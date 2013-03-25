@@ -1,0 +1,8 @@
+MVC -----------------------------------------------------------------------------
+
+MVC is a software pattern that separates the representation of information
+from the user's interactions with it.
+
+Model       - Classes which contain all of the business logic of the application
+View        - Classes which format and present data to the user
+Controller  - Classes which coordinate user actions and routing

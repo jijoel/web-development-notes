@@ -1,0 +1,10 @@
+Questions
+
+What is the best practice to handle error processing with JSON?
+It sounds like the best practice is to return it in the json string. Something like:
+{"errors":["This field is required","something else"]}
+Also:
+"warnings":[]
+
+
+When deleting objects, my idea was to just set a 'deleted' flag on the base object. It has problems, though, with unique fields, searching, etc. (we have to keep looking for that deleted flag in every query...). Instead, could we combine the data into a text field, and write it to an archive table?

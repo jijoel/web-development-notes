@@ -1,0 +1,416 @@
+Testing
+
+This document contains notes related to testing, using these tools:
+    TDD (Test Driven Development)
+    Mockery (for creating mock objects)
+    phpunit
+    Laravel techniques:
+        call/response
+        web crawler
+        IoC/facades
+        In-memory database and test environment
+
+
+Test Driven Development (TDD) ---------------------------------------------------
+
+
+This is a development technique that helps create more reliable code over time.
+Begin by writing a test that will fail
+Test it (make sure it fails)
+Write the code to make the test pass
+Test it (make sure it passes)
+Refactor (make sure all tests still pass)
+
+---
+Mocks:
+A mock is a replacement for an object that we can use for testing.
+Rather than hitting an actual class (eg, to write to the database), go to a mock
+Integration testing should hit actual classes
+
+Mockery is a project that makes creation and handling of mocks easier:
+in composer.json, require  "mockery/mockery": "dev-master"
+
+Using Mocks:
+(instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
+My controller is ItemsController
+My model is Item
+
+I'll set up several different classes:
+ItemsController
+Item
+ItemRepositoryInterface
+EloquentItemRepository
+
+In ItemsController, use this:
+    public function __construct(ItemRepositoryInterface $items)
+    {
+        $this->items = $items;
+    }
+
+    Interface ItemRepositoryInterface
+    {
+        public function all();
+        public function find($id);
+        ...
+        any other functions you want the controller to be able to access
+    }
+
+    class EloquentItemRepository implements ItemRepositoryInterface
+    {
+        public function all(){     return Item::all(); }
+        public function find($id){ return Item::find($id); }
+        ... 
+        other functions, just call the corresponding item function
+    }
+
+The application also needs to know the default repository to use to implement the interface:
+    App::bind('ItemRepositoryInterface', 'EloquentItemRepository');
+
+When testing, using Mockery,
+    public function testMockShow()
+    {
+        $mock = \Mockery::mock('ItemRepositoryInterface');
+        $mock->shouldReceive('find')->once()->andReturn('{"name":"works"}');
+        App::instance('ItemRepositoryInterface', $mock);
+
+        $response = $this->call('GET', 'items/1');
+        $this->assertTrue($response->isOk());
+        $this->assertNotEmpty($response->getContent());
+        $json = json_decode($response->getContent());
+        $this->assertEquals('works', $json->name);
+    }
+
+This should bypass the database completely.
+In some cases, we need to return an intermediate object (eg, items/1/vendors)
+
+    public function testShowItemVendors()
+    {
+        $mockVendor = $this->mock('Vendor');
+        $mockVendor->shouldReceive('get')->once()->andReturn('{"name":"vendor works"}');
+
+        $mockItem = $this->mock('Item');
+        $mockItem->shouldReceive('find')->once()->andReturn($mockItem);
+        $mockItem->shouldReceive('vendors')->once()->andReturn($mockVendor); 
+
+        $response = $this->call('GET', 'items/1/vendors');
+        $this->assertTrue($response->isOk());
+        $this->assertNotEmpty($response->getContent());
+        $json = json_decode($response->getContent());
+        $this->assertEquals('vendor works', $json->name);
+    }
+
+    public function mock($class)
+    {
+        $repo = $class . 'RepositoryInterface';
+        $mock = \Mockery::mock($repo);
+        App::instance($repo, $mock);       
+        return $mock;
+    }
+
+---
+phpunit
+
+I'm using phpunit for testing. It will read configuration information from phpunit.xml, in the root directory of the project.
+
+We can only test some groups at a time:
+
+    /**
+     * @group database
+     * @group remoteTasks
+     */
+    public function testSomething()
+    {
+    }
+
+testSomething() is now in two groups, and if either is added on the command line (or in the config.xml) --exclude-group parameter. it won't be run.
+
+phpunit --exclude-group integration         // won't run integration tests tagged with @group integration
+phpunit --group integration                 // will run only tests tagged with @group integration
+
+Tags for phpunit can be put on either classes or individual functions.
+
+
+---
+Make a test dependent on success of a previous test:
+ 
+    public function testEmpty()
+    {
+        $stack = array();
+        $this->assertTrue(empty($stack));
+        return $stack;   // also sends this variable to any following tests - if this worked
+    }
+
+    /**
+     * only runs if testEmpty() passed
+     *
+     * @depends testEmpty
+     */
+    public function testPush(array $stack)
+    {
+    }
+
+
+---
+Call/Response:
+
+When unit testing, we can call functions and get the responses. We can also do this with mocks. The basic format is like this:
+
+    $response = $this->call('GET', 'items/1/vendors');
+    $this->assertTrue($response->isOk());
+    $this->assertNotEmpty($response->getContent());
+
+The response class has several useful functions, including:
+    getStatusCode()
+    getContent()
+    getOriginalContent()
+
+Response Helper Functions
+    Function Name           Status Codes
+    isInvalid()             <100 and >=600
+    isInformational()       >=100 and <200
+    isSuccessful()          >=200 and <300
+    isRedirection()         >=300 and <400
+    isClientError()         >=400 and <500
+    isServerError()         >=500 and <600
+    isOk()                  200
+    isForbidden()           403
+    isNotFound()            404
+    isRedirect()            201,301,302,303,307,308
+    isEmpty()               201,204,304
+    isNotModified()
+ 
+use like:
+    if ($response->isOK)  doSomething;
+
+
+---
+Web Crawler
+The Symphony web crawler component will go through the DOM of the page to handle very specific test cases. It can be used during integration tests to simulate a browser (much faster than Selenium).
+
+// Click a link:
+    $crawler = $this->client->request('GET', '/user/login');
+    $link = $crawler->filter('a:contains("Greet")')->eq(1)->link();
+    $crawler = $client->click($link);
+ 
+// Find the submit button on a form:
+    $form = $crawler->selectButton('submit')->form();
+ 
+// set some values
+    $form['name'] = 'Lucas';
+    $form['form_name[subject]'] = 'Hey there!';
+ 
+// submit the form
+    $crawler = $client->submit($form);
+  
+// Assert that the response matches a given CSS selector.
+    $this->assertGreaterThan(0, $crawler->filter('h1')->count());
+ 
+Test against the Response content directly if you just want to assert that the content contains some text, or if the Response is not an XML/HTML document:
+    $this->assertRegExp(
+        '/Hello Fabien/',
+        $client->getResponse()->getContent()
+    );
+ 
+Force each request to be executed in its own PHP process to avoid any side-effects when working with several clients in the same script:
+    $client->insulate();
+ 
+// Search through all content on page for a string
+    $crawler = $this->client->request('GET', '/user/login');
+    $this->assertTrue($this->client->getResponse()->isOk(), 'should have an OK response');
+    $this->assertContains('Please Log In', 
+        $this->client->getResponse()->getContent(), 'should contain "Please Log In" ');
+ 
+// Find a specific string in a specific location
+    $crawler = $this->client->request('GET', '/user/login');
+    $this->assertCount(1, $crawler->filter('h1:contains("Please Log In")'), 
+        'should contain "Please Log In" in h1 tag (only once)');
+ 
+Useful Assertions
+    // Assert that there is at least one h2 tag with the class "subtitle"
+    $this->assertGreaterThan( 0, $crawler->filter('h2.subtitle')->count());
+ 
+    // Assert that there are exactly 4 h2 tags on the page
+    $this->assertCount(4, $crawler->filter('h2'));
+ 
+    // Assert that the "Content-Type" header is "application/json"
+    $this->assertTrue(
+        $client->getResponse()->headers->contains(
+            'Content-Type',
+            'application/json'
+        )
+    );
+ 
+    // Assert that the response content matches a regexp.
+    $this->assertRegExp('/foo/', $client->getResponse()->getContent());
+ 
+    // Assert that the response status code is 2xx
+    $this->assertTrue($client->getResponse()->isSuccessful());
+ 
+    // Assert that the response status code is 404
+    $this->assertTrue($client->getResponse()->isNotFound());
+ 
+    // Assert a specific 200 status code
+    $this->assertEquals(200,$client->getResponse()->getStatusCode());
+ 
+    // Assert that the response is a redirect to /demo/contact
+    $this->assertTrue($client->getResponse()->isRedirect('/demo/contact'));
+ 
+    // or simply check that the response is a redirect to any URL
+    $this->assertTrue($client->getResponse()->isRedirect());
+ 
+Browsing
+The Client supports many operations that can be done in a real browser:
+    $client->back();
+    $client->forward();
+    $client->reload();
+ 
+    // Clears all cookies and the history
+    $client->restart();
+ 
+Accessing Internal Objects
+If you use the client to test your application, you might want to access the client's internal objects:
+    $history   = $client->getHistory();
+    $cookieJar = $client->getCookieJar();
+ 
+You can also get the objects related to the latest request:
+    $request  = $client->getRequest();
+    $response = $client->getResponse();
+    $crawler  = $client->getCrawler();
+ 
+If your requests are not insulated, you can also access the Container and the Kernel:
+    $container = $client->getContainer();
+    $kernel    = $client->getKernel();
+ 
+Redirecting
+When a request returns a redirect response, the client does not follow it automatically. You can examine the response and force a redirection afterwards with the followRedirect() method:
+    $crawler = $client->followRedirect();
+ 
+If you want the client to automatically follow all redirects, you can force him with the followRedirects() method:
+    $client->followRedirects();
+ 
+The Crawler
+A Crawler instance is returned each time you make a request with the Client. It allows you to traverse HTML documents, select nodes, find links and forms.
+ 
+Traversing
+Like jQuery, the Crawler has methods to traverse the DOM of an HTML/XML document. For example, the following finds all input[type=submit] elements, selects the last one on the page, and then selects its immediate parent element:
+    $newCrawler = $crawler->filter('input[type=submit]')
+        ->last()
+        ->parents()
+        ->first();
+ 
+Many other methods are also available:
+    Method                  Description
+    filter('h1.title')      Nodes that match the CSS selector
+    filterXpath('h1')       Nodes that match the XPath expression
+    eq(1)                   Node for the specified index
+    first()                 First node
+    last()                  Last node
+    siblings()              Siblings
+    nextAll()               All following siblings
+    previousAll()           All preceding siblings
+    parents()               Returns the parent nodes
+    children()              Returns children nodes
+    reduce($lambda)         Nodes for which the callable does not return false
+ 
+Extracting Information
+    // Returns the attribute value for the first node
+    $crawler->attr('class');
+ 
+    // Returns the node value for the first node
+    $crawler->text();
+ 
+    // Extracts an array of attributes for all nodes (_text returns the node value)
+    // returns an array for each element in crawler, each with the value and href
+    $info = $crawler->extract(array('_text', 'href'));
+ 
+    // Executes a lambda for each node and return an array of results
+    $data = $crawler->each(function ($node, $i)
+    {
+        return $node->attr('href');
+    });
+ 
+Links
+To select links, you can use the traversing methods above or the convenient selectLink() shortcut:
+    $crawler->selectLink('Click here');
+ 
+    $link = $crawler->selectLink('Click here')->link();
+    $client->click($link);
+ 
+Forms
+    $buttonCrawlerNode = $crawler->selectButton('submit'); 
+
+
+
+
+
+
+---
+Laravel 4 IoC and Facades
+http://www.thenerdary.net/post/30859565484/laravel-4
+
+When using a laravel class, we generally use a facade:
+    $var = Session::get('foo');
+ 
+Under the hood, it does this:
+    $app->resolve('session')->get('foo');
+ 
+So, we can swap out parts of the framework, like so:
+    $app['session'] = function()
+    {
+        return new MyCustomSessionLayer;
+    }
+ 
+For instance, maybe you want to make the whole Redirect layer for a test. In your test you could just do:
+    $app['redirect'] = $mock;
+
+https://news.ycombinator.com/item?id=5044336
+However, things like the Input, URL, File, etc. classes still being static could lead to some testability problems. I've broken encapsulation on the Input class just to make it a little more testable. You can set the Input just by saying "Input::$input = array()".
+
+You can swap out entire components with your own. For instance, if you had a class that inherited from the root Response object (Illuminate\Http\Response), you could use it (instead of the standard response class) for all response handling. Just edit app/config/app.php:
+    //'Response'        => 'Illuminate\Support\Facades\Response',
+    'Response'        => 'Api\Facades\Response',    (your own response facade)
+
+    
+    
+---
+In-memory database and test environment
+
+An in-memory database is much faster than writing data to your actual database (it doesn't require any disk reads, indexes, etc.)
+
+From: http://net.tutsplus.com/tutorials/php/testing-like-a-boss-in-laravel-models/
+Within the app/config/testing directory, create a new file, named database.php, and fill it with the following content:
+
+    // app/config/testing/database.php
+    <?php     
+    return array( 
+        'default' => 'sqlite',
+        'connections' => array(
+            'sqlite' => array(
+                'driver'   => 'sqlite',
+                'database' => ':memory:',
+                'prefix'   => ''
+            ),
+        )
+    );
+ 
+Before running tests
+Since the in-memory database is always empty when a connection is made, it’s important to migrate the database before every test. To do this, open app/tests/TestCase.php and add the following method to the end of the class:
+
+    /**
+     * Migrates the database.
+     * This will cause the tests to run quickly.
+     *
+     */
+    private function prepareForTests()
+    {
+        Artisan::call('migrate');   // sets up all tables
+        $this->seed;                // seed test database values
+        Mail::pretend(true);        // if using mail
+    }
+
+    // When using Mockery, it's important to close it at the end of the test
+    public function tearDown()
+    {
+        \Mockery::close();
+    }
+
