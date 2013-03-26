@@ -118,20 +118,21 @@ Note, on the moreinfo entry, instead of trying to construct a uri, the client ca
 
 http://satishgopal.wordpress.com/2012/03/26/building-restful-services-part-2/
 In an order, we might get this:
-<order>
-    <cart>
-        <items>
-            <item code="abc" qty="1">
-            <item code="def" qty="1">
-        </items>
-        <link rel="update" href="/estore/order/178567/cart"/>
-    </cart>
-    <link rel="saveForLater" href="/estore/customer/1356/archive/order/178567"/>
-    <link rel="cancel" href="/estore/order/178567"/>
-    <link rel="address" href="/estore/order/178567/address"
-        type="application/vnd.estore_address+xml"/>
-</order>
+    <order>
+        <cart>
+            <items>
+                <item code="abc" qty="1">
+                <item code="def" qty="1">
+            </items>
+            <link rel="update" href="/estore/order/178567/cart"/>
+        </cart>
+        <link rel="saveForLater" href="/estore/customer/1356/archive/order/178567"/>
+        <link rel="cancel" href="/estore/order/178567"/>
+        <link rel="address" href="/estore/order/178567/address"
+            type="application/vnd.estore_address+xml"/>
+    </order>
 
 The important point here is that the client doesn’t have to figure out from an external document as to what are the possible next states for the order. The possible next states are all captured with hyperlinks. Again, this makes for really loose coupling and provides the service a lot of flexibility in evolving business rules around order processing without breaking existing clients.
 
 The set of possible next steps are provided by the service at any given point using hyperlinks. This is HATEOAS (Hypermedia As The Engine Of Application State) 
+

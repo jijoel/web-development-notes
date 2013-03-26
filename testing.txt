@@ -124,11 +124,52 @@ We can only test some groups at a time:
 
 testSomething() is now in two groups, and if either is added on the command line (or in the config.xml) --exclude-group parameter. it won't be run.
 
-phpunit --exclude-group integration         // won't run integration tests tagged with @group integration
-phpunit --group integration                 // will run only tests tagged with @group integration
+This won't run integration tests tagged with @group integration:
+    phpunit --exclude-group integration         
+
+This will run only tests tagged with @group integration:
+    phpunit --group integration                 
 
 Tags for phpunit can be put on either classes or individual functions.
 
+We can also include or exclude specific test groups in the phpunit.xml file:
+
+    <?xml version="1.0" encoding="UTF-8"?>
+    <phpunit backupGlobals="false"
+            backupStaticAttributes="false"
+            bootstrap="bootstrap/autoload.php"
+            colors="true"
+            convertErrorsToExceptions="true"
+            convertNoticesToExceptions="true"
+            convertWarningsToExceptions="true"
+            processIsolation="false"
+            stopOnFailure="false"
+            syntaxCheck="false"
+    >
+        <testsuites>
+            <testsuite name="Application Test Suite">
+                <directory>./app/tests/</directory>
+            </testsuite>
+        </testsuites>
+
+        <groups>
+          <exclude>
+            <group>integration</group>
+            <group>failing</group>
+          </exclude>
+        </groups>
+
+    </phpunit>
+
+(this will automatically exclude the integration and failing test groups, that is anything tagged with @group integration  or  @group failing)
+
+To use a different configuration file, use:
+    phpunit -c other_config_file.xml
+
+To generate documentation, use:
+    phpunit --testdox
+
+    
 
 ---
 Make a test dependent on success of a previous test:

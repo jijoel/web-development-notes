@@ -2,8 +2,10 @@ Laravel ------------------------------------------------------------------------
 
 Using Laravel 4:  http://four.laravel.com
 
----
-Set Up:
+
+Setup
+--------
+
 To set up laravel, copy the basic project from above, and run composer install to get all of the dependencies.
 
 Set the project root directory in apache to the /public folder
@@ -33,8 +35,11 @@ Laravel’s components are instances that exist within the Laravel 4 $app contai
     $app->component->methodName();.
     Component::methodName();
 
+
+    
+IoC Binding
 ---
-To bind classes to the IoC container:
+To bind classes to the IoC container (for unit testing):
  
     $app->bind('UsersController', function($app) {
         $controller = new UsersController(
@@ -51,8 +56,9 @@ At this point, we can make the class, using
     $app->make('UsersController') ;
 
 
----
+    
 Migrations and Seeding
+-----------------------
 Migrations are like version control for your databases.
  
     php artisan migrate:make create_users_table 
@@ -100,16 +106,21 @@ To run the migration:
     php artisan migrate:refresh --seed      // refresh, then seed the database
     php artisan db:seed                     // seed the database
 
----
-Artisan Class Generator
-jeffrey way (nettuts) has created an add-in for artisan, which can automatically generate items for you.
+
+    
+Artisan Class Generator    
+--------------------------
+jeffrey way (nettuts) has created an add-in for artisan, which can automatically generate classes (including models, controllers, several views, routing, and error testing) for you.
+
     require "way/generators": "dev-master"           (composer.json)
     'Way\Generators\GeneratorsServiceProvider'       (add to providers array)
 
     php artisan generate:resource
 
---- 
-Controllers:
+    
+    
+Controllers
+----------------
 
     php artisan controller:make <Controller name>
 
@@ -137,7 +148,7 @@ or
     return View::make('photos.index')->with(array('photos' => $photos));
  
 In a view, to get a link to the photos.show method (parameter id), use:
-  <a href="{{ route('photos.show', ['photos' => $photo->id]) }}"> 
+    <a href="{{ route('photos.show', ['photos' => $photo->id]) }}"> 
 
 photos/create -> POST photos -> photos/store
 photos/edit/1 -> PUT photos/1 -> photos/1/update
@@ -145,8 +156,8 @@ GET photos/id/delete
 DELETE photos/id
 
 
----
 Models
+----------
 
 By default, the table name will be plural, and the model name will be singular. This can be changed, though…
  
@@ -160,8 +171,10 @@ To use something else, in the model,
         public static $table = 'my_user_table';
     }
 
----
-Routing:
+
+    
+Routing
+------------
 Here are a few different ways to send variables to the default view:
  
 via the routes.php file:
@@ -200,3 +213,4 @@ Via a controller:
     public function action_index() {
         return View::make('home.index', $data);
     }
+

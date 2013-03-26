@@ -6,7 +6,19 @@ It sounds like the best practice is to return it in the json string. Something l
 Also:
 "warnings":[]
 
+  {
+      "status": 404,
+      "code": 40483,
+      "message": "Oops! It looks like that file does not exist.",
+      "developerMessage": "File resource for path /uploads/foobar.txt does not exist. 
+          Please wait 10 minutes until the upload batch completes before checking again.",
+      "moreInfo": "<link rel="moreinfo" href='http://www.mycompany.com/errors/40483' />"
+  }
+  
+How do I actually implement that in laravel?
 
+  
+---
 When deleting objects, my idea was to just set a 'deleted' flag on the base object. It has problems, though, with unique fields, searching, etc. (we have to keep looking for that deleted flag in every query...). Instead, could we combine the data into a text field, and write it to an archive table?
 
 
@@ -21,7 +33,7 @@ But to look at a field to use the data (eg, to log in), we'd want both of:
         'password' => 'required|between:4,12'
 
 And to modify one field at a time (with bootstrap-editable or another such tool), we'd want one of:
-        'username' => 'required|unique:users|alpha_dash|min:4',
-        'password' => 'required|between:4,12'
+        'username' => 'unique:users|alpha_dash|min:4',
+        'password' => 'between:4,12'
 
 That's three separate usage cases for one table. Others will be similar.
