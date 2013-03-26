@@ -8,3 +8,20 @@ Also:
 
 
 When deleting objects, my idea was to just set a 'deleted' flag on the base object. It has problems, though, with unique fields, searching, etc. (we have to keep looking for that deleted flag in every query...). Instead, could we combine the data into a text field, and write it to an archive table?
+
+
+How can I set up different sets of validation rules, based on the context of a request?
+For instance, in User, to set data, we want:
+        'username' => 'required|unique:users|alpha_dash|min:4',
+        'password' => 'required|between:4,12|confirmed',
+        'password_confirmation' => 'required|between:4,12'
+
+But to look at a field to use the data (eg, to log in), we'd want both of:
+        'username' => 'required|alpha_dash|min:4',
+        'password' => 'required|between:4,12'
+
+And to modify one field at a time (with bootstrap-editable or another such tool), we'd want one of:
+        'username' => 'required|unique:users|alpha_dash|min:4',
+        'password' => 'required|between:4,12'
+
+That's three separate usage cases for one table. Others will be similar.
