@@ -2,38 +2,65 @@ git:
 
 Basic Usage
 To create a new local repository:
+
     git init      // Initialize a new git repository
     git remote add origin https://github.com/jijoel/project.git
 
 To copy a remote repository to the local machine:
+
     git clone https://github.com/jijoel/project.git local_project_dir
 
+To copy a specific branch of a remote repository to the local machine in git 1.7.10 or later:
+
+    git clone -b develop --single-branch https://github.com/laravel/laravel.git laravel-develop
+
+To copy a specific branch of a remote repository to the local machine in git 1.7.9 or prior:
+
+    mkdir repo
+    git init
+    git fetch url-to-repo branchname:refs/remotes/origin/branchname
+    
+
 To use git to send files to a remote repository:
+
     git add *     // Add all files in the path on the local machine to the track list
     git commit    // Commits changes to the local repository
     git push      // Pushes changes to the remote repository
     
 To pull working files from the repository (eg, to get updates from other people or other places that have been pushed to the remote repository)
+
     git pull      // Pull (and merge) changes from the remote repository
+
 or
+
     git fetch
     git merge
 
 To see what has changed in the working tree
+
     git status
 
 
+
 Advanced Usage
+--------------------------------------------------------------
 Pull data from a remote repository, wiping out any local changes:
+
     git reset --hard HEAD
     git pull
 
 If you have local commits that you'd also like to wipe out:
+
     git reset --hard origin/master
     git pull
     
-Configuration:
+
+
+
+Configuration
+--------------------------------------------------------------
 Use the nano editor for commits
+
     git config --global core.editor "nano"
     
 Syntax highlighting in nano

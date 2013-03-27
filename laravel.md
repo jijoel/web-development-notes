@@ -1,10 +1,14 @@
-Laravel -------------------------------------------------------------------------
+Laravel 
+=====================
 
 Using Laravel 4:  http://four.laravel.com
 
 
 Setup
 --------
+
+There are instructions here:
+http://niallobrien.me/2013/03/installing-and-updating-laravel-4/
 
 To set up laravel, copy the basic project from above, and run composer install to get all of the dependencies.
 
@@ -79,6 +83,7 @@ creates the basic structure for a new 'users' table. Fill it in further, to get:
 
 Use seeds to add sample records:
 Create a file within the app/database/seeds folder that has the same name as the table that it corresponds to; in our case, users.php. Add:
+
     <?php 
     return array(
         array(
@@ -148,6 +153,7 @@ or
     return View::make('photos.index')->with(array('photos' => $photos));
  
 In a view, to get a link to the photos.show method (parameter id), use:
+
     <a href="{{ route('photos.show', ['photos' => $photo->id]) }}"> 
 
 photos/create -> POST photos -> photos/store
