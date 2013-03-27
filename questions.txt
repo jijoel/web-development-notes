@@ -17,7 +17,15 @@ Also:
   
 How do I actually implement that in laravel?
 
-  
+---
+Is there some way to set up something in phpunit that will change the environment that laravel works in? I'd love to have dev and test environments, pulling data from different sources.
+
+phpunit -c dev.xml        // pulls from in-memory database 
+phpunit -c test.xml       // pulls from physical database
+
+How can I set that up?
+
+
 ---
 When deleting objects, my idea was to just set a 'deleted' flag on the base object. It has problems, though, with unique fields, searching, etc. (we have to keep looking for that deleted flag in every query...). Instead, could we combine the data into a text field, and write it to an archive table?
 
@@ -37,3 +45,4 @@ And to modify one field at a time (with bootstrap-editable or another such tool)
         'password' => 'between:4,12'
 
 That's three separate usage cases for one table. Others will be similar.
+
