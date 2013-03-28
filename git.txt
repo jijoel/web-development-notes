@@ -1,6 +1,11 @@
-git:
+git
+================
 
 Basic Usage
+------------------
+
+    man gittutorial
+
 To create a new local repository:
 
     git init      // Initialize a new git repository
