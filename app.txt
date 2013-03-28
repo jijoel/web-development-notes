@@ -1,6 +1,7 @@
 Application Variables
 ========================
 
+These are all of the variables listed in the application object, as found using:
 var_dump( App::getFacadeRoot() );
 
 Class: Illuminate\Foundation\Application
