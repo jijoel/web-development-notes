@@ -112,6 +112,11 @@ phpunit
 
 I'm using phpunit for testing. It will read configuration information from phpunit.xml, in the root directory of the project.
 
+Incomplete tests:
+Skip them by putting this at the beginning of the test:
+$this->markTestIncomplete();
+
+
 We can only test some groups at a time:
 
     /**
@@ -204,6 +209,7 @@ The response class has several useful functions, including:
     getStatusCode()
     getContent()
     getOriginalContent()
+    headers->get('header-name')
 
 Response Helper Functions
     Function Name           Status Codes

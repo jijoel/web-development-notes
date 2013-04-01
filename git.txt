@@ -70,3 +70,8 @@ Use the nano editor for commits
     
 Syntax highlighting in nano
 http://milianw.de/code-snippets/git-commit-message-highlighting-in-nano
+
+Color output:
+
+    git config --global color.ui true
+
