@@ -125,7 +125,22 @@ Master branch is there by default. Work on new, experimental features in new bra
     git push -u origin <name>   Push latest commit from branch <name> to origin repository (github)
                                 (create the origin repository if it doesn't already exist)
     
-    
+
+
+Stashes
+---------
+
+You can stash changes to pause what you're working on, switch to something else, then resume when you're ready.
+
+    git add .           adds changes to the index
+    git stash           Write those changes to a stash, return to original working state
+    git stash apply     Bring your stashed work back
+    git shash pop       Bring your stashed work back (and delete the stash)
+    git stash list      List all stashes
+    git shash drop <id> Delete a stash (use after applying it)
+    git stash clear     Delete all stashes
+
+
 
 
 
