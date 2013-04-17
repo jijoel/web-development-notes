@@ -1,0 +1,1363 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"testFail",
+				"testFailOnSearchForItemWithBadFieldName"
+			],
+			[
+				"vali",
+				"validateContext"
+			],
+			[
+				"BaseMod",
+				"BaseModelStub"
+			],
+			[
+				"BaseMo",
+				"BaseModelStub"
+			],
+			[
+				"is_int",
+				"is_integer"
+			],
+			[
+				"con",
+				"context"
+			],
+			[
+				"validat",
+				"validationRules"
+			],
+			[
+				"Item",
+				"ItemsController"
+			],
+			[
+				"json",
+				"json_decode"
+			],
+			[
+				"for",
+				"forClass"
+			],
+			[
+				"boots",
+				"bootstrap-editable"
+			],
+			[
+				"que",
+				"questionBelongsToUser"
+			],
+			[
+				"Html",
+				"HTML	Laravel: HTML::span()"
+			],
+			[
+				"Crypter",
+				"Crypter	Laravel: Crypter::encrypt()"
+			],
+			[
+				"View",
+				"View	Laravel: View::make()"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "_ide_helper.php",
+			"settings":
+			{
+				"buffer_size": 44308,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "weekly/04-08.md",
+			"settings":
+			{
+				"buffer_size": 2693,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/User/php.sublime-build",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"todo",
+				"Show TODOs: Project and open files"
+			],
+			[
+				"filen",
+				"File: Copy Name"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"About"
+			],
+			[
+				"split",
+				"Emmet: Split\\Join Tag"
+			],
+			[
+				"php",
+				"Tidy PHP"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"wor",
+				"Word Wrap: Toggle"
+			],
+			[
+				"sort",
+				"Sort Lines"
+			],
+			[
+				"tidi",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"show",
+				"Show TODOs: Project and open files"
+			],
+			[
+				"key",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"blade",
+				"Set Syntax: PHP - Laravel Blade"
+			],
+			[
+				"git stat",
+				"Git: Status"
+			],
+			[
+				"gita d",
+				"Git: Add..."
+			],
+			[
+				"git",
+				"Git: Toggle Annotations"
+			],
+			[
+				"git push",
+				"Git: Push"
+			],
+			[
+				"git commit",
+				"Git: Commit"
+			],
+			[
+				"gitg",
+				"Git: Gui"
+			],
+			[
+				"git ",
+				"Git: Commit"
+			],
+			[
+				"rena",
+				"File: Rename"
+			],
+			[
+				"prefer",
+				"Preferences: Key Bindings - User"
+			],
+			[
+				"lara",
+				"Set Syntax: PHP - Laravel Blade"
+			],
+			[
+				"syn h",
+				"Set Syntax: HTML"
+			],
+			[
+				"blad",
+				"Set Syntax: PHP - Laravel Blade"
+			],
+			[
+				"syntaht",
+				"Set Syntax: HTML"
+			],
+			[
+				"htm",
+				"Set Syntax: HTML"
+			],
+			[
+				"em",
+				"Set Syntax: Emmet"
+			],
+			[
+				"pro",
+				"Project: Edit"
+			],
+			[
+				"project",
+				"Project: Edit"
+			],
+			[
+				"sidebar",
+				"View: Toggle Open Files in Side Bar"
+			],
+			[
+				"Package Control: ",
+				"Package Control: List Packages"
+			],
+			[
+				"disable pa",
+				"Package Control: Disable Package"
+			],
+			[
+				"package",
+				"Package Control: Enable Package"
+			],
+			[
+				"subli",
+				"SublimeCodeIntel: Reset"
+			],
+			[
+				"install ",
+				"Package Control: Install Package"
+			],
+			[
+				"Snippet: ",
+				"Snippet: html"
+			]
+		],
+		"width": 456.0
+	},
+	"console":
+	{
+		"height": 125.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/wamp/www/shopping/api/bootstrap/start.php",
+		"/C/wamp/www/shopping/api/app/models/Vendor.php",
+		"/C/wamp/www/shopping/api/app/start/global.php",
+		"/C/wamp/www/kata/index.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/HttpException.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/process/Symfony/Component/Process/Exception/RuntimeException.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Log/Writer.php",
+		"/C/wamp/www/shopping/api/vendor/monolog/monolog/src/Monolog/Logger.php",
+		"/C/wamp/www/shopping/api/phpunit.xml",
+		"/C/wamp/www/shopping/api/app/models/repositories/ItemRepositoryInterface.php",
+		"/C/wamp/www/shopping/api/app/models/repositories/EloquentItemRepository.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Support/Collection.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php",
+		"/C/wamp/www/shopping/api/kata.php",
+		"/C/wamp/www/shopping/api/app/tests/models/ItemTest.php",
+		"/C/wamp/www/shopping/api/app/tests/models/BaseModelTest.php",
+		"/C/wamp/www/shopping/api/app/controllers/BaseControllerStub.php",
+		"/C/wamp/www/shopping/api/app/commands/TestCommand.php",
+		"/C/wamp/www/shopping/api/app/kata.php",
+		"/C/wamp/www/shopping/api/app/stuff.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Validation/Validator.php",
+		"/C/wamp/www/shopping/api/app/config/app.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Validation/Factory.php",
+		"/C/wamp/www/shopping/api/vendor/mockery/mockery/library/Mockery/CountValidator/Exception.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/filesystem/Symfony/Component/Filesystem/Exception/ExceptionInterface.php",
+		"/C/wamp/www/shopping/api/app/config/validation/Item.php",
+		"/C/wamp/www/shopping/api/app/lib/validation.php",
+		"/C/wamp/www/shopping/api/app/controllers/BaseControllerTester.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php",
+		"/C/wamp/www/shopping/api/app/tests/integration/IntegrationTestCase.php",
+		"/C/wamp/www/shopping/api/app/tests/TestCase.php",
+		"/C/wamp/www/shopping/api/app/tests/BaseControllerTest.php",
+		"/C/wamp/www/shopping/api/app/models/BaseModel.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Connection.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/tests/Database/DatabaseEloquentModelTest.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Support/Facades/DB.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php",
+		"/C/wamp/www/shopping/api/app/tests/integration/IntegrationTest.php",
+		"/C/wamp/www/shopping/api/app/controllers/BaseController.php",
+		"/C/wamp/www/shopping/api/test.php",
+		"/C/wamp/www/shopping/api/app/database/seeds/CartItemsTableSeeder.php",
+		"/C/wamp/www/shopping/api/app/config/testing/database.php",
+		"/C/wamp/www/shopping/api/app/config/database.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/tests/Auth/AuthEloquentUserProviderTest.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Support/Facades/Input.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Http/Request.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/ParameterBag.php",
+		"/C/wamp/www/shopping/api/app/models/Item.php",
+		"/C/wamp/www/shopping/api/shopping-api.sublime-project",
+		"/C/wamp/www/shopping/api/app/config/foo/database.php",
+		"/C/wamp/www/shopping/api/app/start/artisan.php",
+		"/C/wamp/www/shopping/api/server.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/browser-kit/Symfony/Component/BrowserKit/Client.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/tests/Http/HttpRequestTest.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/README.md",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Request.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Console/Command.php",
+		"/C/wamp/www/shopping/api/app/database/seeds/CartsTableSeeder.php",
+		"/C/wamp/www/shopping/api/app/database/seeds/VendorsTableSeeder.php",
+		"/C/wamp/www/shopping/api/app/database/seeds/ItemVendorsTableSeeder.php",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/User/Default (Windows).sublime-keymap",
+		"/C/wamp/www/shopping/api/app/database/seeds/ItemsTableSeeder.php",
+		"/C/wamp/www/shopping/api/app/config/testing/database.php.v1",
+		"/C/wamp/www/shopping/api/app/tests/controllers/AccountsControllerTest.php",
+		"/C/wamp/www/shopping/api/app/tests/controllers/Cart_itemsControllerTest.php.test",
+		"/C/wamp/www/shopping/api/app/tests/controllers/CartsControllerTest.php",
+		"/C/wamp/www/shopping/api/app/tests/controllers/Item_vendorsControllerTest.php.test",
+		"/C/wamp/www/shopping/api/app/tests/controllers/UsersControllerTest.php",
+		"/C/wamp/www/shopping/api/app/tests/controllers/VendorsControllerTest.php",
+		"/C/wamp/www/shopping/api/vendor/mockery/mockery/library/Mockery/Expectation.php",
+		"/C/wamp/www/shopping/api/test.txt",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/DatabaseServiceProvider.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/tests/Database/stubs/EloquentModelNamespacedStub.php",
+		"/C/wamp/www/shopping/notes/03-18.txt",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/JsonResponseTest.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/JsonResponse.php",
+		"/C/wamp/www/shopping/api/vendor/monolog/monolog/src/Monolog/Formatter/JsonFormatter.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/composer.json",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Support/MessageBag.php",
+		"/C/wamp/www/shopping/api/app/models/repositories/CartRepositoryInterface.php",
+		"/C/wamp/www/shopping/api/app/models/repositories/EloquentCartRepository.php",
+		"/C/wamp/www/shopping/api/app/commands/RoutesCommand.php",
+		"/C/wamp/www/shopping/api/app/models/repositories/EloquentVendorRepository.php",
+		"/C/wamp/www/shopping/api/app/models/repositories/VendorRepositoryInterface.php",
+		"/C/wamp/www/shopping/api/app/database/seeds/AccountsTableSeeder.php",
+		"/C/wamp/www/shopping/api/app/database/seeds/DatabaseSeeder.php",
+		"/C/wamp/www/shopping/api/app/database/seeds/UsersTableSeeder.php",
+		"/C/wamp/www/shopping/api/composer.json",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/tests/Database/DatabaseSeederTest.php",
+		"/C/wamp/www/shopping/api/app/controllers/HomeController.php",
+		"/C/wamp/bin/php/php5.4.3/php.ini",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Http/RedirectResponse.php",
+		"/C/wamp/www/phpDocumentor/composer.json",
+		"/C/cygdrive/c/wamp/bin/php/php5.4.3/php.ini",
+		"/Cwampbinphpphp5.4.3php.ini",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/RequestTest.php",
+		"/C/wamp/www/shopping/api/app/database/migrations/2013_03_15_033130_create_carts_table.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Tests/ClientTest.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/tests/Database/DatabaseSchemaBuilderTest.php",
+		"/C/wamp/www/shopping/api/vendor/symfony/console/Symfony/Component/Console/Input/Input.php",
+		"/C/wamp/www/shopping/api/vendor/monolog/monolog/tests/Monolog/TestCase.php",
+		"/C/wamp/www/shopping/api/vendor/swiftmailer/swiftmailer/test-suite/lib/simpletest/test/site/form_with_array_based_inputs.php",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/Color Scheme - Default/Monokai.tmTheme",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/Color Scheme - Default/LAZY.tmTheme",
+		"/C/wamp/www/shopping/api/app/tests/controllers/ItemsControllerTest.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Http/Response.php",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/Http Requester/README.md",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/Http Requester/Default.sublime-commands",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/Http Requester/Default (Windows).sublime-keymap",
+		"/C/wamp/www/shopping/api/app/controllers/UsersController.php",
+		"/C/wamp/www/shopping/api/app/controllers/Item_vendorsController.php",
+		"/C/wamp/www/shopping/api/app/controllers/Cart_itemsController.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php",
+		"/C/wamp/www/shopping/api/app/database/migrations/2013_03_15_033207_create_cart_items_table.php",
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migration.php",
+		"/C/wamp/www/shopping/api/app/routes.php",
+		"/C/wamp/www/shopping/api/app/views/users/login.blade.php",
+		"/C/wamp/www/shopping/api/.gitignore",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/C/wamp/www/shop/app/database/seeds/VendorsTableSeeder.php",
+		"/C/wamp/www/shop/app/controllers/CartsController.php",
+		"/C/wamp/www/shop/app/controllers/VendorsController.php",
+		"/C/wamp/www/shopping/ui/composer.json"
+	],
+	"find":
+	{
+		"height": 34.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"errorMessageContains",
+			"runTestForException",
+			"testForException",
+			"stroy",
+			"original",
+			"get(",
+			"\":",
+			"\":\"",
+			":",
+			"pivot",
+			"this->validationRules",
+			"verify",
+			"BaseModel",
+			"new BaseModel",
+			"$item",
+			"Item",
+			"item",
+			"Item",
+			"echo",
+			"static::$rules",
+			"_BaseControllerTester",
+			"URI",
+			"jsonR",
+			"[type]",
+			"getJSON",
+			"getErr",
+			"actino",
+			"uri",
+			"items/1",
+			"array",
+			"mockFunction",
+			"class",
+			"ion",
+			"response->getContent()",
+			"expectedValue",
+			"field",
+			"itemList",
+			"        var_dump($this->call('GET', 'items?name=x'));\n",
+			"Item::",
+			"vendor",
+			"vendors",
+			"array(",
+			"(",
+			"    {",
+			"'find'",
+			"find",
+			"value",
+			"array",
+			"{",
+			"=>",
+			"#",
+			" =>",
+			"EloquentModelFindStub",
+			"array(2) {",
+			"=>",
+			"model",
+			"function",
+			"addError",
+			"MessageBag",
+			"vendor",
+			"Vendor",
+			"vendor",
+			"Vendor",
+			"vendor",
+			"Vendor",
+			"vendor",
+			"Vendor",
+			"vendor",
+			"Vendor",
+			"()",
+			"{",
+			"public function ",
+			"public",
+			"{",
+			"$this->assertEquals",
+			"		$this->assertOK($response);\n		$json = json_decode($response->getContent());\n",
+			"		$response = $this->get('items');\n		$this->assertOK($response);\n		$json = json_decode($response->getContent());\n",
+			"$this->assertTrue($response->isOk());",
+			"$this->call('GET', ",
+			"128",
+			"ssl",
+			"header",
+			"$json",
+			"json",
+			"content",
+			"font",
+			"7",
+			"    /**\n     * Returns a Not Found error (via json)\n     */\n    protected static function notFound()\n    {\n        return Response::json()->setStatusCode(404);\n    }\n",
+			"$this->",
+			"Response::json()->setStatusCode(404);",
+			"vendor",
+			"vendors",
+			"item",
+			"array(",
+			"array",
+			" ,",
+			"Target",
+			")",
+			"58250\n60300\n60400\n61100\n61200\n62020\n62100\n62250\n62500\n63100\n63150\n76100\n76200\n",
+			"=> '.+",
+			"=> 'HMS Classroom Costs'",
+			"=> 'HMS Classroom Costs',",
+			"name=>",
+			"),",
+			", ",
+			")",
+			"Expense ",
+			"Exp",
+			"active",
+			"Items",
+			"report",
+			"2",
+			"1",
+			"media",
+			"text",
+			"input",
+			"var_dump(",
+			"    public function user()\n    {\n        return $this->belongsTo('Users');\n    }\n",
+			"UsersController",
+			"username",
+			"    <p>\n        {{ Form::label('username', 'Username')}}<br />\n        {{ Form::text('username', Input::old('username')) }}\n    </p>\n",
+			"register",
+			"pw_confirmation",
+			"password_confirmation",
+			"password",
+			"text",
+			"li",
+			"}}</"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			",",
+			",  "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "_ide_helper.php",
+					"settings":
+					{
+						"buffer_size": 44308,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23596,
+								23596
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 6754.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "weekly/04-08.md",
+					"settings":
+					{
+						"buffer_size": 2693,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2658,
+								2658
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1627.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 38.0
+	},
+	"input":
+	{
+		"height": 38.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 142.0
+	},
+	"output.git":
+	{
+		"height": 142.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"vendor",
+				"app/models/Vendor.php"
+			],
+			[
+				"start/",
+				"app/start/global.php"
+			],
+			[
+				"start",
+				"bootstrap/start.php"
+			],
+			[
+				"runtimeexcep",
+				"vendor/symfony/process/Symfony/Component/Process/Exception/RuntimeException.php"
+			],
+			[
+				"runtimee",
+				"vendor/symfony/process/Symfony/Component/Process/Exception/RuntimeException.php"
+			],
+			[
+				"httpex",
+				"vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/HttpException.php"
+			],
+			[
+				"monolog",
+				"vendor/monolog/monolog/src/Monolog/Logger.php"
+			],
+			[
+				"illuminate/log/writer",
+				"vendor/laravel/framework/src/Illuminate/Log/Writer.php"
+			],
+			[
+				"symfony/component/httpkernel/exception/httpexception",
+				"vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Exception/HttpException.php"
+			],
+			[
+				"glob",
+				"app/start/global.php"
+			],
+			[
+				"phpun",
+				"phpunit.xml"
+			],
+			[
+				"elo",
+				"app/models/repositories/EloquentItemRepository.php"
+			],
+			[
+				"itemin",
+				"app/models/repositories/ItemRepositoryInterface.php"
+			],
+			[
+				"model",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php"
+			],
+			[
+				"databasemodel",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php"
+			],
+			[
+				"eloquentmodel",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php"
+			],
+			[
+				"collec",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php"
+			],
+			[
+				"collect",
+				"vendor/laravel/framework/src/Illuminate/Support/Collection.php"
+			],
+			[
+				"basecollec",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php"
+			],
+			[
+				"eloquentcolle",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php"
+			],
+			[
+				"item",
+				"app/models/Item.php"
+			],
+			[
+				"php",
+				"phpunit.xml"
+			],
+			[
+				"basecon",
+				"app/controllers/BaseControllerStub.php"
+			],
+			[
+				"basemo",
+				"app/models/BaseModel.php"
+			],
+			[
+				"testcon",
+				"app/commands/TestCommand.php"
+			],
+			[
+				"testcase",
+				"app/tests/TestCase.php"
+			],
+			[
+				"illuminate/validation/validator",
+				"vendor/laravel/framework/src/Illuminate/Validation/Validator.php"
+			],
+			[
+				"validation/f",
+				"vendor/laravel/framework/src/Illuminate/Validation/Factory.php"
+			],
+			[
+				"excep",
+				"vendor/mockery/mockery/library/Mockery/CountValidator/Exception.php"
+			],
+			[
+				"exception",
+				"vendor/symfony/filesystem/Symfony/Component/Filesystem/Exception/ExceptionInterface.php"
+			],
+			[
+				"querybu",
+				"vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php"
+			],
+			[
+				"elobuil",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php"
+			],
+			[
+				"tests/data",
+				"vendor/laravel/framework/tests/Database/DatabaseEloquentModelTest.php"
+			],
+			[
+				"facade",
+				"vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php"
+			],
+			[
+				"facaddb",
+				"vendor/laravel/framework/src/Illuminate/Support/Facades/DB.php"
+			],
+			[
+				"databa/conn",
+				"vendor/laravel/framework/src/Illuminate/Database/Connection.php"
+			],
+			[
+				"query",
+				"vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php"
+			],
+			[
+				"builder",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php"
+			],
+			[
+				"connection",
+				"vendor/laravel/framework/src/Illuminate/Database/Connection.php"
+			],
+			[
+				"inte",
+				"app/tests/integration/IntegrationTest.php"
+			],
+			[
+				"seeds/",
+				"app/database/seeds/CartItemsTableSeeder.php"
+			],
+			[
+				"config/t",
+				"app/config/testing/database.php"
+			],
+			[
+				"conf/dat",
+				"app/config/database.php"
+			],
+			[
+				"int",
+				"app/tests/integration/IntegrationTest.php"
+			],
+			[
+				"eloquent",
+				"vendor/laravel/framework/tests/Auth/AuthEloquentUserProviderTest.php"
+			],
+			[
+				"eloquentcoll",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Collection.php"
+			],
+			[
+				"request",
+				"vendor/laravel/framework/src/Illuminate/Http/Request.php"
+			],
+			[
+				"input",
+				"vendor/laravel/framework/src/Illuminate/Support/Facades/Input.php"
+			],
+			[
+				"illuminate/http/request",
+				"vendor/laravel/framework/src/Illuminate/Http/Request.php"
+			],
+			[
+				"itemre",
+				"app/models/repositories/ItemRepositoryInterface.php"
+			],
+			[
+				"validator",
+				"vendor/laravel/framework/src/Illuminate/Validation/Validator.php"
+			],
+			[
+				"symfony/component/httpfoundation/parameterbag",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/ParameterBag.php"
+			],
+			[
+				"basec",
+				"app/controllers/BaseController.php"
+			],
+			[
+				".sub",
+				"shopping-api.sublime-project"
+			],
+			[
+				"server",
+				"server.php"
+			],
+			[
+				"vendor/laravel/framework/tests/http/httprequesttest.php",
+				"vendor/laravel/framework/tests/Http/HttpRequestTest.php"
+			],
+			[
+				"vendor/symfony/http-foundation/symfony/component/httpfoundation/readme.md",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/README.md"
+			],
+			[
+				"symfony/component/httpfoundation/request",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Request.php"
+			],
+			[
+				"client",
+				"vendor/symfony/browser-kit/Symfony/Component/BrowserKit/Client.php"
+			],
+			[
+				"vendor/laravel/framework/src/illuminate/foundation/testing/testcase.php",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php"
+			],
+			[
+				"vendor/laravel/framework/src/illuminate/console/command.php",
+				"vendor/laravel/framework/src/Illuminate/Console/Command.php"
+			],
+			[
+				"testco",
+				"app/commands/TestCommand.php"
+			],
+			[
+				"eloq",
+				"app/models/repositories/EloquentItemRepository.php"
+			],
+			[
+				"integra",
+				"app/tests/integration/IntegrationTest.php"
+			],
+			[
+				"cartseed",
+				"app/database/seeds/CartsTableSeeder.php"
+			],
+			[
+				"itemven",
+				"app/database/seeds/ItemVendorsTableSeeder.php"
+			],
+			[
+				"seedven",
+				"app/database/seeds/VendorsTableSeeder.php"
+			],
+			[
+				"querybuil",
+				"vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php"
+			],
+			[
+				"querybui",
+				"vendor/laravel/framework/src/Illuminate/Database/Query/Builder.php"
+			],
+			[
+				"eloqu",
+				"app/models/repositories/EloquentItemRepository.php"
+			],
+			[
+				"itemr",
+				"app/models/repositories/ItemRepositoryInterface.php"
+			],
+			[
+				"eloquentbu",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Builder.php"
+			],
+			[
+				"/illuminate/database/connection.php",
+				"vendor/laravel/framework/src/Illuminate/Database/Connection.php"
+			],
+			[
+				"illuminate/foundation/testing/testcase",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php"
+			],
+			[
+				"expect",
+				"vendor/mockery/mockery/library/Mockery/Expectation.php"
+			],
+			[
+				"illuminate/database/databaseserviceprovider",
+				"vendor/laravel/framework/src/Illuminate/Database/DatabaseServiceProvider.php"
+			],
+			[
+				"illuminate/database/eloquent/model",
+				"vendor/laravel/framework/src/Illuminate/Database/Eloquent/Model.php"
+			],
+			[
+				"test.t",
+				"test.txt"
+			],
+			[
+				"eloquentmodelt",
+				"vendor/laravel/framework/tests/Database/DatabaseEloquentModelTest.php"
+			],
+			[
+				"eloquentmodelstub",
+				"vendor/laravel/framework/tests/Database/stubs/EloquentModelNamespacedStub.php"
+			],
+			[
+				"integ",
+				"app/tests/integration/IntegrationTest.php"
+			],
+			[
+				"facad",
+				"vendor/laravel/framework/src/Illuminate/Support/Facades/Facade.php"
+			],
+			[
+				"itemt",
+				"app/tests/models/ItemTest.php"
+			],
+			[
+				"jsonre",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Tests/JsonResponseTest.php"
+			],
+			[
+				"json",
+				"vendor/monolog/monolog/src/Monolog/Formatter/JsonFormatter.php"
+			],
+			[
+				"respon",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php"
+			],
+			[
+				"responsejson",
+				"vendor/symfony/event-dispatcher/Symfony/Component/EventDispatcher/composer.json"
+			],
+			[
+				"validator.p",
+				"vendor/laravel/framework/src/Illuminate/Validation/Validator.php"
+			],
+			[
+				"messageb",
+				"vendor/laravel/framework/src/Illuminate/Support/MessageBag.php"
+			],
+			[
+				"eloquenti",
+				"app/models/repositories/EloquentItemRepository.php"
+			],
+			[
+				"cartrep",
+				"app/models/repositories/EloquentCartRepository.php"
+			],
+			[
+				"cartre",
+				"app/models/repositories/CartRepositoryInterface.php"
+			],
+			[
+				"res",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php"
+			],
+			[
+				"respo",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php"
+			],
+			[
+				"phpu",
+				"phpunit.xml"
+			],
+			[
+				"testca",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php"
+			],
+			[
+				"seed",
+				"app/database/seeds/ItemsTableSeeder.php"
+			],
+			[
+				"comp",
+				"composer.json"
+			],
+			[
+				"response",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php"
+			],
+			[
+				"testcas",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php"
+			],
+			[
+				"testc",
+				"app/tests/TestCase.php"
+			],
+			[
+				"databasese",
+				"vendor/laravel/framework/tests/Database/DatabaseSeederTest.php"
+			],
+			[
+				"routes",
+				"app/routes.php"
+			],
+			[
+				"homecon",
+				"app/controllers/HomeController.php"
+			],
+			[
+				"vendor/laravel/framework/src/illuminate/http/redirectresponse.php",
+				"vendor/laravel/framework/src/Illuminate/Http/RedirectResponse.php"
+			],
+			[
+				"vendor/symfony/http-foundation/symfony/component/httpfoundation/response.php",
+				"vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php"
+			],
+			[
+				"base",
+				"app/controllers/BaseController.php"
+			],
+			[
+				"clienttest",
+				"vendor/symfony/http-kernel/Symfony/Component/HttpKernel/Tests/ClientTest.php"
+			],
+			[
+				"schemabui",
+				"vendor/laravel/framework/src/Illuminate/Database/Schema/Builder.php"
+			],
+			[
+				"schema",
+				"vendor/laravel/framework/tests/Database/DatabaseSchemaBuilderTest.php"
+			],
+			[
+				"migra/",
+				"app/database/migrations/2013_03_15_033130_create_carts_table.php"
+			],
+			[
+				"test",
+				"vendor/laravel/framework/src/Illuminate/Foundation/Testing/TestCase.php"
+			],
+			[
+				"illuinput",
+				"vendor/swiftmailer/swiftmailer/test-suite/lib/simpletest/test/site/form_with_array_based_inputs.php"
+			],
+			[
+				"ba",
+				"app/controllers/BaseController.php"
+			],
+			[
+				"bas",
+				"app/controllers/BaseController.php"
+			],
+			[
+				"rout",
+				"app/routes.php"
+			],
+			[
+				"migrator",
+				"vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php"
+			],
+			[
+				"migration",
+				"vendor/laravel/framework/src/Illuminate/Database/Migrations/Migration.php"
+			],
+			[
+				"log",
+				"app/views/users/login.blade.php"
+			],
+			[
+				"r",
+				"app/routes.php"
+			],
+			[
+				"routesc",
+				"app/commands/RoutesCommand.php"
+			],
+			[
+				"cra",
+				"test/vendor/symfony/dom-crawler/Symfony/Component/DomCrawler/Tests/CrawlerTest.php"
+			],
+			[
+				"craw",
+				"test/vendor/symfony/dom-crawler/Symfony/Component/DomCrawler/Crawler.php"
+			],
+			[
+				"sess",
+				"test/vendor/laravel/framework/src/Illuminate/Session/SessionServiceProvider.php"
+			],
+			[
+				"session",
+				"test/vendor/laravel/framework/src/Illuminate/Session/SessionServiceProvider.php"
+			],
+			[
+				"ques",
+				"app/controllers/QuestionsController.php"
+			],
+			[
+				"question",
+				"app/controllers/QuestionsController.php"
+			],
+			[
+				"index.bl",
+				"app/views/questions/index.blade.php"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 332.0,
+	"status_bar_visible": true
+}

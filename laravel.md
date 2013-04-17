@@ -10,6 +10,10 @@ Setup
 There are instructions here:
 http://niallobrien.me/2013/03/installing-and-updating-laravel-4/
 
+I also like these additional tools:
+        "way/generators": "dev-master",
+        "mockery/mockery": "dev-master"
+
 To set up laravel, copy the basic project from above, and run composer install to get all of the dependencies.
 
 Set the project root directory in apache to the /public folder
@@ -20,9 +24,17 @@ make storage directory writable:
     (or chown www-data storage/*)
 
 application key:
+
     app/config/app.php
+
 use command line to generate secure application key:
+
     php artisan key:generate
+
+Include the Way Generators with this (in the providers section)
+
+            'Way\Generators\GeneratorsServiceProvider'
+
 
 Laravel configuration information stored in project/app/config
 Each file here returns an array with configuration information (closures are OK)
