@@ -73,6 +73,7 @@ The application also needs to know the default repository to use to implement th
     App::bind('ItemRepositoryInterface', 'EloquentItemRepository');
 
 When testing, using Mockery,
+
     public function testMockShow()
     {
         $mock = \Mockery::mock('ItemRepositoryInterface');
@@ -186,6 +187,12 @@ To use a different configuration file, use:
 To generate documentation, use:
 
     phpunit --testdox
+
+To show code coverage, use:
+
+    phpunit --coverage-html <folder>
+
+You can then to go the specified folder for marked-up coverage. It shows lines of code that have been run in green, other lines in red. It will also show everything in the framework that has been run. 
 
     
 Make a test dependent on success of a previous test:
@@ -490,6 +497,11 @@ For instance, maybe you want to make the whole Redirect layer for a test. In you
 
     $app['redirect'] = $mock;
 
+For any classes that use facades (most of Laravel's classes), get the original class name with:
+
+    echo get_class(App::getFacadeRoot());       (App, or any other class)
+
+
 https://news.ycombinator.com/item?id=5044336
 However, things like the Input, URL, File, etc. classes still being static could lead to some testability problems. I've broken encapsulation on the Input class just to make it a little more testable. You can set the Input just by saying "Input::$input = array()".
 
@@ -641,4 +653,18 @@ My tester:
         }
     }
 
+To test specific actions, we can use this:
+
+        $data = $this->action('PUT',                // request type
+            'TodoController@update',                // controller/method to use
+            array('999'),                           // id sent to update 
+            array('title'=>'something new'));       // new data via Input
+
+        $data = $this->action('DELETE', 
+            'TodoController@destroy', 
+            array(42));
+
+        $result = $this->action('POST', 
+            'TodoController@store', 
+            array('title'=>'test'));
 
