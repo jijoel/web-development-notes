@@ -33,12 +33,21 @@ use command line to generate secure application key:
 
 Include the Way Generators with this (in the providers section)
 
-            'Way\Generators\GeneratorsServiceProvider'
+    'Way\Generators\GeneratorsServiceProvider'
+
+This lets me create resources very easily:
+
+    php artisan generate:resource Todos --fields="title:string,description:text"
+
+Even better, we can create resources with a lot of standard boilerplate:
+
+    php artisan generate:scaffold Todos --fields="title:string,description:text"
 
 
 Laravel configuration information stored in project/app/config
 Each file here returns an array with configuration information (closures are OK)
 Access it at any time with Config::get. Use the file name and array key:
+
     Config::get('app.timezone')
 
 For any classes that use facades (most of Laravel's classes), get the original class name with:
@@ -225,10 +234,13 @@ or:
 Via a controller:
  
 (in routes.php):
+
     Route::controller('home');
  
 (in controllers/home.php):
+
     public function action_index() {
         return View::make('home.index', $data);
     }
+
 

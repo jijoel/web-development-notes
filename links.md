@@ -41,6 +41,12 @@ http://fideloper.com/laravel-4-where-to-put-bindings
 Easy fixtures for models
 https://github.com/summerstreet/woodling
 
+There's an interesting package called Expressive Date, at:
+http://jasonlewis.me/code/expressive-date/docs
+
+Test cases (inherit classes from these):
+https://github.com/Zizaco/laravel4-test-cases
+
 
 
 

@@ -1,4 +1,4 @@
-<?php die("Access denied!");
+<?php __halt_compiler();
 /**
  * ---------------- DO NOT UPLOAD THIS FILE TO LIVE SERVER ------------------------
  * Laravel IDE Helper <http://LaravelBook.com>
@@ -36,7 +36,7 @@ class Auth extends Illuminate\Auth\Guard {}
  * @method  static  void    rememberForever(string   $key, Closure  $callback)  Get an item from the cache, or store the default value forever.
  * @method  static  void    forget(string  $key)    Remove an item from the cache.
  * @method  static  void    flush() Remove all items from the cache.
- * @method  static  int     getDefaultCacheTime()   Get the default cache time.
+ * @method  static  int getDefaultCacheTime()   Get the default cache time.
  * @method  static  void    setDefaultCacheTime(int   $minutes) Set the default cache time in minutes.
  * @method  static  bool    existsInMemory(string  $key)    Determine if an item is in memory.
  * @method  static  array   getMemory() Get all of the values in memory.
@@ -88,15 +88,15 @@ class Cookie extends Illuminate\Cookie\CookieJar {}
  * @method  static  mixed   selectOne(string  $query, array   $bindings)    Run a select statement and return a single result.
  * @method  static  array   pretending(string  $query, array   $bindings)   Run a select statement against the database.
  * @method  static  bool    insert(string  $query, array   $bindings)   Run an insert statement against the database.
- * @method  static  int     update(string  $query, array   $bindings)   Run an update statement against the database.
- * @method  static  int     delete(string  $query, array   $bindings)   Run a delete statement against the database.
+ * @method  static  int update(string  $query, array   $bindings)   Run an update statement against the database.
+ * @method  static  int delete(string  $query, array   $bindings)   Run a delete statement against the database.
  * @method  static  bool    pretending(string  $query, array   $bindings)   Execute an SQL statement and return the boolean result.
- * @method  static  int     pretending(string  $query, array   $bindings)   Run an SQL statement and get the number of rows affected.
+ * @method  static  int pretending(string  $query, array   $bindings)   Run an SQL statement and get the number of rows affected.
  * @method  static  array   prepareBindings(array  $bindings)   Prepare the query bindings for execution.
  * @method  static  mixed   transaction(Closure  $callback) Execute a Closure within a transaction.
  * @method  static  array   pretend(Closure  $callback) Execute the given callback in "dry run" mode.
  * @method  static  void    logQuery(string  $query, array   $bindings) Log a query in the connection's query log.
- * @method  static  PDO     getPdo()    Get the currently used PDO connection.
+ * @method  static  PDO getPdo()    Get the currently used PDO connection.
  * @method  static  string  getDriverName() Get the PDO driver name.
  * @method  static  void    getQueryGrammar()   Get the query grammar used by the connection.
  * @method  static  void    setQueryGrammar(Illuminate\Database\Query\Grammars\Grammar) Set the query grammar used by the connection.
@@ -109,8 +109,8 @@ class Cookie extends Illuminate\Cookie\CookieJar {}
  * @method  static  void    getPaginator()  Get the paginator environment instance.
  * @method  static  void    setPaginator(Illuminate\Pagination\Environment|Closure  $paginator) Set the pagination environment instance.
  * @method  static  bool    pretending()    Determine if the connection in a "dry run".
- * @method  static  int     getFetchMode()  Get the default fetch mode for the connection.
- * @method  static  int     setFetchMode(int  $fetchMode)   Set the default fetch mode for the connection.
+ * @method  static  int getFetchMode()  Get the default fetch mode for the connection.
+ * @method  static  int setFetchMode(int  $fetchMode)   Set the default fetch mode for the connection.
  * @method  static  array   getQueryLog()   Get the connection query log.
  * @method  static  string  getDatabaseName()   Get the name of the connected database.
  * @method  static  string  setDatabaseName(string  $database)  Set the name of the connected database.
@@ -120,9 +120,9 @@ class Cookie extends Illuminate\Cookie\CookieJar {}
 class DB extends Illuminate\Database\Connection {}
 
 /**
- * @var static  void        incrementing    Indicates if the IDs are auto-incrementing.
- * @var static  void        timestamps  Indicates if the model should be timestamped.
- * @var static  void        exists  Indicates if the model exists.
+ * @var static  void    incrementing    Indicates if the IDs are auto-incrementing.
+ * @var static  void    timestamps  Indicates if the model should be timestamped.
+ * @var static  void    exists  Indicates if the model exists.
  * @method  static  void    fill(array  $attributes)    Fill the model with an array of attributes.
  * @method  static  void    newInstance(array  $attributes, bool   $exists) Create a new instance of the given model.
  * @method  static  void    newExisting(array  $attributes) Create a new model instance that is existing.
@@ -149,7 +149,7 @@ class DB extends Illuminate\Database\Connection {}
  * @method  static  mixed   getKey()    Get the value of the model's primary key.
  * @method  static  string  getKeyName()    Get the primary key for the model.
  * @method  static  bool    usesTimestamps()    Determine if the model uses timestamps.
- * @method  static  int     getPerPage()    Get the number of models to return per page.
+ * @method  static  int getPerPage()    Get the number of models to return per page.
  * @method  static  void    setPerPage(int   $perPage)  Set the number of models ot return per page.
  * @method  static  string  getForeignKey() Get the default foreign key name for the model.
  * @method  static  array   getHidden() Get the hidden attributes for the model.
@@ -212,15 +212,15 @@ class Event extends Illuminate\Events\Event {}
  * @method  static  string  getRemote(string  $path)    Get the contents of a remote file.
  * @method  static  mixed   getRequire(string  $path)   Get the returned value of a file.
  * @method  static  void    requireOnce(string  $file)  Require the given file once.
- * @method  static  int     put(string  $path, string  $contents)   Write the contents of a file.
- * @method  static  int     append(string  $path, string  $data)    Append to a file.
+ * @method  static  int put(string  $path, string  $contents)   Write the contents of a file.
+ * @method  static  int append(string  $path, string  $data)    Append to a file.
  * @method  static  bool    delete(string  $path)   Delete the file at a given path.
  * @method  static  void    move(string  $path, string  $target)    Move a file to a new location.
  * @method  static  void    copy(string  $path, string  $target)    Copy a file to a new location.
  * @method  static  string  extension(string  $path)    Extract the file extension from a file path.
  * @method  static  string  type(string  $path) Get the file type of a given file.
- * @method  static  int     size(string  $path) Get the file size of a given file.
- * @method  static  int     lastModified(string  $path) Get the file's last modification time.
+ * @method  static  int size(string  $path) Get the file size of a given file.
+ * @method  static  int lastModified(string  $path) Get the file's last modification time.
  * @method  static  bool    isDirectory(string  $directory) Determine if the given path is a directory.
  * @method  static  array   glob(string  $pattern, int     $flags)  Find path names matching a given pattern.
  * @method  static  array   filetype(string  $directory)    Get an array of all files in a directory.
@@ -337,7 +337,7 @@ class Input extends Illuminate\Http\Request {}
 class Request extends Illuminate\Http\Request {}
 
 /**
- * @var static  void        original    The original content of the response.
+ * @var static  void    original    The original content of the response.
  * @method  static  void    withCookie(Symfony\Component\HttpFoundation\Cookie  $cookie)    Add a cookie to the response.
  * @method  static  void    setContent(mixed  $content) Set the content on the response.
  * @method  static  mixed   getOriginalContent()    Get the original response content.
@@ -368,10 +368,10 @@ class Mail extends Illuminate\Mail\Mailer {}
  * @method  static  void    links() Get the pagination links view.
  * @method  static  string  getUrl(int     $page)   Get a URL for a given page number.
  * @method  static  void    addQuery(string  $key, string  $value)  Add a query string value to the paginator.
- * @method  static  int     getCurrentPage()    Get the current page for the request.
- * @method  static  int     getLastPage()   Get the last page that should be available.
+ * @method  static  int getCurrentPage()    Get the current page for the request.
+ * @method  static  int getLastPage()   Get the last page that should be available.
  * @method  static  array   getItems()  Get the items being paginated.
- * @method  static  int     getTotal()  Get the total number of items in the collection.
+ * @method  static  int getTotal()  Get the total number of items in the collection.
  * @method  static  ArrayIterator   getIterator()   Get an iterator for the items.
  * @method  static  int count() Get the number of items for the current page.
  * @method  static  bool    offsetExists(mixed  $key)   Determine if the given item exists.
@@ -526,3 +526,5 @@ class Validator extends Illuminate\Validation\Factory {}
  * @method  static  array   getSections()   Get the entire array of sections.
  */
 class View extends Illuminate\View\Environment {}
+
+
