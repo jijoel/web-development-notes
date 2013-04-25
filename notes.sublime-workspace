@@ -71,24 +71,23 @@
 			"file": "weekly/04-15.md",
 			"settings":
 			{
-				"buffer_size": 14314,
+				"buffer_size": 14409,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "      <full_name>\\action</full_name>\n        <description>Generate a URL to a controller action.</description>\n      <full_name>\\app</full_name>\n        <description>Get the root Facade application instance.</description>\n      <full_name>\\app_path</full_name>\n        <description>Get the path to the application folder.</description>\n      <full_name>\\array_divide</full_name>\n        <description>Divide an array into two arrays.</description>\n      <full_name>\\array_dot</full_name>\n        <description>Flatten a multi-dimensional associative array with dots.</description>\n      <full_name>\\array_except</full_name>\n        <description>Get all of the given array except for a specified array of items.</description>\n      <full_name>\\array_fetch</full_name>\n        <description>Fetch a flattened array of a nested array element.</description>\n      <full_name>\\array_first</full_name>\n        <description>Return the first element in an array passing a given truth test.</description>\n      <full_name>\\array_flatten</full_name>\n        <description>Flatten a multi-dimensional array into a single level.</description>\n      <full_name>\\array_forget</full_name>\n        <description>Remove an array item from a given array using \"dot\" notation.</description>\n      <full_name>\\array_get</full_name>\n        <description>Get an item from an array using \"dot\" notation.</description>\n      <full_name>\\array_only</full_name>\n        <description>Get a subset of the items from the given array.</description>\n      <full_name>\\array_pluck</full_name>\n        <description>Pluck an array of values from an array.</description>\n      <full_name>\\array_set</full_name>\n        <description>Set an array item to a given value using \"dot\" notation.</description>\n      <full_name>\\asset</full_name>\n        <description>Generate an asset path for the application.</description>\n      <full_name>\\base_path</full_name>\n        <description>Get the path to the base of the install.</description>\n      <full_name>\\camel_case</full_name>\n        <description>Convert a value to camel case.</description>\n      <full_name>\\class_basename</full_name>\n        <description>Get the class \"basename\" of the given object / class.</description>\n      <full_name>\\csrf_token</full_name>\n        <description>Get the CSRF token value.</description>\n      <full_name>\\e</full_name>\n        <description>Escape HTML entities in a string.</description>\n      <full_name>\\ends_with</full_name>\n        <description>Determine if a given string ends with a given needle.</description>\n      <full_name>\\head</full_name>\n        <description>Get the first element of an array.</description>\n      <full_name>\\link_to</full_name>\n        <description>Generate a HTML link.</description>\n      <full_name>\\last</full_name>\n        <description>Get the last element from an array.</description>\n      <full_name>\\link_to_asset</full_name>\n        <description>Generate a HTML link to an asset.</description>\n      <full_name>\\link_to_route</full_name>\n        <description>Generate a HTML link to a named route.</description>\n      <full_name>\\link_to_action</full_name>\n        <description>Generate a HTML link to a controller action.</description>\n      <full_name>\\public_path</full_name>\n        <description>Get the path to the public folder.</description>\n      <full_name>\\route</full_name>\n        <description>Generate a URL to a named route.</description>\n      <full_name>\\secure_asset</full_name>\n        <description>Generate an asset path for the application.</description>\n      <full_name>\\secure_url</full_name>\n        <description>Generate a HTTPS url for the application.</description>\n      <full_name>\\snake_case</full_name>\n        <description>Convert a string to snake case.</description>\n      <full_name>\\starts_with</full_name>\n        <description>Determine if a string starts with a given needle.</description>\n      <full_name>\\storage_path</full_name>\n        <description>Get the path to the storage folder.</description>\n      <full_name>\\str_contains</full_name>\n        <description>Determine if a given string contains a given sub-string.</description>\n      <full_name>\\str_finish</full_name>\n        <description>Cap a string with a single instance of a given value.</description>\n      <full_name>\\str_is</full_name>\n        <description>Determine if a given string matches a given pattern.</description>\n      <full_name>\\str_plural</full_name>\n        <description>Get the plural form of an English word.</description>\n      <full_name>\\str_random</full_name>\n        <description>Generate a \"random\" alpha-numeric string.</description>\n      <full_name>\\str_singular</full_name>\n        <description>Get the singular form of an English word.</description>\n      <full_name>\\studly_case</full_name>\n        <description>Convert a value to studly caps case.</description>\n      <full_name>\\trans</full_name>\n        <description>Translate the given message.</description>\n      <full_name>\\trans_choice</full_name>\n        <description>Translates the given message based on a count.</description>\n      <full_name>\\url</full_name>\n        <description>Generate a url for the application.</description>\n      <full_name>\\value</full_name>\n        <description>Return the default value of the given value.</description>\n      <full_name>\\with</full_name>\n        <description>Return the given object.</description>",
+			"file": "weekly/04-22.md",
 			"settings":
 			{
-				"buffer_size": 5432,
-				"line_ending": "Windows",
-				"name": "<full_name>\\action</full_name>"
+				"buffer_size": 426,
+				"line_ending": "Windows"
 			}
 		},
 		{
 			"file": "_ide_helper.php",
 			"settings":
 			{
-				"buffer_size": 44308,
+				"buffer_size": 44230,
 				"line_ending": "Unix"
 			}
 		},
@@ -96,7 +95,7 @@
 			"file": "laravel.md",
 			"settings":
 			{
-				"buffer_size": 7125,
+				"buffer_size": 7950,
 				"line_ending": "Windows"
 			}
 		},
@@ -131,14 +130,38 @@
 				"buffer_size": 3860,
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "links.txt",
+			"settings":
+			{
+				"buffer_size": 2750,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "testing.md",
+			"settings":
+			{
+				"buffer_size": 22968,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "Packages/User/php.sublime-build",
 	"command_palette":
 	{
-		"height": 392.0,
+		"height": 311.0,
 		"selected_items":
 		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
 			[
 				"todo",
 				"Show TODOs: Project and open files"
@@ -162,10 +185,6 @@
 			[
 				"php",
 				"Tidy PHP"
-			],
-			[
-				"install",
-				"Package Control: Install Package"
 			],
 			[
 				"wor",
@@ -264,10 +283,6 @@
 				"View: Toggle Open Files in Side Bar"
 			],
 			[
-				"Package Control: ",
-				"Package Control: List Packages"
-			],
-			[
 				"disable pa",
 				"Package Control: Disable Package"
 			],
@@ -288,7 +303,7 @@
 				"Snippet: html"
 			]
 		],
-		"width": 456.0
+		"width": 400.0
 	},
 	"console":
 	{
@@ -305,12 +320,14 @@
 	},
 	"file_history":
 	[
+		"/C/wamp/www/notes/weekly/04-08.md",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/User/Package Control.sublime-settings",
+		"/C/Users/Joel/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
 		"/C/wamp/www/active/kata/docs/names.txt",
 		"/C/wamp/www/active/kata/docs/structure.xml",
 		"/C/wamp/www/notes/laravel_models.md",
 		"/C/Users/Joel/Desktop/sample.php",
 		"/C/Users/Joel/Desktop/sample_sim.php",
-		"/C/wamp/www/notes/weekly/04-08.md",
 		"/C/wamp/www/shopping/api/bootstrap/start.php",
 		"/C/wamp/www/shopping/api/app/models/Vendor.php",
 		"/C/wamp/www/shopping/api/app/start/global.php",
@@ -430,9 +447,7 @@
 		"/C/wamp/www/shopping/api/app/controllers/Cart_itemsController.php",
 		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migrator.php",
 		"/C/wamp/www/shopping/api/app/database/migrations/2013_03_15_033207_create_cart_items_table.php",
-		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migration.php",
-		"/C/wamp/www/shopping/api/app/routes.php",
-		"/C/wamp/www/shopping/api/app/views/users/login.blade.php"
+		"/C/wamp/www/shopping/api/vendor/laravel/framework/src/Illuminate/Database/Migrations/Migration.php"
 	],
 	"find":
 	{
@@ -440,9 +455,10 @@
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 105.0,
 		"where_history":
 		[
+			""
 		]
 	},
 	"find_state":
@@ -450,6 +466,10 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"belongs",
+			"generator",
+			"</description>",
+			"<full_name>\\",
 			":",
 			"</description>",
 			"<full_name>",
@@ -573,11 +593,7 @@
 			"Exp",
 			"active",
 			"Items",
-			"report",
-			"2",
-			"1",
-			"media",
-			"text"
+			"report"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -597,7 +613,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -605,15 +621,15 @@
 					"file": "weekly/04-15.md",
 					"settings":
 					{
-						"buffer_size": 14314,
+						"buffer_size": 14409,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10929,
-								10929
+								11446,
+								11447
 							]
 						],
 						"settings":
@@ -711,32 +727,118 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 6952.0,
+						"translation.y": 7383.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "weekly/04-22.md",
 					"settings":
 					{
-						"buffer_size": 5432,
+						"buffer_size": 426,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6,
-								18
+								426,
+								426
 							]
 						],
 						"settings":
 						{
-							"auto_name": "<full_name>\\action</full_name>",
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -749,15 +851,15 @@
 					"file": "_ide_helper.php",
 					"settings":
 					{
-						"buffer_size": 44308,
+						"buffer_size": 44230,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								24857,
-								24857
+								40770,
+								40770
 							]
 						],
 						"settings":
@@ -853,7 +955,7 @@
 							"syntax": "Packages/PHP/PHP.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 6970.0,
+						"translation.y": 8861.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -863,15 +965,15 @@
 					"file": "laravel.md",
 					"settings":
 					{
-						"buffer_size": 7125,
+						"buffer_size": 7950,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								888,
-								888
+								7690,
+								7720
 							]
 						],
 						"settings":
@@ -969,7 +1071,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 2829.0,
+						"translation.y": 5763.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1080,10 +1182,12 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Markdown/Markdown.tmLanguage"
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1150.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1432,6 +1536,236 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 2371.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "links.txt",
+					"settings":
+					{
+						"buffer_size": 2750,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								269,
+								269
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 276.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "testing.md",
+					"settings":
+					{
+						"buffer_size": 22968,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								22699,
+								22699
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"C++": "c",
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Markdown/Markdown.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 16619.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

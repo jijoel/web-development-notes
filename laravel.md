@@ -183,8 +183,8 @@ GET photos/id/delete
 DELETE photos/id
 
 
-Models
-----------
+Eloquent Models
+--------------------
 
 By default, the table name will be plural, and the model name will be singular. This can be changed, though…
  
@@ -197,6 +197,18 @@ To use something else, in the model,
     class User extends Eloquent {
         public static $table = 'my_user_table';
     }
+
+To get additional data from a pivot table (eg, the M2M join table):
+
+    class Item extends Eloquent
+    {
+        public function vendors()
+        {
+            return $this->belongsToMany('Vendor', 'item_vendors')
+                ->withPivot(array('confirmed', 'last_known_price'));
+        }
+    }
+
 
 
     
@@ -243,4 +255,15 @@ Via a controller:
         return View::make('home.index', $data);
     }
 
+By default, it does not support a trailing slash in a URL, but you can add one, by using the missingMethod function:
+
+    class BaseController extends Controller 
+    { ...
+        public function missingMethod($parameters) {
+
+            if (substr($_SERVER['REQUEST_URI'], strlen($_SERVER['REQUEST_URI'])-1)=='/')
+                return Redirect::to(rtrim($_SERVER['REQUEST_URI'],'/'));
+
+            throw new Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Page Not Found');
+        }
 

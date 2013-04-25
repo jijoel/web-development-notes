@@ -294,22 +294,47 @@ Web Crawler
 -------------
 The Symphony web crawler component will go through the DOM of the page to handle very specific test cases. It can be used during integration tests to simulate a browser (much faster than Selenium).
 
+We can see if there is a div with id 'item' like this:
+
+    public function testSampleItemIsInAnItemDiv()
+    {
+        $crawler = $this->client->request('GET', '/');
+        $this->assertGreaterThan(0, $crawler->filter('div.item')->count());
+    }
+
+We can get information for children in the DOM chain, with:
+
+    $children = $crawler->filter('div.item')->first()->children();
+    echo $children->filter('h4')->count();
+    foreach($children as $child) {
+        echo($child->tagName);
+        echo($child->getAttribute('class'));
+        echo($child->nodeValue);
+    }
+
+Other stuff:
+
     // Click a link:
+
         $crawler = $this->client->request('GET', '/user/login');
         $link = $crawler->filter('a:contains("Greet")')->eq(1)->link();
         $crawler = $client->click($link);
      
     // Find the submit button on a form:
+
         $form = $crawler->selectButton('submit')->form();
      
     // set some values
+
         $form['name'] = 'Lucas';
         $form['form_name[subject]'] = 'Hey there!';
      
     // submit the form
+
         $crawler = $client->submit($form);
       
     // Assert that the response matches a given CSS selector.
+
         $this->assertGreaterThan(0, $crawler->filter('h1')->count());
  
 Test against the Response content directly if you just want to assert that the content contains some text, or if the Response is not an XML/HTML document:
@@ -668,3 +693,22 @@ To test specific actions, we can use this:
             'TodoController@store', 
             array('title'=>'test'));
 
+
+
+Additional stuff for testing
+------------------------------
+
+To dump a query:
+
+    var_dump(DB::getQueryLog());
+
+This will produce output like this (where you can see the actual query string):
+
+    array (size=1)
+      0 => 
+        array (size=3)
+          'query' => string 'select * from `questions` where `qid` = ? limit 1' (length=49)
+          'bindings' => 
+            array (size=1)
+              0 => int 4
+          'time' => string '0.77' (length=4)
