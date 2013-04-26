@@ -54,6 +54,9 @@ Misc
 -----------------------------
 
 Various development issues (blog)
+http://antjanus.com/blog/
+
+Various development issues (blog)
 http://fideloper.com/
 http://fideloper.com/api-etag-conditional-get
 http://fideloper.com/laravel4-etag-conditional-get

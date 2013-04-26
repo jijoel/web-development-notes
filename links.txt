@@ -13,8 +13,6 @@ http://net.tutsplus.com/tutorials/php/laravel-4-a-start-at-a-restful-api/
 Error handling in REST
 http://satishgopal.wordpress.com/tag/rest-error-handling/
 
-Various development issues (blog)
-http://antjanus.com/blog/
 
 Various development issues (blog)
 http://fideloper.com/
@@ -45,7 +43,6 @@ http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootst
 "Hello World" of increasing complexity in backbone at:
 http://arturadib.com/hello-backbonejs/
 
-http://technetlk.blogspot.com.au/2012/09/laravel-backbonejs-coffeescript.html
 
 
 
