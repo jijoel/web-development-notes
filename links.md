@@ -32,6 +32,9 @@ http://www.thenerdary.net/post/30859565484/laravel-4
 Dependency Injection and IoC in Laravel 4 Controllers
 http://www.nathandavison.com/posts/view/16/using-dependency-injection-and-ioc-in-laravel-4-controllers
 
+Excellent tutorial on a user management system:
+https://gist.github.com/anchetaWern/4223764
+
 
 Testing
 ------------------------
