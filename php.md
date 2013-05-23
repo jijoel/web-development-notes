@@ -13,3 +13,7 @@ end(array)          Return value of last element in array
 
 compact('items')    shorthand for array('items' => $items);
 
+
+Insert end-of-line code:
+echo PHP_EOL;
+
