@@ -266,4 +266,66 @@ By default, it does not support a trailing slash in a URL, but you can add one, 
 
             throw new Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Page Not Found');
         }
+        
+
+Views
+---------
+Views can contain multiple sections (a part of a view rendered in each section). It can write data (like a report), or have read/write information (as a form). 
+
+To use multiple sections (eg, template / view / sub-view):
+
+template:
+
+    <html>...
+    <head>
+        @yield('css')
+    </head>
+    <body>
+        @yield('content')
+    ...etc
+
+Main view:
+
+    @extends('template')
+    @section('content')
+       # enter all of the content here
+       @include('sub-view')
+    @stop
+    @section('css')  # or whatever...
+        #enter that section's content here
+    @stop
+    
+Sub-view:
+
+    #just include the data for the sub-view here
+    
+    
+Forms
+---------
+
+This is the standard structure to use with forms:
+
+    {{ Form::open(array('url'=>URL::route('todos.store'), 'method'=>'POST')) }}
+      @if(count($errors)>0)
+          <div class="messages">
+              <ul class="error">
+                  <p>There were errors saving the item:</p>
+                  @foreach($errors->all('<li>:message</li>') as $error)
+                      {{$error}}
+                  @endforeach
+              </ul> <!--  .errors -->
+          </div> <!--  .messages -->
+      @endif
+      <p>
+          {{ Form::label('title', 'Title') }}
+          {{ Form::input('title', 'title') }}
+      </p>
+      <p>
+          {{ Form::label('description', 'Description') }}
+          {{ Form::textarea('description', Null, array('rows'=>'8', 'cols'=>'35')) }}
+      </p>
+      <p>
+          {{ Form::submit('Add a new entry') }}
+      </p>
+    {{ Form::close() }}
 

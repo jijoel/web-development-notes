@@ -11,7 +11,7 @@ This document contains notes related to testing, using these tools:
         IoC/facades
         In-memory database and test environment
         Testing with an array repository
-
+    BDD and acceptance testing with codeception
 
 
 
@@ -712,3 +712,86 @@ This will produce output like this (where you can see the actual query string):
             array (size=1)
               0 => int 4
           'time' => string '0.77' (length=4)
+
+          
+          
+          
+          
+          
+          
+          
+          
+BDD and Acceptance Testing with Codeception
+===============================================
+
+Codeception is a testing tool based on phpunit, which can do BDD (behavior driven development) and acceptance testing. It can also possibly do unit testing. It has three separate "tester" objects:
+
+  WebGuy    (Acceptance tests) Standard user; emulate web browser; see web output
+  TestGuy   (Functional tests) Advanced user; emulate web requests; see app internal values
+  CodeGuy   (Unit tests) Coder
+
+Download from:
+
+    http://codeception.com/quickstart
+    wget http://codeception.com/codecept.phar
+
+To get started, in the web root:
+
+    php codecept.phar bootstrap       // sets up the testing environment
+
+Configure acceptance tests (in tests/acceptance.suite.yml)
+
+    class_name: WebGuy 
+    modules: 
+        enabled: [PhpBrowser, WebHelper]
+        config: 
+            PhpBrowser:
+                url: '{YOUR APP'S URL}'
+    
+Create an acceptance test:
+
+    php codecept.phar generate:cept acceptance Welcome    // create first acceptance test
+
+Write the test (eg, in tests/acceptance/WelcomeCept.php. One test will go into each file).
+
+Run the test:
+
+    php codecept.phar run
+    php codecept.phar run --steps                 // also show steps
+    php codecept.phar run <suitename> <testname>  // run just one suite/test
+
+Here are some sample tests:
+
+    // This is standard BDD labelling. Who am I? What do I want to do? Why? Then do it.
+    $I = new WebGuy($scenario);
+    $I->am('Account Holder'); 
+    $I->wantTo('withdraw cash from an ATM');
+    $I->lookForwardTo('get money when the bank is closed');
+
+    $I = new WebGuy($scenario);
+    $I->wantTo('see home page');
+    $I->amOnPage('/');
+    $I->seeResponseCodeIs(200);
+    $I->see('Hello');
+
+    $I = new WebGuy($scenario);
+    $I->wantTo('log in');
+    $I->amOnPage('/login');
+    $I->seeResponseCodeIs(200);
+    $I->see('notFoundHttpException');
+    $I->click('login');
+
+    $I->fillField('Name', 'Miles');
+    // we can use input name, or id
+    $I->fillField('user[email]','miles@davis.com');
+    $I->selectOption('Gender','Male');
+    $I->click('Update');
+    
+    $I->seeInCurrentUrl('/user/miles');
+    $I->seeCheckboxIsChecked('#agree');
+    $I->seeInField('user[name]','Miles');
+    $I->seeLink('Login');
+
+    $v=$I->grabTextFrom('body');
+    var_dump($v);
+

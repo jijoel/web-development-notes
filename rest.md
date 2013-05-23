@@ -136,3 +136,15 @@ The important point here is that the client doesn’t have to figure out from an
 
 The set of possible next steps are provided by the service at any given point using hyperlinks. This is HATEOAS (Hypermedia As The Engine Of Application State) 
 
+---
+Using laravel resources, we have these routes:
+
+| GET /todos              | todos.index   | TodosController@index   |
+| GET /todos/create       | todos.create  | TodosController@create  |
+| POST /todos             | todos.store   | TodosController@store   |
+| GET /todos/{todos}      | todos.show    | TodosController@show    |
+| GET /todos/{todos}/edit | todos.edit    | TodosController@edit    |
+| PUT /todos/{todos}      | todos.update  | TodosController@update  |
+| PATCH /todos/{todos}    |               | TodosController@update  |
+| DELETE /todos/{todos}   | todos.destroy | TodosController@destroy |
+
