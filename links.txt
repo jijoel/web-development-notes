@@ -43,7 +43,8 @@ http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootst
 "Hello World" of increasing complexity in backbone at:
 http://arturadib.com/hello-backbonejs/
 
-
+Style guide for web authors
+http://med.stanford.edu/modelsite/styles/
 
 
 Laravel 4
