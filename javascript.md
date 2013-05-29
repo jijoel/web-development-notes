@@ -232,3 +232,9 @@ And, when instanciating the class:
     });
 
     
+Recipes
+--------------
+
+// draw zebra lines for table
+$('.table tr:even').addClass('even');
+
