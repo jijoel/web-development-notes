@@ -142,6 +142,18 @@ You can stash changes to pause what you're working on, switch to something else,
 
 
 
+Tagging
+-----------
+You can tag specific commits as being important:
+
+    git tag                                 List all tags
+    git tag -l 'v1.4.2.*'                   List all tags under v1.4.2.x
+    git tag -a v1.4 -m 'my version 1.4'     Create tag with a message
+    git tag -s ...                          Creates a gpg encrypted tag
+    git tag -v ...                          Verifies the gpg encrypted tag
+    git push origin [tagname]               Push a tag to a server (eg, github)
+    git push origin --tags                  Push all tags to remote server
+    
 
 
 Configuration
@@ -161,3 +173,79 @@ Configuration information is stored in these files:
 
     ~/.gitconfig          (global for user)
     project/.git/config   (local to project)
+
+
+
+Strategy for working with branches
+----------------------------------------
+Based on:
+http://nvie.com/posts/a-successful-git-branching-model/
+
+Branching Strategy:
+We want several types of branches:
+
+    master:     latest live/production version
+    hotfix:         critical bug fixes, etc.; send directly to master and develop when completed 
+    release:        once major features implemented, feature freeze. Bug fixes, and when good send to master
+    develop:    integration branch; latest delivered development changes
+    feature:        specific features for the next (or future) release. As feature completed, send to release 
+
+Feature Branch:
+    creating:
+    $ git checkout -b myfeature develop     // switch to new myfeature branch, forked from develop
+
+    incorporating:
+    $ git checkout develop              
+    $ git merge --no-ff myfeature
+    $ git branch -d myfeature
+    $ git push origin develop
+
+Release Branch:
+    creating release-*:
+    $ git checkout -b release-1.2 develop
+    $ echo 1.2 > version.txt
+    $ git commit -a -m "Bumped version number to 1.2"
+
+    incorporating, then removing:
+    $ git checkout master
+    $ git merge --no-ff release-1.2
+    $ git tag -a 1.2
+    $ git checkout develop
+    $ git merge --no-ff release-1.2
+    $ git branch -d release-1.2
+
+Hotfix Branch:
+    creating hotfix-*:
+    $ git checkout -b hotfix-1.2.1 master
+    $ echo 1.2.1 > version.txt
+    $ git commit -a -m "Bumped version number to 1.2.1"
+
+    Fixing the bug:
+    $ git commit -m "Fixed severe production problem"
+
+    Incorporate changes to master and develop:
+    $ git checkout master
+    $ git merge --no-ff hotfix-1.2.1
+    $ git tag -a 1.2.1
+    $ git checkout develop
+    $ git merge --no-ff hotfix-1.2.1
+    $ git branch -d hotfix-1.2.1
+
+
+Working with remote branches
+-------------------------------
+
+git remote                              shows all remote branches
+git remote -v                           shows remote branches (with url)
+git remote add [alias] [url]            add a new remote repository
+git remote rm [alias]                   remove (delete) the local pointer to the remote repository
+git remote rename [old] [new-alias]     rename old-alias to new-alias
+git remote set-url                      changes the url of the given alias
+
+git fetch [remote-name]                 fetch an update from remote repository
+git pull [remote-name]                  fetch and merge update from remote repository into active branch
+git push [remote-name] [branch-name]    push changes from local branch-name to remote remote-name
+  (eg, git push origin master)
+git push -u origin mybranch             push changes (create tracking)
+git remote show [remote-name]           shows data about the remote (URL, tracked branches)
+
