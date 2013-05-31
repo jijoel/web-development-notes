@@ -153,7 +153,7 @@ You can tag specific commits as being important:
     git tag -v ...                          Verifies the gpg encrypted tag
     git push origin [tagname]               Push a tag to a server (eg, github)
     git push origin --tags                  Push all tags to remote server
-    
+
 
 
 Configuration
@@ -249,3 +249,5 @@ git push [remote-name] [branch-name]    push changes from local branch-name to r
 git push -u origin mybranch             push changes (create tracking)
 git remote show [remote-name]           shows data about the remote (URL, tracked branches)
 
+git branch -a                           shows all branches available on the remote repository
+git checkout -b dev origin/dev          checkout the dev remote branch (create a local tracker)
