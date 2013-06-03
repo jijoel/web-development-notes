@@ -155,7 +155,7 @@ NOTE: Make the commit, then add the tag.
     git tag -v ...                          Verifies the gpg encrypted tag
     git push origin [tagname]               Push a tag to a server (eg, github)
     git push origin --tags                  Push all tags to remote server
-    
+
 
 
 Configuration
@@ -260,3 +260,5 @@ git branch -d the_local_branch          Delete a branch from the local repositor
 git push [remotename] [localbranch]:[remotebranch]  pushes from localbranch to remotebranch on remotename
 
 
+git branch -a                           shows all branches available on the remote repository
+git checkout -b dev origin/dev          checkout the dev remote branch (create a local tracker)
