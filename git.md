@@ -114,6 +114,7 @@ Master branch is there by default. Work on new, experimental features in new bra
 
     git branch              shows list of branches
     git branch <name>       create a new branch
+    git branch -m <o> <n>   renames old branch <o> to new name <n>
     git branch -d <name>    delete the named branch
     git checkout <name>     swich to the named branch
     git checkout -b <name>  create and switch to a new branch
@@ -144,7 +145,8 @@ You can stash changes to pause what you're working on, switch to something else,
 
 Tagging
 -----------
-You can tag specific commits as being important:
+You can tag specific commits as being important. 
+NOTE: Make the commit, then add the tag.
 
     git tag                                 List all tags
     git tag -l 'v1.4.2.*'                   List all tags under v1.4.2.x
@@ -185,34 +187,36 @@ Branching Strategy:
 We want several types of branches:
 
     master:     latest live/production version
-    hotfix:         critical bug fixes, etc.; send directly to master and develop when completed 
+    hotfix:         critical bug fixes, etc.; send directly to master and dev when completed 
     release:        once major features implemented, feature freeze. Bug fixes, and when good send to master
-    develop:    integration branch; latest delivered development changes
+    dev:        integration branch; latest delivered development changes
     feature:        specific features for the next (or future) release. As feature completed, send to release 
 
 Feature Branch:
     creating:
-    $ git checkout -b myfeature develop     // switch to new myfeature branch, forked from develop
+    $ git checkout -b myfeature dev     // switch to new myfeature branch, forked from dev
 
     incorporating:
-    $ git checkout develop              
+    $ git checkout dev
     $ git merge --no-ff myfeature
     $ git branch -d myfeature
-    $ git push origin develop
+    $ git push origin --delete myfeature
+    $ git push origin dev
 
 Release Branch:
     creating release-*:
-    $ git checkout -b release-1.2 develop
-    $ echo 1.2 > version.txt
+    $ git checkout -b release-1.2 dev
+    $ echo 1.2 > version.txt             // or some other way to change the version number
     $ git commit -a -m "Bumped version number to 1.2"
 
-    incorporating, then removing:
+    incorporating into master, then removing:
     $ git checkout master
     $ git merge --no-ff release-1.2
     $ git tag -a 1.2
-    $ git checkout develop
+    $ git checkout dev
     $ git merge --no-ff release-1.2
     $ git branch -d release-1.2
+    $ git push origin --delete release-1.2
 
 Hotfix Branch:
     creating hotfix-*:
@@ -223,13 +227,14 @@ Hotfix Branch:
     Fixing the bug:
     $ git commit -m "Fixed severe production problem"
 
-    Incorporate changes to master and develop:
+    Incorporate changes to master and dev:
     $ git checkout master
     $ git merge --no-ff hotfix-1.2.1
     $ git tag -a 1.2.1
-    $ git checkout develop
+    $ git checkout dev
     $ git merge --no-ff hotfix-1.2.1
     $ git branch -d hotfix-1.2.1
+    $ git push origin --delete hotfix-1.2.1
 
 
 Working with remote branches
@@ -246,6 +251,12 @@ git fetch [remote-name]                 fetch an update from remote repository
 git pull [remote-name]                  fetch and merge update from remote repository into active branch
 git push [remote-name] [branch-name]    push changes from local branch-name to remote remote-name
   (eg, git push origin master)
-git push -u origin mybranch             push changes (create tracking)
+git push -u origin mybranch             push changes (create tracking) for remote branch
 git remote show [remote-name]           shows data about the remote (URL, tracked branches)
+git push origin --delete [branch]       Deletes a branch from the origin (remote site)
+git push origin :the_remote_branch      Another way to delete a branch from origin
+git branch -d the_local_branch          Delete a branch from the local repository
+
+git push [remotename] [localbranch]:[remotebranch]  pushes from localbranch to remotebranch on remotename
+
 

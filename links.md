@@ -102,3 +102,37 @@ vendor\symfony\http-foundation\Symfony\Component\HttpFoundation\Response.php
 See a full list of autoloaded classes for the project (refresh via composer dump-autoload):
 <project dir>/vendor/composer/autoload_classmap.php
 
+
+
+
+
+User Interface / Front-End
+===================================
+ 
+Bootstrap-themed jQuery UI Widgets
+http://addyosmani.github.io/jquery-ui-bootstrap/
+
+Auto-size text fields:
+http://www.jacklmoore.com/autosize/
+
+Money masks:
+http://plentz.github.io/jquery-maskmoney/
+
+"Are You Sure?" message when leaving a page with changed data:
+https://github.com/codedance/jquery.AreYouSure
+
+JQuery modification highlighter:
+http://dougestep.com/dme/jquery-modification-highlighter-widget
+
+Canvas resize:
+https://gokercebeci.com/dev/canvasresize
+
+"Is Loading" message
+https://github.com/hekigan/is-loading
+
+Canvas functions:
+http://iwhitcomb.github.io/dynamocanvas/
+
+Data tables:
+http://datatables.net/
+
