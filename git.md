@@ -182,9 +182,11 @@ git push [remotename] [localbranch]:[remotebranch]  pushes from localbranch to r
 git branch -a                           shows all branches available on the remote repository
 git checkout -b dev origin/dev          checkout the dev remote branch (create a local tracker)
 git fetch [remote] [branch]             pulls a branch from remote to local
+git branch -rd origin/branch            deletes the local reference to a (deleted) branch
 
 git remote update
 git pull --all
+
 
 
 Configuration
@@ -234,6 +236,7 @@ Feature Branch:
     $ git branch -d myfeature               // delete the myfeature branch from local machine
     $ git push origin --delete myfeature    // delete the myfeature branch from remote
     $ git push origin dev                   // push the merged branch to the remote dev branch
+    $ git branch -rd origin/branch          // on other computer: deletes local reference to branch
 
 Release Branch:
     creating release-*:
