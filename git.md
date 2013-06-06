@@ -157,6 +157,35 @@ NOTE: Make the commit, then add the tag.
     git push origin --tags                  Push all tags to remote server
 
 
+Working with remote branches
+-------------------------------
+
+git remote                              shows all remote branches
+git remote -v                           shows remote branches (with url)
+git remote add [alias] [url]            add a new remote repository
+git remote rm [alias]                   remove (delete) the local pointer to the remote repository
+git remote rename [old] [new-alias]     rename old-alias to new-alias
+git remote set-url                      changes the url of the given alias
+
+git fetch [remote-name]                 fetch an update from remote repository
+git pull [remote-name]                  fetch and merge update from remote repository into active branch
+git push [remote-name] [branch-name]    push changes from local branch-name to remote remote-name
+  (eg, git push origin master)
+git push -u origin mybranch             push changes (create tracking) for remote branch
+git remote show [remote-name]           shows data about the remote (URL, tracked branches)
+git push origin --delete [branch]       Deletes a branch from the origin (remote site)
+git push origin :the_remote_branch      Another way to delete a branch from origin
+git branch -d the_local_branch          Delete a branch from the local repository
+
+git push [remotename] [localbranch]:[remotebranch]  pushes from localbranch to remotebranch on remotename
+
+git branch -a                           shows all branches available on the remote repository
+git checkout -b dev origin/dev          checkout the dev remote branch (create a local tracker)
+git fetch [remote] [branch]             pulls a branch from remote to local
+
+git remote update
+git pull --all
+
 
 Configuration
 --------------------------------------------------------------
@@ -194,14 +223,17 @@ We want several types of branches:
 
 Feature Branch:
     creating:
-    $ git checkout -b myfeature dev     // switch to new myfeature branch, forked from dev
+    $ git checkout -b myfeature dev         // switch to new myfeature branch, forked from dev
+    $ git push origin myfeature:myfeature   // pushes from local machine to origin
+    $ git branch -a                         // shows all branches available on the remote repository
+    $ git checkout -b dev origin/dev        // checkout the dev remote branch (create a local tracker)
 
     incorporating:
-    $ git checkout dev
-    $ git merge --no-ff myfeature
-    $ git branch -d myfeature
-    $ git push origin --delete myfeature
-    $ git push origin dev
+    $ git checkout dev                      // check out dev on the local machine
+    $ git merge --no-ff myfeature           // can also include -m 'message' for non-default message
+    $ git branch -d myfeature               // delete the myfeature branch from local machine
+    $ git push origin --delete myfeature    // delete the myfeature branch from remote
+    $ git push origin dev                   // push the merged branch to the remote dev branch
 
 Release Branch:
     creating release-*:
@@ -237,28 +269,3 @@ Hotfix Branch:
     $ git push origin --delete hotfix-1.2.1
 
 
-Working with remote branches
--------------------------------
-
-git remote                              shows all remote branches
-git remote -v                           shows remote branches (with url)
-git remote add [alias] [url]            add a new remote repository
-git remote rm [alias]                   remove (delete) the local pointer to the remote repository
-git remote rename [old] [new-alias]     rename old-alias to new-alias
-git remote set-url                      changes the url of the given alias
-
-git fetch [remote-name]                 fetch an update from remote repository
-git pull [remote-name]                  fetch and merge update from remote repository into active branch
-git push [remote-name] [branch-name]    push changes from local branch-name to remote remote-name
-  (eg, git push origin master)
-git push -u origin mybranch             push changes (create tracking) for remote branch
-git remote show [remote-name]           shows data about the remote (URL, tracked branches)
-git push origin --delete [branch]       Deletes a branch from the origin (remote site)
-git push origin :the_remote_branch      Another way to delete a branch from origin
-git branch -d the_local_branch          Delete a branch from the local repository
-
-git push [remotename] [localbranch]:[remotebranch]  pushes from localbranch to remotebranch on remotename
-
-
-git branch -a                           shows all branches available on the remote repository
-git checkout -b dev origin/dev          checkout the dev remote branch (create a local tracker)

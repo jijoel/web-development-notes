@@ -35,6 +35,9 @@ http://www.nathandavison.com/posts/view/16/using-dependency-injection-and-ioc-in
 Excellent tutorial on a user management system:
 https://gist.github.com/anchetaWern/4223764
 
+Laravel starter site
+https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site
+
 
 Testing
 ------------------------
