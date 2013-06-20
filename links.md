@@ -127,9 +127,18 @@ See a full list of autoloaded classes for the project (refresh via composer dump
 
 User Interface / Front-End
 ===================================
- 
+
+"Holy Grail" layout -- 3 equal-length full-height columns with fixed sides and fluid center:
+http://alistapart.com/article/holygrail
+
 Bootstrap-themed jQuery UI Widgets
 http://addyosmani.github.io/jquery-ui-bootstrap/
+
+Type ahead:
+http://twitter.github.io/typeahead.js/
+
+Slideshow:
+http://jquery.malsup.com/cycle2/
 
 Auto-size text fields:
 http://www.jacklmoore.com/autosize/
@@ -189,4 +198,22 @@ https://github.com/bower/bower
 
 Another method:
 https://github.com/component/component
+
+
+
+Websockets (Persistent Connections / Real-time updates)
+=========================================================
+
+Latchet - Laravel-specific wrapper for Ratchet
+https://github.com/sidneywidmer/Latchet
+
+Ratchet - Awesome php websockets library
+Ratchet: http://socketo.me/
+
+
+
+Apps to Watch / Assist?
+============================
+Laravel 4 online reservation system, YARS (Yet Another Reservation System):
+https://github.com/alariva/yars
 

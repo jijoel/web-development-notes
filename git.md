@@ -58,6 +58,10 @@ If you have local commits that you'd also like to wipe out:
     git reset --hard origin/master          (resets to the current origin/master commit)
     git pull
 
+To stop tracking a file that is currently tracked:
+
+    git rm --cached file
+
 
 
 git add just adds changes (including in new files)
