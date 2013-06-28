@@ -49,6 +49,10 @@ http://acairns.co.uk/2013/01/routing-and-cors-with-laravel-4/
 Several blog posts:
 http://driesvints.com/
 
+Doctrine documentation:
+http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
+
+
 
 
 
