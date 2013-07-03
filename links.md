@@ -174,6 +174,10 @@ A nice JQuery UI Date/Time picker:
 https://github.com/trentrichardson/jQuery-Timepicker-Addon
 http://trentrichardson.com/examples/timepicker/
 
+"State Face" icons:
+http://propublica.github.io/stateface/
+
+
 
 Backbone
 ------------------
