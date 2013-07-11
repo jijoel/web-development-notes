@@ -192,6 +192,34 @@ git remote update
 git pull --all
 
 
+Troubleshooting
+-----------------------
+
+Error: You asked me to pull without telling me which branch you want to merge with...
+
+git remote show origin    shows local vs origin branches, in this format:
+
+    * remote origin
+      Fetch URL: https://github.com/jijoel/project.git
+      Push  URL: https://github.com/jijoel/project.git
+      HEAD branch: master
+      Remote branches:
+        autobuild tracked
+        dev       tracked
+        master    tracked
+      Local branches configured for 'git pull':
+        dev    merges with remote dev
+        master merges with remote master
+      Local refs configured for 'git push':
+        autobuild pushes to autobuild (local out of date)
+        dev       pushes to dev       (up to date)
+        master    pushes to master    (up to date)
+
+In this particular case, autobuild is set to push, but not to pull. To fix it:
+
+    git branch --set-upstream autobuild origin/autobuild
+
+
 
 Configuration
 --------------------------------------------------------------
