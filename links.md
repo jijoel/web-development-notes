@@ -19,6 +19,8 @@ http://satishgopal.wordpress.com/tag/rest-error-handling/
 Style guide for web authors
 http://med.stanford.edu/modelsite/styles/
 
+Supported Timezones:
+http://php.net/manual/en/timezones.php
 
 
 
@@ -52,6 +54,78 @@ http://driesvints.com/
 Doctrine documentation:
 http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
 
+
+
+Composer Packages
+----------------------------------------
+Laravel package registry:
+http://registry.autopergamene.eu/
+
+Prevent artisan from running some commands (eg, migrate:refresh on a production server):
+https://github.com/Itrulia/ArtisanBlock
+
+Image handling and manipulation:
+http://intervention.olivervogel.net/image
+"intervention/image": "dev-master"
+
+More image handling and manipulation:
+https://github.com/Zweer/php-images
+
+Laravel Administrator (seems to be a nice front-end for accessing tables, etc.):
+http://administrator.frozennode.com/
+https://github.com/FrozenNode/Laravel-Administrator
+"frozennode/administrator": "dev-master"
+
+Classes to help write tests for laravel:
+https://github.com/Zizaco/testcases-laravel
+
+Role-based permissions for Laravel 4:
+https://github.com/Zizaco/entrust
+"zizaco/entrust": "dev-master"
+
+Authentication (by same person who built entrust):
+https://github.com/Zizaco/confide
+"zizaco/confide": "dev-master"
+
+Authentication & Authorization:
+https://github.com/cartalyst/sentry
+"cartalyst/sentry": "2.0.*" 
+
+Another auth package:
+https://github.com/AndreasHeiberg/Verify-L4
+"andheiberg/verify": "2.0.*"
+
+Server-side handling of datatables:
+https://github.com/bllim/laravel4-datatables-packages
+"bllim/datatables": "dev-master"
+
+I think this lets you interact with Artisan via a web form (useful if no shell access):
+https://github.com/JN-Jones/web-artisan
+
+Laravel IDE Helper - improves auto-completion:
+https://github.com/barryvdh/laravel-ide-helper
+"barryvdh/laravel-ide-helper": "v1.5.2"
+
+Extra functionality for models (including auto-validation, similar to ardent):
+https://github.com/betawax/role-model
+
+Ardent Self-validating, secure and smart models:
+https://github.com/laravelbook/ardent
+"laravelbook/ardent": "dev-master"
+
+Markdown compiler for Laravel 4:
+https://github.com/vtalbot/markdown
+
+User-available configuration settings (config loader via database):
+https://bitbucket.org/hailwoodnz/database-config-loader
+"hailwood/database-config-loader": "dev-master"
+
+Simple menu builder:
+https://bitbucket.org/purposemedia/menu
+
+Alternate formatting for rules 
+(eg, 'username'  => Rule::required()->alphaDash()->between(3, 100))
+https://github.com/bigelephant/laravel-rules
 
 
 

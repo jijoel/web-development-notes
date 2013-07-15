@@ -4,11 +4,15 @@ Laravel
 Using Laravel 4:  http://four.laravel.com
 
 
-Setup
+Setupc
 --------
 
 There are instructions here:
 http://niallobrien.me/2013/03/installing-and-updating-laravel-4/
+
+Instead, you can install it directly via composer:
+
+    composer create-project laravel/laravel <projectName>
 
 I also like these additional tools:
         "way/generators": "dev-master",
@@ -329,3 +333,15 @@ This is the standard structure to use with forms:
       </p>
     {{ Form::close() }}
 
+
+Mail
+--------
+Laravel can send email messages; also through gmail. Configuration for that should be set up as follows:
+
+    'driver' => 'smtp',
+    'host' => 'smtp.gmail.com',
+    'port' => 465,
+    'encryption' => 'ssl',
+    'username' => 'your-email@gmail.com',
+    'password' => 'your-password',
+    

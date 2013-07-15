@@ -3,19 +3,15 @@ php commands
 
 file_put_contents($file, $contents)   write $contents to $file
 file_get_contents($file)              read $file into a variable
+Insert end-of-line code:              echo PHP_EOL;
 
 uniqid              Generate a unique id string based on timestamp
-    
 serialize           Generate a (storable) string from an object/array
 unserialize         Load (stored) string data into an object/array
-    
 end(array)          Return value of last element in array
-
 compact('items')    shorthand for array('items' => $items);
+strip_tags($str)    strips all html tags from $str
 
-
-Insert end-of-line code:
-echo PHP_EOL;
 
 
 Static vs Non-static
@@ -32,7 +28,6 @@ In a static function, you can only call other static functions, unless you creat
 
 Magic functions
 -----------------
-
 Magic functions run at (given) times. For instance, __call runs whenever a function can not be found, so you can do something else:
 
     public static function __call($name, $args)
@@ -48,4 +43,15 @@ Magic functions run at (given) times. For instance, __call runs whenever a funct
         }
         return strtolower($name);
     }
+
+    
+Namespaces
+------------
+
+Based off the folder structure.
+
+My project: package/src/Vendor/Package.php
+    github: jijoel/Package/src/Vendor/Package.php
+
+namespace Vendor\Package
 

@@ -695,6 +695,51 @@ To test specific actions, we can use this:
 
 
 
+Testing for exceptions
+------------------------
+We can make sure that an exception is thrown by using a docblock:
+
+    /*
+     * @expectedException ExceptionName
+     */
+    public function testThrowsExceptionOnError() {
+        // do something that should throw an exception
+    }
+
+    
+Varying tests
+----------------
+If you have a lot of tests that are basically similar, these can be set in by a data provider.
+For instance, if you have this:
+
+    public function testGetFieldData() {
+        $fields = $this->schema->getFields();
+        $this->assertEquals('id', $fields['id']['name']);
+        $this->assertEquals('Text1', $fields['text1']['display']);
+        $this->assertEquals('Object Identifier', $fields['oid']['display']);
+    }
+
+... you're basically doing the same thing over and over again. For more dry code, you can do something like this:
+
+    public function inputFieldData() {
+        return array(
+            array('id', 'id', 'name'),
+            array('Text1', 'text1', 'name'),
+            array('Object Identifier', 'oid', 'display'),
+        );
+    }
+    
+    /*
+     * @dataProvider inputFieldData
+     */
+    public function testGetFieldData($expected, $field, $attr) {
+        $fields = $this->schema->getFields();
+        $this->assertEquals($expected, $field, $attr);
+    }
+    
+For a small set of tests, this may be overkill, but you can repeat the data in other tests, and easily add new data.
+    
+    
 Additional stuff for testing
 ------------------------------
 
