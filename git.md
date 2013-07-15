@@ -62,7 +62,10 @@ To stop tracking a file that is currently tracked:
 
     git rm --cached file
 
+Remove untracked files:
 
+    git clean -f
+    
 
 git add just adds changes (including in new files)
 
