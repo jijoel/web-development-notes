@@ -121,8 +121,15 @@ phpunit
 I'm using phpunit for testing. It will read configuration information from phpunit.xml, in the root directory of the project.
 
 Incomplete tests:
-Skip them by putting this at the beginning of the test:
-$this->markTestIncomplete();
+Skip them by putting one of these at the beginning of the test:
+
+    $this->markTestIncomplete();
+
+    $this->markTestSkipped(
+      'The MySQLi extension is not available.'
+    );
+
+(these can be entered in the setUp routine for all tests, to skip all. The parser will still go through everything to find class definitions, etc., though)
 
 
 We can only test some groups at a time:

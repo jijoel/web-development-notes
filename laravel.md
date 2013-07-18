@@ -4,7 +4,7 @@ Laravel
 Using Laravel 4:  http://four.laravel.com
 
 
-Setupc
+Setup
 --------
 
 There are instructions here:

@@ -96,7 +96,7 @@ https://github.com/AndreasHeiberg/Verify-L4
 "andheiberg/verify": "2.0.*"
 
 Server-side handling of datatables:
-https://github.com/bllim/laravel4-datatables-packages
+https://github.com/bllim/laravel4-datatables-package
 "bllim/datatables": "dev-master"
 
 I think this lets you interact with Artisan via a web form (useful if no shell access):
@@ -243,6 +243,7 @@ Data tables:
 http://datatables.net/
 http://www.codeproject.com/Articles/194916/Enhancing-HTML-tables-using-a-JQuery-DataTables-pl
 (includes info/examples on server-side processing for thousands of records)
+(also see: Server-side handling of datatables)
 
 CKEditor:
 http://ckeditor.com
@@ -294,8 +295,11 @@ Ratchet: http://socketo.me/
 
 
 
-Apps to Watch / Assist?
-============================
+Interesting Apps to Model / Watch / Assist?
+==============================================
 Laravel 4 online reservation system, YARS (Yet Another Reservation System):
 https://github.com/alariva/yars
+
+Missing pet flyer
+https://github.com/msurguy/missingpetflyer
 
