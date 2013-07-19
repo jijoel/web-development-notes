@@ -765,8 +765,10 @@ This will produce output like this (where you can see the actual query string):
               0 => int 4
           'time' => string '0.77' (length=4)
 
-          
-          
+You can also export the data to a log, like so:
+
+    \Log::debug(var_export(DB::getQueryLog(), true));
+         
           
           
           

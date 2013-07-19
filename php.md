@@ -12,6 +12,10 @@ end(array)          Return value of last element in array
 compact('items')    shorthand for array('items' => $items);
 strip_tags($str)    strips all html tags from $str
 
+var_export()        Like var_dump, but writes data in a way it can be captured. For instance:
+
+    \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
+
 
 
 Static vs Non-static
