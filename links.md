@@ -127,6 +127,9 @@ Alternate formatting for rules
 (eg, 'username'  => Rule::required()->alphaDash()->between(3, 100))
 https://github.com/bigelephant/laravel-rules
 
+Theme and asset management:
+https://github.com/teepluss/laravel4-theme
+"teepluss/theme": "dev-master"
 
 
 
@@ -155,6 +158,9 @@ Misc
 
 Various development issues (blog)
 http://antjanus.com/blog/
+
+Lots of laravel examples (blog):
+http://maxoffsky.com/category/code-blog/
 
 Various development issues (blog)
 http://fideloper.com/
@@ -255,6 +261,9 @@ http://trentrichardson.com/examples/timepicker/
 
 "State Face" icons:
 http://propublica.github.io/stateface/
+
+Image cropping with jquery:
+http://deepliquid.com/content/Jcrop.html
 
 
 
