@@ -542,7 +542,30 @@ You can swap out entire components with your own. For instance, if you had a cla
     //'Response'        => 'Illuminate\Support\Facades\Response',
     'Response'        => 'Api\Facades\Response',    (your own response facade)
 
-    
+
+Mocking
+-----------------
+This is how to mock a facade:
+
+    public function setUp()
+    {
+        parent::setUp();
+
+        $app = m::mock('AppMock');
+        $app->shouldReceive('instance')->once()->andReturn($app);
+
+        Illuminate\Support\Facades\Facade::setFacadeApplication($app);
+        Illuminate\Support\Facades\Config::swap($config = m::mock('ConfigMock'));
+
+        $config->shouldReceive('get')->once()
+            ->with('logviewer::log_dirs')->andReturn(array('app' => 'app/storage/logs'));
+
+        $this->logviewer = new Logviewer('app', 'cgi-fcgi', '2013-06-01');
+    }
+
+I think that ...\Config::swap  statement actually swaps out the class the facade is looking for.
+
+
     
 In-memory database and test environment
 -----------------------------------------

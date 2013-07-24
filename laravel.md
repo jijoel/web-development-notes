@@ -333,6 +333,12 @@ This is the standard structure to use with forms:
       </p>
     {{ Form::close() }}
 
+You can supply additional parameters like so:
+
+    {{ Form::input('type', 'name', 'value', array('style'=>'width: 30em') ) }}
+    {{ Form::textarea('name', 'value', array('rows'=>8)) }}
+
+
 
 Mail
 --------
@@ -345,3 +351,28 @@ Laravel can send email messages; also through gmail. Configuration for that shou
     'username' => 'your-email@gmail.com',
     'password' => 'your-password',
     
+
+
+Sessions
+---------------
+You can use a session to return you to a main page, after making some change in a related (sub) page. Like this:
+
+    public function edit($id)
+    {
+        if ( ! Session::get('errors')) {
+            Session::put('referrer', Request::server('HTTP_REFERER'));
+        }
+
+        $item = $this->items->find($id);
+        return View::make('api/edit')
+            ->with('item', $item);
+    }
+
+    public function update($id)
+    {
+        ... do the update ...
+
+        return Redirect::to(Session::get('referrer'));
+    }
+
+
