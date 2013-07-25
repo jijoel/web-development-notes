@@ -1,3 +1,32 @@
+GitHub-Flavored Markdown
+==============================
+
+# Header
+
+## Another Header
+
+### Another Header
+
+#### Another Header
+
+    Code is indented 4 spaces
+
+This does syntax highlighting for php (no indentation needed for code):
+
+    ```php
+            <php code goes here>
+    ```
+
+- Creates a bulleted list
+- Creates an `inline code` statement
+- Drop in pictures like this:
+
+    ![picture](http://path/image.png)
+
+
+
+
+
 FluxBB Markup (Used in Laravel forum)
 =======================================
 
@@ -46,3 +75,7 @@ The following tags change the appearance of text:
 [color=#FF0000]Red text[/color] produces Red text
 [color=blue]Blue text[/color] produces Blue text
 [h]Heading text[/h] produces Heading text
+
+
+
+

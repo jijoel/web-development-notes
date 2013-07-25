@@ -25,6 +25,8 @@ Write the code to make the test pass
 Test it (make sure it passes)
 Refactor (make sure all tests still pass)
 
+
+
 Mocks
 -------
 A mock is a replacement for an object that we can use for testing.
@@ -401,6 +403,7 @@ Useful Assertions:
  
     // or simply check that the response is a redirect to any URL
     $this->assertTrue($client->getResponse()->isRedirect());
+
  
 Browsing
 ----------
@@ -412,6 +415,7 @@ The Client supports many operations that can be done in a real browser:
  
     // Clears all cookies and the history
     $client->restart();
+
  
 Accessing Internal Objects
 ----------------------------
@@ -431,6 +435,7 @@ If your requests are not insulated, you can also access the Container and the Ke
     $container = $client->getContainer();
     $kernel    = $client->getKernel();
  
+
 Redirecting
 -------------
 When a request returns a redirect response, the client does not follow it automatically. You can examine the response and force a redirection afterwards with the followRedirect() method:
@@ -441,6 +446,7 @@ If you want the client to automatically follow all redirects, you can force him 
 
     $client->followRedirects();
  
+
 The Crawler
 ------------
 A Crawler instance is returned each time you make a request with the Client. It allows you to traverse HTML documents, select nodes, find links and forms.
@@ -547,6 +553,8 @@ Mocking
 -----------------
 This is how to mock a facade:
 
+    use \Mockery as m;
+
     public function setUp()
     {
         parent::setUp();
@@ -565,8 +573,26 @@ This is how to mock a facade:
 
 I think that ...\Config::swap  statement actually swaps out the class the facade is looking for.
 
+Mockery will let us mock demeter chains, eg `$object->foo()->bar()->zebra()->alpha()->selfDestruct();`. It will return the value of the LAST entry of the entire chain. We can mock all of that like this:
+
+    $mock = \Mockery::mock('SomeMock');
+    $mock->shouldReceive('foo->bar->zebra->alpha->selfDestruct')->andReturn('Ten!');
+
+It will also let us do partial mocks, where we mock some of the public functions of the class under test. (They MUST be public functions; we can't mock private or protected functions).
+
+In my class, if I have a function `getAlias` that I want to mock, this is how I do it: 
+
+    $test = m::mock('\Kalani\FacadeRoot\FacadeRoot[getAlias]', array(Null, Null));
+        // the array, above, is for passing parameters to the constructor
+
+    $test->shouldReceive('getAlias')->andReturn('Foo');
+        // The `getAlias` function will be called, and return 'Foo'
+
+    $this->assertEquals('(alias) Foo', $test->getRoot(Null));
+        // getRoot calls getAlias (and takes a parameter)
 
     
+
 In-memory database and test environment
 -----------------------------------------
 An in-memory database is much faster than writing data to your actual database (it doesn't require any disk reads, indexes, etc.)

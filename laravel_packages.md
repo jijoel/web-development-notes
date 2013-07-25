@@ -3,40 +3,78 @@ Laravel Packages
 
 Instructions at:  http://culttt.com/2013/06/24/creating-a-laravel-4-package/
 
-    composer create-project laravel/laravel schema-interface
+Install a new instance of laravel:
+
+    composer create-project laravel/laravel foo
     chmod -R go+w app/storage/*
 
-Edit some settings in app/config/workbench.php, then set up the workbench:
+Edit app/config/workbench.php to insert critical information, then run:
 
-    php artisan workbench --resources Kalani/SchemaInterface
+    php artisan workbench Vendor/PackageFoo
 
 I get a new folder structure that looks like this:
 
-    ~/projects/web/schema-interface/workbench/kalani/schema-interface/src/Kalani/SchemaInterface
+    <project>/workbench/vendor/package-foo/src/Vendor/PackageFoo
 
-My namespace will be:
+Enter this in the providers array of app/config/app.php:
 
-    namespace Kalani\SchemaInterface
+    'Vendor\PackageFoo\PackageFooServiceProvider', 
 
-In the SchemaInterface package, I want to put these objects:
+Set up files as follows:
 
-    SchemaController
-    SchemaModel
-    TableSchema
-    ValidationRuleGenerator
+Modify workbench/vendor/package-foo/src/Vendor/PackageFoo/PackageFooServiceProvider:
 
-First thing to do is create a test in workbench/kalani/schema-interface/tests:
-
-    <?php
-
-    class SchemaControllerTest extends PHPUnit_Framework_TestCase
+    public function register()
     {
-        public funtion testWorks()
+        $this->app['foo'] = $this->app->share(function($app){
+          return new Foo;
+        });
+
+        $this->app->booting(function()
         {
-            $this->assertTrue(False);
+          $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+          $loader->alias('Foo', 'Vendor\PackageFoo\Facades\Foo');
+        });     
+    }
+
+    public function provides()
+    {
+        return array('Foo');
+    }
+
+Create workbench/vendor/package-foo/src/Vendor/PackageFoo/Facades/Foo:
+
+    <?php namespace Vendor\PackageFoo\Facades;
+     
+    use Illuminate\Support\Facades\Facade;
+     
+    class Foo extends Facade 
+    {
+        protected static function getFacadeAccessor() { return 'foo'; }
+    }
+
+Create workbench/vendor/package-foo/src/Vendor/PackageFoo/Foo.php:
+
+    <?php namespace Vendor\PackageFoo;
+
+    class Foo
+    {
+        public function foo()
+        {
+            return 'bar';
         }
     }
 
-Running phpunit from /cygdrive/c/wamp/www/active/lkata/workbench/kalani/schema-interface...
-It fails. We can begin...
+Create workbench/vendor/package-foo/tests:
+
+    <?php
+
+    class FooTest extends PHPUnit_Framework_TestCase
+    {
+        public function testSetup()
+        {
+            $foo = new \Vendor\PackageFoo\Foo;
+            $this->assertEquals('bar', $foo->foo());
+        }
+    }
 

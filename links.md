@@ -48,9 +48,6 @@ https://github.com/andrew13/Laravel-4-Bootstrap-Starter-Site
 Routing / Cross-Origin-Resource-Sharing 
 http://acairns.co.uk/2013/01/routing-and-cors-with-laravel-4/
 
-Several blog posts:
-http://driesvints.com/
-
 Doctrine documentation:
 http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
 
@@ -65,6 +62,7 @@ Prevent artisan from running some commands (eg, migrate:refresh on a production 
 https://github.com/Itrulia/ArtisanBlock
 
 Image handling and manipulation:
+http://creolab.hr/2013/07/image-manipulation-in-laravel-4-with-imagine/
 http://intervention.olivervogel.net/image
 "intervention/image": "dev-master"
 
@@ -127,6 +125,12 @@ Alternate formatting for rules
 (eg, 'username'  => Rule::required()->alphaDash()->between(3, 100))
 https://github.com/bigelephant/laravel-rules
 
+File attachments:
+https://github.com/CodeSleeve/stapler
+
+File uploads:
+https://github.com/andrew13/cabinet
+
 
 
 
@@ -153,18 +157,6 @@ https://github.com/padraic/mockery
 Misc
 -----------------------------
 
-Various development issues (blog)
-http://antjanus.com/blog/
-
-Various development issues (blog)
-http://fideloper.com/
-http://fideloper.com/api-etag-conditional-get
-http://fideloper.com/laravel4-etag-conditional-get
-http://fideloper.com/error-handling-with-content-negotiation
-http://fideloper.com/laravel4-error-handling
-http://fideloper.com/laravel-4-application-setup-app-library-autoloading
-http://fideloper.com/laravel-4-where-to-put-bindings
-
 Easy fixtures for models
 https://github.com/summerstreet/woodling
 
@@ -173,19 +165,6 @@ http://jasonlewis.me/code/expressive-date/docs
 
 Test cases (inherit classes from these):
 https://github.com/Zizaco/laravel4-test-cases
-
-
-
-
-Forums / Ideas 
-================================
-
-Best practice for responding to AJAX request?
-http://forums.laravel.io/viewtopic.php?id=2508
-
-How do you take your project from development to production?
-http://forums.laravel.io/viewtopic.php?pid=32807#p32807
-
 
 
 
@@ -303,3 +282,22 @@ https://github.com/alariva/yars
 Missing pet flyer
 https://github.com/msurguy/missingpetflyer
 
+
+
+Interesting Blogs
+============================
+http://driesvints.com/
+http://culttt.com/
+http://antjanus.com/blog/
+http://fideloper.com/
+
+
+
+Forums / Ideas 
+================================
+
+Best practice for responding to AJAX request?
+http://forums.laravel.io/viewtopic.php?id=2508
+
+How do you take your project from development to production?
+http://forums.laravel.io/viewtopic.php?pid=32807#p32807

@@ -64,6 +64,16 @@ Laravel’s components are instances that exist within the Laravel 4 $app contai
     $app->component->methodName();.
     Component::methodName();
 
+We can also instanciate classes in several ways:
+
+    $profiler = App::make('profiler');
+    $profiler = app('profiler');
+    $profiler = $app['profiler'];           // If you have access to the instance 
+                                               (which you do in app/start/global.php)
+    $profiler = $this->app['profiler'];     // If, for example, you're inside the 
+                                               boot() method of a service provider
+
+
 
     
 IoC Binding

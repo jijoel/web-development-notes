@@ -54,3 +54,26 @@ You can combine these, to update one package for source. Do an initial installat
 
 
 
+Loading a package from a VCS repository (eg, github)
+-------------------------------------------------------
+
+We don't have to upload packages to packagist.org. They can be downloaded from a git repository, as follows:
+
+http://getcomposer.org/doc/05-repositories.md#repository
+
+    {
+        "require": {
+            "vendor/my-private-repo": "dev-master"
+        },
+        "repositories": [
+            {
+                "type": "vcs",
+                "url":  "git@bitbucket.org:vendor/my-private-repo.git"  // for a private repo on bitbucket
+            },
+            {
+                "type": "vcs",
+                "url":  "https://github.com/igorw/monolog"              // for a repo on github
+            }
+        ]
+    }
+
