@@ -131,6 +131,12 @@ https://github.com/CodeSleeve/stapler
 File uploads:
 https://github.com/andrew13/cabinet
 
+Theme and asset management:
+https://github.com/teepluss/laravel4-theme
+"teepluss/theme": "dev-master"
+
+Find the classes behind the facades:
+https://github.com/experience/laravel-4-map
 
 
 
@@ -234,6 +240,9 @@ http://trentrichardson.com/examples/timepicker/
 
 "State Face" icons:
 http://propublica.github.io/stateface/
+
+Image cropping with jquery:
+http://deepliquid.com/content/Jcrop.html
 
 
 
