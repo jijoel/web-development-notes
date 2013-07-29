@@ -74,6 +74,7 @@ Create workbench/vendor/package-foo/tests:
         public function testSetup()
         {
             $foo = new \Vendor\PackageFoo\Foo;
+            $this->assertEquals('\\Vendor\\PackageFoo\\Foo', get_class($foo));
             $this->assertEquals('bar', $foo->foo());
         }
     }

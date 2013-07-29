@@ -52,6 +52,9 @@ You can combine these, to update one package for source. Do an initial installat
 
     composer update --prefer-source vendor/package
 
+Note: When using composer, we should upload the file composer.lock to our VCS repository. Having it in the repository assures you that each developer is using the same versions of all packages, and that the version in test is the same as the version in dev. On a production server, run composer install (never composer update).
+
+
 
 
 Loading a package from a VCS repository (eg, github)

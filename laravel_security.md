@@ -17,31 +17,17 @@ We have to look for a file that is not available the file system (if the file ex
 
 In app/routes.php:
 
-    Route::get('/assets/{id1}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}/{id3}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}/{id3}/{id4}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}/{id3}/{id4}/{id5}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}/{id7}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}/{id7}/{id8}', 
-        array('uses'=>'RoutingController@findAsset'));
-    Route::get('/assets/{id1}/{id2}/{id3}/{id4}/{id5}/{id6}/{id7}/{id8}/{id9}', 
-        array('uses'=>'RoutingController@findAsset'));
+    Route::get('/assets/{path}', array(
+        'as' => 'private', 
+        'uses' => 'RoutingController@findAsset'))
+        ->where('path', '.+');
+
 
 The RoutingController looks like this:
 
     class RoutingController extends Controller
     {
-        public function findAsset($p1='', $p2='', $p3='', $p4='', 
-            $p5='', $p6='', $p7='', $p8='', $p9='')
+        public function findAsset($path)
         {
             // Find out if the user has permission to use this asset;
             // abort with a 403 error code if they do not.
@@ -49,33 +35,14 @@ The RoutingController looks like this:
             // if (Auth::guest() && strlen($p3)==0)
             //     App::abort(403);
 
-            $asset = $this->joinPath(
-                $_SERVER["DOCUMENT_ROOT"] . '/../private',
-                $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9);
+            $asset = realpath($_SERVER["DOCUMENT_ROOT"] . '/../private' . $path);
 
             // Find out if the user has permission to use this asset;
             // abort with a 403 error code if they do not.
     
             $this->returnFile($asset);
         }
-
-        private function joinPath($p0, $p1, $p2, $p3, $p4, $p5, $p6, $p7, $p8, $p9)
-        {
-            $asset = $p0;
-
-            if (strlen($p1)>0) $asset.='/'.$p1;
-            if (strlen($p2)>0) $asset.='/'.$p2;
-            if (strlen($p3)>0) $asset.='/'.$p3;
-            if (strlen($p4)>0) $asset.='/'.$p4;
-            if (strlen($p5)>0) $asset.='/'.$p5;
-            if (strlen($p6)>0) $asset.='/'.$p6;
-            if (strlen($p7)>0) $asset.='/'.$p7;
-            if (strlen($p8)>0) $asset.='/'.$p8;
-            if (strlen($p9)>0) $asset.='/'.$p9;
-
-            return realpath($asset);
-        }
-
+    
         private function returnFile($path, array $headers = array())
         {
             if (!is_file($path))

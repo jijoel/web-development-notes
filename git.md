@@ -167,34 +167,67 @@ NOTE: Make the commit, then add the tag.
 Working with remote branches
 -------------------------------
 
-git remote                              shows all remote branches
-git remote -v                           shows remote branches (with url)
-git remote add [alias] [url]            add a new remote repository
-git remote rm [alias]                   remove (delete) the local pointer to the remote repository
-git remote rename [old] [new-alias]     rename old-alias to new-alias
-git remote set-url                      changes the url of the given alias
+    git remote                              shows all remote branches
+    git remote -v                           shows remote branches (with url)
+    git remote add [alias] [url]            add a new remote repository
+    git remote rm [alias]                   remove (delete) the local pointer to the remote repository
+    git remote rename [old] [new-alias]     rename old-alias to new-alias
+    git remote set-url                      changes the url of the given alias
 
-git fetch [remote-name]                 fetch an update from remote repository
-git pull [remote-name]                  fetch and merge update from remote repository into active branch
-git push [remote-name] [branch-name]    push changes from local branch-name to remote remote-name
-  (eg, git push origin master)
-git push -u origin mybranch             push changes (create tracking) for remote branch
-git remote show [remote-name]           shows data about the remote (URL, tracked branches)
-git push origin --delete [branch]       Deletes a branch from the origin (remote site)
-git push origin :the_remote_branch      Another way to delete a branch from origin
-git branch -d the_local_branch          Delete a branch from the local repository
+    git fetch [remote-name]                 fetch an update from remote repository
+    git pull [remote-name]                  fetch and merge update from remote repository into active branch
+    git push [remote-name] [branch-name]    push changes from local branch-name to remote remote-name
+      (eg, git push origin master)
+    git push -u origin mybranch             push changes (create tracking) for remote branch
+    git remote show [remote-name]           shows data about the remote (URL, tracked branches)
+    git push origin --delete [branch]       Deletes a branch from the origin (remote site)
+    git push origin :the_remote_branch      Another way to delete a branch from origin
+    git branch -d the_local_branch          Delete a branch from the local repository
 
-git push [remotename] [localbranch]:[remotebranch]  pushes from localbranch to remotebranch on remotename
+    git push [remotename] [localbranch]:[remotebranch]  pushes from localbranch to remotebranch on remotename
 
-git branch -a                           shows all branches available on the remote repository
-git checkout -b dev origin/dev          checkout the dev remote branch (create a local tracker)
-git fetch [remote] [branch]             pulls a branch from remote to local
-git branch -rd origin/branch            deletes the local reference to a (deleted) branch
+    git branch -a                           shows all branches available on the remote repository
+    git checkout -b dev origin/dev          checkout the dev remote branch (create a local tracker)
+    git fetch [remote] [branch]             pulls a branch from remote to local
+    git branch -rd origin/branch            deletes the local reference to a (deleted) branch
 
-git remote update
-git pull --all
+    git remote update
+    git pull --all
+
+    git rebase -p origin/dev                rebases the current branch to origin/dev
+                                            (it could have been origin/master, or something else)
+
+                                        
+Forks and upstream changes
+-----------------------------
+You can fork a repository on github. This will create your own personal version of this repository, in your own github account. To make a pull request (a request to have your code pulled into the master repository):
+
+1. Fork the repository to your own github account
+2. Clone your version to your local machine
+3. Create a new branch for your feature or bug fix
+4. Make the changes
+5. Commit the changes (git add; git commit)
+6. Push your branch to your github repo  (git push origin my/branch)
+7. Look at our branch on github; make sure everything looks right
+8. Click Pull Request button on github; 
+      Make sure to submit changes to the right place (dev vs master, etc.)
+      write comments so maintainer can see what you changed
+      send pull request
+
+To update your repository from the master repository, you can use upstream changes:
+
+    git remote add upstream https://github.com/vendor/master-repository-name.git
+
+    git fetch upstream
+    # Fetches any new changes from the original repository
+
+    git merge upstream/master
+    # Merges any changes fetched into your working files
 
 
+
+
+                                        
 Troubleshooting
 -----------------------
 
@@ -259,6 +292,7 @@ We want several types of branches:
     feature:        specific features for the next (or future) release. As feature completed, send to release 
 
 Feature Branch:
+
     creating:
     $ git checkout -b myfeature dev         // switch to new myfeature branch, forked from dev
     $ git push origin myfeature:myfeature   // pushes from local machine to origin
@@ -274,6 +308,7 @@ Feature Branch:
     $ git branch -rd origin/branch          // on other computer: deletes local reference to branch
 
 Release Branch:
+
     creating release-*:
     $ git checkout -b release-1.2 dev
     $ echo 1.2 > version.txt             // or some other way to change the version number
@@ -289,6 +324,7 @@ Release Branch:
     $ git push origin --delete release-1.2
 
 Hotfix Branch:
+
     creating hotfix-*:
     $ git checkout -b hotfix-1.2.1 master
     $ echo 1.2.1 > version.txt

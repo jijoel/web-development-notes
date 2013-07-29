@@ -15,15 +15,17 @@ Instead, you can install it directly via composer:
     composer create-project laravel/laravel <projectName>
 
 I also like these additional tools:
-        "way/generators": "dev-master",
-        "mockery/mockery": "dev-master"
 
-To set up laravel, copy the basic project from above, and run composer install to get all of the dependencies.
+    "way/generators": "dev-master",
+    "mockery/mockery": "dev-master"
+
+To set up laravel, copy the basic project from above, and run `composer install` to get all of the dependencies.
 
 Set the project root directory in apache to the /public folder
 (this is a place for css, img, js, etc. files, also)
 
 make storage directory writable:
+
     chmod -R o+w storage
     (or chown www-data storage/*)
 
@@ -50,11 +52,12 @@ Even better, we can create resources with a lot of standard boilerplate:
 
 Laravel configuration information stored in project/app/config
 Each file here returns an array with configuration information (closures are OK)
-Access it at any time with Config::get. Use the file name and array key:
+Access it at any time with `Config::get`. Use the file name and array key:
 
     Config::get('app.timezone')
 
 For any classes that use facades (most of Laravel's classes), get the original class name with:
+
     echo get_class(App::getFacadeRoot());       (App, or any other class)
 
 
@@ -77,7 +80,7 @@ We can also instanciate classes in several ways:
 
     
 IoC Binding
----
+------------
 To bind classes to the IoC container (for unit testing):
  
     $app->bind('UsersController', function($app) {
@@ -92,6 +95,7 @@ To bind classes to the IoC container (for unit testing):
     });
  
 At this point, we can make the class, using
+
     $app->make('UsersController') ;
 
 
@@ -103,6 +107,7 @@ Migrations are like version control for your databases.
     php artisan migrate:make create_users_table 
 
 creates the basic structure for a new 'users' table. Fill it in further, to get:
+
     public function up()
     {
         Schema::create('users', function($table) {
@@ -117,6 +122,7 @@ creates the basic structure for a new 'users' table. Fill it in further, to get:
     }
 
 Use seeds to add sample records:
+
 Create a file within the app/database/seeds folder that has the same name as the table that it corresponds to; in our case, users.php. Add:
 
     <?php 
@@ -137,10 +143,12 @@ Create a file within the app/database/seeds folder that has the same name as the
  
  
 Run the migrations and insert sample records:
+
     // Make sure the auto-loader knows about these new classes
     php composer.phar dump-autoload
 
 To run the migration:
+
     php artisan migrate                     // run all migrations that have not been run
     php artisan migrate:refresh             // roll back and re-run all migrations
     php artisan migrate:refresh --seed      // refresh, then seed the database
@@ -177,24 +185,29 @@ creates lots of functions, including:
     Route::resource('photos','PhotosController');
  
 Laravel 4 is restful by default.
-in index(), if you return Photo::all(), you'll get json output
+in index(), if you return `Photo::all()`, you'll get json output
 
 These are equivalent ways to return data to a user:
+
     return Photo::all();  
+
 or
+
     $photos = Photo::all();
     return View::make('photos.index', compact('photos'));
+
 or
+
     return View::make('photos.index')->with(array('photos' => $photos));
  
 In a view, to get a link to the photos.show method (parameter id), use:
 
     <a href="{{ route('photos.show', ['photos' => $photo->id]) }}"> 
 
-photos/create -> POST photos -> photos/store
-photos/edit/1 -> PUT photos/1 -> photos/1/update
-GET photos/id/delete
-DELETE photos/id
+    photos/create -> POST photos -> photos/store
+    photos/edit/1 -> PUT photos/1 -> photos/1/update
+    GET photos/id/delete
+    DELETE photos/id
 
 
 Eloquent Models
@@ -202,8 +215,8 @@ Eloquent Models
 
 By default, the table name will be plural, and the model name will be singular. This can be changed, though…
  
-Table   Model   Controller
-users   User    UsersController
+    Table   Model   Controller
+    users   User    UsersController
  
 To use something else, in the model,
  
@@ -231,6 +244,7 @@ Routing
 Here are a few different ways to send variables to the default view:
  
 via the routes.php file:
+
     $data = array(
         'greeting'   => 'hello',
         'something'  => 'world',

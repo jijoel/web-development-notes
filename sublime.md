@@ -49,39 +49,39 @@ Global Key Map
 
 I like these key bindings:
 
-[
-    { "keys": ["ctrl+shift+;"], "command": "run_macro_file", "args": {
-            "file": "Packages/User/EOL_Semicolon.sublime-macro"
-        } 
-    },
-    { "keys": ["ctrl+alt+n"], "command": "advanced_new_file"},
-    { "keys": ["ctrl+shift+a"], "command": "select_all" },
-    { "keys": ["ctrl+a"], "command": "move_to", "args": {"to": "bol", "extend": false} },
-    { "keys": ["ctrl+e"], "command": "move_to", "args": {"to": "eol", "extend": false} }
-]
+    [
+        { "keys": ["ctrl+shift+;"], "command": "run_macro_file", "args": {
+                "file": "Packages/User/EOL_Semicolon.sublime-macro"
+            } 
+        },
+        { "keys": ["ctrl+alt+n"], "command": "advanced_new_file"},
+        { "keys": ["ctrl+shift+a"], "command": "select_all" },
+        { "keys": ["ctrl+a"], "command": "move_to", "args": {"to": "bol", "extend": false} },
+        { "keys": ["ctrl+e"], "command": "move_to", "args": {"to": "eol", "extend": false} }
+    ]
 
 
 Global Settings
 ------------------
 
-{
-    "color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
-    "font_size": 16,
-    "ignored_packages":
-    [
-        "Vintage"
-    ],
-    "tab_size": 4,
-    "todo":
     {
-        "folder_exclude_patterns":
+        "color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+        "font_size": 16,
+        "ignored_packages":
         [
-            "vendor",
-            "bootstrap"
-        ]
-    },
-    "translate_tabs_to_spaces": true
-}
+            "Vintage"
+        ],
+        "tab_size": 4,
+        "todo":
+        {
+            "folder_exclude_patterns":
+            [
+                "vendor",
+                "bootstrap"
+            ]
+        },
+        "translate_tabs_to_spaces": true
+    }
 
 
 Custom Macros
@@ -99,6 +99,7 @@ Emmet Configuration
 ----------------------
 
 See 
+
     http://docs.emmet.io/customization/preferences/
     http://docs.emmet.io/filters/
 

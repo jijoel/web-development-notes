@@ -1,6 +1,8 @@
 Testing
+==========
 
 This document contains notes related to testing, using these tools:
+
     TDD (Test Driven Development)
     Mockery (for creating mock objects)
     phpunit
@@ -19,11 +21,12 @@ Test Driven Development (TDD)
 --------------------------------------------------
 
 This is a development technique that helps create more reliable code over time.
-Begin by writing a test that will fail
-Test it (make sure it fails)
-Write the code to make the test pass
-Test it (make sure it passes)
-Refactor (make sure all tests still pass)
+
+* Begin by writing a test that will fail
+* Test it (make sure it fails)
+* Write the code to make the test pass
+* Test it (make sure it passes)
+* Refactor (make sure all tests still pass)
 
 
 
@@ -38,14 +41,15 @@ in composer.json, require  "mockery/mockery": "dev-master"
 
 Using Mocks:
 (instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
-My controller is ItemsController
-My model is Item
+* My controller is ItemsController
+* My model is Item
 
 I'll set up several different classes:
-ItemsController
-Item
-ItemRepositoryInterface
-EloquentItemRepository
+
+    ItemsController
+    Item
+    ItemRepositoryInterface
+    EloquentItemRepository
 
 In ItemsController, use this:
 
@@ -541,6 +545,7 @@ For any classes that use facades (most of Laravel's classes), get the original c
 
 
 https://news.ycombinator.com/item?id=5044336
+
 However, things like the Input, URL, File, etc. classes still being static could lead to some testability problems. I've broken encapsulation on the Input class just to make it a little more testable. You can set the Input just by saying "Input::$input = array()".
 
 You can swap out entire components with your own. For instance, if you had a class that inherited from the root Response object (Illuminate\Http\Response), you could use it (instead of the standard response class) for all response handling. Just edit app/config/app.php:
@@ -613,7 +618,7 @@ Within the app/config/testing directory, create a new file, named database.php, 
         )
     );
  
-Before running tests:
+#### Before running tests:
 Since the in-memory database is always empty when a connection is made, it’s important to migrate the database before every test. To do this, open app/tests/TestCase.php and add the following method to the end of the class:
 
     /**
@@ -736,18 +741,18 @@ My tester:
 
 To test specific actions, we can use this:
 
-        $data = $this->action('PUT',                // request type
-            'TodoController@update',                // controller/method to use
-            array('999'),                           // id sent to update 
-            array('title'=>'something new'));       // new data via Input
+    $data = $this->action('PUT',                // request type
+        'TodoController@update',                // controller/method to use
+        array('999'),                           // id sent to update 
+        array('title'=>'something new'));       // new data via Input
 
-        $data = $this->action('DELETE', 
-            'TodoController@destroy', 
-            array(42));
+    $data = $this->action('DELETE', 
+        'TodoController@destroy', 
+        array(42));
 
-        $result = $this->action('POST', 
-            'TodoController@store', 
-            array('title'=>'test'));
+    $result = $this->action('POST', 
+        'TodoController@store', 
+        array('title'=>'test'));
 
 
 
@@ -829,9 +834,9 @@ BDD and Acceptance Testing with Codeception
 
 Codeception is a testing tool based on phpunit, which can do BDD (behavior driven development) and acceptance testing. It can also possibly do unit testing. It has three separate "tester" objects:
 
-  WebGuy    (Acceptance tests) Standard user; emulate web browser; see web output
-  TestGuy   (Functional tests) Advanced user; emulate web requests; see app internal values
-  CodeGuy   (Unit tests) Coder
+    WebGuy    (Acceptance tests) Standard user; emulate web browser; see web output
+    TestGuy   (Functional tests) Advanced user; emulate web requests; see app internal values
+    CodeGuy   (Unit tests) Coder
 
 Download from:
 

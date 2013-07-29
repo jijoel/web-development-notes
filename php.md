@@ -1,20 +1,20 @@
 php commands
 ==============
 
-file_put_contents($file, $contents)   write $contents to $file
-file_get_contents($file)              read $file into a variable
-Insert end-of-line code:              echo PHP_EOL;
+    file_put_contents($file, $contents)   write $contents to $file
+    file_get_contents($file)              read $file into a variable
+    Insert end-of-line code:              echo PHP_EOL;
 
-uniqid              Generate a unique id string based on timestamp
-serialize           Generate a (storable) string from an object/array
-unserialize         Load (stored) string data into an object/array
-end(array)          Return value of last element in array
-compact('items')    shorthand for array('items' => $items);
-strip_tags($str)    strips all html tags from $str
+    uniqid              Generate a unique id string based on timestamp
+    serialize           Generate a (storable) string from an object/array
+    unserialize         Load (stored) string data into an object/array
+    end(array)          Return value of last element in array
+    compact('items')    shorthand for array('items' => $items);
+    strip_tags($str)    strips all html tags from $str
 
-var_export()        Like var_dump, but writes data in a way it can be captured. For instance:
+    var_export()        Like var_dump, but writes data in a way it can be captured. For instance:
 
-    \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
+        \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
 
 
 
@@ -54,8 +54,8 @@ Namespaces
 
 Based off the folder structure.
 
-My project: package/src/Vendor/Package.php
-    github: jijoel/Package/src/Vendor/Package.php
+    My project: package/src/Vendor/Package.php
+        github: jijoel/Package/src/Vendor/Package.php
 
-namespace Vendor\Package
+    namespace Vendor\Package
 

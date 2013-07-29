@@ -74,6 +74,10 @@ http://administrator.frozennode.com/
 https://github.com/FrozenNode/Laravel-Administrator
 "frozennode/administrator": "dev-master"
 
+Laravel 4 package unit testing helper  (this has a lot of dependencies...):
+https://github.com/orchestral/testbench
+"orchestra/testbench": "2.0.*"
+
 Classes to help write tests for laravel:
 https://github.com/Zizaco/testcases-laravel
 
@@ -190,6 +194,9 @@ See a full list of autoloaded classes for the project (refresh via composer dump
 
 User Interface / Front-End
 ===================================
+
+Huge list of frontend resources:
+https://github.com/dypsilon/frontend-dev-bookmarks
 
 "Holy Grail" layout -- 3 equal-length full-height columns with fixed sides and fluid center:
 http://alistapart.com/article/holygrail
