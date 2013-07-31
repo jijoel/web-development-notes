@@ -377,6 +377,24 @@ Laravel can send email messages; also through gmail. Configuration for that shou
     
 
 
+Logging
+---------
+Laravel supports logging data to a log file. The logger provides the seven logging levels defined in RFC 5424: 
+
+    debug, info, notice, warning, error, critical, and alert.
+
+To use the logger, write commands like this:
+
+    Log::info('This is some useful information.');
+    Log::warning('Something could be going wrong.');
+    Log::error('Something is really going wrong.');
+
+Use var_export to covert data to a readable string:
+
+    \Log::debug(var_export(DB::getQueryLog(), true));
+
+
+
 Sessions
 ---------------
 You can use a session to return you to a main page, after making some change in a related (sub) page. Like this:

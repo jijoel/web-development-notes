@@ -171,7 +171,7 @@ Easy fixtures for models
 https://github.com/summerstreet/woodling
 
 There's an interesting package called Expressive Date, at:
-http://jasonlewis.me/code/expressive-date/docs
+https://github.com/jasonlewis/expressive-date
 
 Test cases (inherit classes from these):
 https://github.com/Zizaco/laravel4-test-cases

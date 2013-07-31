@@ -60,4 +60,9 @@ We can't generally call PUT and DELETE via the browser, but they can be called i
     });
 
 
-    
+In the controller, we can see if we're being sent an AJAX request:
+
+    if (Request::ajax()) {
+        // do something
+    }
+

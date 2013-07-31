@@ -17,9 +17,7 @@ We have to look for a file that is not available the file system (if the file ex
 
 In app/routes.php:
 
-    Route::get('/assets/{path}', array(
-        'as' => 'private', 
-        'uses' => 'RoutingController@findAsset'))
+    Route::get('/assets/{path}', array('uses' => 'RoutingController@getAsset'))
         ->where('path', '.+');
 
 
@@ -27,7 +25,7 @@ The RoutingController looks like this:
 
     class RoutingController extends Controller
     {
-        public function findAsset($path)
+        public function getAsset($path)
         {
             // Find out if the user has permission to use this asset;
             // abort with a 403 error code if they do not.
@@ -99,4 +97,33 @@ So, I'll get these results:
     /login                            (returns login page, lets me log in)
     /assets/attach/acro.jpg           (returns the acro.jpg file)
     /assets/attach/2012/acro.jpg      (returns file private/attach/2012/acro.jpg)
-    
+
+
+
+Guarded Attributes
+----------------------
+By default, Laravel will guard all attributes. This will prevent some things from being automatically filled from input. Set a $fillable array to choose attributes that you should be able to fill, or modify the $guarded array to select only some attributes. To write to a guarded attribute:
+
+    public function store()
+    {
+        $validation = Validator::make(Input::all(), $this->rules->getRules());
+
+        if ($validation->fails()) {
+            return Redirect::back()->withInput()->withErrors($validation->errors());
+        }
+
+        $items = new $this->items;      // $this->items is the name of the model for this class
+
+        $oid = newObjectId();           // however you get it
+        $items->fill(Input::all());     // Fill in all unguarded attributes
+        $items->oid = $oid;             // Fill in the (guarded) oid attribute
+
+        if ( ! $items->save() ) {
+            return Redirect::back()->withInput()->withErrors( $items->errors() );
+        }
+
+        // Create the history entry for this object
+        History::store($oid);
+
+        return Redirect::to(Session::get('referrer'));
+    }
