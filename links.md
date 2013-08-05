@@ -145,6 +145,10 @@ http://docs.cartalyst.com/themes-2/overview
 Find the classes behind the facades:
 https://github.com/experience/laravel-4-map
 
+Multi-gateway payment processing library:
+https://github.com/adrianmacneil/omnipay
+"omnipay/omnipay": "1.*"
+
 
 
 Testing
@@ -257,6 +261,15 @@ http://deepliquid.com/content/Jcrop.html
 Credit card number validator:
 http://paweldecowski.github.io/jQuery-CreditCardValidator/
 
+File Manager:
+https://github.com/Studio-42/elFinder
+
+Another file manager (I like the interface, but it's slow...):
+https://github.com/simogeo/Filemanager
+
+Other jquery-based file managers:
+http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
+
 
 
 Backbone
@@ -323,3 +336,7 @@ http://forums.laravel.io/viewtopic.php?id=2508
 
 How do you take your project from development to production?
 http://forums.laravel.io/viewtopic.php?pid=32807#p32807
+
+Uploading files?
+http://forums.laravel.io/viewtopic.php?id=2022
+
