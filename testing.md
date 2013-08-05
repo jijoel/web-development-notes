@@ -596,6 +596,9 @@ In my class, if I have a function `getAlias` that I want to mock, this is how I 
     $this->assertEquals('(alias) Foo', $test->getRoot(Null));
         // getRoot calls getAlias (and takes a parameter)
 
+If we need to mock multiple statements, we do it like this:
+
+
     
 
 In-memory database and test environment

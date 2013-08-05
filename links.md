@@ -139,6 +139,9 @@ Theme and asset management:
 https://github.com/teepluss/laravel4-theme
 "teepluss/theme": "dev-master"
 
+Themes:
+http://docs.cartalyst.com/themes-2/overview
+
 Find the classes behind the facades:
 https://github.com/experience/laravel-4-map
 
@@ -250,6 +253,9 @@ http://propublica.github.io/stateface/
 
 Image cropping with jquery:
 http://deepliquid.com/content/Jcrop.html
+
+Credit card number validator:
+http://paweldecowski.github.io/jQuery-CreditCardValidator/
 
 
 

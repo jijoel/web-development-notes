@@ -203,8 +203,8 @@ Forks and upstream changes
 You can fork a repository on github. This will create your own personal version of this repository, in your own github account. To make a pull request (a request to have your code pulled into the master repository):
 
 1. Fork the repository to your own github account
-2. Clone your version to your local machine
-3. Create a new branch for your feature or bug fix
+2. Clone your version to your local machine               git clone ...
+3. Create a new branch for your feature or bug fix        git checkout -b bug/... 
 4. Make the changes
 5. Commit the changes (git add; git commit)
 6. Push your branch to your github repo  (git push origin my/branch)

@@ -82,18 +82,20 @@ We can also instanciate classes in several ways:
 IoC Binding
 ------------
 To bind classes to the IoC container (for unit testing):
- 
-    $app->bind('UsersController', function($app) {
-        $controller = new UsersController(
-            new Response,
-            $app->make('request'),
-            $app->make('validator'),
-            $app->make('hash'),
-            new User
-        );
-        return $controller;
-    });
- 
+
+```php 
+$app->bind('UsersController', function($app) {
+    $controller = new UsersController(
+        new Response,
+        $app->make('request'),
+        $app->make('validator'),
+        $app->make('hash'),
+        new User
+    );
+    return $controller;
+});
+```
+
 At this point, we can make the class, using
 
     $app->make('UsersController') ;
@@ -108,38 +110,41 @@ Migrations are like version control for your databases.
 
 creates the basic structure for a new 'users' table. Fill it in further, to get:
 
-    public function up()
-    {
-        Schema::create('users', function($table) {
-            $table->increments('id')->unsigned();   // auto-increments an unsigned id field
-            $table->string('name',50);              // sets to length you entered
-            $table->string('email');                // sets to varchar 200
-            $table->string('password');
-            $table->boolean('activated')->default(0);   // sets a default value
-            $table->integer('age')->nullable();         // allows nulls
-            $table->timestamps();                       // creates created_at and modified_at fields
-        });
-    }
+```php
+public function up()
+{
+    Schema::create('users', function($table) {
+        $table->increments('id')->unsigned();   // auto-increments an unsigned id field
+        $table->string('name',50);              // sets to length you entered
+        $table->string('email');                // sets to varchar 200
+        $table->string('password');
+        $table->boolean('activated')->default(0);   // sets a default value
+        $table->integer('age')->nullable();         // allows nulls
+        $table->timestamps();                       // creates created_at and modified_at fields
+    });
+}
+```
 
 Use seeds to add sample records:
 
 Create a file within the app/database/seeds folder that has the same name as the table that it corresponds to; in our case, users.php. Add:
 
-    <?php 
-    return array(
-        array(
-            'username' => 'firstuser',
-            'password' => Hash::make('first_password'),
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime
-        ),
-        array(
-            'username' => 'seconduser',
-            'password' => Hash::make('second_password'),
-            'created_at' => new DateTime,
-            'updated_at' => new DateTime
-        )
-    );
+```php
+return array(
+    array(
+        'username' => 'firstuser',
+        'password' => Hash::make('first_password'),
+        'created_at' => new DateTime,
+        'updated_at' => new DateTime
+    ),
+    array(
+        'username' => 'seconduser',
+        'password' => Hash::make('second_password'),
+        'created_at' => new DateTime,
+        'updated_at' => new DateTime
+    )
+);
+```
  
  
 Run the migrations and insert sample records:
@@ -294,7 +299,60 @@ By default, it does not support a trailing slash in a URL, but you can add one, 
 
             throw new Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Page Not Found');
         }
-        
+
+If you use Route::controller, it will create a new route for each getter in your controller. For instance:
+
+    Route::controller('pages', 'PagesController');
+
+    class PagesController extends BaseController {
+        public function getFoo() {
+            return 'bar';
+        }
+    }
+
+This will create a pages route, so you can go to pages/foo. It works on everything that starts with get...  (this works for all GET requests). For POST requests, prefix it with post:
+
+    public function postX
+
+This works for these HTTP verbs:
+
+    GET
+    PUT
+    POST
+    DELETE
+    OPTIONS
+
+It does not currently seem to work for these HTTP verbs:
+
+    HEAD       Call to undefined method Illuminate\Routing\Router::head() 
+    TRACE
+    CONNECT
+    PROPFIND
+    PROPPATCH
+    MKCOL
+    COPY
+    MOVE
+    LOCK
+    UNLOCK
+    VERSION-CONTROL
+    REPORT
+    CHECKOUT
+    CHECKIN
+    UNCHECKOUT
+    MKWORKSPACE
+    UPDATE
+    LABEL
+    MERGE
+    BASELINE-CONTROL
+    MKACTIVITY
+    ORDERPATCH
+    ACL
+    PATCH
+    SEARCH
+
+
+
+
 
 Views
 ---------
