@@ -22,7 +22,7 @@ Passing by Reference
 -------------------------
 Use `&` to pass a reference, rather than a value. For instance, to modify an array in place:
 
-``` php
+    ``` php
     protected function injectTagIntoArrayForId(&$array, $id, $tag=' selected="selected"')
     {
         foreach($array as &$item) {
@@ -32,7 +32,7 @@ Use `&` to pass a reference, rather than a value. For instance, to modify an arr
             }
         }
     }
-```
+    ```
 
 
 
@@ -53,6 +53,7 @@ Magic functions
 -----------------
 Magic functions run at (given) times. For instance, __call runs whenever a function can not be found, so you can do something else:
 
+``` php
     public static function __call($name, $args)
     {
         $fn = strtolower($name);
@@ -66,6 +67,7 @@ Magic functions run at (given) times. For instance, __call runs whenever a funct
         }
         return strtolower($name);
     }
+```
 
     
 Namespaces
