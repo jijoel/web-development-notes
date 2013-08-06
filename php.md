@@ -18,6 +18,23 @@ php commands
         \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
 
 
+Passing by Reference
+-------------------------
+Use `&` to pass a reference, rather than a value. For instance, to modify an array in place:
+
+``` php
+    protected function injectTagIntoArrayForId(&$array, $id, $tag=' selected="selected"')
+    {
+        foreach($array as &$item) {
+            if($item['id']==$id) {
+                $item['extra'] = $tag;
+                return;
+            }
+        }
+    }
+```
+
+
 
 Static vs Non-static
 ----------------------
@@ -29,6 +46,7 @@ In a static function, you can only call other static functions, unless you creat
 
         $instance = new static;
         $instance->function(x);
+
 
 
 Magic functions
