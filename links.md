@@ -112,6 +112,7 @@ Extra functionality for models (including auto-validation, similar to ardent):
 https://github.com/betawax/role-model
 
 Ardent Self-validating, secure and smart models:
+http://laravelbook.github.io/ardent/
 https://github.com/laravelbook/ardent
 "laravelbook/ardent": "dev-master"
 
@@ -269,6 +270,12 @@ https://github.com/simogeo/Filemanager
 
 Other jquery-based file managers:
 http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
+
+Prettier select boxes:
+http://harvesthq.github.io/chosen/
+
+Packery (dynamically rearrange things on pages):
+http://packery.metafizzy.co/faq.html
 
 
 

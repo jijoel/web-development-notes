@@ -3,8 +3,10 @@ Using Laravel with Javascript and ajax
 
 We can link to routes (in a view) using resources like this:
 
+``` php
     Route::resource('todos', 'TodosController', 
         array('only'=>array('index','store','update', 'destroy')));
+```
 
 The routes defined by that look like this:
 
@@ -17,13 +19,16 @@ The routes defined by that look like this:
 
 In the view, we can call them like this:
 
+``` html
     <a class="editEntryAnchor" 
         href="{{ URL::route('todos.update', $item->id) }}">Edit</a>
     <a class="deleteEntryAnchor" 
         href="{{ URL::route('todos.destroy', $item->id) }}">Delete</a>
+```
 
 We can't generally call PUT and DELETE via the browser, but they can be called in Javascript via ajax in JQuery:
 
+```php
     $('a.deleteEntryAnchor').click(function() {
         var thisparam = $(this);
         thisparam.parent().parent().find('p').text('Please Wait...');
@@ -58,11 +63,44 @@ We can't generally call PUT and DELETE via the browser, but they can be called i
 
         return false;
     });
-
+```
 
 In the controller, we can see if we're being sent an AJAX request:
 
+```php
     if (Request::ajax()) {
         // do something
     }
+```
+
+We can also respond to an AJAX call with php data:
+
+``` php
+    $category = new Category;
+    return Response::json($category->search(Request::all())
+        ->get(array('id','name as label')));
+```
+
+This can be read directly by javascript (for instance, in a select list):
+
+``` js
+    function loadAjaxForSelectBox(url, selectBox) 
+    {
+        $.ajax({
+            url: url,
+        }).done(function(data) {
+            var selectableItems = '';
+            data.forEach(function(entry) {
+                var extra = '';
+                if(typeof entry.extra != 'undefined') {
+                    extra = entry.extra;
+                }
+
+                var newItem = '<option value=' + entry.id + extra + '>' + entry.label + '</option>' ;
+                selectableItems += newItem;
+            });
+            $(selectBox).html(selectableItems);
+        });
+    }
+```
 

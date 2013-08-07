@@ -13,7 +13,7 @@ GitHub-Flavored Markdown
 
 This does syntax highlighting for php (no indentation needed for code):
 
-    ```php
+    ``` php
             <php code goes here>
     ```
 

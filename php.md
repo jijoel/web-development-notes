@@ -22,7 +22,7 @@ Passing by Reference
 -------------------------
 Use `&` to pass a reference, rather than a value. For instance, to modify an array in place:
 
-    ``` php
+``` php 
     protected function injectTagIntoArrayForId(&$array, $id, $tag=' selected="selected"')
     {
         foreach($array as &$item) {
@@ -32,7 +32,7 @@ Use `&` to pass a reference, rather than a value. For instance, to modify an arr
             }
         }
     }
-    ```
+```
 
 
 
@@ -44,8 +44,8 @@ Static vs Non-static
 
 In a static function, you can only call other static functions, unless you create an instance, like so: 
 
-        $instance = new static;
-        $instance->function(x);
+    $instance = new static;
+    $instance->function(x);
 
 
 
