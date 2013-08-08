@@ -1,25 +1,33 @@
 Laravel 
 =====================
 
-Using Laravel 4:  http://four.laravel.com
+* [Setup](#setup)
+* [IOC Binding](#ioc)
+* [Migrations and Seeding](#migrations)
+* [Way Generators](#way-generators)
+* [Routing](#routing)
+* [Controllers](#controllers)
+* [Models](#models)
+* [Views](#views)
+* [Forms](#forms)
+* [Mail](#mail)
+* [Logging](#logging)
+* [Sessions](#sessions)
 
 
-Setup
---------
 
-There are instructions here:
-http://niallobrien.me/2013/03/installing-and-updating-laravel-4/
+Setup<a name="setup">
+------------------------
 
-Instead, you can install it directly via composer:
+You can install it directly via composer:
 
     composer create-project laravel/laravel <projectName>
 
-I also like these additional tools:
+Or manually install, via instructions here:
 
-    "way/generators": "dev-master",
-    "mockery/mockery": "dev-master"
+    http://niallobrien.me/2013/03/installing-and-updating-laravel-4/
 
-To set up laravel, copy the basic project from above, and run `composer install` to get all of the dependencies.
+To set up laravel, copy the basic project from above, then run `composer install` to get all of the dependencies.
 
 Set the project root directory in apache to the /public folder
 (this is a place for css, img, js, etc. files, also)
@@ -29,29 +37,12 @@ make storage directory writable:
     chmod -R o+w storage
     (or chown www-data storage/*)
 
-application key:
-
-    app/config/app.php
-
-use command line to generate secure application key:
+A secure application key is automatically created when laravel is installed, but you can change it via Artisan on the command line if you'd like:
 
     php artisan key:generate
 
-Include the Way Generators with this (in the providers section)
-
-    'Way\Generators\GeneratorsServiceProvider'
-
-This lets me create resources very easily:
-
-    php artisan generate:resource Todos --fields="title:string,description:text"
-
-Even better, we can create resources with a lot of standard boilerplate:
-
-    php artisan generate:scaffold Todos --fields="title:string,description:text"
-
-
-Laravel configuration information stored in project/app/config
-Each file here returns an array with configuration information (closures are OK)
+Laravel configuration information stored in `project/app/config`.
+Each file here returns an array with configuration information (closures are OK).
 Access it at any time with `Config::get`. Use the file name and array key:
 
     Config::get('app.timezone')
@@ -79,8 +70,8 @@ We can also instanciate classes in several ways:
 
 
     
-IoC Binding
-------------
+IoC Binding<a name="ioc">
+----------------------------
 To bind classes to the IoC container (for unit testing):
 
 ```php 
@@ -102,8 +93,8 @@ At this point, we can make the class, using
 
 
     
-Migrations and Seeding
------------------------
+Migrations and Seeding<a name="#migrations">
+----------------------------------------------
 Migrations are like version control for your databases.
  
     php artisan migrate:make create_users_table 
@@ -161,95 +152,30 @@ To run the migration:
 
 
     
-Artisan Class Generator    
---------------------------
+Artisan Class Generator<a name="way-generator">    
+---------------------------------------------------
 jeffrey way (nettuts) has created an add-in for artisan, which can automatically generate classes (including models, controllers, several views, routing, and error testing) for you.
 
     require "way/generators": "dev-master"           (composer.json)
     'Way\Generators\GeneratorsServiceProvider'       (add to providers array)
 
-    php artisan generate:resource
+This lets me create resources very easily:
 
-    
-    
-Controllers
-----------------
+    php artisan generate:resource Todos --fields="title:string,description:text"
 
-    php artisan controller:make <Controller name>
+Even better, we can create resources with a lot of standard boilerplate:
 
-creates lots of functions, including:
-
-      index   GET  - collection, eg site/photos
-      create  GET  - display form to add new record - site/photos/create
-      store   POST - take input from new item, write new record
-      edit    GET  - display form to edit record - site/photos/1/edit
-      update  PUT  - submitted form, update existing record
-      show    GET  - item, eg site/photos/1
-      destroy DELETE sent - delete an object
- 
-    Route::resource('photos','PhotosController');
- 
-Laravel 4 is restful by default.
-in index(), if you return `Photo::all()`, you'll get json output
-
-These are equivalent ways to return data to a user:
-
-    return Photo::all();  
-
-or
-
-    $photos = Photo::all();
-    return View::make('photos.index', compact('photos'));
-
-or
-
-    return View::make('photos.index')->with(array('photos' => $photos));
- 
-In a view, to get a link to the photos.show method (parameter id), use:
-
-    <a href="{{ route('photos.show', ['photos' => $photo->id]) }}"> 
-
-    photos/create -> POST photos -> photos/store
-    photos/edit/1 -> PUT photos/1 -> photos/1/update
-    GET photos/id/delete
-    DELETE photos/id
-
-
-Eloquent Models
---------------------
-
-By default, the table name will be plural, and the model name will be singular. This can be changed, though…
- 
-    Table   Model   Controller
-    users   User    UsersController
- 
-To use something else, in the model,
- 
-    <?php
-    class User extends Eloquent {
-        public static $table = 'my_user_table';
-    }
-
-To get additional data from a pivot table (eg, the M2M join table):
-
-    class Item extends Eloquent
-    {
-        public function vendors()
-        {
-            return $this->belongsToMany('Vendor', 'item_vendors')
-                ->withPivot(array('confirmed', 'last_known_price'));
-        }
-    }
-
+    php artisan generate:scaffold Todos --fields="title:string,description:text"
 
 
     
-Routing
-------------
+Routing<a name="routing">
+----------------------------
 Here are a few different ways to send variables to the default view:
  
 via the routes.php file:
 
+``` php
     $data = array(
         'greeting'   => 'hello',
         'something'  => 'world',
@@ -260,22 +186,27 @@ via the routes.php file:
     Route::get('/', function() {
         return View::make('home.index', $data);
     };
+```
 
 or:
 
+``` php
     Route::get('/', function() {
         return View::make('home.index')->with($data);        
     });
+```
 
 or:
 
+``` php
     Route::get('/', function() {
         $view = View::make('home.index');
         $view->greeting = 'Hi';
         $view->something = 'Everyone';
         return $view;
     });
- 
+```
+
 Via a controller:
  
 (in routes.php):
@@ -284,12 +215,15 @@ Via a controller:
  
 (in controllers/home.php):
 
+``` php
     public function action_index() {
         return View::make('home.index', $data);
     }
+```
 
 By default, it does not support a trailing slash in a URL, but you can add one, by using the missingMethod function:
 
+``` php
     class BaseController extends Controller 
     { ...
         public function missingMethod($parameters) {
@@ -299,9 +233,11 @@ By default, it does not support a trailing slash in a URL, but you can add one, 
 
             throw new Symfony\Component\HttpKernel\Exception\NotFoundHttpException('Page Not Found');
         }
+```
 
 If you use Route::controller, it will create a new route for each getter in your controller. For instance:
 
+``` php
     Route::controller('pages', 'PagesController');
 
     class PagesController extends BaseController {
@@ -309,6 +245,7 @@ If you use Route::controller, it will create a new route for each getter in your
             return 'bar';
         }
     }
+```
 
 This will create a pages route, so you can go to pages/foo. It works on everything that starts with get...  (this works for all GET requests). For POST requests, prefix it with post:
 
@@ -352,10 +289,82 @@ It does not currently seem to work for these HTTP verbs:
 
 
 
+Controllers<a name="controllers">
+-------------------------------------
+
+    php artisan controller:make <Controller name>
+
+creates lots of functions, including:
+
+      index   GET  - collection, eg site/photos
+      create  GET  - display form to add new record - site/photos/create
+      store   POST - take input from new item, write new record
+      edit    GET  - display form to edit record - site/photos/1/edit
+      update  PUT  - submitted form, update existing record
+      show    GET  - item, eg site/photos/1
+      destroy DELETE sent - delete an object
+ 
+    Route::resource('photos','PhotosController');
+ 
+Laravel 4 is restful by default.
+in index(), if you return `Photo::all()`, you'll get json output
+
+These are equivalent ways to return data to a user:
+
+    return Photo::all();  
+
+or
+
+    $photos = Photo::all();
+    return View::make('photos.index', compact('photos'));
+
+or
+
+    return View::make('photos.index')->with(array('photos' => $photos));
+ 
+In a view, to get a link to the photos.show method (parameter id), use:
+
+    <a href="{{ route('photos.show', ['photos' => $photo->id]) }}"> 
+
+    photos/create -> POST photos -> photos/store
+    photos/edit/1 -> PUT photos/1 -> photos/1/update
+    GET photos/id/delete
+    DELETE photos/id
 
 
-Views
----------
+
+Eloquent Models<a name="models">
+-------------------------------------
+
+By default, the table name will be plural, and the model name will be singular. This can be changed, though…
+ 
+    Table   Model   Controller
+    users   User    UsersController
+ 
+To use something else, in the model,
+ 
+    <?php
+    class User extends Eloquent {
+        public static $table = 'my_user_table';
+    }
+
+To get additional data from a pivot table (eg, the M2M join table):
+
+``` php
+    class Item extends Eloquent
+    {
+        public function vendors()
+        {
+            return $this->belongsToMany('Vendor', 'item_vendors')
+                ->withPivot(array('confirmed', 'last_known_price'));
+        }
+    }
+```
+
+
+
+Views<a name="views">
+------------------------
 Views can contain multiple sections (a part of a view rendered in each section). It can write data (like a report), or have read/write information (as a form). 
 
 To use multiple sections (eg, template / view / sub-view):
@@ -386,8 +395,9 @@ Sub-view:
     #just include the data for the sub-view here
     
     
-Forms
----------
+
+Forms<a name="forms">
+------------------------
 
 This is the standard structure to use with forms:
 
@@ -422,8 +432,8 @@ You can supply additional parameters like so:
 
 
 
-Mail
---------
+Mail<a name="mail">
+--------------------
 Laravel can send email messages; also through gmail. Configuration for that should be set up as follows:
 
     'driver' => 'smtp',
@@ -435,8 +445,8 @@ Laravel can send email messages; also through gmail. Configuration for that shou
     
 
 
-Logging
----------
+Logging<a name="logging">
+--------------------------
 Laravel supports logging data to a log file. The logger provides the seven logging levels defined in RFC 5424: 
 
     debug, info, notice, warning, error, critical, and alert.
@@ -453,8 +463,8 @@ Use var_export to covert data to a readable string:
 
 
 
-Sessions
----------------
+Sessions<a name="sessions">
+---------------------------
 You can use a session to return you to a main page, after making some change in a related (sub) page. Like this:
 
     public function edit($id)

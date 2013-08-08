@@ -1,5 +1,15 @@
-GitHub-Flavored Markdown
-==============================
+Markdown
+=========================
+Markdown is a simple, expressive text structure used to write formatted output. It is readable and easy to write, and can be converted to html so that it gets formatted correctly on web sites. If there isn't a markdown feature that does something you want, you can include html code directly. Many sites now use it, with their own distinct flavors. This has information for:
+
+* [GitHub](#github)
+* [FluxBB](#fluxbb) (Used in Laravel forum)
+* [General Markdown](#general)
+
+
+
+GitHub-Flavored Markdown<a name="github">
+=============================================
 
 # Header
 
@@ -27,8 +37,8 @@ This does syntax highlighting for php (no indentation needed for code):
 
 
 
-FluxBB Markup (Used in Laravel forum)
-=======================================
+FluxBB Markup (Used in Laravel forum)<a name="fluxbb">
+=========================================================
 
 http://forums.laravel.io/help.php#bbcode
 
@@ -78,4 +88,6 @@ The following tags change the appearance of text:
 
 
 
+General Markdown<a name="general">
+=====================================
 

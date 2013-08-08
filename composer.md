@@ -1,4 +1,5 @@
-Composer:
+Composer
+===============
 
 Use composer to install additional components for the app.
 
@@ -80,3 +81,26 @@ http://getcomposer.org/doc/05-repositories.md#repository
         ]
     }
 
+
+
+
+Composer Package Notes
+===============================
+
+There are a lot of packages I find useful. Many of these are listed in [a relative link](links.md). This section has specific notes about specific packages:
+
+* [Carbon](#carbon)     Date/Time management
+
+
+Carbon<a name="carbon">
+--------------------------
+
+Create a Carbon object from a mysql datetime value:
+
+    $c = Carbon::createFromTimestamp(strtotime($model->date_time_field));
+
+Output a formatted date string (Mon d, YYYY):
+
+    $c->toFormattedDateString();        //  Aug 7, 2013
+    $c->toDayDateTimeString();          //  Wed, Aug 7, 2013 10:09 PM
+    $c->format($format);                //  Any format from http://www.php.net/manual/en/function.date.php

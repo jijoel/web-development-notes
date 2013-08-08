@@ -1,8 +1,27 @@
 Helpful links 
 ===================================
 
-General Web & Development 
---------------------------
+Helpful links on a variety of topics:
+
+* [General Web & Development](#general)
+* [Laravel 4](#laravel)
+* [Composer Packages](#composer)
+* [Testing](#testing)
+* [Misc](#misc)
+* [Important Project File Reference](#project-files)
+* [User Interface / Front End](#ui)
+* [Backbone](#backbone)
+* [Component Management](#components)
+* [Websockets (Persistent Connections / Real-time updates)](#websockets)
+* [Interesting Apps to Model / Watch / Assist?](#apps)
+* [Interesting Blogs](#blogs)
+* [Forums / Ideas ](#forum)
+
+
+
+
+General Web & Development<a name="general">
+---------------------------------------------
 
 HTTP Response Codes
 http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
@@ -24,8 +43,8 @@ http://php.net/manual/en/timezones.php
 
 
 
-Laravel 4
-----------------------
+Laravel 4<a name="laravel">
+-------------------------------------
 
 Installing Laravel
 http://niallobrien.me/2013/03/installing-and-updating-laravel-4/
@@ -53,8 +72,8 @@ http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
 
 
 
-Composer Packages
-----------------------------------------
+Composer Packages<a name="composer">
+-------------------------------------------------------
 Laravel package registry:
 http://registry.autopergamene.eu/
 
@@ -152,8 +171,8 @@ https://github.com/adrianmacneil/omnipay
 
 
 
-Testing
-------------------------
+Testing<a name="testing">
+---------------------------------------
 
 PhpUnit
 https://jtreminio.com/2013/03/unit-testing-tutorial-introduction-to-phpunit/
@@ -172,8 +191,8 @@ https://github.com/padraic/mockery
 
 
 
-Misc
------------------------------
+Misc<a name="misc">
+--------------------------------------------
 
 Easy fixtures for models
 https://github.com/summerstreet/woodling
@@ -187,8 +206,8 @@ https://github.com/Zizaco/laravel4-test-cases
 
 
 
-Important Project File Reference 
-===================================
+Important Project File Reference<a name="project-files">
+==========================================================
 
 HTTP Response Codes:
 vendor\symfony\http-foundation\Symfony\Component\HttpFoundation\Response.php
@@ -200,8 +219,8 @@ See a full list of autoloaded classes for the project (refresh via composer dump
 
 
 
-User Interface / Front-End
-===================================
+User Interface / Front-End<a name="ui">
+=================================================
 
 Huge list of frontend resources:
 https://github.com/dypsilon/frontend-dev-bookmarks
@@ -279,8 +298,8 @@ http://packery.metafizzy.co/faq.html
 
 
 
-Backbone
-------------------
+Backbone<a name="backbone">
+---------------------------------
 
 cool demo of backbone.js:
 http://www.sinbadsoft.com/blog/backbone-js-by-example-part-1/
@@ -294,8 +313,8 @@ http://arturadib.com/hello-backbonejs/
 
 
 
-Component Management
------------------------
+Component Management<a name="components">
+--------------------------------------
 
 Installs packages and dependencies (eg, jquery, etc.)
 https://github.com/bower/bower
@@ -305,8 +324,8 @@ https://github.com/component/component
 
 
 
-Websockets (Persistent Connections / Real-time updates)
-=========================================================
+Websockets (Persistent Connections / Real-time updates)<a name="websockets">
+=============================================================================
 
 Latchet - Laravel-specific wrapper for Ratchet
 https://github.com/sidneywidmer/Latchet
@@ -316,8 +335,8 @@ Ratchet: http://socketo.me/
 
 
 
-Interesting Apps to Model / Watch / Assist?
-==============================================
+Interesting Apps to Model / Watch / Assist?<a name="apps">
+======================================================================
 Laravel 4 online reservation system, YARS (Yet Another Reservation System):
 https://github.com/alariva/yars
 
@@ -326,8 +345,8 @@ https://github.com/msurguy/missingpetflyer
 
 
 
-Interesting Blogs
-============================
+Interesting Blogs<a name="blogs">
+======================================
 http://driesvints.com/
 http://culttt.com/
 http://antjanus.com/blog/
@@ -335,7 +354,7 @@ http://fideloper.com/
 
 
 
-Forums / Ideas 
+Forums / Ideas <a name="forum">
 ================================
 
 Best practice for responding to AJAX request?
