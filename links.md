@@ -20,7 +20,7 @@ Helpful links on a variety of topics:
 
 
 
-General Web & Development<a name="general">
+General Web & Development <a name="general">
 ---------------------------------------------
 
 HTTP Response Codes
@@ -43,7 +43,7 @@ http://php.net/manual/en/timezones.php
 
 
 
-Laravel 4<a name="laravel">
+Laravel 4 <a name="laravel">
 -------------------------------------
 
 Installing Laravel
@@ -72,7 +72,7 @@ http://docs.doctrine-project.org/projects/doctrine-dbal/en/latest/index.html
 
 
 
-Composer Packages<a name="composer">
+Composer Packages <a name="composer">
 -------------------------------------------------------
 Laravel package registry:
 http://registry.autopergamene.eu/
@@ -171,7 +171,7 @@ https://github.com/adrianmacneil/omnipay
 
 
 
-Testing<a name="testing">
+Testing <a name="testing">
 ---------------------------------------
 
 PhpUnit
@@ -191,7 +191,7 @@ https://github.com/padraic/mockery
 
 
 
-Misc<a name="misc">
+Misc <a name="misc">
 --------------------------------------------
 
 Easy fixtures for models
@@ -206,8 +206,8 @@ https://github.com/Zizaco/laravel4-test-cases
 
 
 
-Important Project File Reference<a name="project-files">
-==========================================================
+Important Project File Reference <a name="project-files">
+-------------------------------------------------------------
 
 HTTP Response Codes:
 vendor\symfony\http-foundation\Symfony\Component\HttpFoundation\Response.php
@@ -219,8 +219,8 @@ See a full list of autoloaded classes for the project (refresh via composer dump
 
 
 
-User Interface / Front-End<a name="ui">
-=================================================
+User Interface / Front-End <a name="ui">
+---------------------------------------------
 
 Huge list of frontend resources:
 https://github.com/dypsilon/frontend-dev-bookmarks
@@ -296,9 +296,13 @@ http://harvesthq.github.io/chosen/
 Packery (dynamically rearrange things on pages):
 http://packery.metafizzy.co/faq.html
 
+Template rendering engine:
+http://tempojs.com/
 
 
-Backbone<a name="backbone">
+
+
+Backbone <a name="backbone">
 ---------------------------------
 
 cool demo of backbone.js:
@@ -313,7 +317,7 @@ http://arturadib.com/hello-backbonejs/
 
 
 
-Component Management<a name="components">
+Component Management <a name="components">
 --------------------------------------
 
 Installs packages and dependencies (eg, jquery, etc.)
@@ -324,8 +328,8 @@ https://github.com/component/component
 
 
 
-Websockets (Persistent Connections / Real-time updates)<a name="websockets">
-=============================================================================
+Websockets (Persistent Connections / Real-time updates) <a name="websockets">
+----------------------------------------------------------------------------
 
 Latchet - Laravel-specific wrapper for Ratchet
 https://github.com/sidneywidmer/Latchet
@@ -335,8 +339,8 @@ Ratchet: http://socketo.me/
 
 
 
-Interesting Apps to Model / Watch / Assist?<a name="apps">
-======================================================================
+Interesting Apps to Model / Watch / Assist? <a name="apps">
+-------------------------------------------------------------------------
 Laravel 4 online reservation system, YARS (Yet Another Reservation System):
 https://github.com/alariva/yars
 
@@ -345,8 +349,8 @@ https://github.com/msurguy/missingpetflyer
 
 
 
-Interesting Blogs<a name="blogs">
-======================================
+Interesting Blogs <a name="blogs">
+---------------------------------------------
 http://driesvints.com/
 http://culttt.com/
 http://antjanus.com/blog/
@@ -355,7 +359,7 @@ http://fideloper.com/
 
 
 Forums / Ideas <a name="forum">
-================================
+---------------------------------------------
 
 Best practice for responding to AJAX request?
 http://forums.laravel.io/viewtopic.php?id=2508
