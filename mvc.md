@@ -4,14 +4,31 @@ MVC
 MVC is a software pattern that separates the representation of information
 from the user's interactions with it.
 
-    Model       - Classes which contain all of the business logic of the application
-    View        - Classes which format and present data to the user
-    Controller  - Classes which coordinate user actions and routing
+* [Model](#model)           - Classes which contain all of the business logic of the application
+* [View](#view)             - Classes which format and present data to the user
+* [Controller](#controller) - Classes which coordinate user actions and routing
+
+This includes an overview of the MVC pattern, and specific examples of how it's done in Laravel.
+
+* [MVC in Laravel](#laravel) 
+    * [Controller](#laravel-controller)
+    * [Model](#laravel-model)
+        * [Scopes](#laravel-model-scopes)
+    * [Views](#laravel-view)
+        * [Templates](#laravel-view-template)
+        * [Partials](#laravel-view-partials)
+        * [Main](#laravel-view-main)
+        * [Index](#laravel-view-index)
+        * [Create](#laravel-view-create)
+        * [Edit](#laravel-view-edit")
+        * [Show](#laravel-view-show")
+    * [Incorporating Javascript and AJAX](#ajax")
+
 
 
 http://www.bennadel.com/blog/2379-A-Better-Understanding-Of-MVC-Model-View-Controller-Thanks-To-Steven-Neiland.htm
 
-### Controller 
+### Controller <a name="controller">
 
 The "C" in "MVC"
 
@@ -23,7 +40,7 @@ The Controller makes too many requests to the Service layer.
 The Controller makes a number of requests to the Service layer that don't return data.
 The Controller makes requests to the Service layer without passing in arguments.
 
-### View 
+### View <a name="view">
 
 The "V" in "MVC"
 
@@ -34,7 +51,7 @@ Red Flags: My View architecture might be going bad if:
 The View contains business logic.
 The View contains session logic.
 
-### Model 
+### Model <a name="model">
 
 The "M" in "MVC"
 
@@ -54,21 +71,21 @@ The Value Objects retain (ie. store) references to Service objects or Gateway ob
 
 
 Other Objects
-==================
+---------------
 
-The MVC pattern is a very good way to split up applications, but it might not be enough in some cases. 
+The MVC pattern is a very good way to split up applications; there are some other objects layers that can split them up even further, ultimately to make it easier to manage:
 
+    Services     - Business logic that can talk to multiple models 
     Presenters   - Logic to be passed to the view
 
 
 
-MVC in Laravel
-==================
+MVC in Laravel <a name="laravel">
+===================================
 
-Laravel uses the MVC pattern, with Models, Views, and Controllers. This will show standard code and talk about each of the standard functions we do:
+Laravel uses the MVC pattern, with Models, Views, and Controllers. This will show standard code and talk about each of the standard functions we do. 
 
-Controller
-------------
+### Controller <a name="laravel-controller">
 
 ``` php
 class ModelsController extends Controller
@@ -199,46 +216,107 @@ class ModelsController extends Controller
 ```
     
 
-Model
------------
+### Model <a name="laravel-model">
 
 The model will contain validation rules (unless they're auto-generated). The model layer is also where business logic should go. We can also connect to other objects here.
 
 ``` php
-class Foo extends Eloquent 
-{
-    protected $guarded = array();
-
-    public static $rules = array(
-        'foo' => 'required',
-        'bar' => 'required'
-    );
-
-    public function items()
+    class Foo extends Eloquent 
     {
-        return $this->hasMany('Item');
-    }
+        protected $guarded = array();
 
-    public function bar()
-    {
-        return $this->belongsTo('Bar');
-    }
+        public static $rules = array(
+            'foo' => 'required',
+            'bar' => 'required'
+        );
 
-    public function roles()
-    {
-        return $this->belongsToMany('Role');
+    // Attributes ---------------------------------------
+
+        
+        public function getPriorityTextAttribute()
+        {
+            if ($this->priority >= 5)
+                return 'High';
+
+            if($this->priority>=2)
+                return 'Med';
+
+            return 'Low';
+        }
+
+        public function getNameAttribute()
+        {
+            return $this->first_name . ' ' . $this->last_name;
+        }
+
+    // Scopes (filters; see [Scopes](#laravel-model-scopes)) 
+
+        public function scopeUnassigned($query)
+        {
+            $query->where('assignee_id', 0);
+        }
+
+        public function scopeOpen($query)
+        {
+            $query->whereRaw('closed_at=0');
+        }
+
+        public function scopeClosed($query)
+        {
+            $query->whereRaw('closed_at<>0');
+        }
+
+
+    // Relationships ----------------------------------
+
+        public function items()
+        {
+            return $this->hasMany('Item');
+        }
+
+        public function bar()
+        {
+            return $this->belongsTo('Bar');
+        }
+
+        public function roles()
+        {
+            return $this->belongsToMany('Role');
+        }
     }
-}
 ```
 
+#### Scopes <a name="laravel-model-scopes">
+
+You can also put scopes into the models. These act, basically, like chainable filters. For example:
+
+``` php
+    class User extends Eloquent 
+    {
+        public function scopeApproved($query)
+        {
+            $query->where('approved', 1);
+        }
+
+        public function scopePopular($query, $minimum = 100)
+        {
+            $query->where('votes', '>', $minimum);
+        }
+    }
+```
+
+You could use it like this:
+
+    $users = User::approved()->popular(50)->get();
 
 
-Views
-------------
+
+
+### Views <a name="laravel-view">
 
 It's a good practice to have a template, with individual views extending the template. Personally, I also find partial views to make things a lot easier to work with. Here's an example of how it works:
 
-#### template 
+#### template <a name="laravel-view-template">
 (following a bootstrap structure; for a 3-column layout)
 
 ``` html
@@ -278,11 +356,12 @@ It's a good practice to have a template, with individual views extending the tem
 </html>
 ```
 
-### Partials
+### Partials <a name="laravel-view-partials">
 Partials are sections that might repeat, or sections that I want to have separated (so I can find and modify them more easily). A partial for the styles (above) might look like this:
 
 ``` html
 <link rel="stylesheet" href="/components/bootstrap/css/bootstrap.css" media="screen">
+<link rel="stylesheet" href="/components/bootstrap/css/bootstrap-responsive.css" media="screen">
 <link rel="stylesheet" href="/components/font-awesome/css/font-awesome.css">
 <link rel="stylesheet" href="/assets/css/myProject.css" media="screen">
 ```
@@ -290,11 +369,11 @@ Partials are sections that might repeat, or sections that I want to have separat
 A partial for scripts might look like this:
 
 ``` html
-<script src="/components/jquery/jquery.js"></script>
-<script src="/components/jquery-ui/jquery-ui-built.js"></script>
-<script src="/components/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript" src="/components/jquery/jquery.js"></script>
+<script type="text/javascript" src="/components/jquery-ui/jquery-ui-built.js"></script>
+<script type="text/javascript" src="/components/bootstrap/js/bootstrap.js"></script>
 <script type="text/javascript" src="/components/jquery-autosize/jquery.autosize.js"></script>
-<script src="/assets/js/myProject.js"></script>
+<script type="text/javascript" src="/assets/js/myProject.js"></script>
 ```
 
 Note that these scripts will be available on EVERY page. If I want something just on one page, I can include it in the js or css section. 
@@ -320,7 +399,7 @@ On forms, where we're entering specific things, we can include error messages wi
 ```
 
 
-### Main view
+#### Main view <a name="laravel-view-main">
 This would be the view called from a controller. It follows this basic structure:
 
     @extends('template')
@@ -335,7 +414,7 @@ This would be the view called from a controller. It follows this basic structure
     @stop
 
 
-#### Index
+#### Index <a name="laravel-view-index">
 
 As an example, this might be an index form entered as a main view:
 
@@ -409,7 +488,7 @@ The form can be hidden, though, so we can put the button wherever we want it, li
     {{ Form::close() }}
 
 
-#### Create
+#### Create <a name="laravel-view-create">
 
 A creation form might look like this:
 
@@ -435,7 +514,7 @@ A creation form might look like this:
 @stop
 ```
 
-#### Edit
+#### Edit <a name="laravel-view-edit">
 
 The edit form needs to have information about the object being edited. We can do that by using Form::model instead of Form::open. This will bind the form to the model's attributes.
 
@@ -462,7 +541,7 @@ The edit form needs to have information about the object being edited. We can do
 @stop
 ```
 
-#### Show
+#### Show <a name="laravel-view-show">
 
 Showing a record just lists out (in a non-editable way) the fields. No forms required, but we could include links to other routes for editing.
 
@@ -587,8 +666,8 @@ Showing a record just lists out (in a non-editable way) the fields. No forms req
     </li>
 
 
-Incorporating Javascript and AJAX
-----------------------------------
+### Incorporating Javascript and AJAX <a name="ajax">
+
 Some of the above fields require javascript in order to work. Some will need ajax (particularly to load data).
 
     $('#calendar').datetimepicker({

@@ -235,6 +235,16 @@ By default, it does not support a trailing slash in a URL, but you can add one, 
         }
 ```
 
+(I think this is working now in the final release...)
+
+There are a couple of ways of handling query strings:
+
+    /name/search/ForName:
+    Route::get('/name/search/{name}', function($name) { return $name; });
+
+    /name/search?query=ForName
+    Route::get('/name/search', function() { return Request::get('query'); });
+
 If you use Route::controller, it will create a new route for each getter in your controller. For instance:
 
 ``` php

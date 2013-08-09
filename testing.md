@@ -3,21 +3,30 @@ Testing
 
 This document contains notes related to testing, using these tools:
 
-    TDD (Test Driven Development)
-    Mockery (for creating mock objects)
-    phpunit
-    Selenium
-    Laravel techniques:
-        call/response
-        web crawler
-        IoC/facades
-        In-memory database and test environment
-        Testing with an array repository
-    BDD and acceptance testing with codeception
+* [Test Driven Development (TDD)](#tdd)
+* [Mockery](#mocks)
+* [phpunit](#phpunit)
+* [Selenium](#selenium)
+* [Laravel Techniques](#laravel)
+    * [Call/Response](#laravel-call)
+    * [Web Crawler](#laravel-web-crawler)
+        * [Browsing](#laravel-client-browsing)
+        * [Accessing Internal Objects](#laravel-client-internals)
+        * [Redirecting](#laravel-client-redirection)
+        * [Crawler](#laravel-crawler)
+    * [Laravel 4 IoC and Facades](#laravel-ioc)
+    * [Mocking a Facade](#laravel-mock-facade)
+    * [In-memory database and test environment](#laravel-memory-db)
+    * [Testing with an Array Repository](#laravel-array-repo)
+* [Testing for exceptions](#phpunit-exceptions)
+* [Data Providers](#phpunit-data-providers)
+* [Additional stuff for testing](#laravel-extra)
+* [BDD and Acceptance Testing with Codeception](#codeception)
 
 
 
-Test Driven Development (TDD) 
+
+Test Driven Development (TDD) <a name="tdd">
 --------------------------------------------------
 
 This is a development technique that helps create more reliable code over time.
@@ -30,8 +39,8 @@ This is a development technique that helps create more reliable code over time.
 
 
 
-Mocks
--------
+Mocks <a name="mocks">
+----------------------
 A mock is a replacement for an object that we can use for testing.
 Rather than hitting an actual class (eg, to write to the database), go to a mock
 Integration testing should hit actual classes
@@ -41,18 +50,20 @@ in composer.json, require  "mockery/mockery": "dev-master"
 
 Using Mocks:
 (instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
+
 * My controller is ItemsController
 * My model is Item
 
 I'll set up several different classes:
 
-    ItemsController
-    Item
-    ItemRepositoryInterface
-    EloquentItemRepository
+* ItemsController
+* Item
+* ItemRepositoryInterface
+* EloquentItemRepository
 
 In ItemsController, use this:
 
+``` php
     public function __construct(ItemRepositoryInterface $items)
     {
         $this->items = $items;
@@ -73,13 +84,17 @@ In ItemsController, use this:
         ... 
         other functions, just call the corresponding item function
     }
+```
 
 The application also needs to know the default repository to use to implement the interface:
 
+``` php
     App::bind('ItemRepositoryInterface', 'EloquentItemRepository');
+```
 
 When testing, using Mockery,
 
+``` php
     public function testMockShow()
     {
         $mock = \Mockery::mock('ItemRepositoryInterface');
@@ -92,10 +107,12 @@ When testing, using Mockery,
         $json = json_decode($response->getContent());
         $this->assertEquals('works', $json->name);
     }
+```
 
 This should bypass the database completely.
 In some cases, we need to return an intermediate object (eg, items/1/vendors)
 
+``` php
     public function testShowItemVendors()
     {
         $mockVendor = $this->mock('Vendor');
@@ -119,27 +136,30 @@ In some cases, we need to return an intermediate object (eg, items/1/vendors)
         App::instance($repo, $mock);       
         return $mock;
     }
+```
 
 
-
-phpunit
-----------
+phpunit <a name="phpunit">
+----------------------------
 I'm using phpunit for testing. It will read configuration information from phpunit.xml, in the root directory of the project.
 
-Incomplete tests:
+#### Incomplete tests:
 Skip them by putting one of these at the beginning of the test:
 
+```php
     $this->markTestIncomplete();
 
     $this->markTestSkipped(
       'The MySQLi extension is not available.'
     );
+```
 
 (these can be entered in the setUp routine for all tests, to skip all. The parser will still go through everything to find class definitions, etc., though)
 
 
 We can only test some groups at a time:
 
+```php
     /**
      * @group database
      * @group remoteTasks
@@ -147,6 +167,7 @@ We can only test some groups at a time:
     public function testSomething()
     {
     }
+```
 
 testSomething() is now in two groups, and if either is added on the command line (or in the config.xml) --exclude-group parameter. it won't be run.
 
@@ -164,6 +185,7 @@ Tags for phpunit can be put on either classes or individual functions. This mean
 
 We can also include or exclude specific test groups in the phpunit.xml file:
 
+```xml
     <?xml version="1.0" encoding="UTF-8"?>
     <phpunit backupGlobals="false"
             backupStaticAttributes="false"
@@ -190,6 +212,7 @@ We can also include or exclude specific test groups in the phpunit.xml file:
         </groups>
 
     </phpunit>
+```
 
 (this will automatically exclude the integration and failing test groups, that is anything tagged with @group integration  or  @group failing)
 
@@ -209,7 +232,8 @@ You can then to go the specified folder for marked-up coverage. It shows lines o
 
     
 Make a test dependent on success of a previous test:
- 
+
+```php 
     public function testEmpty()
     {
         $stack = array();
@@ -225,14 +249,15 @@ Make a test dependent on success of a previous test:
     public function testPush(array $stack)
     {
     }
+```
 
 
-
-Selenium
--------------
+Selenium <a name="selenium">
+----------------------------------
 
 We can test the actual user experience with selenium. To set up a selenium test, use this:
 
+```php
     class SeleniumTest extends PHPUnit_Extensions_Selenium2TestCase
     {
         public function __construct()
@@ -251,21 +276,23 @@ We can test the actual user experience with selenium. To set up a selenium test,
                 'should not return an xdebug error');
         }
     }
+```
 
 
 
+Laravel Techniques <a name="laravel">
+==========================================
 
-Laravel Techniques
-==========================
-
-Call/Response
----------------
+Call/Response <a name="laravel-call">
+----------------------------------------
 When unit testing, we can call functions and get the responses. We can also do this with mocks. The basic format is like this:
 
+```php
     $response = $this->action('GET', 'ItemsController@show', array('1'));
     $response = $this->call('GET', '/items/1');
     $this->assertTrue($response->isOk());
     $this->assertNotEmpty($response->getContent());
+```
 
 The response class has several useful functions, including:
 
@@ -303,20 +330,23 @@ The view class that is returned also has valuable information:
 
 
 
-Web Crawler
--------------
+Web Crawler <a name="laravel-web-crawler">
+---------------------------------------------
 The Symphony web crawler component will go through the DOM of the page to handle very specific test cases. It can be used during integration tests to simulate a browser (much faster than Selenium).
 
 We can see if there is a div with id 'item' like this:
 
+```php
     public function testSampleItemIsInAnItemDiv()
     {
         $crawler = $this->client->request('GET', '/');
         $this->assertGreaterThan(0, $crawler->filter('div.item')->count());
     }
+```
 
 We can get information for children in the DOM chain, with:
 
+```php
     $children = $crawler->filter('div.item')->first()->children();
     echo $children->filter('h4')->count();
     foreach($children as $child) {
@@ -324,9 +354,11 @@ We can get information for children in the DOM chain, with:
         echo($child->getAttribute('class'));
         echo($child->nodeValue);
     }
+```
 
 Other stuff:
 
+```php
     // Click a link:
 
         $crawler = $this->client->request('GET', '/user/login');
@@ -349,18 +381,22 @@ Other stuff:
     // Assert that the response matches a given CSS selector.
 
         $this->assertGreaterThan(0, $crawler->filter('h1')->count());
- 
+```
+
 Test against the Response content directly if you just want to assert that the content contains some text, or if the Response is not an XML/HTML document:
 
+```php
     $this->assertRegExp(
         '/Hello Fabien/',
         $client->getResponse()->getContent()
     );
- 
+```
+
 Force each request to be executed in its own PHP process to avoid any side-effects when working with several clients in the same script:
 
     $client->insulate();
  
+```php
 // Search through all content on page for a string
 
     $crawler = $this->client->request('GET', '/user/login');
@@ -373,9 +409,11 @@ Force each request to be executed in its own PHP process to avoid any side-effec
     $crawler = $this->client->request('GET', '/user/login');
     $this->assertCount(1, $crawler->filter('h1:contains("Please Log In")'), 
         'should contain "Please Log In" in h1 tag (only once)');
- 
+```
+
 Useful Assertions:
 
+```php
     // Assert that there is at least one h2 tag with the class "subtitle"
     $this->assertGreaterThan( 0, $crawler->filter('h2.subtitle')->count());
  
@@ -407,22 +445,23 @@ Useful Assertions:
  
     // or simply check that the response is a redirect to any URL
     $this->assertTrue($client->getResponse()->isRedirect());
-
+```
  
-Browsing
-----------
+Browsing <a name="laravel-client-browsing">
+----------------------------------------------
 The Client supports many operations that can be done in a real browser:
 
+```php
     $client->back();
     $client->forward();
     $client->reload();
  
     // Clears all cookies and the history
     $client->restart();
-
+```
  
-Accessing Internal Objects
-----------------------------
+Accessing Internal Objects <a name="laravel-client-internals">
+---------------------------------------------------------------
 If you use the client to test your application, you might want to access the client's internal objects:
 
     $history   = $client->getHistory();
@@ -440,8 +479,8 @@ If your requests are not insulated, you can also access the Container and the Ke
     $kernel    = $client->getKernel();
  
 
-Redirecting
--------------
+Redirecting <a name="laravel-client-redirection">
+-----------------------------------------------------
 When a request returns a redirect response, the client does not follow it automatically. You can examine the response and force a redirection afterwards with the followRedirect() method:
 
     $crawler = $client->followRedirect();
@@ -451,19 +490,21 @@ If you want the client to automatically follow all redirects, you can force him 
     $client->followRedirects();
  
 
-The Crawler
-------------
+The Crawler <a name="laravel-crawler">
+-----------------------------------------
 A Crawler instance is returned each time you make a request with the Client. It allows you to traverse HTML documents, select nodes, find links and forms.
  
-Traversing:
+#### Traversing:
 
 Like jQuery, the Crawler has methods to traverse the DOM of an HTML/XML document. For example, the following finds all input[type=submit] elements, selects the last one on the page, and then selects its immediate parent element:
 
+```php
     $newCrawler = $crawler->filter('input[type=submit]')
         ->last()
         ->parents()
         ->first();
- 
+```
+
 Many other methods are also available:
 
     Method                  Description
@@ -479,8 +520,9 @@ Many other methods are also available:
     children()              Returns children nodes
     reduce($lambda)         Nodes for which the callable does not return false
  
-Extracting Information:
+#### Extracting Information:
 
+```php
     // Returns the attribute value for the first node
     $crawler->attr('class');
  
@@ -496,28 +538,37 @@ Extracting Information:
     {
         return $node->attr('href');
     });
+```
 
 We can chain commands like this (which will assert the last input field in the form has a type of 'submit):
 
-    this->assertEquals('submit', $crawler->filter('form')->filter('input')->last()->attr('type'), 'should have submit button');
- 
-Links:
+```php
+    this->assertEquals('submit', $crawler
+        ->filter('form')
+        ->filter('input')
+        ->last()
+        ->attr('type'), 'should have submit button');
+```
+
+#### Links:
 
 To select links, you can use the traversing methods above or the convenient selectLink() shortcut:
 
+```php
     $crawler->selectLink('Click here');
  
     $link = $crawler->selectLink('Click here')->link();
     $client->click($link);
- 
-Forms:
+``` 
+
+#### Forms:
 
     $buttonCrawlerNode = $crawler->selectButton('submit'); 
 
 
 
-Laravel 4 IoC and Facades
----------------------------
+Laravel 4 IoC and Facades <a name="laravel-ioc">
+---------------------------------------------------------
 http://www.thenerdary.net/post/30859565484/laravel-4
 
 When using a laravel class, we generally use a facade:
@@ -554,10 +605,11 @@ You can swap out entire components with your own. For instance, if you had a cla
     'Response'        => 'Api\Facades\Response',    (your own response facade)
 
 
-Mocking
------------------
+Mocking a Facade <a name="laravel-mock-facade">
+---------------------------------------------------
 This is how to mock a facade:
 
+```php
     use \Mockery as m;
 
     public function setUp()
@@ -571,22 +623,28 @@ This is how to mock a facade:
         Illuminate\Support\Facades\Config::swap($config = m::mock('ConfigMock'));
 
         $config->shouldReceive('get')->once()
-            ->with('logviewer::log_dirs')->andReturn(array('app' => 'app/storage/logs'));
+            ->with('logviewer::log_dirs')
+            ->andReturn(array('app' => 'app/storage/logs'));
 
         $this->logviewer = new Logviewer('app', 'cgi-fcgi', '2013-06-01');
     }
+```
 
 I think that ...\Config::swap  statement actually swaps out the class the facade is looking for.
 
 Mockery will let us mock demeter chains, eg `$object->foo()->bar()->zebra()->alpha()->selfDestruct();`. It will return the value of the LAST entry of the entire chain. We can mock all of that like this:
 
+```php
     $mock = \Mockery::mock('SomeMock');
-    $mock->shouldReceive('foo->bar->zebra->alpha->selfDestruct')->andReturn('Ten!');
+    $mock->shouldReceive('foo->bar->zebra->alpha->selfDestruct')
+        ->andReturn('Ten!');
+```
 
 It will also let us do partial mocks, where we mock some of the public functions of the class under test. (They MUST be public functions; we can't mock private or protected functions).
 
 In my class, if I have a function `getAlias` that I want to mock, this is how I do it: 
 
+```php
     $test = m::mock('\Kalani\FacadeRoot\FacadeRoot[getAlias]', array(Null, Null));
         // the array, above, is for passing parameters to the constructor
 
@@ -595,14 +653,15 @@ In my class, if I have a function `getAlias` that I want to mock, this is how I 
 
     $this->assertEquals('(alias) Foo', $test->getRoot(Null));
         // getRoot calls getAlias (and takes a parameter)
+```
 
 If we need to mock multiple statements, we do it like this:
 
-
+// TODO: Mock multiple statements
     
 
-In-memory database and test environment
------------------------------------------
+In-memory database and test environment <a name="laravel-memory-db">
+----------------------------------------------------------------------
 An in-memory database is much faster than writing data to your actual database (it doesn't require any disk reads, indexes, etc.)
 
 From: http://net.tutsplus.com/tutorials/php/testing-like-a-boss-in-laravel-models/
@@ -624,6 +683,7 @@ Within the app/config/testing directory, create a new file, named database.php, 
 #### Before running tests:
 Since the in-memory database is always empty when a connection is made, it’s important to migrate the database before every test. To do this, open app/tests/TestCase.php and add the following method to the end of the class:
 
+```php
     /**
      * Migrates the database.
      * This will cause the tests to run quickly.
@@ -641,13 +701,14 @@ Since the in-memory database is always empty when a connection is made, it’s i
     {
         \Mockery::close();
     }
+```
 
-
-Testing with an Arrray Repository
-------------------------------------
+Testing with an Arrray Repository <a name="laravel-array-repo">
+-----------------------------------------------------------------
 
 We can get fast, solid testing with an array repository, which basically stubs the functionality we need. Here's the critical pieces:
 
+```php
     interface TodoRepositoryInterface
     {
         public function all();
@@ -691,6 +752,7 @@ We can get fast, solid testing with an array repository, which basically stubs t
                     'updated_at'    => new DateTime,
             ...
         }
+```
 
 The global binding is set to this:
 
@@ -698,9 +760,9 @@ The global binding is set to this:
 
 My controller looks like this:
 
+```php
     class TodoController extends BaseController 
     {
-
         protected $todo;
 
         public function __construct(TodoRepositoryInterface $todo)
@@ -714,9 +776,11 @@ My controller looks like this:
                 ->with('items', $this->todo->all());
         }
     }
+```
 
 My tester:
 
+```php
     class TodoControllerTest extends TestCase
     {
         public function testTodoControllerExistsAndReturnsView()
@@ -741,9 +805,11 @@ My tester:
             $this->assertEquals(999, $data['items'][0]['id']);        
         }
     }
+```
 
 To test specific actions, we can use this:
 
+```php
     $data = $this->action('PUT',                // request type
         'TodoController@update',                // controller/method to use
         array('999'),                           // id sent to update 
@@ -756,11 +822,11 @@ To test specific actions, we can use this:
     $result = $this->action('POST', 
         'TodoController@store', 
         array('title'=>'test'));
+```
 
 
-
-Testing for exceptions
-------------------------
+Testing for exceptions <a name="phpunit-exceptions">
+-----------------------------------------------------
 We can make sure that an exception is thrown by using a docblock:
 
     /*
@@ -771,20 +837,23 @@ We can make sure that an exception is thrown by using a docblock:
     }
 
     
-Varying tests
-----------------
+Data Providers<a name="phpunit-data-providers">
+-------------------------------------------
 If you have a lot of tests that are basically similar, these can be set in by a data provider.
 For instance, if you have this:
 
+```php
     public function testGetFieldData() {
         $fields = $this->schema->getFields();
         $this->assertEquals('id', $fields['id']['name']);
         $this->assertEquals('Text1', $fields['text1']['display']);
         $this->assertEquals('Object Identifier', $fields['oid']['display']);
     }
+```
 
 ... you're basically doing the same thing over and over again. For more dry code, you can do something like this:
 
+```php
     public function inputFieldData() {
         return array(
             array('id', 'id', 'name'),
@@ -800,12 +869,13 @@ For instance, if you have this:
         $fields = $this->schema->getFields();
         $this->assertEquals($expected, $field, $attr);
     }
-    
+```
+
 For a small set of tests, this may be overkill, but you can repeat the data in other tests, and easily add new data.
     
     
-Additional stuff for testing
-------------------------------
+Additional stuff for testing<a name="laravel-extra">
+----------------------------------------------------------
 
 To dump a query:
 
@@ -832,8 +902,8 @@ You can also export the data to a log, like so:
           
           
           
-BDD and Acceptance Testing with Codeception
-===============================================
+BDD and Acceptance Testing with Codeception <a name="codeception">
+====================================================================
 
 Codeception is a testing tool based on phpunit, which can do BDD (behavior driven development) and acceptance testing. It can also possibly do unit testing. It has three separate "tester" objects:
 

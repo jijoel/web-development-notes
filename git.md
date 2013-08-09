@@ -57,6 +57,14 @@ If you have local commits that you'd also like to wipe out:
 
     git reset --hard origin/master          (resets to the current origin/master commit)
     git pull
+    
+To rewind a branch that you have pushed to a remote repository (on the master branch); in this case, rewind a master branch and put the changes into a new branch:
+
+    git push -f origin a3f0442_id_of_prior_commit:master   // rewinds the remote
+    git reset a3f0442                                      // resets the local to that spot
+    git stash
+    git checkout -b branch_name                            // switch to new branch
+    git stash pop                                          // brings back files in new branch
 
 To stop tracking a file that is currently tracked:
 
