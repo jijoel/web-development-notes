@@ -286,6 +286,19 @@ We can test the actual user experience with selenium. To set up a selenium test,
 Laravel Techniques <a name="laravel">
 ==========================================
 
+* [Call/Response](#laravel-call)
+* [Web Crawler](#laravel-web-crawler)
+    * [Browsing](#laravel-client-browsing)
+    * [Accessing Internal Objects](#laravel-client-internals)
+    * [Redirecting](#laravel-client-redirection)
+    * [Crawler](#laravel-crawler)
+* [Laravel 4 IoC and Facades](#laravel-ioc)
+* [Mocking a Facade](#laravel-mock-facade)
+* [In-memory database and test environment](#laravel-memory-db)
+* [Testing with an Array Repository](#laravel-array-repo)
+* [Additional stuff for testing](#laravel-extra)
+
+
 Call/Response <a name="laravel-call">
 ----------------------------------------
 When unit testing, we can call functions and get the responses. We can also do this with mocks. The basic format is like this:
@@ -946,6 +959,7 @@ Run the test:
 
 Here are some sample tests:
 
+```php
     // This is standard BDD labelling. Who am I? What do I want to do? Why? Then do it.
     $I = new WebGuy($scenario);
     $I->am('Account Holder'); 
@@ -978,4 +992,4 @@ Here are some sample tests:
 
     $v=$I->grabTextFrom('body');
     var_dump($v);
-
+```
