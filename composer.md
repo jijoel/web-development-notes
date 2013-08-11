@@ -92,7 +92,7 @@ There are a lot of packages I find useful. Many of these are listed in [a relati
 * [Carbon](#carbon)     Date/Time management
 
 
-Carbon<a name="carbon">
+Carbon <a name="carbon">
 --------------------------
 
 Create a Carbon object from a mysql datetime value:
@@ -104,3 +104,5 @@ Output a formatted date string (Mon d, YYYY):
     $c->toFormattedDateString();        //  Aug 7, 2013
     $c->toDayDateTimeString();          //  Wed, Aug 7, 2013 10:09 PM
     $c->format($format);                //  Any format from http://www.php.net/manual/en/function.date.php
+
+    

@@ -156,7 +156,7 @@ Skip them by putting one of these at the beginning of the test:
 
 (these can be entered in the setUp routine for all tests, to skip all. The parser will still go through everything to find class definitions, etc., though)
 
-
+#### phpUnit test groups
 We can only test some groups at a time:
 
 ```php
@@ -185,7 +185,7 @@ Tags for phpunit can be put on either classes or individual functions. This mean
 
 We can also include or exclude specific test groups in the phpunit.xml file:
 
-```xml
+``` xml
     <?xml version="1.0" encoding="UTF-8"?>
     <phpunit backupGlobals="false"
             backupStaticAttributes="false"
@@ -231,9 +231,11 @@ To show code coverage, use:
 You can then to go the specified folder for marked-up coverage. It shows lines of code that have been run in green, other lines in red. It will also show everything in the framework that has been run. 
 
     
+#### phpUnit Test Dependencies
+
 Make a test dependent on success of a previous test:
 
-```php 
+``` php 
     public function testEmpty()
     {
         $stack = array();
@@ -250,6 +252,7 @@ Make a test dependent on success of a previous test:
     {
     }
 ```
+
 
 
 Selenium <a name="selenium">
@@ -838,7 +841,7 @@ We can make sure that an exception is thrown by using a docblock:
 
     
 Data Providers<a name="phpunit-data-providers">
--------------------------------------------
+-------------------------------------------------
 If you have a lot of tests that are basically similar, these can be set in by a data provider.
 For instance, if you have this:
 
