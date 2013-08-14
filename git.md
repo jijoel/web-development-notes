@@ -1,8 +1,21 @@
 git
 ================
 
-Basic Usage
-------------------
+* [Basic Usage](#basic)
+* [Commits](#commits)
+* [Branches](#branch)
+* [Stashes](#stash)
+* [Tagging](#tags)
+* [Working with remote branches](#remote)
+* [Forks and upstream changes](#forks)
+* [Troubleshooting](#troubleshooting)
+* [Configuration](#config)
+* [Strategy for working with branches](#strategy)
+
+
+
+Basic Usage <a name="basic" />
+--------------------------------
 
     man gittutorial
 
@@ -45,9 +58,6 @@ To see what has changed in the working tree
 
     git status
 
-
-Advanced Usage
---------------------------------------------------------------
 Pull data from a remote repository, wiping out any local changes:
 
     git reset --hard HEAD                   (resets to the current HEAD)
@@ -74,7 +84,6 @@ Remove untracked files:
 
     git clean -f
     
-
 git add just adds changes (including in new files)
 
     git add .             (adds all files in directory)
@@ -120,10 +129,32 @@ git log shows a history of commits over time
     git log --grep='x'    Limit output to those with log message matching regex
 
     alias gl='git log --oneline --graph --all --decorate'
+
     
-    
-Branches
----------
+
+Commits<a name="commits" />
+-------------------------------
+You can arbitrarily move to any point in the log, see how things were then, and even create a new branch from that spot. To move to a separate point in the log, given these commits:
+
+* 5d632ba (HEAD, origin/master, master) files to test
+* 5194b7e initial commit
+
+To switch back to the initial commit, as it was before any changes were made:
+
+    git reset 5194b7e               // moves back to the initial commit
+    git checkout -- .               // unstages changes to initial commit (modified files)
+    git clean -f                    // removes new files (created in commit:files to test)
+
+To switch, again, to the 'files to test' commit, with everything it has:
+
+    git reset 5d632ba
+    git checkout -- .
+
+
+
+
+Branches <a name="branch" />
+-----------------------------------
 
 Master branch is there by default. Work on new, experimental features in new branches. You can switch branches at any time. When you commit, it will commit to the active branch.
 
@@ -143,8 +174,8 @@ Master branch is there by default. Work on new, experimental features in new bra
     
 
 
-Stashes
----------
+Stashes <a name="stash" />
+-------------------------
 
 You can stash changes to pause what you're working on, switch to something else, then resume when you're ready.
 
@@ -158,8 +189,8 @@ You can stash changes to pause what you're working on, switch to something else,
 
 
 
-Tagging
------------
+Tagging <a name="tags" />
+---------------------------
 You can tag specific commits as being important. 
 NOTE: Make the commit, then add the tag.
 
@@ -172,8 +203,9 @@ NOTE: Make the commit, then add the tag.
     git push origin --tags                  Push all tags to remote server
 
 
-Working with remote branches
--------------------------------
+
+Working with remote branches <a name="remote" />
+-------------------------------------------------
 
     git remote                              shows all remote branches
     git remote -v                           shows remote branches (with url)
@@ -206,8 +238,8 @@ Working with remote branches
                                             (it could have been origin/master, or something else)
 
                                         
-Forks and upstream changes
------------------------------
+Forks and upstream changes <a name="forks" />
+---------------------------------------------
 You can fork a repository on github. This will create your own personal version of this repository, in your own github account. To make a pull request (a request to have your code pulled into the master repository):
 
 1. Fork the repository to your own github account
@@ -236,8 +268,8 @@ To update your repository from the master repository, you can use upstream chang
 
 
                                         
-Troubleshooting
------------------------
+Troubleshooting <a name="troubleshooting" />
+---------------------------------------------------
 
 Error: You asked me to pull without telling me which branch you want to merge with...
 
@@ -265,8 +297,8 @@ In this particular case, autobuild is set to push, but not to pull. To fix it:
 
 
 
-Configuration
---------------------------------------------------------------
+Configuration <a name="config" />
+-------------------------------------------------------
 Use the nano editor for commits
 
     git config --global core.editor "nano"
@@ -285,8 +317,8 @@ Configuration information is stored in these files:
 
 
 
-Strategy for working with branches
-----------------------------------------
+Strategy for working with branches <a name="strategy" />
+---------------------------------------------------------
 Based on:
 http://nvie.com/posts/a-successful-git-branching-model/
 

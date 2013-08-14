@@ -75,16 +75,16 @@ BBCode
 
 The following tags change the appearance of text:
 
-[b]Bold text[/b] produces Bold text
-[u]Underlined text[/u] produces Underlined text
-[i]Italic text[/i] produces Italic text
-[s]Strike-through text[/s] produces Strike-through text
-[del]Deleted text[/del] produces Deleted text
-[ins]Inserted text[/ins] produces Inserted text
-[em]Emphasised text[/em] produces Emphasised text
-[color=#FF0000]Red text[/color] produces Red text
-[color=blue]Blue text[/color] produces Blue text
-[h]Heading text[/h] produces Heading text
+* [b]Bold text[/b] produces Bold text
+* [u]Underlined text[/u] produces Underlined text
+* [i]Italic text[/i] produces Italic text
+* [s]Strike-through text[/s] produces Strike-through text
+* [del]Deleted text[/del] produces Deleted text
+* [ins]Inserted text[/ins] produces Inserted text
+* [em]Emphasised text[/em] produces Emphasised text
+* [color=#FF0000]Red text[/color] produces Red text
+* [color=blue]Blue text[/color] produces Blue text
+* [h]Heading text[/h] produces Heading text
 
 
 

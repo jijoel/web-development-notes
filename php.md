@@ -13,9 +13,48 @@ php commands
     strip_tags($str)    strips all html tags from $str
     get_class           Returns the name of a class from an object
     
+    is_callable($c, $s) Returns true if the class $c has (public) method $s
+    method_exists       Similar to is_callable, but for all methods (including protected/private) 
+
     var_export()        Like var_dump, but writes data in a way it can be captured. For instance:
 
         \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
+
+    
+
+
+Reflection <a name="reflection">
+-----------------------------------
+
+This is a standard PHP class, used to report information about a class. Official documentation at:
+http://www.php.net/manual/en/class.reflectionclass.php
+
+Laravel uses it internally for several things. Externally, we can use it to see a list of available methods for a class. Like this:
+
+```php
+    $r = new ReflectionClass('ClassFacadeOrAliasName');
+    $methods = $r->getMethods();
+
+    $methodArray = array();
+    foreach($methods as $method) {
+        $methodArray[$method->getName()] = $method->getDocComment();
+    }
+    ksort($methodArray);
+    return $methodArray;
+```php
+
+It has several interesting things to choose from:
+
+    getMethods          // gets a list of public methods for the class
+    getProperties       // public properties
+    getConstants        // constants defined by the class
+    getDocComment       // DocBlock comments for a class (or method, or property)
+    getFileName         // Gets the name of the file the class is defined in
+    getInterfaceNames   // List all interfaces the class instanciates
+    getNamespaceName    // Return the full namespace of the class
+    getParentClass      // Return the name of the parent class for this class
+    getMethod()->getParameters()
+
 
 
 Passing by Reference

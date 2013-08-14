@@ -80,6 +80,10 @@ http://registry.autopergamene.eu/
 Prevent artisan from running some commands (eg, migrate:refresh on a production server):
 https://github.com/Itrulia/ArtisanBlock
 
+DocBlock parser:
+"phpdocumentor/reflection-docblock": "2.0.*@dev"
+https://github.com/phpDocumentor/ReflectionDocBlock
+
 Image handling and manipulation:
 http://creolab.hr/2013/07/image-manipulation-in-laravel-4-with-imagine/
 http://intervention.olivervogel.net/image
@@ -264,6 +268,15 @@ http://www.codeproject.com/Articles/194916/Enhancing-HTML-tables-using-a-JQuery-
 (includes info/examples on server-side processing for thousands of records)
 (also see: Server-side handling of datatables)
 
+Another data grid (Flexigrid; not updated often):
+http://flexigrid.info/
+
+A data grid based on backbone:
+http://loicfrering.github.io/backbone.datagrid/
+
+Another data grid (looks very nice):
+https://github.com/mleibman/SlickGrid/wiki/Examples
+
 CKEditor:
 http://ckeditor.com
 http://docs.ckeditor.com/#!/guide/dev_configuration
@@ -287,6 +300,9 @@ https://github.com/Studio-42/elFinder
 Another file manager (I like the interface, but it's slow...):
 https://github.com/simogeo/Filemanager
 
+Interface for File Uploads:
+http://blueimp.github.io/jQuery-File-Upload/index.html
+
 Other jquery-based file managers:
 http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
 
@@ -298,6 +314,7 @@ http://packery.metafizzy.co/faq.html
 
 Template rendering engine:
 http://tempojs.com/
+
 
 
 

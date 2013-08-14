@@ -39,106 +39,6 @@ This is a development technique that helps create more reliable code over time.
 
 
 
-Mocks <a name="mocks">
-----------------------
-A mock is a replacement for an object that we can use for testing.
-Rather than hitting an actual class (eg, to write to the database), go to a mock
-Integration testing should hit actual classes
-
-Mockery is a project that makes creation and handling of mocks easier:
-in composer.json, require  "mockery/mockery": "dev-master"
-
-Using Mocks:
-(instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
-
-* My controller is ItemsController
-* My model is Item
-
-I'll set up several different classes:
-
-* ItemsController
-* Item
-* ItemRepositoryInterface
-* EloquentItemRepository
-
-In ItemsController, use this:
-
-``` php
-    public function __construct(ItemRepositoryInterface $items)
-    {
-        $this->items = $items;
-    }
-
-    Interface ItemRepositoryInterface
-    {
-        public function all();
-        public function find($id);
-        ...
-        any other functions you want the controller to be able to access
-    }
-
-    class EloquentItemRepository implements ItemRepositoryInterface
-    {
-        public function all(){     return Item::all(); }
-        public function find($id){ return Item::find($id); }
-        ... 
-        other functions, just call the corresponding item function
-    }
-```
-
-The application also needs to know the default repository to use to implement the interface:
-
-``` php
-    App::bind('ItemRepositoryInterface', 'EloquentItemRepository');
-```
-
-When testing, using Mockery,
-
-``` php
-    public function testMockShow()
-    {
-        $mock = \Mockery::mock('ItemRepositoryInterface');
-        $mock->shouldReceive('find')->once()->andReturn('{"name":"works"}');
-        App::instance('ItemRepositoryInterface', $mock);
-
-        $response = $this->call('GET', 'items/1');
-        $this->assertTrue($response->isOk());
-        $this->assertNotEmpty($response->getContent());
-        $json = json_decode($response->getContent());
-        $this->assertEquals('works', $json->name);
-    }
-```
-
-This should bypass the database completely.
-In some cases, we need to return an intermediate object (eg, items/1/vendors)
-
-``` php
-    public function testShowItemVendors()
-    {
-        $mockVendor = $this->mock('Vendor');
-        $mockVendor->shouldReceive('get')->once()->andReturn('{"name":"vendor works"}');
-
-        $mockItem = $this->mock('Item');
-        $mockItem->shouldReceive('find')->once()->andReturn($mockItem);
-        $mockItem->shouldReceive('vendors')->once()->andReturn($mockVendor); 
-
-        $response = $this->call('GET', 'items/1/vendors');
-        $this->assertTrue($response->isOk());
-        $this->assertNotEmpty($response->getContent());
-        $json = json_decode($response->getContent());
-        $this->assertEquals('vendor works', $json->name);
-    }
-
-    public function mock($class)
-    {
-        $repo = $class . 'RepositoryInterface';
-        $mock = \Mockery::mock($repo);
-        App::instance($repo, $mock);       
-        return $mock;
-    }
-```
-
-
 phpunit <a name="phpunit">
 ----------------------------
 I'm using phpunit for testing. It will read configuration information from phpunit.xml, in the root directory of the project.
@@ -619,6 +519,123 @@ You can swap out entire components with your own. For instance, if you had a cla
 
     //'Response'        => 'Illuminate\Support\Facades\Response',
     'Response'        => 'Api\Facades\Response',    (your own response facade)
+
+
+
+Mocks <a name="mocks">
+----------------------
+A mock is a replacement for an object that we can use for testing.
+Rather than hitting an actual class (eg, to write to the database), go to a mock
+Integration testing should hit actual classes
+
+Mockery is a project that makes creation and handling of mocks easier:
+in composer.json, require  "mockery/mockery": "dev-master"
+
+Using Mocks:
+(instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
+
+* My controller is ItemsController
+* My model is Item
+
+I'll set up several different classes:
+
+* ItemsController
+* Item
+* ItemRepositoryInterface
+* EloquentItemRepository
+
+In ItemsController, use this:
+
+``` php
+    public function __construct(ItemRepositoryInterface $items)
+    {
+        $this->items = $items;
+    }
+
+    Interface ItemRepositoryInterface
+    {
+        public function all();
+        public function find($id);
+        ...
+        any other functions you want the controller to be able to access
+    }
+
+    class EloquentItemRepository implements ItemRepositoryInterface
+    {
+        public function all(){     return Item::all(); }
+        public function find($id){ return Item::find($id); }
+        ... 
+        other functions, just call the corresponding item function
+    }
+```
+
+The application also needs to know the default repository to use to implement the interface:
+
+``` php
+    App::bind('ItemRepositoryInterface', 'EloquentItemRepository');
+```
+
+When testing, using Mockery,
+
+``` php
+    public function testMockShow()
+    {
+        $mock = \Mockery::mock('ItemRepositoryInterface');
+        $mock->shouldReceive('find')->once()->andReturn('{"name":"works"}');
+        App::instance('ItemRepositoryInterface', $mock);
+
+        $response = $this->call('GET', 'items/1');
+        $this->assertTrue($response->isOk());
+        $this->assertNotEmpty($response->getContent());
+        $json = json_decode($response->getContent());
+        $this->assertEquals('works', $json->name);
+    }
+```
+
+This should bypass the database completely.
+In some cases, we need to return an intermediate object (eg, items/1/vendors)
+
+``` php
+    public function testShowItemVendors()
+    {
+        $mockVendor = $this->mock('Vendor');
+        $mockVendor->shouldReceive('get')->once()->andReturn('{"name":"vendor works"}');
+
+        $mockItem = $this->mock('Item');
+        $mockItem->shouldReceive('find')->once()->andReturn($mockItem);
+        $mockItem->shouldReceive('vendors')->once()->andReturn($mockVendor); 
+
+        $response = $this->call('GET', 'items/1/vendors');
+        $this->assertTrue($response->isOk());
+        $this->assertNotEmpty($response->getContent());
+        $json = json_decode($response->getContent());
+        $this->assertEquals('vendor works', $json->name);
+    }
+
+    public function mock($class)
+    {
+        $repo = $class . 'RepositoryInterface';
+        $mock = \Mockery::mock($repo);
+        App::instance($repo, $mock);       
+        return $mock;
+    }
+```
+
+Mock statements can be either separate or chained. If they are chained, make sure to use `getMock()` at the end to actually get the mock object. So, this:
+
+```php
+    $mockItem = $this->mock('Item');
+    $mockItem->shouldReceive('find')->once()->andReturn($mockItem);
+    $mockItem->shouldReceive('vendors')->once()->andReturn($mockVendor); 
+```
+
+is equivalent to this:
+
+```php
+    $mockItem = $this->mock('Item')
+        ->shouldReceive('find')->once()->andReturn($mockItem)
+        ->shouldReceive('vendors')->once()->andReturn($mockVendor)->getMock(); 
+```
 
 
 Mocking a Facade <a name="laravel-mock-facade">
