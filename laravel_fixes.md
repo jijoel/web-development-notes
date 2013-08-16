@@ -1,8 +1,12 @@
-Workarounds for some issues I've seen
-========================================
+Workarounds and solutions for some issues I've seen
+======================================================
 
-Trying to get property of non-object for ajax query
------------------------------------------------------
+* [Trying to get property of non-object for ajax query](#ajax-non-object)
+* [phpUnit - no tests found in class "TestCase"](#phpunit-testcase)
+
+
+Trying to get property of non-object for ajax query <a name="ajax-non-object">
+-----------------------------------------------------------------------------------
 I have a complex relationship, but it works beautifully when sent directly from the view. After an ajax query, though, it's sending bad data. My tables / relationships:
 
     Person (id, oid, :name, :comments)
@@ -28,4 +32,21 @@ So, we do this:
     }
 
     $creatorId = $found->object->history->first()->event_creator_id;
+
+
+
+phpUnit - No tests found in class "TestCase" <a name="phpunit-testcase">
+---------------------------------------------------------------------------
+
+I can run phpunit, and get this as part of the result:
+
+> There were 2 failures:
+>
+> 1) Warning
+> No tests found in class "Illuminate\Foundation\Testing\TestCase".
+>
+> 2) Warning
+> No tests found in class "TestCase".
+
+I found it's because I had a case-difference in one of the test class names. (The file was DBTest.php; the class name was DbTest.php)
 

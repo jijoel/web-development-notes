@@ -84,6 +84,10 @@ DocBlock parser:
 "phpdocumentor/reflection-docblock": "2.0.*@dev"
 https://github.com/phpDocumentor/ReflectionDocBlock
 
+Presenter:
+https://github.com/robclancy/presenter
+"robclancy/presenter": "1.1.*"
+
 Image handling and manipulation:
 http://creolab.hr/2013/07/image-manipulation-in-laravel-4-with-imagine/
 http://intervention.olivervogel.net/image

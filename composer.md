@@ -95,7 +95,6 @@ There are a lot of packages I find useful. Many of these are listed in [a relati
 
 
 
-
 Carbon <a name="carbon">
 --------------------------
 
@@ -103,10 +102,20 @@ Create a Carbon object from a mysql datetime value:
 
     $c = Carbon::createFromTimestamp(strtotime($model->date_time_field));
 
+We can add to date values:
+
+    $date = new \Carbon\Carbon;
+    $prev = $date->addDay();
+
 Output a formatted date string (Mon d, YYYY):
 
     $c->toFormattedDateString();        //  Aug 7, 2013
     $c->toDayDateTimeString();          //  Wed, Aug 7, 2013 10:09 PM
     $c->format($format);                //  Any format from http://www.php.net/manual/en/function.date.php
 
-    
+By default, Eloquent will convert the created_at, updated_at, and deleted_at columns to instances of Carbon. You may customize which fields are automatically mutated, and even completely disable this mutation, by overriding the getDates method of the model:
+
+public function getDates()
+{
+    return array('created_at', 'my_date_field');
+}
