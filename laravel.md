@@ -55,11 +55,20 @@ For any classes that use facades (most of Laravel's classes), get the original c
 
     echo get_class(App::getFacadeRoot());       (App, or any other class)
 
+
+    
+IoC Binding<a name="ioc">
+----------------------------
+
+To use classes that are bound to Laravel's IoC container:
+
 Laravel’s components are instances that exist within the Laravel 4 $app container object. They can be called in each of these ways:
  
-    $app['component']->methodName();
-    $app->component->methodName();.
     Component::methodName();
+    App::make('component')->methodName();
+    app('component')->methodName();
+    $app['component']->methodName();
+    $app->component->methodName();
 
 We can also instanciate classes in several ways:
 
@@ -72,10 +81,7 @@ We can also instanciate classes in several ways:
 
 
 
-    
-IoC Binding<a name="ioc">
-----------------------------
-To bind classes to the IoC container (for unit testing):
+To bind classes to the IoC container:
 
 ```php 
 $app->bind('UsersController', function($app) {

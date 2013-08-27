@@ -531,7 +531,27 @@ Integration testing should hit actual classes
 Mockery is a project that makes creation and handling of mocks easier:
 in composer.json, require  "mockery/mockery": "dev-master"
 
-Using Mocks:
+### Using Mockery
+
+    $mock = \Mockery::mock('Ticket');       // create a mock object
+    $mock->closed_at = $date;               // set a variable on the mock object
+    $mock->shouldReceive('function')        // function that should be called
+        ->once()                            // require it to be called once
+        ->times(4)                          // require it to be called 4 times
+        ->andReturn('foo')                  // return the given value to the calling function
+
+For instance:
+
+    $errors = array('foo'=>'bar');
+
+    Validator::shouldReceive('make')->once()
+        ->andReturn(\Mockery::mock(array(
+            'passes'=>$bool, 
+            'errors'=>new \Illuminate\Support\MessageBag($errors)
+        )));
+
+
+### Using Mocks:
 (instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
 
 * My controller is ItemsController

@@ -18,6 +18,7 @@ Use composer to install additional components for the app.
 Get composer at http://getcomposer.org/
 It looks for a file called composer.json in your project root directory:
 
+```json
     {
         "require": {
                 "laravel/framework": "4.0.*",
@@ -35,7 +36,7 @@ It looks for a file called composer.json in your project root directory:
         },
         "minimum-stability": "dev"
     }
-
+```
 
 Basic functions:
 
@@ -77,6 +78,7 @@ We don't have to upload packages to packagist.org. They can be downloaded from a
 
 http://getcomposer.org/doc/05-repositories.md#repository
 
+```json
     {
         "require": {
             "vendor/my-private-repo": "dev-master"
@@ -92,7 +94,7 @@ http://getcomposer.org/doc/05-repositories.md#repository
             }
         ]
     }
-
+```
 
 
 
@@ -103,6 +105,7 @@ There are a lot of packages I find useful. Many of these are listed in [a relati
 
 * [Carbon](#carbon)     Date/Time management
 * [Presenter](#presenter)    Presenter (a Decorator)
+* [DataTables](#datatables)     DataTables (server side; works with [datatables client](client.md#datatables))
 
 
 
@@ -148,11 +151,12 @@ Some sample date formats include:
 
 By default, Eloquent will convert the created_at, updated_at, and deleted_at columns to instances of Carbon. You may customize which fields are automatically mutated, and even completely disable this mutation, by overriding the getDates method of the model:
 
+```php
 public function getDates()
 {
     return array('created_at', 'my_date_field');
 }
-
+```
 
 
 

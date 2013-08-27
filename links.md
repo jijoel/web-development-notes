@@ -236,6 +236,9 @@ https://github.com/dypsilon/frontend-dev-bookmarks
 "Holy Grail" layout -- 3 equal-length full-height columns with fixed sides and fluid center:
 http://alistapart.com/article/holygrail
 
+Bootstrapper for Laravel:
+http://bootstrapper.aws.af.cm/
+
 Bootstrap-themed jQuery UI Widgets
 http://addyosmani.github.io/jquery-ui-bootstrap/
 
@@ -269,6 +272,7 @@ http://iwhitcomb.github.io/dynamocanvas/
 Data tables:
 http://datatables.net/
 http://www.codeproject.com/Articles/194916/Enhancing-HTML-tables-using-a-JQuery-DataTables-pl
+https://github.com/DataTables/DataTables.git
 (includes info/examples on server-side processing for thousands of records)
 (also see: Server-side handling of datatables)
 
@@ -288,6 +292,9 @@ http://docs.ckeditor.com/#!/guide/dev_configuration
 A nice JQuery UI Date/Time picker:
 https://github.com/trentrichardson/jQuery-Timepicker-Addon
 http://trentrichardson.com/examples/timepicker/
+
+Font Awesome (various icons):
+http://fortawesome.github.io/Font-Awesome/
 
 "State Face" icons:
 http://propublica.github.io/stateface/
