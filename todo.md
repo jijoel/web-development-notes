@@ -4,6 +4,8 @@ TODO
 Long term, I would love to have these things available. I might be able to develop some of them; others might be interested/able to develop some.
 
 * [Use Presenter in DataTables](#datatable-presenter)
+* [DataTables / Eloquent Queries](#datatable-eloquent)
+* [Automatic getDates](#getDates)
 
 
 DataTables/Presenter <a name="datatable-presenter">
@@ -164,4 +166,29 @@ Presenter:
         }
     }
 ```
+
+DataTables / Eloquent Queries <a name="datatable-eloquent">
+---------------------------------------------------------------
+
+(8/26) DataTables seems to fail when we use eloquent queries. Not sure what's up with that. This does not work:
+
+```php
+    public function scopeOpen($query)
+    {
+        return $query->where('closed_at', 0)
+            ->orWhereNull('closed_at');
+    }
+```
+
+This is equivalent, but works:
+
+```php
+    return $query->whereRaw('closed_at=0 or not closed_at is Null');
+```
+
+
+
+Automatic getDates <a name="getDates">
+-------------------------------------------
+I suspect that I will always want every date field in every table to be returned as a carbon object. The way to do that, currently, is with the getDates function. Any way to look at the fields, and automatically turn any date into a Carbon object?
 

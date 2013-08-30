@@ -15,6 +15,7 @@ This document contains notes related to testing, using these tools:
         * [Redirecting](#laravel-client-redirection)
         * [Crawler](#laravel-crawler)
     * [Laravel 4 IoC and Facades](#laravel-ioc)
+    * [Mock Input](#laravel-mock-input)
     * [Mocking a Facade](#laravel-mock-facade)
     * [In-memory database and test environment](#laravel-memory-db)
     * [Testing with an Array Repository](#laravel-array-repo)
@@ -655,6 +656,14 @@ is equivalent to this:
     $mockItem = $this->mock('Item')
         ->shouldReceive('find')->once()->andReturn($mockItem)
         ->shouldReceive('vendors')->once()->andReturn($mockVendor)->getMock(); 
+```
+
+Mocking Input <a name="laravel-mock-input">
+----------------------------------------------
+The input facade is designed to be able to handle mock input easily. To mock input, just do this:
+
+```php
+    Input::replace($input = array('ticket-type' => 'open'));
 ```
 
 

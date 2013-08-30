@@ -4,13 +4,15 @@ Client
 Here are notes about client-side tools and techniques. Including
 
 * [DataTables](#datatables)
-
+* [JQuery-UI](#jquery-ui)
 
 
 DataTables <a name="datatables">
 --------------------------------------
 
 DataTables gives me a nice scrollable, sortable table on the client.
+http://datatables.net/
+
 
 Initializing:
 
@@ -28,7 +30,7 @@ With parameters:
         },
     });
 
-##### sDom parameter info:
+#### sDom parameter info:
 
 Available settings are:
 
@@ -135,6 +137,7 @@ Available settings are:
 
 #### Highlighting the current row
 
+```css
     #example tbody tr.even:hover, #example tbody tr.even td.highlighted {
     background-color: #ECFFB3;}
 
@@ -173,4 +176,31 @@ Available settings are:
     #example tr.odd:hover td.sorting_3 {
         background-color: #DBFF70;
     }
+```css
+
+
+#### Redrawing the table
+
+The table can be redrawn with the fnDraw() method. This happens asynchronously. If you'd like to do something after the table load (eg, getting an id of the first record, etc.), you can use jQuery's 'one' function, like this:
+
+```js
+    $('#ticket-type-selector').on( "change", function(){
+        $table.fnDraw();
+        $('#ticketList').one('draw', function () {
+            $id = $("#ticketList tbody td").first().html();
+            console.log($id);
+        } );
+    } );
+```
+
+When the ticket-type-selector drop-down is changed, redraw the table, then save the value of the first cell in the body of the table to $id, and write that on the log.
+
+
+
+
+JQuery-UI <a name="jquery-ui">
+--------------------------------------
+
+JQuery-UI provides user-interface widgets, controls, and interactions for an app. 
+http://jqueryui.com/
 

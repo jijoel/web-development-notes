@@ -1,9 +1,15 @@
 Workarounds and solutions for some issues I've seen
 ======================================================
 
-* [Trying to get property of non-object for ajax query](#ajax-non-object)
-* [phpUnit - no tests found in class "TestCase"](#phpunit-testcase)
 
+* Laravel Issues:
+    * [Trying to get property of non-object for ajax query](#ajax-non-object)
+    * [phpUnit - no tests found in class "TestCase"](#phpunit-testcase)
+* Bootstrap issues:
+    * [Radio Button: cannot call methods on button prior to initialization](#radio-initialization)
+
+Laravel Issues
+================
 
 Trying to get property of non-object for ajax query <a name="ajax-non-object">
 -----------------------------------------------------------------------------------
@@ -49,4 +55,14 @@ I can run phpunit, and get this as part of the result:
 > No tests found in class "TestCase".
 
 I found it's because I had a case-difference in one of the test class names. (The file was DBTest.php; the class name was DbTest.php)
+
+
+
+
+Bootstrap Issues
+===========================
+
+Radio Button: cannot call methods on button prior to initialization <a name="radio-initialization">
+----------------------------------------------------------------------------------------------------------
+Sometimes a radio button or check box will not work. Looking at the log, I get the error "cannot call methods on button prior to initialization". This happens if bootstrap.js is loaded before jquery-ui.js.
 
