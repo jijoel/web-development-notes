@@ -41,6 +41,10 @@ A secure application key is automatically created when laravel is installed, but
 
     php artisan key:generate
 
+There is currently some inconsistent indentation in the base laravel installation. Sometimes, they'll use tabs; other times, spaces. To convert all tabs to 4 spaces for the entire directory tree, run this from the app directory:
+
+        find . ! -type d ! -name _tmp_ -exec sh -c 'expand -t 4 {} > _tmp_ && mv _tmp_ {}' \;
+
 Laravel configuration information stored in `project/app/config`.
 Each file here returns an array with configuration information (closures are OK).
 Access it at any time with `Config::get`. Use the file name and array key:
@@ -52,11 +56,19 @@ For any classes that use facades (most of Laravel's classes), get the original c
     echo get_class(App::getFacadeRoot());       (App, or any other class)
 
 
+    
+IoC Binding<a name="ioc">
+----------------------------
+
+To use classes that are bound to Laravel's IoC container:
+
 Laravel’s components are instances that exist within the Laravel 4 $app container object. They can be called in each of these ways:
  
-    $app['component']->methodName();
-    $app->component->methodName();.
     Component::methodName();
+    App::make('component')->methodName();
+    app('component')->methodName();
+    $app['component']->methodName();
+    $app->component->methodName();
 
 We can also instanciate classes in several ways:
 
@@ -69,10 +81,7 @@ We can also instanciate classes in several ways:
 
 
 
-    
-IoC Binding<a name="ioc">
-----------------------------
-To bind classes to the IoC container (for unit testing):
+To bind classes to the IoC container:
 
 ```php 
 $app->bind('UsersController', function($app) {

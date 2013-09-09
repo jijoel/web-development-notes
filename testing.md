@@ -15,6 +15,7 @@ This document contains notes related to testing, using these tools:
         * [Redirecting](#laravel-client-redirection)
         * [Crawler](#laravel-crawler)
     * [Laravel 4 IoC and Facades](#laravel-ioc)
+    * [Mock Input](#laravel-mock-input)
     * [Mocking a Facade](#laravel-mock-facade)
     * [In-memory database and test environment](#laravel-memory-db)
     * [Testing with an Array Repository](#laravel-array-repo)
@@ -531,7 +532,27 @@ Integration testing should hit actual classes
 Mockery is a project that makes creation and handling of mocks easier:
 in composer.json, require  "mockery/mockery": "dev-master"
 
-Using Mocks:
+### Using Mockery
+
+    $mock = \Mockery::mock('Ticket');       // create a mock object
+    $mock->closed_at = $date;               // set a variable on the mock object
+    $mock->shouldReceive('function')        // function that should be called
+        ->once()                            // require it to be called once
+        ->times(4)                          // require it to be called 4 times
+        ->andReturn('foo')                  // return the given value to the calling function
+
+For instance:
+
+    $errors = array('foo'=>'bar');
+
+    Validator::shouldReceive('make')->once()
+        ->andReturn(\Mockery::mock(array(
+            'passes'=>$bool, 
+            'errors'=>new \Illuminate\Support\MessageBag($errors)
+        )));
+
+
+### Using Mocks:
 (instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
 
 * My controller is ItemsController
@@ -635,6 +656,14 @@ is equivalent to this:
     $mockItem = $this->mock('Item')
         ->shouldReceive('find')->once()->andReturn($mockItem)
         ->shouldReceive('vendors')->once()->andReturn($mockVendor)->getMock(); 
+```
+
+Mocking Input <a name="laravel-mock-input">
+----------------------------------------------
+The input facade is designed to be able to handle mock input easily. To mock input, just do this:
+
+```php
+    Input::replace($input = array('ticket-type' => 'open'));
 ```
 
 

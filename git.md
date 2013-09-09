@@ -342,6 +342,7 @@ Feature Branch:
     incorporating:
     $ git checkout dev                      // check out dev on the local machine
     $ git merge --no-ff myfeature           // can also include -m 'message' for non-default message
+    $ (or) git rebase myfeature             // alternative: import without intermediate brach steps
     $ git branch -d myfeature               // delete the myfeature branch from local machine
     $ git push origin --delete myfeature    // delete the myfeature branch from remote
     $ git push origin dev                   // push the merged branch to the remote dev branch
