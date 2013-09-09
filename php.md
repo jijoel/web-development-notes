@@ -18,9 +18,8 @@ php commands
 
     var_export()        Like var_dump, but writes data in a way it can be captured. For instance:
 
-        \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
+    \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
 
-    
 
 
 Reflection <a name="reflection">
@@ -118,4 +117,33 @@ Based off the folder structure.
         github: jijoel/Package/src/Vendor/Package.php
 
     namespace Vendor\Package
+
+You can call methods from a namespaced class like this:
+
+    $foo = (new Foo\Bar)->method();
+
+You can also run tests that call standard functions based on your namespace. For instance, time. If there is no time() function in your namespace, php will just use the default time() function. If you have it declared in your namespace, though, it will use that. eg,
+
+Foo.php:
+
+```php
+    namespace Fizz;
+    class Foo {
+        function bar { return time(); }
+    }
+```
+
+FooTest.php:
+
+```php
+    namespace Fizz;
+    function time() { return 'buzz'; }
+
+    class FooTest extends \PHPUnit_Framework_TestCase {
+        function testGetBar() {
+            $result = (new Foo)->bar();
+            $this->assertEquals('buzz', $result);
+        }
+    }
+```
 
