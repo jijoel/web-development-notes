@@ -34,8 +34,8 @@ Set the project root directory in apache to the /public folder
 
 make storage directory writable:
 
-    chmod -R o+w storage
-    (or chown www-data storage/*)
+    chmod -R o+w app/storage/*
+    (or chown www-data app/storage/*)
 
 A secure application key is automatically created when laravel is installed, but you can change it via Artisan on the command line if you'd like:
 
@@ -43,7 +43,14 @@ A secure application key is automatically created when laravel is installed, but
 
 There is currently some inconsistent indentation in the base laravel installation. Sometimes, they'll use tabs; other times, spaces. To convert all tabs to 4 spaces for the entire directory tree, run this from the app directory:
 
-        find . ! -type d ! -name _tmp_ -exec sh -c 'expand -t 4 {} > _tmp_ && mv _tmp_ {}' \;
+    find . ! -type d ! -name _tmp_ -exec sh -c 'expand -t 4 {} > _tmp_ && mv _tmp_ {}' \;
+
+Do NOT run this from the root directory--it will destroy the .git files.
+
+Permissions are not set up correctly, so change those, also:
+
+    find app/ -type f | xargs chmod -x
+    chmod +x vendor/bin/*
 
 Laravel configuration information stored in `project/app/config`.
 Each file here returns an array with configuration information (closures are OK).

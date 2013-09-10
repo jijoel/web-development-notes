@@ -237,6 +237,28 @@ Working with remote branches <a name="remote" />
     git rebase -p origin/dev                rebases the current branch to origin/dev
                                             (it could have been origin/master, or something else)
 
+To squash multiple commits in a feature branch into a single commit, reset the feature branch changes in the master and commit everything again:
+
+    git checkout master
+    git fetch       # this may be necessary (depending on your git config) to receive updates on origin/master
+    git pull
+
+    # Merge the feature branch into the master branch.
+    git merge feature_branch
+
+    # Reset the master branch to origin's state.
+    git reset origin/master
+
+    # Git now considers all changes as unstaged changes.
+    # We can add these changes as one commit.
+    # Adding . will also add untracked files.
+    git add --all
+    git commit
+
+    git branch -d feature_branch
+
+NOTE: Only do this with feature branches you intend to delete. After merging, you will not be able to work on that branch any more.
+
                                         
 Forks and upstream changes <a name="forks" />
 ---------------------------------------------
@@ -382,5 +404,8 @@ Hotfix Branch:
     $ git merge --no-ff hotfix-1.2.1
     $ git branch -d hotfix-1.2.1
     $ git push origin --delete hotfix-1.2.1
+
+
+
 
 

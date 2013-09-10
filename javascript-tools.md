@@ -1,4 +1,4 @@
-Client
+Javascript Tools
 ====================
 
 Here are notes about client-side tools and techniques. Including

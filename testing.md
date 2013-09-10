@@ -658,6 +658,25 @@ is equivalent to this:
         ->shouldReceive('vendors')->once()->andReturn($mockVendor)->getMock(); 
 ```
 
+Missing Functions <a name="laravel-mock-missing">
+------------------------------------------------------
+If you're mocking something, you can either ignore or defer functions that are missing. For instance, this:
+
+    $this->objectMock = \Mockery::mock('Client\Core\Object\UniversalObject');
+    $this->objectMock
+        ->shouldReceive('unguard')->once()
+        ->shouldReceive('fill')->once()
+        ->shouldReceive('reguard')->once()
+        ->shouldReceive('save')->once();
+
+Can also be done this way:
+
+    $this->objectMock = \Mockery::mock('Client\Core\Object\UniversalObject')->shouldDeferMissing();
+    $this->objectMock
+        ->shouldReceive('fill')->once()
+        ->shouldReceive('save')->once();
+
+
 Mocking Input <a name="laravel-mock-input">
 ----------------------------------------------
 The input facade is designed to be able to handle mock input easily. To mock input, just do this:
