@@ -999,8 +999,12 @@ Download from:
 
 To get started, in the web root:
 
-    php codecept.phar bootstrap       // sets up the testing environment
+    php codecept.phar bootstrap [path]      // sets up the testing environment
 
+Configure the database (codeception.yml):
+
+    dsn:
+    
 Configure acceptance tests (in tests/acceptance.suite.yml)
 
     class_name: WebGuy 
