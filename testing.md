@@ -655,7 +655,8 @@ is equivalent to this:
 ```php
     $mockItem = $this->mock('Item')
         ->shouldReceive('find')->once()->andReturn($mockItem)
-        ->shouldReceive('vendors')->once()->andReturn($mockVendor)->getMock(); 
+        ->shouldReceive('vendors')->once()->andReturn($mockVendor)
+        ->getMock(); 
 ```
 
 Missing Functions <a name="laravel-mock-missing">
