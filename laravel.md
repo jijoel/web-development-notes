@@ -8,6 +8,11 @@ Laravel
 * [Routing](#routing)
 * [Controllers](#controllers)
 * [Models](#models)
+    * [Model Sections](#model-sections)
+        * [Mutators & Accessors](#model-mutate)
+        * [Scopes](#model-scope)
+        * [Relationships](#model-relationship)
+        * [Utility Functions](#model-utility)
 * [Views](#views)
 * [Forms](#forms)
 * [Mail](#mail)
@@ -377,7 +382,7 @@ To use something else, in the model,
 To get additional data from a pivot table (eg, the M2M join table):
 
 ``` php
-    class Item extends Eloquent
+    class Item extend s Eloquent
     {
         public function vendors()
         {
@@ -386,6 +391,71 @@ To get additional data from a pivot table (eg, the M2M join table):
         }
     }
 ```
+
+### Model Sections <a name="model-sections">
+
+There are several types of methods that we want to include in models. These include:
+
+* [Mutators & Accessors](#model-mutate)
+* [Scopes](#model-scope)
+* [Relationships](#model-relationship)
+* [Utility Functions](#model-utility)
+
+#### Mutators & Accessors <a name="model-mutate">
+
+These are used to change data before it is shown to a user, or before it is written to the database. They can be used on existing field names (though it is better to use a Presenter for those), or can define new field names:
+
+```php
+    public function setBirthdateAttribute($birthdate)
+    {
+        $date = new \Carbon\Carbon($birthdate);
+        $this->attributes['birthdate'] = $date->format('Y-m-d');
+    }
+
+    public function getBirthdateAttribute($value)
+    {
+        return new \Carbon\Carbon($value);
+    }
+```
+
+
+#### Scopes <a name="model-scope">
+
+These are used to filter data.
+
+```php
+    public function scopeOpen($query)
+    {
+        $query->whereRaw('closed_at=0 or closed_at is Null');
+    }
+
+    public function scopeOverdue($query)
+    {
+        return $query
+            ->whereRaw('due_at > 0 and not due_at is Null and due_at < "' 
+                . Carbon::now()->toDateTimeString() . '"')
+            ->andWhere(function($query){
+                $this->scopeOpen($query);
+            });
+    }
+```
+
+
+#### Relationships <a name="model-relationship">
+
+These are used to get related records from other models.
+
+
+
+#### Utilities <a name="model-utility">
+
+We don't have many of these, but they can be used to do things like letting the model know which Presenter to use to display data:
+
+    public function getPresenter()
+    {
+        return new Kalani\Core\Person\PersonPresenter($this);
+    }
+
 
 
 
@@ -419,6 +489,16 @@ Main view:
 Sub-view:
 
     #just include the data for the sub-view here
+
+
+
+Although views should not contain much logic, you can do some interesting things with them, such as assigning even and odd classes, for instance:
+
+@foreach($items as $index => $item)
+    <tr class="@if($index% 2 == 0) rowclass1 @else rowclass2 @endif">
+        ....
+    </tr>
+@endforeach
     
     
 

@@ -144,77 +144,77 @@ protected $deferredServices
 $bindings 
 -------------
 
-      request
-      kernel.error
-      kernel.exception
-      exception
-      exception.function
-      router
-      url
-      redirect
-      events
-      env
       app
-      config.loader
       artisan
-      auth
-      cache
-      memcached.connector
-      command.command.make
-      command.session.database
-      composer
-      filter.parser
-      command.controller.make
-      cookie
-      db.factory
-      db
-      encrypter
-      files
-      hash
-      form
-      command.key.generate
-      swift.transport
-      swift.mailer
-      mailer
-      migration.repository
-      migrator
-      command.migrate
-      command.migrate.rollback
-      command.migrate.reset
-      command.migrate.refresh
-      command.migrate.install
-      migration.creator
-      command.migrate.make
-      paginator
-      command.asset.publish
       asset.publisher
-      command.config.publish
-      config.publisher
-      queue
-      command.queue.work
-      queue.worker
-      command.queue.listen
-      queue.listener
-      redis
+      auth
       auth.reminder
       auth.reminder.repository
+      cache
+      command.asset.publish
       command.auth.reminders
+      command.command.make
+      command.config.publish
+      command.controller.make
+      command.key.generate
+      command.migrate
+      command.migrate.install
+      command.migrate.make
+      command.migrate.refresh
+      command.migrate.reset
+      command.migrate.rollback
+      command.queue.listen
+      command.queue.work
       command.seed
-      seeder
       command.serve
-      session
+      command.session.database
       command.tinker
+      command.workbench
+      composer
+      config.loader
+      config.publisher
+      cookie
+      db
+      db.factory
+      encrypter
+      env
+      events
+      exception
+      exception.function
+      files
+      filter.parser
+      form
+      hash
+      ItemRepositoryInterface
+      kernel.error
+      kernel.exception
+      mailer
+      memcached.connector
+      migration.creator
+      migration.repository
+      migrator
+      package.creator
+      paginator
+      queue
+      queue.listener
+      queue.worker
+      redirect
+      redis
+      request
+      router
+      seeder
+      session
+      swift.mailer
+      swift.transport
       translation.loader
       translator
+      url
       validation.presence
       validator
+      VendorRepositoryInterface
+      view
       view.engine.resolver
       view.finder
-      view
-      package.creator
-      command.workbench
-      ItemRepositoryInterface
-      VendorRepositoryInterface
 
 
 protected $instances

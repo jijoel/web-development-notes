@@ -114,15 +114,15 @@ https://github.com/Zizaco/entrust
 
 Authentication (by same person who built entrust):
 https://github.com/Zizaco/confide
-"zizaco/confide": "dev-master"
+"zizaco/confide": "dev-master"  (needs PHP 5.4)
 
 Authentication & Authorization:
 https://github.com/cartalyst/sentry
 "cartalyst/sentry": "2.0.*" 
 
 Another auth package:
-https://github.com/AndreasHeiberg/Verify-L4
-"andheiberg/verify": "2.0.*"
+https://github.com/Toddish/Verify-L4
+"toddish/verify": "dev-master"
 
 Server-side handling of datatables:
 https://github.com/bllim/laravel4-datatables-package
@@ -145,6 +145,9 @@ https://github.com/laravelbook/ardent
 
 Markdown compiler for Laravel 4:
 https://github.com/vtalbot/markdown
+
+Markdown:
+https://github.com/michelf/php-markdown/
 
 User-available configuration settings (config loader via database):
 https://bitbucket.org/hailwoodnz/database-config-loader
@@ -177,6 +180,9 @@ Multi-gateway payment processing library:
 https://github.com/adrianmacneil/omnipay
 "omnipay/omnipay": "1.*"
 
+Create PDF files:
+https://github.com/barryvdh/laravel-dompdf
+"barryvdh/laravel-dompdf": "dev-master"
 
 
 Testing <a name="testing">
@@ -319,6 +325,9 @@ http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
 
 Prettier select boxes:
 http://harvesthq.github.io/chosen/
+
+Pop-up dialog boxes:
+http://docs.toddish.co.uk/popup/
 
 Packery (dynamically rearrange things on pages):
 http://packery.metafizzy.co/faq.html

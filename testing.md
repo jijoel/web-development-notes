@@ -6,7 +6,8 @@ This document contains notes related to testing, using these tools:
 * [Test Driven Development (TDD)](#tdd)
 * [Mockery](#mocks)
 * [phpunit](#phpunit)
-* [Selenium](#selenium)
+    * [Testing for exceptions](#phpunit-exceptions)
+    * [Data Providers](#phpunit-data-providers)
 * [Laravel Techniques](#laravel)
     * [Call/Response](#laravel-call)
     * [Web Crawler](#laravel-web-crawler)
@@ -19,9 +20,10 @@ This document contains notes related to testing, using these tools:
     * [Mocking a Facade](#laravel-mock-facade)
     * [In-memory database and test environment](#laravel-memory-db)
     * [Testing with an Array Repository](#laravel-array-repo)
-* [Testing for exceptions](#phpunit-exceptions)
-* [Data Providers](#phpunit-data-providers)
-* [Additional stuff for testing](#laravel-extra)
+    * [Testing Without a Repository Pattern](#laravel-no-repo)
+    * [Testing Filters](#laravel-filters)
+    * [Additional stuff for testing](#laravel-extra)
+* [Selenium](#selenium)
 * [BDD and Acceptance Testing with Codeception](#codeception)
 
 
@@ -155,32 +157,56 @@ Make a test dependent on success of a previous test:
 ```
 
 
+#### Testing for exceptions <a name="phpunit-exceptions">
 
-Selenium <a name="selenium">
-----------------------------------
+We can make sure that an exception is thrown by using a docblock:
 
-We can test the actual user experience with selenium. To set up a selenium test, use this:
+    /*
+     * @expectedException ExceptionName
+     */
+    public function testThrowsExceptionOnError() {
+        // do something that should throw an exception
+    }
+
+    
+#### Data Providers<a name="phpunit-data-providers">
+
+If you have a lot of tests that are basically similar, these can be set in by a data provider.
+For instance, if you have this:
 
 ```php
-    class SeleniumTest extends PHPUnit_Extensions_Selenium2TestCase
-    {
-        public function __construct()
-        {
-            parent::__construct();
-            $this->setBrowserUrl('http://lkata');
-            $this->setBrowser('chrome');
-            $this->setHost('localhost');
-            $this->setPort(4444);
-        }
-
-        public function testHomePageDoesNotIncludeDebugError()
-        {
-            $this->assertEquals(0, 
-                preg_match('/xdebug-error/i', $this->source()), 
-                'should not return an xdebug error');
-        }
+    public function testGetFieldData() {
+        $fields = $this->schema->getFields();
+        $this->assertEquals('id', $fields['id']['name']);
+        $this->assertEquals('Text1', $fields['text1']['display']);
+        $this->assertEquals('Object Identifier', $fields['oid']['display']);
     }
 ```
+
+... you're basically doing the same thing over and over again. For more dry code, you can do something like this:
+
+```php
+    public function inputFieldData() {
+        return array(
+            array('id', 'id', 'name'),
+            array('Text1', 'text1', 'name'),
+            array('Object Identifier', 'oid', 'display'),
+        );
+    }
+    
+    /*
+     * @dataProvider inputFieldData
+     */
+    public function testGetFieldData($expected, $field, $attr) {
+        $fields = $this->schema->getFields();
+        $this->assertEquals($expected, $field, $attr);
+    }
+```
+
+For a small set of tests, this may be overkill, but you can repeat the data in other tests, and easily add new data.
+
+
+
 
 
 
@@ -686,6 +712,22 @@ The input facade is designed to be able to handle mock input easily. To mock inp
     Input::replace($input = array('ticket-type' => 'open'));
 ```
 
+We can then test this in a couple of different ways:
+
+```php
+    Input::replace(array('username' => 'foo', 'password'=>'bar'));
+    $this->call('POST', '/user/login', Input::all());
+```
+
+or:
+
+```php
+    Input::replace(array('username' => 'foo', 'password'=>'bar'));
+    $test = new UserController;
+    $test->postLogin();
+```
+
+
 
 Mocking a Facade <a name="laravel-mock-facade">
 ---------------------------------------------------
@@ -714,6 +756,9 @@ This is how to mock a facade:
 
 I think that ...\Config::swap  statement actually swaps out the class the facade is looking for.
 
+
+Mocking Demeter Chains
+-----------------------------
 Mockery will let us mock demeter chains, eg `$object->foo()->bar()->zebra()->alpha()->selfDestruct();`. It will return the value of the LAST entry of the entire chain. We can mock all of that like this:
 
 ```php
@@ -785,7 +830,7 @@ Since the in-memory database is always empty when a connection is made, it’s i
     }
 ```
 
-Testing with an Arrray Repository <a name="laravel-array-repo">
+Testing with an Array Repository <a name="laravel-array-repo">
 -----------------------------------------------------------------
 
 We can get fast, solid testing with an array repository, which basically stubs the functionality we need. Here's the critical pieces:
@@ -907,53 +952,103 @@ To test specific actions, we can use this:
 ```
 
 
-Testing for exceptions <a name="phpunit-exceptions">
------------------------------------------------------
-We can make sure that an exception is thrown by using a docblock:
-
-    /*
-     * @expectedException ExceptionName
-     */
-    public function testThrowsExceptionOnError() {
-        // do something that should throw an exception
-    }
-
-    
-Data Providers<a name="phpunit-data-providers">
--------------------------------------------------
-If you have a lot of tests that are basically similar, these can be set in by a data provider.
-For instance, if you have this:
+Testing Without a Repository Pattern <a name="laravel-no-repo">
+------------------------------------------------------------------
+(from http://lutro.priv.no/posts/testable-simple-l4-code-without-repository-patterns)
+For simple tests/projects, the repository pattern is overkill. We can just swap out our models:
 
 ```php
-    public function testGetFieldData() {
-        $fields = $this->schema->getFields();
-        $this->assertEquals('id', $fields['id']['name']);
-        $this->assertEquals('Text1', $fields['text1']['display']);
-        $this->assertEquals('Object Identifier', $fields['oid']['display']);
+    class MyController extends Controller
+    {
+        protected $model;
+
+        public function __construct(MyModel $model)
+        {
+            $this->model = $model;
+        }
+
+        public function index()
+        {
+            return View::make('my.index')
+                ->with('models', $this->model->all());
+        }
+
+        public function show($modelId)
+        {
+            return View::make('my.show')
+                ->with('models', $this->model->find($modelId));
+        }
     }
 ```
 
-... you're basically doing the same thing over and over again. For more dry code, you can do something like this:
+A test would look like this:
 
 ```php
-    public function inputFieldData() {
-        return array(
-            array('id', 'id', 'name'),
-            array('Text1', 'text1', 'name'),
-            array('Object Identifier', 'oid', 'display'),
-        );
+    class MyControllerTest extends TestCase
+    {
+        public function setUp()
+        {
+            parent::setUp();
+            $this->mockModel = Mockery::mock('MyModel');
+            $this->app->instance('MyModel', $this->mockModel);
+        }
+
+        public function testIndex()
+        {
+            // return an empty array because our index view has a foreach
+            // loop that would error if we returned something non-iterable
+            $this->mockModel->shouldReceive('all')->once()
+                ->andReturn(array());
+
+            $this->call('get', '/my-route');
+
+            $this->assertResponseOk();
+            $this->assertViewHas('models');
+        }
+
+        public function testShow()
+        {
+            // this is the best way to mock a real model to pass to a
+            // view without having to add ->shouldReceive for every
+            // single function and defining every single variable on it.
+            $mock = Mockery::mock(new MyModel);
+
+            $this->mockModel->shouldReceive('find')->once()->with(1)
+                ->andReturn($mock);
+
+            $this->call('get', '/my-route/1');
+
+            $this->assertResponseOk();
+            $this->assertViewHas('model');
+        }
     }
-    
-    /*
-     * @dataProvider inputFieldData
-     */
-    public function testGetFieldData($expected, $field, $attr) {
-        $fields = $this->schema->getFields();
-        $this->assertEquals($expected, $field, $attr);
+
+
+
+Testing Filters <a name="laravel-filters">
+------------------------------------------------------------------
+
+Filters are generally ignored during the unit tests. This is a good thing, because it lets us test without worrying about logging in, and such, first. To test filters, Test the action itself, then the filter, and then test that the action has that filter. Putting filters into a separate class will allow you to test them properly. 
+https://github.com/laravel/framework/issues/766
+
+You can also enable filters for a specific test like so:
+
+```php
+    public function testRedirectionWorks()
+    {
+        Route::enableFilters();
+        $response = $this->call('GET', '/');
+        $this->assertEquals(302, $response->getStatusCode());
+
+        $this->client->followRedirect();
+        $response = $this->client->getResponse();
+        $this->assertEquals(200, $response->getStatusCode());
+        $this->assertContains('login', $response->getContent());
+        Route::disableFilters();
     }
 ```
 
-For a small set of tests, this may be overkill, but you can repeat the data in other tests, and easily add new data.
+
     
     
 Additional stuff for testing<a name="laravel-extra">
@@ -981,6 +1076,31 @@ You can also export the data to a log, like so:
           
           
           
+Selenium <a name="selenium">
+====================================================================
+
+We can test the actual user experience with selenium. To set up a selenium test, use this:
+
+```php
+    class SeleniumTest extends PHPUnit_Extensions_Selenium2TestCase
+    {
+        public function __construct()
+        {
+            parent::__construct();
+            $this->setBrowserUrl('http://lkata');
+            $this->setBrowser('chrome');
+            $this->setHost('localhost');
+            $this->setPort(4444);
+        }
+
+        public function testHomePageDoesNotIncludeDebugError()
+        {
+            $this->assertEquals(0, 
+                preg_match('/xdebug-error/i', $this->source()), 
+                'should not return an xdebug error');
+        }
+    }
+```
           
           
           
@@ -1026,6 +1146,49 @@ Run the test:
     php codecept.phar run
     php codecept.phar run --steps                 // also show steps
     php codecept.phar run <suitename> <testname>  // run just one suite/test
+
+Note: Codeception can also use test groups. So, you can enter this at the beginning of a file:
+
+```php
+/**
+ * @group now
+ */
+```
+
+and run it from the command line like this:
+
+    php codecept.phar run --group now
+
+Codeception can provide much simpler syntax than using a web crawler (as described above). For instance, this is a codeception test:
+
+```php
+    $I->amOnPage('/user/login');
+    $I->fillField('Username', 'joel');
+    $I->fillField('Password', 'test');
+    $I->click('Log in');
+```
+
+or...
+
+```php
+    $I->amOnPage('/user/login');
+    $I->submitForm('#login', array('username'=>'joel', 'password'=>'test'));
+```
+
+This would be the equivalent test using php (with a web crawler):
+
+```php
+    $this->call('GET', '/user/login');
+
+    $crawler = $this->client->getCrawler();
+    $form = $crawler->selectButton('Log in')->form();
+
+    $form['username'] = 'joel';
+    $form['password'] = 'test';
+
+    $crawler = $this->client->submit($form);
+```
+
 
 Here are some sample tests:
 
