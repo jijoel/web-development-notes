@@ -299,6 +299,9 @@ A nice JQuery UI Date/Time picker:
 https://github.com/trentrichardson/jQuery-Timepicker-Addon
 http://trentrichardson.com/examples/timepicker/
 
+Bootstrap-compatible date picker:
+http://eternicode.github.io/bootstrap-datepicker/
+
 Font Awesome (various icons):
 http://fortawesome.github.io/Font-Awesome/
 
