@@ -85,6 +85,10 @@ In a static function, you can only call other static functions, unless you creat
     $instance = new static;
     $instance->function(x);
 
+There are some interesting variations on a couple of static calls:
+
+    self::$items       items in this class
+    static::$items     items in this class, or descendents of this class
 
 
 Magic functions
