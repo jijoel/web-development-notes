@@ -55,6 +55,7 @@ Do NOT run this from the root directory--it will destroy the .git files.
 Permissions are not set up correctly, so change those, also:
 
     find app/ -type f | xargs chmod -x
+    find app/ -type d | xargs chmod o-w
     chmod +x vendor/bin/*
 
 Laravel configuration information stored in `project/app/config`.
@@ -327,13 +328,13 @@ Controllers<a name="controllers">
 
 creates lots of functions, including:
 
-      index   GET  - collection, eg site/photos
-      create  GET  - display form to add new record - site/photos/create
-      store   POST - take input from new item, write new record
-      edit    GET  - display form to edit record - site/photos/1/edit
-      update  PUT  - submitted form, update existing record
-      show    GET  - item, eg site/photos/1
-      destroy DELETE sent - delete an object
+    index   GET  - collection, eg site/photos
+    create  GET  - display form to add new record - site/photos/create
+    store   POST - take input from new item, write new record
+    edit    GET  - display form to edit record - site/photos/1/edit
+    update  PUT  - submitted form, update existing record
+    show    GET  - item, eg site/photos/1
+    destroy DELETE sent - delete an object
  
     Route::resource('photos','PhotosController');
  
@@ -392,6 +393,8 @@ To get additional data from a pivot table (eg, the M2M join table):
     }
 ```
 
+
+
 ### Model Sections <a name="model-sections">
 
 There are several types of methods that we want to include in models. These include:
@@ -400,6 +403,8 @@ There are several types of methods that we want to include in models. These incl
 * [Scopes](#model-scope)
 * [Relationships](#model-relationship)
 * [Utility Functions](#model-utility)
+
+
 
 #### Mutators & Accessors <a name="model-mutate">
 
@@ -451,11 +456,18 @@ These are used to get related records from other models.
 
 We don't have many of these, but they can be used to do things like letting the model know which Presenter to use to display data:
 
+```php
     public function getPresenter()
     {
         return new Kalani\Core\Person\PersonPresenter($this);
     }
+```
 
+### Key/Value data (for select boxes, etc.)
+
+```php
+    $keyValueArray = User::lists('first_name', 'id');
+```
 
 
 
@@ -499,6 +511,17 @@ Although views should not contain much logic, you can do some interesting things
         ....
     </tr>
 @endforeach
+
+
+When using Fluent/Eloquent, you can use the “lists” method to quickly build an array of data that can easily populate the Form::select() HTML helper.
+
+```php
+    $categories = Categories::orderBy('type')->lists('type', 'id');
+    Form::select('category_id', $categories );
+```
+
+The resulting array will populate the option value as the “id” field from the DB and the “type” will populate what value appears in the drop down. For example: <OPTION value=”id”>type</OPTION> So you can adapt that pattern to whatever you want the resulting array to look like. In this example, the array is indexed by my id column with the value of each “type”.
+
     
     
 
@@ -569,10 +592,11 @@ Use var_export to covert data to a readable string:
 
 
 
-Sessions<a name="sessions">
----------------------------
+Sessions <a name="sessions">
+------------------------------
 You can use a session to return you to a main page, after making some change in a related (sub) page. Like this:
 
+```php
     public function edit($id)
     {
         if ( ! Session::get('errors')) {
@@ -590,5 +614,111 @@ You can use a session to return you to a main page, after making some change in 
 
         return Redirect::to(Session::get('referrer'));
     }
+```
+
+For this particular function, laravel has a built-in method, `Redirect::intended('default')`
 
 
+Events <a name="events">
+--------------------------
+Events are a very powerful implementation of the Observer pattern. Many of Laravel's objects will send an event as they do work, and you can trap those events, look at them, and pass back a value to let Laravel know if it should cancel the current activity. It generally passes a full object to you, so you can see what is happening. To use events, enter this in a place where it will be executed (eg, start.php, or routes.php, or filters.php, or include a path to something else):
+
+```php
+    Event::listen('eloquent.creating*', function($model) {
+        // will be fired before a record is created in any table
+
+    Event::listen('illuminate.query', function ($sql, $bindings, $times) {
+        // will be fired for every SQL query
+```
+
+They can also be put directly in your models:
+
+```php
+    class Post extends eloquent {
+        public static function boot()
+        {
+            parent::boot();
+
+            static::creating(function($post)
+            {
+                $post->created_by = Auth::user()->id;
+            });
+```
+
+Info at:
+http://driesvints.com/blog/using-laravel-4-model-events/
+http://jasonlewis.me/article/laravel-events
+
+Here are some standard Laravel event types:
+
+    Event::fire('laravel.done                [Response $response]');
+    Event::fire('laravel.log                 [String $type, String $message]');
+    Event::fire('laravel.query               [String $sql, Array $bindings, String $time]');
+    Event::fire('laravel.resolving           [String $type, Mixed $object]');
+    Event::fire('laravel.composing: {view}   [View $view]');
+    Event::fire('laravel.started: {bundle}   [String $bundle]');
+    Event::first('laravel.controller.factory [String $controller]');
+    Event::first('laravel.config.loader      [String $bundle, String $file]');
+    Event::first('laravel.language.loader    [String $bundle, String $language, String $file]');
+    Event::until('laravel.view.loader        [String $bundle, String $view]');
+    Event::until('laravel.view.engine        [View $view]');
+    Event::first('laravel.view.filter        [String $content, String $path]');
+    Event::fire('eloquent.saving             [Eloquent $model]');
+    Event::fire('eloquent.saving: {model}    [Eloquent $model]');
+    Event::fire('eloquent.updated            [Eloquent $model]');
+    Event::fire('eloquent.updated: {model}   [Eloquent $model]');
+    Event::fire('eloquent.created            [Eloquent $model]');
+    Event::fire('eloquent.created: {model}   [Eloquent $model]');
+    Event::fire('eloquent.saved              [Eloquent $model]');
+    Event::fire('eloquent.saved: {model}     [Eloquent $model]');
+    Event::fire('eloquent.deleting           [Eloquent $model]');
+    Event::fire('eloquent.deleting: {model}  [Eloquent $model]');
+    Event::fire('eloquent.deleted            [Eloquent $model]');
+    Event::fire('eloquent.deleted: {model}   [Eloquent $model]');
+    Event::first('500');
+    Event::first('404');
+
+Here is an example event session (after capturing all events...):
+
+    eloquent.saving: Kalani\KWeb\Models\Object
+    eloquent.creating: Kalani\KWeb\Models\Object
+    eloquent.created: Kalani\KWeb\Models\Object
+    eloquent.saved: Kalani\KWeb\Models\Object
+    eloquent.saving: Kalani\KWeb\Models\Page
+    called creating function...                     // This is something I added to the model
+    info                                            // It writes an info log entry
+    eloquent.creating: Kalani\KWeb\Models\Page
+    eloquent.created: Kalani\KWeb\Models\Page
+    eloquent.saved: Kalani\KWeb\Models\Page
+
+    creating: home
+    composing: home
+    creating: templates/main
+    composing: templates/main
+    creating: partials/styles
+    composing: partials/styles
+    creating: partials/branding
+    composing: partials/branding
+
+In this case, it's working on these objects (the objects are sent as a parameter):
+
+    Kalani\KWeb\Models\Object
+    Kalani\KWeb\Models\Page
+    Illuminate\View\View
+
+To capture all events, I did this:
+
+```php
+    Event::listen('*', function($arg1, $arg2) {
+        $location = __DIR__.'/storage/logs/events.txt';
+        foreach(array($arg1, $arg2) as $foo) {
+            if (($foo) && is_string($foo)) {
+                file_put_contents($location, 's: '.$foo.PHP_EOL, FILE_APPEND);
+            } elseif (is_object($foo)) {
+                file_put_contents($location, 'o: '.get_class($foo).PHP_EOL, FILE_APPEND);
+            } else {
+                file_put_contents($location, 'x: '.gettype($foo).PHP_EOL, FILE_APPEND);
+            }
+        }
+    });
+```

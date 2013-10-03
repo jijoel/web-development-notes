@@ -127,6 +127,7 @@ https://github.com/Toddish/Verify-L4
 Server-side handling of datatables:
 https://github.com/bllim/laravel4-datatables-package
 "bllim/datatables": "dev-master"
+also https://github.com/Chumper/Datatable
 
 I think this lets you interact with Artisan via a web form (useful if no shell access):
 https://github.com/JN-Jones/web-artisan
@@ -409,4 +410,12 @@ http://forums.laravel.io/viewtopic.php?pid=32807#p32807
 
 Uploading files?
 http://forums.laravel.io/viewtopic.php?id=2022
+
+Validating an input array and normal inputs.
+(eg, 'items' => 'required|min:1|integerOrArray')
+http://forums.laravel.io/viewtopic.php?id=13146
+http://stackoverflow.com/questions/18161785/validation-of-array-form-fields-in-laravel-4-error/18163546#18163546
+
+Events
+http://jasonlewis.me/article/laravel-events
 

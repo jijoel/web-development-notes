@@ -4,10 +4,10 @@ Testing
 This document contains notes related to testing, using these tools:
 
 * [Test Driven Development (TDD)](#tdd)
-* [Mockery](#mocks)
 * [phpunit](#phpunit)
     * [Testing for exceptions](#phpunit-exceptions)
     * [Data Providers](#phpunit-data-providers)
+* [Mockery](#mocks)
 * [Laravel Techniques](#laravel)
     * [Call/Response](#laravel-call)
     * [Web Crawler](#laravel-web-crawler)
@@ -136,7 +136,7 @@ You can then to go the specified folder for marked-up coverage. It shows lines o
     
 #### phpUnit Test Dependencies
 
-Make a test dependent on success of a previous test:
+Make a test dependent on success of a previous test (eg, the previous test is required to pass, or we won't run this one):
 
 ``` php 
     public function testEmpty()
@@ -560,15 +560,18 @@ in composer.json, require  "mockery/mockery": "dev-master"
 
 ### Using Mockery
 
+```php
     $mock = \Mockery::mock('Ticket');       // create a mock object
     $mock->closed_at = $date;               // set a variable on the mock object
     $mock->shouldReceive('function')        // function that should be called
         ->once()                            // require it to be called once
         ->times(4)                          // require it to be called 4 times
         ->andReturn('foo')                  // return the given value to the calling function
+```
 
 For instance:
 
+```php
     $errors = array('foo'=>'bar');
 
     Validator::shouldReceive('make')->once()
@@ -576,6 +579,14 @@ For instance:
             'passes'=>$bool, 
             'errors'=>new \Illuminate\Support\MessageBag($errors)
         )));
+```
+
+You can also assign an attribute to a mock, like this:
+
+```php
+    $mock = \Mockery::mock('MockObject');
+    $mock->foo = 'bar';
+```
 
 
 ### Using Mocks:
@@ -689,20 +700,23 @@ Missing Functions <a name="laravel-mock-missing">
 ------------------------------------------------------
 If you're mocking something, you can either ignore or defer functions that are missing. For instance, this:
 
+```php
     $this->objectMock = \Mockery::mock('Client\Core\Object\UniversalObject');
     $this->objectMock
         ->shouldReceive('unguard')->once()
         ->shouldReceive('fill')->once()
         ->shouldReceive('reguard')->once()
         ->shouldReceive('save')->once();
+```
 
 Can also be done this way:
 
+```php
     $this->objectMock = \Mockery::mock('Client\Core\Object\UniversalObject')->shouldDeferMissing();
     $this->objectMock
         ->shouldReceive('fill')->once()
         ->shouldReceive('save')->once();
-
+```
 
 Mocking Input <a name="laravel-mock-input">
 ----------------------------------------------
@@ -1190,6 +1204,51 @@ This would be the equivalent test using php (with a web crawler):
 ```
 
 
+### Using codeception with a sqlite database
+
+This will describe how to set up a separate database for codeception acceptance tests. We'll use sqlite, because it's dramatically faster than mysql, even though an in-memory database does not work at this time. To do this, we'll use two files: a sqlite database, and a data dump. The data dump will repopulate the database for each test.
+
+In acceptance.suite.yml, add this:
+
+    modules:
+        enabled:
+            - Db
+
+After you've added it, run `codecept build` again to rebuild the WebGuy class.
+
+In codeception.yml, add this:
+
+    modules:
+        config:
+            Db:
+                dsn: 'sqlite:app/tests/codeception/_data/db.sqlite'
+                user: ''
+                password: ''
+                dump: app/tests/codeception/_data/dump.sql
+
+Next, build the files. First, we'll need a database connection to the sqlite file. In `app/config/database.php`, enter this:
+
+```php
+    'codeception'  => array(
+        'driver'   => 'sqlite',
+        'database' => __DIR__.'/../tests/codeception/_data/db.sqlite',
+        'prefix'   => '',
+    ),
+```
+
+Populate the database:
+
+    php artisan migrate --seed --database=codeception
+
+Next, we'll create a dump file to be loaded before every codeception test. To do this, we first need to be able to run sqlite3. Install the package, if needed (`sudo apt-get install sqlite3`). The command to create a backup is simple:
+
+    sqlite3 app/tests/codeception/_data/db.sqlite .dump > app/tests/codeception/_data/dump.sql
+
+
+
+
+### Sample Codeception Tests
+
 Here are some sample tests:
 
 ```php
@@ -1226,3 +1285,4 @@ Here are some sample tests:
     $v=$I->grabTextFrom('body');
     var_dump($v);
 ```
+
