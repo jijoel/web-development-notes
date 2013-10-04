@@ -1222,9 +1222,9 @@ In codeception.yml, add this:
         config:
             Db:
                 dsn: 'sqlite:app/tests/codeception/_data/db.sqlite'
+                dump: app/tests/codeception/_data/dump.sql
                 user: ''
                 password: ''
-                dump: app/tests/codeception/_data/dump.sql
 
 Next, build the files. First, we'll need a database connection to the sqlite file. In `app/config/database.php`, enter this:
 
@@ -1244,7 +1244,46 @@ Next, we'll create a dump file to be loaded before every codeception test. To do
 
     sqlite3 app/tests/codeception/_data/db.sqlite .dump > app/tests/codeception/_data/dump.sql
 
+We also need to be able to tell whether we're running codeception, or an actual browser. By default, it will run in the 'testing' environment. If our standard phpunit tests also run in the 'testing' environment, there will be a clash -- either we use sqlite (on disk), which is very slow for the unit tests, or we end up working in the production/staging database, which we really don't want.
 
+So, create a separate environment for php unit tests called test-foo. This environment uses the :memory: sqlite instance, and is very fast. Set up phpunit to use the test-foo environment by default. `testing` is now used by codeception, `test-foo` by phpunit. To do this, just modify the base TestCase object:
+
+    $testEnvironment = 'test-foo';
+
+If using authentication (eg, route filters), we also need to customize the router. To do this:
+
+```php
+    < ?php namespace Namespace\To\ServiceProvider;
+
+    use Illuminate\Routing\RoutingServiceProvider as LaravelRoutingServiceProvider;
+
+    class RoutingServiceProvider extends LaravelRoutingServiceProvider 
+    {
+        protected function registerRouter()
+        {
+            $this->app['router'] = $this->app->share(function($app)
+            {
+                $router = new Router($app);
+
+                // If the current application environment is "testing", we will disable the
+                // routing filters, since they can be tested independently of the routes
+                // and just get in the way of our typical controller testing concerns.
+                if ($app['env'] == 'testing' || $app['env'] == 'test-foo')
+                {
+                    $router->disableFilters();
+                }
+
+                return $router;
+            });
+        }
+    }
+```
+
+In app.php, register the new service provider:
+
+    'Namespace\To\ServiceProvider\RoutingServiceProvider',
+
+codeception and phpunit tests are now isolated from each other, and both run as fast as possible.
 
 
 ### Sample Codeception Tests
