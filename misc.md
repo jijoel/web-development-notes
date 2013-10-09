@@ -9,6 +9,12 @@ Convert tabs to spaces for all files in a given directory tree. DO NOT run this 
 
     find . ! -type d ! -name _tmp_ -exec sh -c 'expand -t 4 {} > _tmp_ && mv _tmp_ {}' \;
 
+Find critical information about every namespace, class, function, and interface in a directory tree:
+
+    for i in `find app/Kalani -type f`; do cat $i | grep -E 'namespace|class|function|interface' | grep -vE 'class=|\$class|this->app'; done
+
+
+
 
 ### MySQL Commands
 
@@ -19,4 +25,9 @@ Get a list of all tables and the number of rows in a database:
 Get the name of the currently active database (from eg, USE db):
 
     select database();
+
+Turn on the global event log:
+
+    SET GLOBAL general_log_file = '/var/log/mysql/mysql.log';
+    set GLOBAL general_log='ON'
 
