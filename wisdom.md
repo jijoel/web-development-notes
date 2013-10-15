@@ -49,3 +49,5 @@ Some things I've found along the way
 
 * As much as possible, test from the very beginning of the project. Write tests from outside, in (eg, first an acceptance test to show the desired results, then unit tests as we develop the ability to deliver those results).
 
+* Make sure that your tests pass before you check a branch in to source control.
+
