@@ -320,6 +320,32 @@ It does not currently seem to work for these HTTP verbs:
     SEARCH
 
 
+### Nested Routes
+You can actually nest resourceful routes, so we can handle a restful interface throughout the system. To do this: 
+
+    Route::resource('pages', 'PagesController');
+    Route::resource('pages.tags', 'TagsController');
+
+We will end up with these routes:
+
+    GET /pages                          | pages.index        | PagesController@index
+    GET /pages/create                   | pages.create       | PagesController@create
+    POST /pages                         | pages.store        | PagesController@store
+    GET /pages/{pages}                  | pages.show         | PagesController@show
+    GET /pages/{pages}/edit             | pages.edit         | PagesController@edit
+    PUT /pages/{pages}                  | pages.update       | PagesController@update
+    PATCH /pages/{pages}                |                    | PagesController@update
+    DELETE /pages/{pages}               | pages.destroy      | PagesController@destroy
+    GET /pages/{pages}/tags             | pages.tags.index   | TagsController@index
+    GET /pages/{pages}/tags/create      | pages.tags.create  | TagsController@create
+    POST /pages/{pages}/tags            | pages.tags.store   | TagsController@store
+    GET /pages/{pages}/tags/{tags}      | pages.tags.show    | TagsController@show
+    GET /pages/{pages}/tags/{tags}/edit | pages.tags.edit    | TagsController@edit
+    PUT /pages/{pages}/tags/{tags}      | pages.tags.update  | TagsController@update
+    PATCH /pages/{pages}/tags/{tags}    |                    | TagsController@update
+    DELETE /pages/{pages}/tags/{tags}   | pages.tags.destroy | TagsController@destroy
+
+
 
 Controllers<a name="controllers">
 -------------------------------------

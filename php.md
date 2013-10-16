@@ -20,6 +20,8 @@ php commands
 
     \Log::debug(var_export(DB::getQueryLog(), true));  // writes debug info to the log file
 
+    array_merge         merge two simple arrays
+    array_replace_recursive  merge two complex arrays; replace matching items
 
 
 Reflection <a name="reflection">

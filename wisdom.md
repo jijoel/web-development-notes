@@ -51,3 +51,14 @@ Some things I've found along the way
 
 * Make sure that your tests pass before you check a branch in to source control.
 
+* Tests should encompass several different layers:
+
+    * Acceptance - from an end-user perspective  (use db)
+    * Functional - make sure that pieces fit together  (use db)
+    * functional (phpunit) - make sure that routes work, and correct data called  (use db)
+    * unit (phpunit) - make sure single unit works well in isolation
+        * controllers - verify correct interface methods are called, views returned, etc. (mocks)
+        * repositories - verify correct model methods are called  (use mocks)
+        * model - verify correct data is returned (use db)
+        * routes - make sure routes are available (use db)
+

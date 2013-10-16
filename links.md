@@ -242,6 +242,7 @@ https://github.com/dypsilon/frontend-dev-bookmarks
 
 "Holy Grail" layout -- 3 equal-length full-height columns with fixed sides and fluid center:
 http://alistapart.com/article/holygrail
+http://philipwalton.github.io/solved-by-flexbox/demos/holy-grail/
 
 Bootstrapper for Laravel:
 http://bootstrapper.aws.af.cm/

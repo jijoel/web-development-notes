@@ -1,6 +1,18 @@
 TODO
 ===============
 
+
+Short-Term
+---------------
+Namespace controllers and seeds
+Create Common/RestfulController, to handle most functionality currently in ApiController
+
+
+
+
+
+Long-Term
+-----------------
 Long term, I would love to have these things available. I might be able to develop some of them; others might be interested/able to develop some.
 
 * [Use Presenter in DataTables](#datatable-presenter)

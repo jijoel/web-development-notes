@@ -46,6 +46,22 @@ phpunit <a name="phpunit">
 ----------------------------
 I'm using phpunit for testing. It will read configuration information from phpunit.xml, in the root directory of the project.
 
+There should be one test class per application class. The test class needs to be set up like this:
+
+```php
+    < ?php
+
+        class FooTest extends \PHPUnit_Framework_TestCase {
+
+            public function testFoo()
+            {
+                $this->assertTrue(False);
+            }
+```
+
+The name of the class should match the file holding the class. The string 'Test' must be at the end for a test to work. Case is significant. The string 'test' must be at the beginning of each test to run. The test file itself should be called `FooTest.php`.
+
+
 #### Incomplete tests:
 Skip them by putting one of these at the beginning of the test:
 
@@ -235,6 +251,18 @@ When unit testing, we can call functions and get the responses. We can also do t
     $response = $this->call('GET', '/items/1');
     $this->assertTrue($response->isOk());
     $this->assertNotEmpty($response->getContent());
+```
+
+These are functionally similar (though the first looks for the $title anywhere on the page, the second counts the number of instances of $title in an h1 block):
+
+```php
+    $result = $this->call('get', $route);
+    $this->assertEquals(200, $result->getStatusCode());
+    $this->assertContains($title, $result->getContent());
+
+    $crawler = $this->client->request('GET', $route);
+    $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
+    $this->assertCount(1, $crawler->filter("#content h1:contains({$title})"));
 ```
 
 The response class has several useful functions, including:
@@ -1286,24 +1314,25 @@ In app.php, register the new service provider:
 codeception and phpunit tests are now isolated from each other, and both run as fast as possible.
 
 
+
 ### Sample Codeception Tests
 
 Here are some sample tests:
 
 ```php
     // This is standard BDD labelling. Who am I? What do I want to do? Why? Then do it.
-    $I = new WebGuy($scenario);
+    $I = new TestGuy($scenario);
     $I->am('Account Holder'); 
     $I->wantTo('withdraw cash from an ATM');
     $I->lookForwardTo('get money when the bank is closed');
 
-    $I = new WebGuy($scenario);
+    $I = new TestGuy($scenario);
     $I->wantTo('see home page');
     $I->amOnPage('/');
     $I->seeResponseCodeIs(200);
     $I->see('Hello');
 
-    $I = new WebGuy($scenario);
+    $I = new TestGuy($scenario);
     $I->wantTo('log in');
     $I->amOnPage('/login');
     $I->seeResponseCodeIs(200);
@@ -1325,3 +1354,14 @@ Here are some sample tests:
     var_dump($v);
 ```
 
+This is a test showing that a filter works:
+
+```php
+    public function testDefaultToLoginPage(TestGuy $I)
+    {
+        \Route::enableFilters();
+
+        $I->amOnPage('/');
+        $I->seeInCurrentUrl('/login');
+    }
+```
