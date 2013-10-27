@@ -86,7 +86,7 @@ https://github.com/phpDocumentor/ReflectionDocBlock
 
 Presenter:
 https://github.com/robclancy/presenter
-"robclancy/presenter": "1.1.*"
+"robclancy/presenter": "dev-master"
 
 Image handling and manipulation:
 http://creolab.hr/2013/07/image-manipulation-in-laravel-4-with-imagine/
@@ -123,6 +123,9 @@ https://github.com/cartalyst/sentry
 Another auth package:
 https://github.com/Toddish/Verify-L4
 "toddish/verify": "dev-master"
+
+OAuth (login via facebook, github, google, etc.)
+https://github.com/madewithlove/laravel-oauth2
 
 Server-side handling of datatables:
 https://github.com/bllim/laravel4-datatables-package
@@ -184,6 +187,10 @@ https://github.com/adrianmacneil/omnipay
 Create PDF files:
 https://github.com/barryvdh/laravel-dompdf
 "barryvdh/laravel-dompdf": "dev-master"
+
+Breadcrumbs:
+https://github.com/davejamesmiller/laravel-breadcrumbs
+
 
 
 Testing <a name="testing">
@@ -249,6 +256,9 @@ http://bootstrapper.aws.af.cm/
 
 Bootstrap-themed jQuery UI Widgets
 http://addyosmani.github.io/jquery-ui-bootstrap/
+
+HTML Kickstart (similar to bootstrap)
+http://www.99lime.com/elements/
 
 Type ahead:
 http://twitter.github.io/typeahead.js/
@@ -330,6 +340,7 @@ http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
 
 Prettier select boxes:
 http://harvesthq.github.io/chosen/
+http://brianreavis.github.io/selectize.js/
 
 Pop-up dialog boxes:
 http://docs.toddish.co.uk/popup/
@@ -340,7 +351,8 @@ http://packery.metafizzy.co/faq.html
 Template rendering engine:
 http://tempojs.com/
 
-
+Syntax highlighting:
+http://prismjs.com/
 
 
 
@@ -381,6 +393,22 @@ Ratchet: http://socketo.me/
 
 
 
+Search
+-------------
+(client and server)
+http://sphinxsearch.com/docs/2.1.2/
+https://github.com/scalia/sphinxsearch
+http://www.andrehonsberg.com/article/install-sphinxsearch-205-in-ubuntu-1204-server
+
+https://lucene.apache.org/solr/
+
+
+
+Code Review
+--------------------
+http://css.dzone.com/articles/automated-code-reviews-php
+
+
 Interesting Apps to Model / Watch / Assist? <a name="apps">
 -------------------------------------------------------------------------
 Laravel 4 online reservation system, YARS (Yet Another Reservation System):
@@ -418,6 +446,15 @@ Validating an input array and normal inputs.
 http://forums.laravel.io/viewtopic.php?id=13146
 http://stackoverflow.com/questions/18161785/validation-of-array-form-fields-in-laravel-4-error/18163546#18163546
 
-Events
+Events:
 http://jasonlewis.me/article/laravel-events
+
+Controller/Layout testing:
+http://stackoverflow.com/questions/16607310/laravel-controller-layout-testing
+
+View Composers:
+http://heera.it/laravel-4-view-composer-master-layout#.UmTaM_l00RU
+
+Multi-select filter search:
+http://stackoverflow.com/questions/18127040/multi-select-filter-search-in-laravel-4
 

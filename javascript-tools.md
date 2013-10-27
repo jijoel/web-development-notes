@@ -21,14 +21,14 @@ Initializing:
 With parameters:
 
     $('#tableName').dataTable({        
-        "sDom": 'trip',             // shows only the (t)able, p(r)ocessing, (i)nformation, (p)agination 
+        "sDom": 'trip',             // shows only (t)able, p(r)ocessing, (i)nfo, (p)agination 
         "bProcessing": true,        // shows a processing message when working
-        "sAjaxSource": '/ajax/tickets/data-table',            // sets the ajax source to this location
-        "fnServerParams": function(aoData) {
-            aoData.push({'foo':'bar'});
-            // data.push({sourceData});
-        },
+        "sAjaxSource": '/ajax/tickets/data-table',       // sets the ajax source to this location
+        "fnServerParams": function ( aoData ) {
+            aoData.push( { "name": "more_data", "value": "my_value" } );
+        }
     });
+
 
 #### sDom parameter info:
 
@@ -76,7 +76,7 @@ Available settings are:
 ```
 
 ```js
-    <script type="text/javascript">
+    < script type="text/javascript">
     $(function () {
         var $table = $("table.grid");
 

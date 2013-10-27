@@ -229,3 +229,142 @@ Note: If you are editing records, this will confuse a call to Form::model, becau
 ```
 
 
+DataTables  <a name='datatables'>
+----------------------------------
+I really like the [Chumper datatable library](https://github.com/Chumper/Datatable) for server-side datatable processing. It has a lot of potential. The readme is a pretty good howto... It's really flexible (passes data to a view, which I can modify myself). 
+
+It works in a few different parts:
+
+* Server sends view containing datatable to the client
+* (this includes a rendered datatable view)
+* Client requests table data from the server via ajax
+* Server returns table data to the client 
+
+
+Server sends initial view:
+
+```php
+    public function table() 
+    {
+        $items = $this->repo->datatable();
+
+        return \DataTable::collection($items)
+            ->showColumns('slug', 'title')
+            ->addColumn('author', function($model) {
+                return $model->getPresenter()->author; })
+            ->addColumn('updated', function($model) {
+                return $model->getPresenter()->updated; })
+            ->addColumn('created_at',function($model){
+                return $model->created_at->toDateTimeString();})
+            ->make();
+    }
+```
+
+Server sends table data to the client:
+
+```php
+    public function datatable()
+    {
+        $fields = array('id', 'title', 'author_id', 'updated_at', 'created_at');
+        return $this->model->get($fields);
+    }
+```
+
+It is critical that the table data sent to the client has everything the presenter needs to generate presented fields. If it doesn't, the presenter will return Null, and things get a bit confusing.
+
+(I have not yet figured out a good way to sort/filter/etc on custom values. This works, as a kludge):
+
+```php
+    public function datatable()
+    {
+        $fields = array('id', 'title', 'author_id', 'updated_at');
+
+        if ($id = \Input::get('topic')) {
+            $repo = \App::make('KBase\Interfaces\TagsRepositoryInterface');
+            return $repo->find($id)->pages()->get();
+        }
+        if ($id = \Input::get('author')) {
+            $repo = \App::make('KBase\Interfaces\UsersRepositoryInterface');
+            return $repo->find($id)->pages()->get();
+        }
+
+        return $this->model->get($fields);
+    }
+```
+
+Initial View:
+
+```php
+<script type="text/javascript" src="/assets/datatables/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" type="text/css" href="/assets/datatables/css/jquery.dataTables.css">
+
+{{ DataTable::table()
+        ->addColumn('slug', 'title', 'author', 'updated') // column headers
+        ->setUrl(route('admin.pages.table'))              // GET table data
+        ->setCustomValues('table-url', '/admin/pages')    // for custom rendered datatable
+        ->setCallbacks(                                   // for custom callbacks
+            'fnServerParams', 'function ( aoData ) {
+                aoData.push( { "name": "topic", "value": '.$item->id.' } ); 
+            }')
+        ->render('common.datatable')                     // or just render() if not custom
+}}
+```
+
+Example rendered datatable view: 
+
+```html
+    <table class="table table-bordered {{ $class = str_random(8) }}">
+        <colgroup>
+            @for ($i = 0; $i < count($columns); $i++)
+            <col class="con{{ $i }}" />
+            @endfor
+        </colgroup>
+        <thead>
+        <tr>
+            @foreach($columns as $i => $c)
+            <th class="head{{ $i }}">{{ $c }}</th>
+            @endforeach
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($data as $d)
+        <tr>
+            @foreach($d as $dd)
+            <td valign="middle">{{ $dd }}</td>
+            @endforeach
+        </tr>
+        @endforeach
+        </tbody>
+    </table>
+    <script type="text/javascript">
+        jQuery(document).ready(function(){
+            // dynamic table
+            jQuery('.{{ $class }}').dataTable({
+                "sPaginationType": "full_numbers",
+                "bProcessing": false,
+                @foreach ($options as $k => $o)
+                {{ json_encode($k) }}: {{ json_encode($o) }},
+                @endforeach
+                @foreach ($callbacks as $k => $o)
+                {{ json_encode($k) }}: {{ $o }},
+                @endforeach
+
+            });
+     
+            @if (isset($values['table-url']))
+                $('.{{$class}}').hover(function() {
+                    $(this).css('cursor', 'pointer');
+                });
+                // This will go to value set in customValues (above) when 
+                // any row is clicked 
+                $('.{{$class}}').on('click', 'tbody tr', function(e) {
+                    $id = e.currentTarget.children[0].innerHTML;
+                    $url = e.currentTarget.baseURI;
+                    document.location.href = "{{ $values['table-url'] }}/" + $id;
+                });
+            @endif
+        });
+    </script>
+
+```
+

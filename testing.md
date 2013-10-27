@@ -616,6 +616,44 @@ You can also assign an attribute to a mock, like this:
     $mock->foo = 'bar';
 ```
 
+or
+
+```php
+    $mock = \Mockery::mock('MockObject')
+        ->shouldReceive('foo')
+        ->andSet('foo', 'bar');
+```
+
+We can include everything in a single statement, like so:
+
+```php
+    $m = \Mockery::mock('Repository')
+        ->shouldReceive('foo')->once()->with(5, 4)
+        ->andReturn(\Mockery::self())
+        ->shouldReceive('bar')->times(3)
+        ->andReturn(\Mockery::self())
+        ->getMock();
+```
+
+The with statement identifies data that was passed to a mocked object. We can test that data in a number of ways:
+
+    with(1)           // integer (1)
+    with('value')     // string (value) in that slot
+    with(1,'value')   // 2 parameters
+    with(1, \Mockery::any())  // check value of first param; allow anything for second
+    withArgs(array(arg1, arg2, ...))  // parameters given via array, instead of individually
+
+    with(resourceValue())             // eg, stringValue  (resource => is_*)
+    with(typeOf('resource'))          // eg, typeOf('string')
+    with(\Mockery::type('resource'))  // eg, type('string')    anything with is_*
+    with(\Mockery::on(closure))
+    with(\Mockery::anyOf(x,y))        // any of given options will be a match
+    with(\Mockery::subset(array(0=>'foo')))   // array with at least this information
+    with(\Mockery::contains(x,y))     // array with all listed values (keys ignored)
+    with(\Mockery::hasKey(x))         // array with listed key   (values ignored)
+    with(\Mockery::hasValue(x))       // array with listed value (key ignored)
+
+
 
 ### Using Mocks:
 (instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
@@ -827,7 +865,55 @@ In my class, if I have a function `getAlias` that I want to mock, this is how I 
 If we need to mock multiple statements, we do it like this:
 
 // TODO: Mock multiple statements
-    
+
+### Testing Protected and Private Methods
+
+With Reflection, we can test protected and private methods, like this:
+
+```php
+    protected static function getMethod($name) 
+    {
+        $class = new ReflectionClass('MyClass');
+        $method = $class->getMethod($name);
+        $method->setAccessible(true);
+        return $method;
+    }
+
+    public function testFoo() 
+    {
+        $foo = self::getMethod('foo');
+        $obj = new MyClass();
+        $foo->invokeArgs($obj, array(...));
+        ...
+    }
+```
+
+Here's an actual test:
+
+```php
+    /**
+     * @dataProvider getSearchStrings
+     */
+    public function testSplitIntoWords($input, $expected)
+    {
+        // use a reflection class to make this method testable
+        $class = new \ReflectionClass('KBase\Repositories\Searcher');
+        $method = $class->getMethod('splitStringIntoWords');
+        $method->setAccessible(true);
+        $output = $method->invokeArgs($this->searcher, array($input));
+        $this->assertEquals($expected, $output);
+    }
+
+    public function getSearchStrings()
+    {
+        return array(
+            array('foo', array('foo')),
+            array('foo bar', array('foo','bar')),
+            array('foo_bar', array('foo','bar')),
+            array('Test for Ÿou', array('test','for','you')),
+        );
+    }
+```    
 
 In-memory database and test environment <a name="laravel-memory-db">
 ----------------------------------------------------------------------

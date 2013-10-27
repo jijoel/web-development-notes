@@ -476,6 +476,15 @@ These are used to filter data.
 
 These are used to get related records from other models.
 
+    hasOne
+    hasMany ($otherModel, $otherFieldToMyKey)
+    belongsTo ($otherModel, $myFieldToOtherModelKey)
+    belongsToMany ($otherModel, $relationTable)
+
+To get data from a related record:
+
+    if ($tag->pages()->where('id', $pageId)->get()->isEmpty()) {
+
 
 
 #### Utilities <a name="model-utility">
