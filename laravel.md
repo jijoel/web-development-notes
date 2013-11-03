@@ -481,10 +481,70 @@ These are used to get related records from other models.
     belongsTo ($otherModel, $myFieldToOtherModelKey)
     belongsToMany ($otherModel, $relationTable)
 
+
+##### Using Relationships
+
 To get data from a related record:
 
     if ($tag->pages()->where('id', $pageId)->get()->isEmpty()) {
 
+
+To get all users which have tasks created_at $date:
+
+```
+    $users = User::join('user_task', 'user_task.task_id', '=', 'task.id')
+        ->where('user_task_created_at', '=', $date)->get();
+```
+
+These can also include complex joins:
+
+```
+    $slots = Slot::select('slots.*')->with('product')
+        ->join('products', 'slots.product_id', '=', 'products.id')
+        ->join('categories', 'products.category_id', '=', 'categories.id')
+        ->where('categories.name', '=', 'MyCategory')->get();
+```
+
+To filter all tasks of a user from $date:
+
+```php
+    $user = User::whereId(1)->with(array(tasks' => function($query)
+    {
+        $query->where('created_at', '=', $date);
+    }))->first();
+```
+
+```php
+    $modules = $dropdowns->filter(function($model) {
+        return $model->ref_type=='module';
+    });
+```
+
+Attach M/M records like this:
+
+```php
+    Product::find($id)->categories()->attach( Input::get('category') );
+```
+
+Attach M/M records with pivot table data like this:
+
+```php
+    $customer->drinks()->attach($drink_id, array(‘customer_got_drink’, 1);
+```
+
+We can get an M/M/M (extended) relationship like this:
+
+```php
+class Customer extends \Eloquent {    
+    public function drinks()
+    {
+        return $this->belongsToMany('Drink', 'customer_drinks', 'customer_id', 'drink_id')
+                    ->withPivot('customer_got_drink', 'chair_id')
+                    ->join('chair', 'chair_id', 'chair.id')
+                    ->select('drink_id', 'customer_id', 'pivot_customer_got_drink', 'chair.name AS pivot_chair_name'); //this select is optional
+    }
+}
+```
 
 
 #### Utilities <a name="model-utility">

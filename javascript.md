@@ -238,3 +238,5 @@ Recipes
 // draw zebra lines for table
 $('.table tr:even').addClass('even');
 
+// Extend options (eg, merge defaults with user-supplied options)
+$.extend({}, default, options);

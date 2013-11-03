@@ -76,7 +76,22 @@ To rewind a branch that you have pushed to a remote repository (on the master br
     git checkout -b branch_name                            // switch to new branch
     git stash pop                                          // brings back files in new branch
 
-To stop tracking a file that is currently tracked:
+Move recent commits from a branch to a new branch:
+
+    git branch newbranch
+    git reset --hard HEAD~3    // Go back 3 commits. You *will* lose uncommitted work.
+    git checkout newbranch
+
+Move recent commits from a branch to an existing branch:
+
+    git checkout existingbranch // branch you want to move commits to
+    git merge master            // branch you want to move commits from
+    git checkout master
+    git reset --hard HEAD~3    // Go back 3 commits. You *will* lose uncommitted work.
+    git checkout existingbranch
+
+
+Stop tracking a file that is currently tracked:
 
     git rm --cached file
 

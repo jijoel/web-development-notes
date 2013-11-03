@@ -191,6 +191,10 @@ https://github.com/barryvdh/laravel-dompdf
 Breadcrumbs:
 https://github.com/davejamesmiller/laravel-breadcrumbs
 
+History tracking:
+https://github.com/VentureCraft/revisionable
+
+
 
 
 Testing <a name="testing">
@@ -354,6 +358,24 @@ http://tempojs.com/
 Syntax highlighting:
 http://prismjs.com/
 
+Simple modal dialog box:
+http://www.ericmmartin.com/projects/simplemodal/
+
+Additional controls for bootstrap (including a wizard):
+http://exacttarget.github.io/fuelux/#checkbox
+
+Plugins for extending bootstrap:
+http://tutorialzine.com/2013/07/50-must-have-plugins-for-extending-twitter-bootstrap/
+
+Front-end data validation:
+http://reactiveraven.github.io/jqBootstrapValidation/
+
+Tag autocomplete (like twitter hashes, etc.):
+http://sandglaz.github.io/bootstrap-tagautocomplete/
+
+"growler" notification boxes:
+https://github.com/ifightcrime/bootstrap-growl
+
 
 
 Backbone <a name="backbone">
@@ -457,4 +479,9 @@ http://heera.it/laravel-4-view-composer-master-layout#.UmTaM_l00RU
 
 Multi-select filter search:
 http://stackoverflow.com/questions/18127040/multi-select-filter-search-in-laravel-4
+
+Beanstalkd (a work queue, which can run queued jobs) with Laravel:
+http://fideloper.com/ubuntu-beanstalkd-and-laravel4
+
+
 
