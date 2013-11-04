@@ -194,6 +194,8 @@ https://github.com/davejamesmiller/laravel-breadcrumbs
 History tracking:
 https://github.com/VentureCraft/revisionable
 
+Reposed (an extended model class):
+https://github.com/kapv89/reposed
 
 
 
