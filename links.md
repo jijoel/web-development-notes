@@ -191,6 +191,9 @@ https://github.com/barryvdh/laravel-dompdf
 Breadcrumbs:
 https://github.com/davejamesmiller/laravel-breadcrumbs
 
+Reposed (an extended model class):
+https://github.com/kapv89/reposed
+
 
 
 Testing <a name="testing">
