@@ -900,7 +900,7 @@ Here's an actual test:
         $class = new \ReflectionClass('KBase\Repositories\Searcher');
         $method = $class->getMethod('splitStringIntoWords');
         $method->setAccessible(true);
-        $output = $method->invokeArgs($this->searcher, array($input));
+        $output = $method->invokeArgs($class, array($input));
         $this->assertEquals($expected, $output);
     }
 
@@ -914,6 +914,39 @@ Here's an actual test:
         );
     }
 ```    
+
+You can also use the reflection technique to run protected methods that tests need in order to work. For instance, when using controller layouts, a protected function called setupLayout is called. Anything relying on that will fail if it does not get called, so let's call it:
+
+```php
+    public function testReturnViewIfLoggedOut()
+    {
+        $this->auth->shouldReceive('isLoggedIn')->once()->andReturn(False);
+        $this->callProtectedMethod($this->test, 'setupLayout', array());
+
+        $result = $this->test->getLogin();
+        $prop = $this->getProtectedProperty($this->test, 'layout');
+
+        $this->assertTrue(...);
+    }
+
+    protected function callProtectedMethod($test, $method, $args)
+    {
+        $class = new \ReflectionClass(get_class($test));
+        $protectedMethod = $class->getMethod($method);
+        $protectedMethod->setAccessible(true);
+        $output = $protectedMethod->invokeArgs($test, $args);
+        return $output;
+    }
+
+    protected function getProtectedProperty($test, $property)
+    {
+        $class = new \ReflectionClass(get_class($test));
+        $protectedProperty = $class->getProperty($property);
+        $protectedProperty->setAccessible(true);
+        $output = $protectedProperty->getValue($test);
+        return $output;
+    }
+```
 
 In-memory database and test environment <a name="laravel-memory-db">
 ----------------------------------------------------------------------
