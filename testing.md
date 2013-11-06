@@ -895,6 +895,7 @@ Here's an actual test:
      * @dataProvider getSearchStrings
      */
     public function testSplitIntoWords($input, $expected)
+
     {
         // use a reflection class to make this method testable
         $class = new \ReflectionClass('KBase\Repositories\Searcher');

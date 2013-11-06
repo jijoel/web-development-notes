@@ -41,6 +41,8 @@ http://med.stanford.edu/modelsite/styles/
 Supported Timezones:
 http://php.net/manual/en/timezones.php
 
+GPG Cheatsheet:
+http://irtfweb.ifa.hawaii.edu/~lockhart/gpg/
 
 
 Laravel 4 <a name="laravel">
@@ -196,6 +198,11 @@ https://github.com/VentureCraft/revisionable
 
 Reposed (an extended model class):
 https://github.com/kapv89/reposed
+
+Shopping Cart:
+https://github.com/moltin/laravel-cart
+
+
 
 
 
