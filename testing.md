@@ -1351,6 +1351,33 @@ This would be the equivalent test using php (with a web crawler):
     $crawler = $this->client->submit($form);
 ```
 
+### Acceptance Tests with PhantomJS
+PhantomJS is a headless browser (but it will take screenshots when there's a failure). It can test everything, including javascript and ajax, from a user's perspective. It uses codeception's Selenium2 driver. To set it up:
+
+Install phantomjs (put it in a folder on your path):
+
+    http://phantomjs.org/download.html
+
+Run it:
+
+    phantomjs --webdriver=4444
+
+Tell codeception to use it. In acceptance.suite.yml:
+
+    class_name: WebGuy
+    modules:
+        enabled:
+            [ Selenium2 ]
+        config:
+            Selenium2:
+                url: 'http://lkata/'
+                browser: phantomjs
+                capabilities:
+                    unexpectedAlertBehaviour: 'accept'
+
+When using phantomjs, sometimes you'll need to include a wait statement to let things process:
+
+    $I->wait(10);    // time in milliseconds
 
 ### Using codeception with a sqlite database
 
