@@ -1370,7 +1370,7 @@ Tell codeception to use it. In acceptance.suite.yml:
             [ Selenium2 ]
         config:
             Selenium2:
-                url: 'http://lkata/'
+                url: 'http://yourSiteName/'
                 browser: phantomjs
                 capabilities:
                     unexpectedAlertBehaviour: 'accept'
