@@ -22,6 +22,7 @@ This document contains notes related to testing, using these tools:
     * [Testing with an Array Repository](#laravel-array-repo)
     * [Testing Without a Repository Pattern](#laravel-no-repo)
     * [Testing Filters](#laravel-filters)
+    * [Testing Migrations](#laravel-migrations)
     * [Additional stuff for testing](#laravel-extra)
 * [Selenium](#selenium)
 * [BDD and Acceptance Testing with Codeception](#codeception)
@@ -1210,6 +1211,50 @@ You can also enable filters for a specific test like so:
 ```
 
 
+Testing Migrations <a name="laravel-migrations">
+------------------------------------------------------
+We can test that migrations will work correctly. In this case, I have a functional test called DbTest.php. It should be run on a version of the database that does not have any tables (eg, an in-memory database that gets rebuilt on every test):
+
+```php
+    /**
+     * @group functional
+     */
+    class DbTest extends TestCase
+    {
+        public function testDbConnectionWorks()
+        {
+            $this->assertNotNull(DB::connection(), 
+                'connection should not be null');
+        }
+
+        /**
+         * @dataProvider getTableConstructors
+         */
+        public function testCreateTables($table, $constructor)
+        {
+            $constructor->up();
+            $this->assertTrue(Schema::hasTable('todos'));
+        }
+
+        /**
+         * @dataProvider getTableConstructors
+         */
+        public function testDropTables($table, $constructor)
+        {
+            $constructor->down();
+            $this->assertFalse(Schema::hasTable('todos'));
+        }
+
+        public function getTableConstructors()
+        {
+            return array(
+                array( 'todos', new CreateTodosTable ),
+            );
+        }
+
+    }
+```
+
     
     
 Additional stuff for testing<a name="laravel-extra">
@@ -1366,7 +1411,8 @@ Tell codeception to use it. In acceptance.suite.yml:
     class_name: WebGuy
     modules:
         enabled:
-            [ Selenium2 ]
+            - Selenium2
+            - Db
         config:
             Selenium2:
                 url: 'http://lkata/'
@@ -1378,9 +1424,42 @@ When using phantomjs, sometimes you'll need to include a wait statement to let t
 
     $I->wait(10);    // time in milliseconds
 
+
 ### Using codeception with a sqlite database
 
 This will describe how to set up a separate database for codeception acceptance tests. We'll use sqlite, because it's dramatically faster than mysql, even though an in-memory database does not work at this time. To do this, we'll use two files: a sqlite database, and a data dump. The data dump will repopulate the database for each test.
+
+If using phantomjs for acceptance testing, we'll want to set the environment to 'testing' whenever it hits a database. Add this to bootstrap/start.php:
+
+if (isset($_SERVER['HTTP_USER_AGENT']) && 
+    strpos($_SERVER['HTTP_USER_AGENT'], 'PhantomJS')) 
+{
+    $env = 'testing';
+}
+
+Also set up a database connection to the sqlite file. In `app/config/testing/database.php`, enter this:
+
+```php
+    < ?php
+
+    return array(
+
+        'default' => 'codeception',
+
+        'connections' => array(
+            'codeception'  => array(
+                'driver'   => 'sqlite',
+                'database' => __DIR__.'/../../tests/codeception/_data/db.sqlite',
+                'prefix'   => '',
+            ),
+        ),
+    );
+```
+
+And set up permissions:
+
+    sudo chown www-data app/tests/codeception/_data
+    sudo chown www-data app/tests/codeception/_data/db.sqlite
 
 In acceptance.suite.yml, add this:
 
@@ -1418,6 +1497,18 @@ Next, we'll create a dump file to be loaded before every codeception test. To do
 
     sqlite3 app/tests/codeception/_data/db.sqlite .dump > app/tests/codeception/_data/dump.sql
 
+I've set up a batch file to do this. I put it in bin/prepTestDB:
+
+    #!/bin/bash
+
+    rm app/tests/codeception/_data/db.sqlite
+    touch app/tests/codeception/_data/db.sqlite
+
+    php artisan migrate --seed --database=codeception
+    sqlite3 app/tests/codeception/_data/db.sqlite .dump > app/tests/codeception/_data/dump.sql
+
+    ls app/tests/codeception/_data
+
 We also need to be able to tell whether we're running codeception, or an actual browser. By default, it will run in the 'testing' environment. If our standard phpunit tests also run in the 'testing' environment, there will be a clash -- either we use sqlite (on disk), which is very slow for the unit tests, or we end up working in the production/staging database, which we really don't want.
 
 So, create a separate environment for php unit tests called test-foo. This environment uses the :memory: sqlite instance, and is very fast. Set up phpunit to use the test-foo environment by default. `testing` is now used by codeception, `test-foo` by phpunit. To do this, just modify the base TestCase object:
@@ -1429,6 +1520,7 @@ If using authentication (eg, route filters), we also need to customize the route
 ```php
     < ?php namespace Namespace\To\ServiceProvider;
 
+    use Illuminate\Routing\Router;   // or a custom router
     use Illuminate\Routing\RoutingServiceProvider as LaravelRoutingServiceProvider;
 
     class RoutingServiceProvider extends LaravelRoutingServiceProvider 
@@ -1511,3 +1603,32 @@ This is a test showing that a filter works:
         $I->seeInCurrentUrl('/login');
     }
 ```
+
+Use WebGuy (acceptance tests) to see things on the page (like a user would); use TestGuy (functional tests) to see things in a database:
+
+```php
+    // Functional test
+    public function testAddItem(TestGuy $I) 
+    {
+        $I->am('a user');
+        $I->amOnPage('/');
+
+        $I->dontSeeInDatabase('todos', array('name'=>'new todo'));
+        $I->submitForm('#todo-form', array('new'=>'new todo'));
+        $I->seeInDatabase('todos', array('name'=>'new todo'));    
+    }
+
+    // Acceptance Test
+    public function testAddItem(WebGuy $I)
+    {
+        $I->am('a user');
+        $I->amOnPage('/');
+
+        $I->dontSee('new todo', 'li');
+        $I->fillField('new', 'new todo');
+        $I->click('New');
+        $I->wait(100);
+        $I->see('new todo', 'li');
+    }
+```
+

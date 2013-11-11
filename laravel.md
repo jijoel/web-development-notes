@@ -58,6 +58,27 @@ Permissions are not set up correctly, so change those, also:
     find app/ -type d | xargs chmod o-w
     chmod +x vendor/bin/*
 
+I like setting up a .gitignore file so that some files and folders won't be loaded into a git repository. Here are my settings:
+
+    # Laravel
+    /bootstrap/compiled.php
+    /vendor
+
+    # Composer
+    composer.phar
+    composer.lock
+
+    # OS
+    .DS_Store
+
+    # Configuration
+    /app/config/staging
+    /app/config/production
+
+    # Codeception
+    _*
+
+
 Laravel configuration information stored in `project/app/config`.
 Each file here returns an array with configuration information (closures are OK).
 Access it at any time with `Config::get`. Use the file name and array key:
