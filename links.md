@@ -257,6 +257,9 @@ See a full list of autoloaded classes for the project (refresh via composer dump
 User Interface / Front-End <a name="ui">
 ---------------------------------------------
 
+Flexbox:
+https://www.adobe.com/devnet/html5/articles/working-with-flexbox-the-new-spec.html
+
 Huge list of frontend resources:
 https://github.com/dypsilon/frontend-dev-bookmarks
 
@@ -385,6 +388,8 @@ http://sandglaz.github.io/bootstrap-tagautocomplete/
 "growler" notification boxes:
 https://github.com/ifightcrime/bootstrap-growl
 
+Semantic web components (similar to bootstrap):
+http://semantic-ui.com/
 
 
 Backbone <a name="backbone">
