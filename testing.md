@@ -896,6 +896,7 @@ Here's an actual test:
      * @dataProvider getSearchStrings
      */
     public function testSplitIntoWords($input, $expected)
+
     {
         // use a reflection class to make this method testable
         $class = new \ReflectionClass('KBase\Repositories\Searcher');
@@ -1415,7 +1416,7 @@ Tell codeception to use it. In acceptance.suite.yml:
             - Db
         config:
             Selenium2:
-                url: 'http://lkata/'
+                url: 'http://yourSiteName/'
                 browser: phantomjs
                 capabilities:
                     unexpectedAlertBehaviour: 'accept'
