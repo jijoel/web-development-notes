@@ -43,6 +43,7 @@ Set tabs to spaces:
 Initialize git:
 
     git init
+    git add .
     git commit -m 'initial commit'
     git checkout -b dev
 
@@ -69,11 +70,6 @@ Add the namespaces to composer.json:
         },
         "classmap": [
 
-Update git:
-
-    git add .
-    git commit -m 'setup namespaces'
-
 
 Codeception
 ---------------
@@ -98,7 +94,7 @@ Edit codeception.yml:
     modules:
         config:
             Db:
-                dsn: 'sqlite:app/tests/codeception/_data/db.sql'
+                dsn: 'sqlite:app/tests/codeception/_data/db.sqlite'
                 dump: app/tests/codeception/_data/dump.sql
                 user: ''
                 password: ''
@@ -136,7 +132,7 @@ Set up database configuration for testing. Create app/config/testing/database.ph
             'codeception' => array(
                 'driver'   => 'sqlite',
                 'database' => __DIR__.'/../../tests/codeception/_data/db.sqlite',
-                'prefix'   => ''
+                'prefix'   => '',
             ),
         )
     );
@@ -147,12 +143,16 @@ Copy the configuration to test-foo:
 
 Modify the app/config/test-foo/database.php as follows:
 
-                'database' => ':memory:'
+            'database' => ':memory:',
 
 Setup folder for local projects, staging, and production:
 
     mkdir app/config/{local,staging,production}
-    mv app/config/database.php app/config/local
+    cp app/config/database.php app/config/local
+    cp app/config/database.php app/config/staging
+    cp app/config/database.php app/config/production
+
+(each configuration will have its own credentials and connection information)
 
 Include a codeception (testing) option in app/config/local/database.php: 
 
@@ -161,7 +161,7 @@ Include a codeception (testing) option in app/config/local/database.php:
         'codeception' => array(
             'driver'   => 'sqlite',
             'database' => __DIR__.'/../tests/codeception/_data/db.sqlite',
-            'prefix'   => ''
+            'prefix'   => '',
         ),
 
 Create a bash file to load the codeception test database with migrated/seeded data. bin/prepTestDB:
@@ -227,7 +227,7 @@ app/Kalani/Project/ServiceProviders/RoutingServiceProvider.php:
 
 Add the routing service provider to the providers array in app/config/app.php:
 
-                'Kalani\Project\ServiceProviders\RoutingServiceProvider',
+        'Kalani\Project\ServiceProviders\RoutingServiceProvider',
 
 Update git:
 
@@ -254,8 +254,12 @@ Edit the acceptance test with things like this:
         $I->amOnPage('/');
         $I->dontSee('The requested URL');
         $I->dontSee('Exception');
-        $I->see('{something}', 'h1');  // Show the page is being served
-        $I->see('{something}', 'li');  // Show data is being delivered
+        
+        // Show the page is being served
+        $I->see('{something}', 'h1');  
+
+        // Show data is being delivered
+        $I->see('{something}', 'li');  
     }
 
     // This is an example. Contrast the commands with the Functional test, below:
@@ -365,9 +369,39 @@ Edit the migration:
         }
     }
 
+Create seeded data:
+
+    < ?php
+
+    class UsersTableSeeder extends Seeder 
+    {
+        public function run()
+        {
+            $data = array(
+                //  id, username, password
+                array(1, 'joel', 'test'),
+                array(2, 'test1', 'test'),
+                array(3, 'test2', 'test'),
+            );
+
+            $items = array();
+            foreach($data as $item) {
+                $items[] = array(
+                    'id'         => $item[0],
+                    'username'   => $item[1],
+                    'password'   => Hash::make($item[2]),
+                    'created_at' => new DateTime,
+                    'updated_at' => new DateTime,
+                );
+            }
+
+            DB::table('users')->insert($items);
+        }
+    }
+
 Create a test for routes (app/test/routes.php). This should be a functional test that ultimately verifies that every exposed route in the app is reachable (eg, the method exists):
 
-    <?php
+    < ?php
 
     /**
      * @group functional
