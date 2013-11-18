@@ -1,15 +1,28 @@
 HTML 5
 ===============
 
+* [Custom Attributes](#custom)
+* [Canvas](#canvas)
+* [Flexbox](#flexbox)
+
+
+
+
+
+Custom Attributes <a name="custom">
+---------------------------------------
+
 You can include any number of custom attributes in any page element, simply precede the name with data-. eg:
 
     data-pk:        primary key
     data-name:      name
     data-whatever:  whatever ;-)
 
+Access them in jquery with $('.selector').data('pk');
 
-Canvas
------------
+
+Canvas <a name="canvas">
+---------------------------
 The canvas is a drawing surface for various shapes. Here's an example on how to use it:
 
 ``` js
@@ -120,3 +133,128 @@ Here's an example, using KineticJS:
     stage.add(layer);
 ```
 
+
+
+Flexbox
+-----------------
+https://www.adobe.com/devnet/html5/articles/working-with-flexbox-the-new-spec.html
+
+Flexbox is new to HTML5; many browsers can't handle it yet. It's very powerful for laying things out. It's still in development, and frequently needs a vendor prefix, eg:
+
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display:  flex;
+
+There are two main objects with a flexbox:
+
+    Flex Container: Parent element in which flex item are located
+    Flex item:      The child of a flex container (the parent)
+
+
+### Flex Container
+
+    display: flex           // sets up this object as a container
+
+    flex-flow:              // The main axis for this container
+        ROW                 // 1 row, items in columns
+        column              // 1 column, items in rows
+        wrap                // ???????
+
+    flex-wrap:              //
+        wrap                //
+        nowrap              //
+        wrap-reverse        //
+
+    flex-direction:         //
+        ROW                 //
+        row-reverse         //
+        column              //
+        column-reverse      //
+
+    justify-content:        // Align elements along the main axis of the container
+        flex-start          // Packed toward start
+        flex-end            // Packed toward end
+        center              // Packed toward center
+        space-between       // Evenly distributed in line
+        space-around        // Evenly distributed in line with half-size spaces at ends
+
+    align-items:            // Align items along the cross axis of the container
+
+    baseline                // Align the baseline of items to the cross line
+    stretch                 // Stretch items a little to align Flex items and baseline
+
+
+### Flex Items
+
+    order           // changes the order of an item
+    flex            // shorthand for: none | [ <flex-grow> <flex-shrink> || <flex-basis> ]
+    flex-grow       // How much an item can grow relative to others (integer)
+    flex-shrink     // How much an item can shrink relative to others (integer)
+    flex-basis      // Initial width of item before free space is distributed (can be auto)
+    align-self      // overrides align-items for this item
+
+
+### Examples
+
+This is a picture, with a name, date, and comment:
+
+```css
+    *,*::before,*::after {
+        box-sizing:border-box
+    }
+    html,body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+    }
+    .comment {
+        display: -webkit-flex;
+        flex-flow: column;
+    }
+    .comment header {
+        display: -webkit-flex;
+        flex-flow: row;
+    }
+    .comment header img {
+        height: 50px;
+        width: 50px;
+        min-width: 50px;
+        border: 4px solid black;
+        margin-right: 10px;
+    }
+    .comment header .text {
+         margin-top: auto; /* pin to bottom */
+         margin-bottom: auto; /* pin to top */
+    }
+```
+
+It can work with html that looks like this:
+
+```html
+    <div class="comment">
+        <header>
+            <img src="foo">
+            <div class="text">
+                Header text (including name and date)
+            </div>
+        </div> <!--  header -->
+        <div class="body">
+            Body text
+        </div>
+    </div> <!--  .comment -->
+```
+
+
+Custom Scrollbars
+----------------------------
+http://css-tricks.com/custom-scrollbars-in-webkit/
+
+    ::-webkit-scrollbar              { /* 1 */ }
+    ::-webkit-scrollbar-button       { /* 2 */ }
+    ::-webkit-scrollbar-track        { /* 3 */ }
+    ::-webkit-scrollbar-track-piece  { /* 4 */ }
+    ::-webkit-scrollbar-thumb        { /* 5 */ }
+    ::-webkit-scrollbar-corner       { /* 6 */ }
+    ::-webkit-resizer                { /* 7 */ }
