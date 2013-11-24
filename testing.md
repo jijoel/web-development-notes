@@ -7,7 +7,6 @@ This document contains notes related to testing, using these tools:
 * [phpunit](#phpunit)
     * [Testing for exceptions](#phpunit-exceptions)
     * [Data Providers](#phpunit-data-providers)
-* [Mockery](#mocks)
 * [Laravel Techniques](#laravel)
     * [Call/Response](#laravel-call)
     * [Web Crawler](#laravel-web-crawler)
@@ -16,6 +15,7 @@ This document contains notes related to testing, using these tools:
         * [Redirecting](#laravel-client-redirection)
         * [Crawler](#laravel-crawler)
     * [Laravel 4 IoC and Facades](#laravel-ioc)
+    * [Mockery](#mocks)
     * [Mock Input](#laravel-mock-input)
     * [Mocking a Facade](#laravel-mock-facade)
     * [In-memory database and test environment](#laravel-memory-db)
@@ -838,8 +838,8 @@ This is how to mock a facade:
 I think that ...\Config::swap  statement actually swaps out the class the facade is looking for.
 
 
-Mocking Demeter Chains
------------------------------
+### Demeter Chains <a name="demeter">
+
 Mockery will let us mock demeter chains, eg `$object->foo()->bar()->zebra()->alpha()->selfDestruct();`. It will return the value of the LAST entry of the entire chain. We can mock all of that like this:
 
 ```php
@@ -867,7 +867,11 @@ If we need to mock multiple statements, we do it like this:
 
 // TODO: Mock multiple statements
 
-### Testing Protected and Private Methods
+
+Reflection <a name="reflection">
+----------------------------------
+
+### Reflection for Testing Protected and Private Methods
 
 With Reflection, we can test protected and private methods, like this:
 
@@ -896,7 +900,6 @@ Here's an actual test:
      * @dataProvider getSearchStrings
      */
     public function testSplitIntoWords($input, $expected)
-
     {
         // use a reflection class to make this method testable
         $class = new \ReflectionClass('KBase\Repositories\Searcher');
@@ -1279,7 +1282,13 @@ This will produce output like this (where you can see the actual query string):
 You can also export the data to a log, like so:
 
     \Log::debug(var_export(DB::getQueryLog(), true));
-         
+
+
+We can also run a query every time the database accessed, to return the SQL code. Like this:
+
+    Event::listen('illuminate.query', function($sql){
+        var_dump($sql);
+    });
           
           
           

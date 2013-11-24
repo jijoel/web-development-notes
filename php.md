@@ -12,6 +12,7 @@ php commands
     compact('items')    shorthand for array('items' => $items);
     strip_tags($str)    strips all html tags from $str
     get_class           Returns the name of a class from an object
+    get_class_methods   Returns all public methods of a class
     
     is_callable($c, $s) Returns true if the class $c has (public) method $s
     method_exists       Similar to is_callable, but for all methods (including protected/private) 
@@ -55,6 +56,23 @@ It has several interesting things to choose from:
     getNamespaceName    // Return the full namespace of the class
     getParentClass      // Return the name of the parent class for this class
     getMethod()->getParameters()
+
+We can also use it in testing, to test private and protected methods. There's some disagreement about whether private and protected methods should be tested; doing so makes the tests more brittle, but it will point out precisely where things are failing, if there's an error. For instance:
+
+```php
+    /**
+     * @dataProvider getSearchStrings
+     */
+    public function testSplitIntoWords($input, $expected)
+    {
+        // use a reflection class to make this method testable
+        $class = new \ReflectionClass('KBase\Repositories\Searcher');
+        $method = $class->getMethod('splitStringIntoWords');
+        $method->setAccessible(true);
+        $output = $method->invokeArgs($class, array($input));
+        $this->assertEquals($expected, $output);
+    }
+```
 
 
 

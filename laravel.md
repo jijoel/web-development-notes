@@ -18,6 +18,8 @@ Laravel
 * [Mail](#mail)
 * [Logging](#logging)
 * [Sessions](#sessions)
+* [Redirections](#redirection)
+* [Events](#events)
 
 
 
@@ -567,6 +569,67 @@ class Customer extends \Eloquent {
 }
 ```
 
+We can also use data from the pivot table in our child records. For instance, if we have tables that look like this:
+
+    Clinic:        id, ...
+    Availability:  clinic_id, therapist_id, status
+    Therapist:     id
+    Session:       id, therapist_id, clinic_id, ...
+
+In our view, we want to call this:
+
+    @foreach($clinics as $clinic)
+        @foreach($clinic->therapists as $therapist)
+            {{ $therapist->status_message }}
+            {{ $therapist->other_fields... }}
+            @foreach($therapist->sessions as $session)
+                {{ $session->time }}
+
+Clinic can include something like this:
+
+```php
+    public function therapists()
+    {
+        return $this->belongsToMany(
+            'Kalani\KSchool\Models\Therapist', 
+            'availability',
+            'clinic_id'
+        )->withPivot('status');
+    }
+```
+
+In Therapist, we can do something like this:
+
+```php
+    public function getStatusMessageAttribute()
+    {
+        if ($this->pivot) {
+            return $this->pivot->status;
+        }
+    }
+
+    public function getSessionsAttribute()
+    {
+        if (! $this->pivot) {
+            return;
+        }
+
+        $clinicId = $this->pivot->clinic_id;
+
+        return $this->appointments()
+            ->forClinic($clinicId)->get();
+    }
+```
+
+In Appointment, 
+
+```php
+    public function scopeForClinic($query, $clinic)
+    {
+        $query->where('clinic_id', $clinic);
+    }
+```
+
 
 #### Utilities <a name="model-utility">
 
@@ -735,40 +798,171 @@ You can use a session to return you to a main page, after making some change in 
 For this particular function, laravel has a built-in method, `Redirect::intended('default')`
 
 
+Redirections <a name="redirection">
+-------------------------------------
+Laravel has several methods for handling redirections. The main facade is Redirect. We can use:
+
+    Redirect::intended('default')
+    Redirect::home()                // goes to the route named 'home'
+    Redirect::back()                // goes to the calling url
+    Redirect::route('named_route')
+    Redirect::to('path')
+    Redirect::action('Controller@method')
+
+Redirect::back doesn't work so well during testing, because test drivers don't set a refering URL. This can be done instead:
+
+    protected function getRedirect()
+    {
+        $referer = Request::header('referer');
+
+        return $referer ? Redirect::to($referer) : Redirect::route('foo');
+    }
+
+Alternately, we can create an alternate Redirector class.
+
+```php
+    < ?php 
+    use Illuminate\Routing\Redirector as LaravelRedirector;
+
+
+    class Redirector extends LaravelRedirector
+    {
+
+       /**
+         * Create a new redirect response to the previous location.
+         *
+         * @param  string  $fallback
+         * @param  int     $status
+         * @param  array   $headers
+         * @return \Illuminate\Http\RedirectResponse;
+         */
+        public function back($fallback = null, $status = 302, $headers = array())
+        {
+            $back = $this->generator->getRequest()->headers->get('referer');
+      
+            if (is_null($back))
+            {
+              $back = $fallback;
+            }
+        
+            return $this->createRedirect($back, $status, $headers);
+        }
+    }
+```
+
+We tell Laravel to use it with a RoutingServiceProvider, like so:
+
+```php
+    < ?php
+
+    use Illuminate\Routing\Router;
+    use Illuminate\Routing\RoutingServiceProvider as LaravelRoutingServiceProvider;
+
+    class RoutingServiceProvider extends LaravelRoutingServiceProvider 
+    {
+        /**
+         * Register the Redirector service.
+         *
+         * @return void
+         */
+        protected function registerRedirector()
+        {
+            $this->app['redirect'] = $this->app->share(function($app)
+            {
+                $redirector = new Redirector($app['url']);
+
+                // If the session is set on the application instance, we'll inject it into
+                // the redirector instance. This allows the redirect responses to allow
+                // for the quite convenient "with" methods that flash to the session.
+                if (isset($app['session.store']))
+                {
+                    $redirector->setSession($app['session.store']);
+                }
+
+                return $redirector;
+            });
+        }
+
+    }
+```
+
+... and, of course, load the redirection service provider in app.php
+
+
 Events <a name="events">
 --------------------------
 Events are a very powerful implementation of the Observer pattern. Many of Laravel's objects will send an event as they do work, and you can trap those events, look at them, and pass back a value to let Laravel know if it should cancel the current activity. It generally passes a full object to you, so you can see what is happening. To use events, enter this in a place where it will be executed (eg, start.php, or routes.php, or filters.php, or include a path to something else):
 
 ```php
-    Event::listen('eloquent.creating*', function($model) {
+ ```php
+         Event::listen('eloquent.creating*', function($model) {
         // will be fired before a record is created in any table
 
-    Event::listen('illuminate.query', function ($sql, $bindings, $times) {
-        // will be fired for every SQL query
-```
+        Event::listen('illuminate.query', function ($sql, $bindings, $times) {
+            // will be fired for every SQL query
+    ```
 
-They can also be put directly in your models:
+    They can also be put directly in your models:
+
+    ```php
+        class Post extends eloquent {
+            public static function boot()
+            {
+                parent::boot();
+
+                static::creating(function($post)
+                {
+                    $post->created_by = Auth::user()->id;
+                });
+    ```
+
+    Info at:
+    http://driesvints.com/blog/using-laravel-4-model-events/
+    http://jasonlewis.me/article/laravel-events
+
+    Here are some standard Laravel event types:
+
+       ```
+
+
+ We tell Laravel to use it with a RoutingServiceProvider, like so:
 
 ```php
-    class Post extends eloquent {
-        public static function boot()
-        {
-            parent::boot();
+    < ?php
 
-            static::creating(function($post)
+    use Illuminate\Routing\Router;
+    use Illuminate\Routing\RoutingServiceProvider as LaravelRoutingServiceProvider;
+
+    class RoutingServiceProvider extends LaravelRoutingServiceProvider 
+    {        Event::fire('laravel.done                [Response $response]');
+         /**
+         * Register the Redirector service.
+         *
+         * @return void
+         */
+        protected function registerRedirector()
+        {
+            $this->app['redirect'] = $this->app->share(function($app)
             {
-                $post->created_by = Auth::user()->id;
+                $redirector = new Redirector($app['url']);
+
+                // If the session is set on the application instance, we'll inject it into
+                // the redirector instance. This allows the redirect responses to allow
+                // for the quite convenient "with" methods that flash to the session.
+                if (isset($app['session.store']))
+                {
+                    $redirector->setSession($app['session.store']);
+                }
+
+                return $redirector;
             });
+        }
+
+    }
 ```
 
-Info at:
-http://driesvints.com/blog/using-laravel-4-model-events/
-http://jasonlewis.me/article/laravel-events
-
-Here are some standard Laravel event types:
-
-    Event::fire('laravel.done                [Response $response]');
-    Event::fire('laravel.log                 [String $type, String $message]');
+... and, of course, load the redirection service provider in app.php
+   Event::fire('laravel.log                 [String $type, String $message]');
     Event::fire('laravel.query               [String $sql, Array $bindings, String $time]');
     Event::fire('laravel.resolving           [String $type, Mixed $object]');
     Event::fire('laravel.composing: {view}   [View $view]');

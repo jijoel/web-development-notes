@@ -444,3 +444,16 @@ Add routes to the database. In routes.php:
     Route::resource('todos', 'TodosController', array(
         'only'=>array('index', 'store', 'destroy')));
 
+
+Load generators. In composer.json, add:
+
+    "require-dev": {        
+        "generator": "dev-dev"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/jijoel/generator"
+        }
+    ],
+
