@@ -282,7 +282,7 @@ http://twitter.github.io/typeahead.js/
 Slideshow:
 http://jquery.malsup.com/cycle2/
 
-Auto-size text fields:
+Auto-size text fields (autogrow textarea input type):
 http://www.jacklmoore.com/autosize/
 
 Money masks:
@@ -390,6 +390,10 @@ https://github.com/ifightcrime/bootstrap-growl
 
 Semantic web components (similar to bootstrap):
 http://semantic-ui.com/
+
+In-place editing for jquery (works with ajax):
+http://www.appelsiini.net/projects/jeditable
+http://vitalets.github.io/x-editable/
 
 
 Backbone <a name="backbone">

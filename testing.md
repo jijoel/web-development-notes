@@ -1279,10 +1279,29 @@ This will produce output like this (where you can see the actual query string):
 You can also export the data to a log, like so:
 
     \Log::debug(var_export(DB::getQueryLog(), true));
-         
-          
-          
-          
+
+
+
+The TestCase class contains several helper methods to make testing your application easier. For instance, set the currently authenticated user using the `be` method  (TestCase::be):
+
+    $user = new User(array('name' => 'John'));
+    $this->be($user);
+
+We can do similar things with codeception tests:
+
+```php
+    protected function setUser($username=Null)
+    {
+        if ($username) {
+            $model = Kalani\KDB\Models\User::where('username', $username)->first();
+            return Auth::setUser($model);
+        }
+        
+        Auth::logout();
+    }
+```
+
+
 Selenium <a name="selenium">
 ====================================================================
 
