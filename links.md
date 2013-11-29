@@ -186,10 +186,6 @@ Multi-gateway payment processing library:
 https://github.com/adrianmacneil/omnipay
 "omnipay/omnipay": "1.*"
 
-Create PDF files:
-https://github.com/barryvdh/laravel-dompdf
-"barryvdh/laravel-dompdf": "dev-master"
-
 Breadcrumbs:
 https://github.com/davejamesmiller/laravel-breadcrumbs
 
@@ -202,6 +198,28 @@ https://github.com/kapv89/reposed
 Shopping Cart:
 https://github.com/moltin/laravel-cart
 
+Laravel Nested Set:
+https://github.com/lazychaser/laravel4-nestedset
+
+Create/work with PDF files:
+https://github.com/barryvdh/laravel-dompdf
+"barryvdh/laravel-dompdf": "dev-master"
+
+http://www.tcpdf.org/index.php
+"tecnick.com/tcpdf": "dev-master"
+
+HTML -> PDF Converter (with some Laravel4 wrappers):
+https://github.com/dompdf/dompdf
+"barryvdh/laravel-dompdf": "dev-master"
+"thujohn/pdf": "dev-master"
+
+FPDF (possibly included in distro as php-fpdf):
+http://www.fpdf.org/
+"itbz/fpdf": "dev-master"
+
+FPDI (FPDF Document Importer; import/annotate pdf files):
+(also works with templates)
+http://www.setasign.com/products/fpdi/downloads/
 
 
 
@@ -282,7 +300,7 @@ http://twitter.github.io/typeahead.js/
 Slideshow:
 http://jquery.malsup.com/cycle2/
 
-Auto-size text fields:
+Auto-size text fields (autogrow textarea input type):
 http://www.jacklmoore.com/autosize/
 
 Money masks:
@@ -390,6 +408,10 @@ https://github.com/ifightcrime/bootstrap-growl
 
 Semantic web components (similar to bootstrap):
 http://semantic-ui.com/
+
+In-place editing for jquery (works with ajax):
+http://www.appelsiini.net/projects/jeditable
+http://vitalets.github.io/x-editable/
 
 
 Backbone <a name="backbone">

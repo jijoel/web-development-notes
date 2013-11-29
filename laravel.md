@@ -92,8 +92,20 @@ For any classes that use facades (most of Laravel's classes), get the original c
     echo get_class(App::getFacadeRoot());       (App, or any other class)
 
 
-    
-IoC Binding<a name="ioc">
+Globals
+------------------------
+We can use any facade like a global, and can reach almost everything through the App facade (see [IoC Binding](#ioc), below).
+
+There are some helper functions that work like globals:
+
+    app_path()      Path to the 'app' folder
+    base_path()     Path to the project's root folder
+    public_path()   Path to the 'public' folder
+    storage_path()  Path to the 'app/storage' folder
+
+
+
+IoC Binding <a name="ioc">
 ----------------------------
 
 To use classes that are bound to Laravel's IoC container:
