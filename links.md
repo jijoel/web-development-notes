@@ -186,10 +186,6 @@ Multi-gateway payment processing library:
 https://github.com/adrianmacneil/omnipay
 "omnipay/omnipay": "1.*"
 
-Create PDF files:
-https://github.com/barryvdh/laravel-dompdf
-"barryvdh/laravel-dompdf": "dev-master"
-
 Breadcrumbs:
 https://github.com/davejamesmiller/laravel-breadcrumbs
 
@@ -202,6 +198,28 @@ https://github.com/kapv89/reposed
 Shopping Cart:
 https://github.com/moltin/laravel-cart
 
+Laravel Nested Set:
+https://github.com/lazychaser/laravel4-nestedset
+
+Create/work with PDF files:
+https://github.com/barryvdh/laravel-dompdf
+"barryvdh/laravel-dompdf": "dev-master"
+
+http://www.tcpdf.org/index.php
+"tecnick.com/tcpdf": "dev-master"
+
+HTML -> PDF Converter (with some Laravel4 wrappers):
+https://github.com/dompdf/dompdf
+"barryvdh/laravel-dompdf": "dev-master"
+"thujohn/pdf": "dev-master"
+
+FPDF (possibly included in distro as php-fpdf):
+http://www.fpdf.org/
+"itbz/fpdf": "dev-master"
+
+FPDI (FPDF Document Importer; import/annotate pdf files):
+(also works with templates)
+http://www.setasign.com/products/fpdi/downloads/
 
 
 
