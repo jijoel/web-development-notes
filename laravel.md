@@ -821,6 +821,9 @@ Laravel has several methods for handling redirections. The main facade is Redire
     Redirect::to('path')
     Redirect::action('Controller@method')
 
+    Redirect::to(route('controller', $record_id) . '#section')
+
+
 Redirect::back doesn't work so well during testing, because test drivers don't set a refering URL. This can be done instead:
 
     protected function getRedirect()

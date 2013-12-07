@@ -192,6 +192,9 @@ https://github.com/davejamesmiller/laravel-breadcrumbs
 History tracking:
 https://github.com/VentureCraft/revisionable
 
+Form Builder:
+https://github.com/Anahkiasen/former
+
 Reposed (an extended model class):
 https://github.com/kapv89/reposed
 
@@ -348,6 +351,9 @@ http://trentrichardson.com/examples/timepicker/
 Bootstrap-compatible date picker:
 http://eternicode.github.io/bootstrap-datepicker/
 
+Autocomplete:
+http://hillelcoren.com/flex-autocomplete/
+
 Font Awesome (various icons):
 http://fortawesome.github.io/Font-Awesome/
 
@@ -413,6 +419,11 @@ In-place editing for jquery (works with ajax):
 http://www.appelsiini.net/projects/jeditable
 http://vitalets.github.io/x-editable/
 
+Animation:
+https://daneden.me/animate/
+http://coding.smashingmagazine.com/2011/09/14/the-guide-to-css-animation-principles-and-examples/
+
+
 
 Backbone <a name="backbone">
 ---------------------------------
@@ -475,6 +486,8 @@ https://github.com/alariva/yars
 Missing pet flyer
 https://github.com/msurguy/missingpetflyer
 
+Invoicing System:
+https://github.com/hillelcoren/invoice-ninja
 
 
 Interesting Blogs <a name="blogs">
