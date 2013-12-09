@@ -249,12 +249,15 @@ It can work with html that looks like this:
 
 Custom Scrollbars
 ----------------------------
+You can create custom scroll bars, for any object or type of object.
+
 http://css-tricks.com/custom-scrollbars-in-webkit/
 
-    ::-webkit-scrollbar              { /* 1 */ }
-    ::-webkit-scrollbar-button       { /* 2 */ }
-    ::-webkit-scrollbar-track        { /* 3 */ }
-    ::-webkit-scrollbar-track-piece  { /* 4 */ }
-    ::-webkit-scrollbar-thumb        { /* 5 */ }
-    ::-webkit-scrollbar-corner       { /* 6 */ }
-    ::-webkit-resizer                { /* 7 */ }
+    ::-webkit-scrollbar              { }
+    ::-webkit-scrollbar-button       { }
+    ::-webkit-scrollbar-track        { }
+    ::-webkit-scrollbar-track-piece  { }
+    ::-webkit-scrollbar-thumb        { }
+    ::-webkit-scrollbar-corner       { }
+    ::-webkit-resizer                { }
+
