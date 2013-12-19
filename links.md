@@ -79,6 +79,10 @@ Composer Packages <a name="composer">
 Laravel package registry:
 http://registry.autopergamene.eu/
 
+Way Generators
+https://github.com/JeffreyWay/Laravel-4-Generators
+"way/generators": "dev-master"
+
 Prevent artisan from running some commands (eg, migrate:refresh on a production server):
 https://github.com/Itrulia/ArtisanBlock
 

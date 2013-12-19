@@ -373,7 +373,7 @@ Feature Branch:
     creating:
     $ git checkout -b myfeature dev         // switch to new myfeature branch, forked from dev
     $ git push origin myfeature:myfeature   // pushes from local machine to origin 
-   $ git branch -a                         // shows all branches available on the remote repository
+    $ git branch -a                         // shows all branches available on the remote repository
     $ git checkout -b dev origin/dev        // checkout the dev remote branch (create a local tracker)
 
     incorporating:
