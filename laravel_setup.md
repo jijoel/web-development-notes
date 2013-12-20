@@ -23,13 +23,12 @@ Edit .gitignore:
 
     # OS
     .DS_Store
+    Thumbs.db
 
     # Configuration
     /app/config/staging
     /app/config/production
 
-    # Codeception
-    _*
 
 Setup permissions:
 
@@ -132,6 +131,7 @@ Set up database configuration for testing. Create app/config/testing/database.ph
             'codeception' => array(
                 'driver'   => 'sqlite',
                 'database' => __DIR__.'/../../tests/codeception/_data/db.sqlite',
+                'database' => app_path() . '/tests/codeception/_data/db.sqlite',
                 'prefix'   => '',
             ),
         )
@@ -172,8 +172,9 @@ Create a bash file to load the codeception test database with migrated/seeded da
 
     php artisan migrate --seed --database=codeception
     sqlite3 app/tests/codeception/_data/db.sqlite .dump > app/tests/codeception/_data/dump.sql
+    chmod o+w app/tests/codeception/_data/db.sqlite
 
-    ls app/tests/codeception/_data
+    for i in `find app/tests/codeception/_data -type f  | grep -v .gitignore`; do ls -l $i; done
 
 Setup permissions:
 
@@ -228,6 +229,15 @@ app/Kalani/Project/ServiceProviders/RoutingServiceProvider.php:
 Add the routing service provider to the providers array in app/config/app.php:
 
         'Kalani\Project\ServiceProviders\RoutingServiceProvider',
+
+In app/tests/codeception/_data and _log, set .gitignore as follows:
+
+    *
+    !.gitignore
+
+In app/tests/codeception/acceptance, functional, and unit, set .gitignore as follows:
+
+    *Guy.php
 
 Update git:
 
@@ -437,6 +447,45 @@ Create a test for routes (app/test/routes.php). This should be a functional test
         }
     }
 
+This is a better routes test:
+
+```php
+    < ?php
+
+    /**
+     * @group functional
+     */
+    class RoutesTest extends TestCase 
+    {
+        public function testRouteMethodsExist()
+        {
+            $missing = '';
+            $routes = App::make('router')->getRoutes();
+            foreach ($routes as $key=>$route) {
+                $action = $route->getAction();
+
+                if (isset($action['controller'])) {
+                    $action = $action['controller'];
+                }
+
+                if (is_array($action)) {
+                    continue;   // TODO: Handle arrays???
+                }
+
+                if (! $action || strpos($action, '@')===False) {
+                    continue;
+                }
+
+                list($class, $method) = explode('@', $action);
+                if (! method_exists($class, $method)) {
+                    $missing = $missing . "Method $class::$method does not exist" . PHP_EOL;
+                }
+            }
+            $this->assertEquals('', $missing);
+        }
+    }
+```
+
 Add routes to the database. In routes.php:
 
     Route::get('/', array('as'=>'home', 'uses'=>'TodosController@index'));
@@ -448,7 +497,7 @@ Add routes to the database. In routes.php:
 Load generators. In composer.json, add:
 
     "require-dev": {        
-        "generator": "dev-dev"
+        "kalani/generator": "dev-master"
     },
     "repositories": [
         {
