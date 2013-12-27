@@ -66,3 +66,78 @@ Some things I've found along the way
 
 
 
+Best Practices  (Clean Code)
+-------------------------------
+
+* Always start with acceptance/functional test
+* Go from outside, and work in.
+
+* Do not start with model. Delay for as long as possible.
+  This makes system more accepting of change.
+* Start with view, degenerate scenario (outside-in)
+  * simplest; lets you get system structure working
+  * basic structure, routes, etc.
+  * hard-code some html
+  * route, controller, method, view (hard-code expected values)
+* Scenario 2 is for variations
+  * For early tests, create a struct/array with data...
+* Introduce dynamism -- programming by wishful thinking
+  (if this worked, it would be wonderful)
+  * Modify the view for how you would like the data to be called
+  * Build a dummy object in the controller (an array of them...)
+* Move code from test -> view -> controller
+
+* When testing, use a Given, When, Then structure
+    Given: the initial state            (setup)
+    When:  what happens to change it?   (method call, etc.)
+    Then:  what should the result be?   (assertion(s))
+
+* Complexity should be extracted from the test objects and into helper functions.
+
+* Switch statements and if statements can cause problems
+
+### Function Structure
+
+* As few arguments to functions as possible, at most 3
+* (if more than 3 variables are so cohesive they're needed together, why aren't they an object?)
+* No boolean arguments ever. Write two functions, instead
+  (one for the true case, one for the false case)
+* Don't use output arguments at all
+
+* Public functions at the top; private/protected below
+* Important functions at the top, less important at the bottom
+
+* Organize functions in the order they are called, and their heirarchy:
+  * Main Public
+  * Another Public
+    * Main Public Sub1
+      * Sub1 sub1 
+        * Sub1 sub1 sub1
+      * Sub1 sub2
+        * Sub1 sub2 sub1
+    * Main Public Sub2
+
+* No backward references: No private/protected function below calls one above
+
+* Switch statements are bad -- a missed opportunity to use polymorphism
+
+* Command/Query Separation - used to manage side-effects
+  * Command: Change state of system; returns nothing
+  * Query:   Returns state of system or value of computation
+
+  * Functions that return values should not change state, and vice versa
+  * If a command fails, throw an exception
+
+* Tell, don't ask
+  * Do not ask an object for it's state, then make decisions about what it should do
+
+* Write error handling code first
+
+* Entity / Interactors don't know anything about outside environment.
+* Entity: Business Rules or business objects
+* Interactor: Talk to entities (Use Cases / eg, "AddEmployeeTransaction")
+* Interactor would know about database... also about security/permissions?
+
+* Single Responsibility: Family of functions that serve a particular actor
+* Responsibilities are assigned to actors (a role that a user changes)
+* Unit tests generally align with actors

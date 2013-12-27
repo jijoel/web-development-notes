@@ -521,6 +521,9 @@ Validating an input array and normal inputs.
 http://forums.laravel.io/viewtopic.php?id=13146
 http://stackoverflow.com/questions/18161785/validation-of-array-form-fields-in-laravel-4-error/18163546#18163546
 
+Validation services:
+http://jasonlewis.me/article/laravel-advanced-validation
+
 Events:
 http://jasonlewis.me/article/laravel-events
 
@@ -536,5 +539,10 @@ http://stackoverflow.com/questions/18127040/multi-select-filter-search-in-larave
 Beanstalkd (a work queue, which can run queued jobs) with Laravel:
 http://fideloper.com/ubuntu-beanstalkd-and-laravel4
 
+Ruby / Hexagonal Architecture
+http://www.youtube.com/watch?v=CGN4RFkhH2M
+
+Design Patterns in PHP
+http://github.com/domnikl/DesignPatternsPHP
 
 

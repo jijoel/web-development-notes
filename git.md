@@ -113,7 +113,8 @@ Use a .gitignore file in a directory to ignore files and folders. List each type
 Parts of git:
 
     working directory       uncompressed files
-    staging area (index)    lets you choose what to commit; good encapsulated messages
+    staging area (index)    lets you choose what to commit; 
+                            good encapsulated messages
     git repository          
 
 git diff is used to see changes that have been made over time.
@@ -149,7 +150,18 @@ git log shows a history of commits over time
 
 Commits<a name="commits" />
 -------------------------------
-You can arbitrarily move to any point in the log, see how things were then, and even create a new branch from that spot. To move to a separate point in the log, given these commits:
+A commit is basically a snapshot of changes at a given time. It includes a message about what has changed. To make a commit:
+
+    git add/rm <file(s)>            // Tell git what files to commit
+    git commit -m 'message'         // Take a snapshot of those changes
+
+You can commit all of the changed files (git add .), or select specific related things. The latter is much more useful, because you can give descriptive names about what has changed, and see it in the log.
+
+To modify the previous commit (if, for instance, you realize another file should have been added), make changes (eg, git add/rm), then enter:
+
+    git commit --amend
+
+You can arbitrarily move to any commit in the log, see how things were then, and even create a new branch from that spot. To move to a separate point in the log, given these commits:
 
 * 5d632ba (HEAD, origin/master, master) files to test
 * 5194b7e initial commit
@@ -157,18 +169,28 @@ You can arbitrarily move to any point in the log, see how things were then, and 
 To switch back to the initial commit, as it was before any changes were made:
 
     git reset 5194b7e               // moves back to the initial commit
-    git checkout -- .               // unstages changes to initial commit (modified files)
-    git clean -f                    // removes new files (created in commit:files to test)
-
-To switch, again, to the 'files to test' commit, with everything it has:
-
-    git reset 5d632ba
-    git checkout -- .
+    git checkout -- .               // unstages changes to initial commit 
+                                    // (eg, modified files)
+    git clean -f -d                 // removes any new files and directories 
+                                    // (anything that has not yet been added)
 
 To alter the last commit, stage the changes, then use:
 
     git commit -amend
 
+To see what has changed in a given commit:
+    
+    git show 5d632ba                    // shows all changes
+    git show --name-only 5d632ba        // shows names of files changed 
+
+To get only a list of files changed, with no header information, (eg, something that could be used to list files for a script, etc.), either of these will work: 
+
+    git show --pretty="format:" --name-only 5d632ba
+    git diff-tree --no-commit-id --name-only -r 5d632ba
+
+You can apply a specific commit on another branch to your current branch:
+
+    git cherry-pick 5d632ba
 
 
 Branches <a name="branch" />
@@ -306,7 +328,6 @@ To update your repository from the master repository, you can use upstream chang
 
     git merge upstream/master
     # Merges any changes fetched into your working files
-
 
 
 

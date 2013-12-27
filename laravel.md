@@ -26,7 +26,12 @@ Laravel
 Setup<a name="setup">
 ------------------------
 
-You can install it directly via composer:
+Install it via the installer:
+
+    download http://laravel.com/laravel.phar
+    php laravel.phar new <projectName> 
+
+Alternately (slower), install it directly via composer:
 
     composer create-project laravel/laravel <projectName>
 
