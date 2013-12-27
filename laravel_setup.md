@@ -32,6 +32,8 @@ Edit .gitignore:
 
 Setup permissions:
 
+    find . -type f | xargs chmod -x
+    chmod u+x artisan
     chmod -R go+w app/storage/*
 
 Set tabs to spaces:

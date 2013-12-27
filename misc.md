@@ -26,8 +26,41 @@ Get the name of the currently active database (from eg, USE db):
 
     select database();
 
+Get infomration about the version of mysql:
+
+    show variables like "%version%"
+
 Turn on the global event log:
 
     SET GLOBAL general_log_file = '/var/log/mysql/mysql.log';
     set GLOBAL general_log='ON'
+
+Users and Permissions
+
+    Permissions are granted to a combination of User and Host.
+
+    CREATE USER 'username'@'host' IDENTIFIED BY 'password';
+    GRANT [type of permission] ON [database name].[table name] TO '[username]'@'host';
+    SHOW GRANTS FOR 'username'@'host';
+    FLUSH PRIVILEGES;
+    
+    DROP USER 'username'@'host';
+    REVOKE [type of permission] ON [database name].[table name] FROM '[username]'@'host';
+
+    Grant permission types:
+        ALL             all access to a designated database (or if no database is selected, across the system)
+        CREATE          allows them to create new tables or databases
+        DROP            allows them to them to delete tables or databases
+        DELETE          allows them to delete rows from tables
+        INSERT          allows them to insert rows into tables
+        SELECT          allows them to use the Select command to read through databases
+        UPDATE          allow them to update table rows
+        GRANT OPTION    allows them to grant or remove other users' privileges
+
+    'host' can be a domain name, ip address, etc.:
+
+        'host.name'     name of machine
+        '192.168.0.1'   ip address
+        '192.168.0.%'   range of ip addresses
+        '%'             global
 

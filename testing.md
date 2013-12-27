@@ -245,9 +245,34 @@ Laravel Techniques <a name="laravel">
 
 Call/Response <a name="laravel-call">
 ----------------------------------------
+Laravel includes several assert methods to make testing easier.
+
+```php
+    $this->call('GET', '/items/1');
+    $this->assertResponseOk();              // status: 200
+    $this->assertResponseStatus(404);       // not found
+    $this->assertRedirectedTo('foo');
+    $this->assertRedirectedToRoute('route.name');
+    $this->assertRedirectedToAction('Controller@method');
+    $this->assertSessionHas('name');
+    $this->assertSessionHas('age', $value);
+    $this->assertHasOldInput();
+```
+
+We can also seed the database in tests, and set a currently authorized user:
+
+    $user = new User(array('name' => 'John'));
+    $this->be($user);
+
+    $this->seed();
+    $this->seed($connection);
+
 When unit testing, we can call functions and get the responses. We can also do this with mocks. The basic format is like this:
 
 ```php
+    $this->call('GET', '/items/1');
+    $response = $this->client->getResponse();
+
     $response = $this->action('GET', 'ItemsController@show', array('1'));
     $response = $this->call('GET', '/items/1');
     $this->assertTrue($response->isOk());
@@ -275,6 +300,8 @@ The response class has several useful functions, including:
 
 Response Helper Functions:
 
+    $this->client->getResponse()->...
+
     Function Name           Status Codes
     isInvalid()             <100 and >=600
     isInformational()       >=100 and <200
@@ -292,7 +319,7 @@ Response Helper Functions:
 use like:
 
     if ($response->isOK)  doSomething;
-
+n
 The view class that is returned also has valuable information:
 
     $result->original->getData();               // data sent to the view
@@ -952,6 +979,28 @@ You can also use the reflection technique to run protected methods that tests ne
         return $output;
     }
 ```
+
+There is another, simpler, way to do assertions on private and protected properties. phpunit includes assertions for Attributes, so you can do this:
+
+    $this->assertEquals('foo', $test->publicProperty);
+    $this->assertAttributeEquals('foo', $test->privateProperty);  // public, protected, or private
+
+We can do that for a lot of different assertion types, including:
+
+    $this->assertAttributeContains()
+    $this->assertAttributeNotContains()
+    $this->assertAttributeContainsOnly()
+    $this->assertAttributeNotContainsOnly()
+    $this->assertAttributeEmpty()
+    $this->assertAttributeNotEmpty()
+    $this->assertAttributeEquals()
+    $this->assertAttributeNotEquals()
+    $this->assertAttributeSame()
+    $this->assertAttributeNotSame()
+
+More info at: http://phpunit.de/manual/3.7/en/writing-tests-for-phpunit.html
+
+
 
 In-memory database and test environment <a name="laravel-memory-db">
 ----------------------------------------------------------------------
