@@ -1709,3 +1709,9 @@ Use WebGuy (acceptance tests) to see things on the page (like a user would); use
     }
 ```
 
+### Click on a laravel "submit" button:
+
+In Laravel, {{ Form::submit() }} creates an input field with type=submit. In a functional test, $I->click('Submit') won't work. Instead, use:
+
+    $I->click('input[type=submit]');
+

@@ -831,11 +831,11 @@ Laravel has several methods for handling redirections. The main facade is Redire
 
 Redirect::back doesn't work so well during testing, because test drivers don't set a refering URL. This can be done instead:
 
-    protected function getRedirect()
+    protected function getRedirectBack($defaultRoute)
     {
         $referer = Request::header('referer');
 
-        return $referer ? Redirect::to($referer) : Redirect::route('foo');
+        return $referer ? Redirect::to($referer) : Redirect::route($defaultRoute);
     }
 
 Alternately, we can create an alternate Redirector class.
@@ -1052,3 +1052,44 @@ To capture all events, I did this:
         }
     });
 ```
+
+
+Uploading Files
+--------------------
+In the form:
+
+    {{ Form::open(['route'=>'data.store', 'files'=>true]) }}
+    {{ Form::file('thumbnail') }}
+
+In the controller:
+
+    $file = Input::get('thumbnail');
+    $file->move(public_path.'/images/');
+
+
+
+Using Laravel/Blade with AngularJS (and other libraries)
+----------------------------------------------------------
+Both Laravel and Angular use the double curly brackets.
+
+Use '@{{' at the beginning of a brace to leave the braces (eg, make compatible for angular) 
+
+Other tips available here:
+http://scotch.io/bar-talk/quick-tip-using-laravel-blade-with-angularjs
+
+Changing the syntax in Angular:
+
+```js
+    var sampleApp = angular.module('sampleApp', [], function($interpolateProvider) {
+        $interpolateProvider.startSymbol('<%');
+        $interpolateProvider.endSymbol('%>');
+    });
+```
+
+Changing the syntax in Blade:
+
+```php
+    Blade::setContentTags('<%', '%>');      // for variables and all things Blade
+    Blade::setEscapedContentTags('<%%', '%%>');     // for escaped data
+```
+

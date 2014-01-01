@@ -141,3 +141,35 @@ Best Practices  (Clean Code)
 * Single Responsibility: Family of functions that serve a particular actor
 * Responsibilities are assigned to actors (a role that a user changes)
 * Unit tests generally align with actors
+
+Use case factory: make method (with use case name)
+Request Builder:  build method (with request name and constructor arguments)
+
+System design using SOLID principles
+
+* First, figure out who the actors are (groups of people who might request changes)
+* Single responsibility principle - one module per actor
+* Goal of component structure is independent deployability
+* Components should be large enough to justify cost of managing releases
+* (they will be independently versioned, etc... think: package)
+* When one class polymorphically uses another, the two classes should be in different components
+
+* Each use case can be called by many different controllers
+
+* Tests: Red, Green, Refactor 
+* Arrange / Act / Assert / Annihilate (cleanup);  Given / When / Then
+  * Arrange: Set up context / state / test fixture
+  * Act:     Call function / perform action we want to test
+  * Assert:  Check output of action; One logical assertion
+  * Annihilate:  Undo everything done in Arrange; restore to base state
+* As tests get more specific, code gets more generic
+  * Make incremental generalizations to the code:
+      constant --> variable --> array
+      if($i == 2)  -->  if($i == $n)  --> while($i==$n)
+  * Always start with the degenerate/edge test cases (errors/boundaries/etc)
+    * Null input (return valid output -- empty array, empty string, etc)
+
+  * Then, go for the guts of the algorithm
+  * Gradually increase complexity (you get stuck if you bite off too much at once) 
+    None of the code we write to pass early tests is wasted code; it’s just code that’s incomplete, not properly placed, or not general enough
+
