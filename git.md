@@ -176,7 +176,7 @@ To switch back to the initial commit, as it was before any changes were made:
 
 To alter the last commit, stage the changes, then use:
 
-    git commit -amend
+    git commit --amend
 
 To see what has changed in a given commit:
     
