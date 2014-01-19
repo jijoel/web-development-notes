@@ -498,6 +498,12 @@ These are used to change data before it is shown to a user, or before it is writ
     }
 ```
 
+We can tell Laravel arrays to include (or hide) given accessors or attributes. To do that:
+
+    protected $appends = array('name','chartable');                 // includes custom accessors
+    protected $hidden  = array('category','value','other');         // hides fields
+
+
 
 #### Scopes <a name="model-scope">
 
