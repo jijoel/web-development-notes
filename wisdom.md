@@ -164,7 +164,7 @@ System design using SOLID principles
   * Annihilate:  Undo everything done in Arrange; restore to base state
 * As tests get more specific, code gets more generic
   * Make incremental generalizations to the code:
-      constant --> variable --> array
+      constant --> variable --> array/loop
       if($i == 2)  -->  if($i == $n)  --> while($i==$n)
   * Always start with the degenerate/edge test cases (errors/boundaries/etc)
     * Null input (return valid output -- empty array, empty string, etc)
@@ -172,4 +172,53 @@ System design using SOLID principles
   * Then, go for the guts of the algorithm
   * Gradually increase complexity (you get stuck if you bite off too much at once) 
     None of the code we write to pass early tests is wasted code; it’s just code that’s incomplete, not properly placed, or not general enough
+
+* Name tests after When/Then:
+  * eg, testWhenPayrollIsRunPaymasterHoldsCheckForHourlyRateTimesHoursWorked
+  * See CleanCode-E21-Test-Design.mp4
+  * Setup functions named after Given (eg, givenStandardHourlyRate)
+* Tests should be named like well written specifications
+* Tests express behavior, not API.
+* Try to test algorithms, not results (spot-check results)
+
+* Test Doubles:
+    * Dummy     Implements interface; all methods return nothing  (Null Object)
+                Neither test nor implementation use values from object
+    * Stub      Dummy, but all methods return special fixed values
+                (can be used to drive code through tested pathway (ifs, etc.))
+    * Spy       Stub, but remembers how it was called (reports to test)
+                (which functions called, how many times, what arguments, etc.)
+    * Mock      Spy, but knows what should happen
+
+    * Fake      Simulated class; respond differently to different inputs
+                (can look like actual class; can be very complex)
+                If you use fakes, make sure to test the fakes, also
+                (avoid fakes, if can)
+
+* Stubs and spies are sufficient for unit tests
+* Sometimes fakes are useful for integration tests
+
+* Test-specific subclass:
+  * Make a subclass of the class to be tested
+  * Replace protected functions needed by the test
+  * Modify / eliminate behavior in protected functions
+* Self shunt
+  * The test becomes a mock (implement an interface, injects itself into class)
+  * You won't need a separate mock class...
+* Humble objects
+  * Isolate testable code from stuff that is hard to test
+  * Move interesting algorithm to a class that can be tested
+  * The Humble Object pattern can be used to test GUIs
+
+* When testing GUIs
+  * Test GUIs with your eyes, coupled with a fake back-end process
+  * GUI code (eg, view) shows UI ONLY
+    * It gets anything that might change from a connector
+    * Also, any static information (strings, etc.)
+  * The connector does not have any logic; it calls functions from an interface
+  * All logic happens in classes that implement the interface
+
+* App should consist of:
+  * Actions - single method use-case objects
+  * Things / Entities - simple objects, few methods
 

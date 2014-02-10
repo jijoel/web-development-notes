@@ -429,6 +429,9 @@ In a view, to get a link to the photos.show method (parameter id), use:
     GET photos/id/delete
     DELETE photos/id
 
+Our controller can return an error statement, like this:
+
+    return Response::make($view, 404);  // returns a 404 error
 
 
 Eloquent Models<a name="models">

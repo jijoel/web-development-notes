@@ -228,6 +228,11 @@ FPDI (FPDF Document Importer; import/annotate pdf files):
 (also works with templates)
 http://www.setasign.com/products/fpdi/downloads/
 
+Online payments
+http://payum.forma-dev.com/
+
+E-Commerce:
+http://sylius.org/
 
 
 
