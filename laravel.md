@@ -444,15 +444,24 @@ By default, the table name will be plural, and the model name will be singular. 
  
 To use something else, in the model,
  
-    <?php
+```php
     class User extends Eloquent {
         public static $table = 'my_user_table';
     }
+```
+
+We can also use something from an alternate database:
+
+```php
+    class User extends Eloquent {
+        public static $table = 'other_db.my_user_table';
+    }
+```
 
 To get additional data from a pivot table (eg, the M2M join table):
 
 ``` php
-    class Item extend s Eloquent
+    class Item extends Eloquent
     {
         public function vendors()
         {
@@ -491,6 +500,12 @@ These are used to change data before it is shown to a user, or before it is writ
         return new \Carbon\Carbon($value);
     }
 ```
+
+We can tell Laravel arrays to include (or hide) given accessors or attributes. To do that:
+
+    protected $appends = array('name','chartable');                 // includes custom accessors
+    protected $hidden  = array('category','value','other');         // hides fields
+
 
 
 #### Scopes <a name="model-scope">

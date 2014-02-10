@@ -26,7 +26,7 @@ Get the name of the currently active database (from eg, USE db):
 
     select database();
 
-Get infomration about the version of mysql:
+Get information about the version of mysql:
 
     show variables like "%version%"
 
@@ -34,6 +34,11 @@ Turn on the global event log:
 
     SET GLOBAL general_log_file = '/var/log/mysql/mysql.log';
     set GLOBAL general_log='ON'
+
+Show defined users:
+
+    SELECT user, host FROM mysql.user;
+
 
 Users and Permissions
 

@@ -123,7 +123,8 @@ git diff is used to see changes that have been made over time.
     git diff --staged     shows difference between committed and staged
     git diff HEAD         difference between working dir and HEAD (repository)
     git diff <hash> <file>  changes to <file> since <commit hash>
-    
+    git diff --name-only  <hash>  files changed since <hash>
+
 git log shows a history of commits over time
 
     git log               basic history of commits over time
@@ -176,7 +177,7 @@ To switch back to the initial commit, as it was before any changes were made:
 
 To alter the last commit, stage the changes, then use:
 
-    git commit -amend
+    git commit --amend
 
 To see what has changed in a given commit:
     

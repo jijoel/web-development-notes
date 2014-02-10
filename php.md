@@ -25,6 +25,11 @@ php commands
     array_replace_recursive  merge two complex arrays; replace matching items
 
 
+Replace a newline with a <br> code:
+return str_replace(array("\r\n", "\n", "\r"), '<br>', e($model->field));
+
+
+
 Reflection <a name="reflection">
 -----------------------------------
 

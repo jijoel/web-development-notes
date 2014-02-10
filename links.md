@@ -448,6 +448,13 @@ http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootst
 http://arturadib.com/hello-backbonejs/
 
 
+AngularJS <a name="angularjs">
+----------------------------------
+Example of using list/detail for an RSS reader:
+http://vojtajina.github.io/WebApp-CodeLab/FinalProject/index.html
+https://github.com/GoogleChrome/wReader-app
+
+
 
 Component Management <a name="components">
 --------------------------------------
