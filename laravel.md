@@ -787,18 +787,16 @@ Laravel can send email messages; also through gmail. Configuration for that shou
     'username' => 'your-email@gmail.com',
     'password' => 'your-password',
 
-Mail can also be queued for later. Use:
-
-    Mail::queue('view.name', $dataArray, function($message){
-        $message
-    });
-
-
 
 Queues <a name="queue">
 ------------------------
 Queues can speed up the front-end by doing work on the back-end. 
 
+You can also send a message via a queue:
+
+    Mail::queue('emails.view_name', $array_for_view, function($message) {
+        $message->to('recipient@address.com')->subject($subject);
+    });
 
 
 Logging<a name="logging">

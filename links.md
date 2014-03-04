@@ -432,6 +432,9 @@ Animation:
 https://daneden.me/animate/
 http://coding.smashingmagazine.com/2011/09/14/the-guide-to-css-animation-principles-and-examples/
 
+Multiselection widget:
+http://www.erichynds.com/blog/jquery-ui-multiselect-widget
+
 
 
 Backbone <a name="backbone">

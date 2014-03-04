@@ -14,6 +14,14 @@ Find critical information about every namespace, class, function, and interface 
     for i in `find app/Kalani -type f`; do cat $i | grep -E 'namespace|class|function|interface' | grep -vE 'class=|\$class|this->app'; done
 
 
+Download a patch that has been created by another github user, but not yet included in the main repo:
+
+    https://github.com/user/repo/pull/000.patch
+
+Apply the patch:
+
+    patch -p1 < 000.patch
+
 
 
 ### MySQL Commands
