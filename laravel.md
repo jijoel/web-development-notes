@@ -16,6 +16,7 @@ Laravel
 * [Views](#views)
 * [Forms](#forms)
 * [Mail](#mail)
+* [Queues](#queue)
 * [Logging](#logging)
 * [Sessions](#sessions)
 * [Redirections](#redirection)
@@ -785,7 +786,19 @@ Laravel can send email messages; also through gmail. Configuration for that shou
     'encryption' => 'ssl',
     'username' => 'your-email@gmail.com',
     'password' => 'your-password',
-    
+
+Mail can also be queued for later. Use:
+
+    Mail::queue('view.name', $dataArray, function($message){
+        $message
+    });
+
+
+
+Queues <a name="queue">
+------------------------
+Queues can speed up the front-end by doing work on the back-end. 
+
 
 
 Logging<a name="logging">
