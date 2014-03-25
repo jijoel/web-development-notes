@@ -530,6 +530,38 @@ These are used to filter data.
     }
 ```
 
+Sub-queries should be put into a sub-function; otherwise, the expression won't evaluate correctly. For instance, the above expression will be evaluated as:
+
+    due_at > 0 and not due_at is Null and due_at < '{time}' and closed_at=0 or closed_at is Null
+
+Not exactly what we want. To use a subquery:
+
+```
+    public function scopeForOpenRecords($query)
+    {
+        return $query->where(function($q) {
+            $q->where('closed', 0)
+                ->orWhereNull('closed');            
+        });
+    }
+```
+
+This will put parentheses in the correct locations, so we get the right results.
+
+We can also pass parameters to subqueries, like this:
+
+```
+    public function scopeForNameLike($query, $first, $last)
+    {
+        return $query->where(function($q) use ($first, $last) {
+            $q->whereRaw("soundex(first_name) = soundex('$first')")
+            ->whereRaw("soundex(last_name) = soundex('$last')");
+        });
+    }
+```
+
+
+
 
 #### Relationships <a name="model-relationship">
 
