@@ -1313,7 +1313,7 @@ We can test that migrations will work correctly. In this case, I have a function
 Additional stuff for testing<a name="laravel-extra">
 ----------------------------------------------------------
 
-To dump a query:
+To dump a sql query:
 
     var_dump(DB::getQueryLog());
 

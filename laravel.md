@@ -519,7 +519,7 @@ These are used to filter data.
         $query->whereRaw('closed_at=0 or closed_at is Null');
     }
 
-    public function scopeOverdue($query)
+    public function scopeOverdue($query)    // This isn't quite right; see below
     {
         return $query
             ->whereRaw('due_at > 0 and not due_at is Null and due_at < "' 
