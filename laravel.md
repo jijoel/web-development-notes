@@ -560,6 +560,21 @@ We can also pass parameters to subqueries, like this:
     }
 ```
 
+We can also use related models in a subquery. For instance, in RoomReservation:
+
+    public function scopeWithExperiencePackage($query)
+    {
+        return $query->whereHas('guest', function($q){
+            $q->withExperiencePackage();
+        });
+    }
+
+in GuestVisit ('guest' return a GuestVisit collection):
+
+    public function scopeWithExperiencePackage($query)
+    {
+        return $query->where('guest_visit.group_visit_id', self::EXPERIENCE_PACKAGE_CODE);
+    }
 
 
 

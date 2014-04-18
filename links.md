@@ -407,10 +407,19 @@ Simple modal dialog box:
 http://www.ericmmartin.com/projects/simplemodal/
 
 Additional controls for bootstrap (including a wizard):
-http://exacttarget.github.io/fuelux/#checkbox
+http://exacttarget.github.io/fuelux
+    Checkbox    Combobox    Datagrid    Datepicker    Pillbox    Preloader    Radio
+    Scheduler   Search      Select      Spinner       Tree       Wizard
 
 Plugins for extending bootstrap:
 http://tutorialzine.com/2013/07/50-must-have-plugins-for-extending-twitter-bootstrap/
+
+AngularJS directives for Bootstrap:
+http://mgcrea.github.io/angular-strap/
+
+Twitter Bootstrap Wizard
+http://vadimg.com/twitter-bootstrap-wizard-example/#
+https://github.com/VinceG/twitter-bootstrap-wizard
 
 Front-end data validation:
 http://reactiveraven.github.io/jqBootstrapValidation/
@@ -560,4 +569,5 @@ http://www.youtube.com/watch?v=CGN4RFkhH2M
 Design Patterns in PHP
 http://github.com/domnikl/DesignPatternsPHP
 
-
+Wizard with Bootstrap and AngularJS:
+http://onehungrymind.com/ng-animate-first-look-with-angularjs-wizard/
