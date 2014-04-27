@@ -64,7 +64,16 @@ Some things I've found along the way
 
 * Functional tests are great for showing actual data, and learning how a system works
 
+* Controller methods should be set up like this:
 
+    Guarding (eg, basic security/validation)
+    try {
+        run method
+        return result
+    }
+    except {
+        return error
+    }
 
 Best Practices  (Clean Code)
 -------------------------------

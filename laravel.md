@@ -862,6 +862,9 @@ Use var_export to covert data to a readable string:
 
     \Log::debug(var_export(DB::getQueryLog(), true));
 
+You can also listen for events, and return the query right away:
+
+    DB::listen(function($sql){ var_dump($sql) })
 
 
 Sessions <a name="sessions">
