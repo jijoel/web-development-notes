@@ -193,6 +193,17 @@ You can apply a specific commit on another branch to your current branch:
 
     git cherry-pick 5d632ba
 
+You can squash a commit (turn several commits into a single commit) by moving back to the base commit, then rebasing with 'squash'.
+
+    * d2c6aef (HEAD, origin/update-to-pheanstalk-3.0.0, update-to-pheanstalk-3.0.0)
+    * edccb7c make code a little cleaner
+    * deed004 update to pheanstalk 3.0.0 (PSR-4)
+    * 1e7c42e (origin/master, origin/HEAD, master) ...
+
+    git rebase -i master
+    (a list comes up; select 'pick' for commits to leave intact; 'squash' for commits to squash into those)
+    git push --force  (forces the squashed commits to github)
+
 
 Branches <a name="branch" />
 -----------------------------------

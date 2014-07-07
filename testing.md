@@ -223,6 +223,17 @@ For instance, if you have this:
 For a small set of tests, this may be overkill, but you can repeat the data in other tests, and easily add new data.
 
 
+#### Testing for elapsed time
+
+You can test to make sure a given process takes less than a given time to complete:
+
+    $start = microtime(true);
+
+    // run the process
+
+    $elapsed = microtime(true) - $start;
+    $this->assertLessThan(.2, $elapsed);
+
 
 
 
@@ -681,6 +692,27 @@ The with statement identifies data that was passed to a mocked object. We can te
     with(\Mockery::hasKey(x))         // array with listed key   (values ignored)
     with(\Mockery::hasValue(x))       // array with listed value (key ignored)
 
+
+The on statement can be used to create more complex queries. For instance, to check an array for all of the given keys, and check one of the keys for a given value, enter this:
+
+```php
+    $this->mock->shouldReceive('with')->once()
+        ->with(Mockery::on(function($args){
+            return array_key_exists('dates', $args)
+                && array_key_exists('found', $args)
+                && $args['active']==42;
+        }))
+        ->andReturn($this->mock);
+```
+
+We can return the values that we were passed, like so:
+
+```php
+    $mock->shouldReceive('build')->byDefault()
+        ->andReturnUsing(function($input){
+            return $input;
+        });
+```
 
 
 ### Using Mocks:
@@ -1240,6 +1272,142 @@ A test would look like this:
 
 
 
+Testing Models <a name="laravel-models">
+-----------------------------------------------------------------
+I put these things into Laravel models:
+
+    * Mutators and Accessors
+    * Scopes
+    * Eager Loading
+    * Relationships
+
+
+#### Mutators and Accessors
+
+Sometimes, mutators and accessors are used to rename a database field, or get more information from it. In these cases, I'll use this:
+
+    /**
+     * @dataProvider getAttributesDataProvider
+     *
+     * @param $inField       input field (eg, from table)
+     * @param $inValue       value of input field
+     * @param $outField      output field (eg, desired field name)
+     * @param $expectedValue expected value of output field
+     */
+    public function testAttributesAreConvertedCorrectly(
+        $inField, $inValue, $outField, $expectedValue)
+    {
+        $this->test->$inField = $inValue;
+        $this->assertSame($expectedValue, $this->test->$outField);
+    }
+
+    public function getAttributesDataProvider()
+    {
+        return array(
+            // infield         invalue          outfield        outvalue
+            ['veh_adv_res_id', 1,               'id',           1       ],
+            ['driver',         Null,            'driver_name',  ''      ],
+            ['driver',         'Foo',           'driver_name', 'Foo'    ],
+            ['notes',          'a'.PHP_EOL.'b', 'notes',        'a<br>b'],
+            ['notes',          "a\nb",          'notes',        'a<br>b'],
+        );  
+    }
+
+Other mutators and accessors (based on multiple fields, etc.) can be tested individually, eg:
+
+    public function testGetDate()
+    {
+        $this->test->reservation_date = '2014-01-02';
+        $this->assertInstanceOf(self::DATE_CLASS, $this->test->date);
+    }
+
+#### Scopes
+
+I'll test scopes by seeding a test database. The relevent seeder methods look like this:
+
+    public function insert($table, $fields, $rows)
+    {
+        $this->createTable($table);
+        $this->insertAttributeData($table, $fields, $rows);
+    }
+
+    private function createTable($table)
+    {
+        $class = 'Create_' . $table;
+        (new $class)->create($this->connection);
+    }
+
+    private function insertAttributeData($table, $fields, $rows)
+    {
+        foreach($rows as $attributes) {
+            $values = '"' . join('","', $attributes) . '"';
+            $values = str_replace('""', 'Null', $values);
+            DB::connection($this->connection)
+                ->insert("insert into $table ($fields) values ($values)");
+        }
+    }
+
+In the test, it will generally be called like this:
+
+    /**
+     * @dataProvider getDates
+     */
+    public function testRecordsForDate($forDate, $count)
+    {
+        $this->seeder->insert(
+            'vehicle_adventure_reservations',
+            'veh_adv_res_id, reservation_date',
+            [[1,'2014-02-01'],[2,'2014-02-03'],[3,'2014-02-03']]
+        );
+
+        $test = $this->test->forDate($forDate)->get();
+        $this->assertCount($count, $test);
+    }
+
+    public function getDates()
+    {
+        return array(
+            ['2014-01-10', 0],
+            ['2014-02-01', 1],
+            ['2014-02-03', 2],
+        );
+    }
+
+
+#### Eager Loading
+
+I'll test for eager loading by mocking a query, and calling the method directly: 
+
+    public function testEagerLoadAccounts()
+    {
+        $query = Mockery::mock('MockQuery');
+        $query->shouldReceive('with')->with('account')->once();
+
+        $this->test->scopeLoadAccounts($query);
+    }
+
+
+#### Relationships
+
+We can test for relationships (and related data), by using the seeder (above) to insert some test records. At this point, we can also test mutators and accessors that rely on relationship data:
+
+    public function testLinkedToPassengers()
+    {
+        $this->seeder->insert(
+            'vehicle_adventure_passengers',
+            'veh_adv_pass_id, veh_adv_res_id',
+            array([1,1],[2,1],[3,2])
+        );
+        
+        $this->test->veh_adv_res_id = 1;
+
+        $this->assertNotNull($this->test->passengers);
+        $this->assertEquals(2, $this->test->passenger_count);
+    }
+
+
+
+
 Testing Filters <a name="laravel-filters">
 ------------------------------------------------------------------
 
@@ -1313,11 +1481,19 @@ We can test that migrations will work correctly. In this case, I have a function
 Additional stuff for testing<a name="laravel-extra">
 ----------------------------------------------------------
 
+You can see the sql that would be used to generate a query with:
+
+    ->toSql();
+
+instead of 
+
+    ->get();
+
 To dump a sql query:
 
     var_dump(DB::getQueryLog());
 
-This will produce output like this (where you can see the actual query string):
+This will produce output like this (where you can see the actual SQL query string):
 
     array (size=1)
       0 => 
@@ -1331,6 +1507,15 @@ This will produce output like this (where you can see the actual query string):
 You can also export the data to a log, like so:
 
     \Log::debug(var_export(DB::getQueryLog(), true));
+
+If you prepare a sql statement manually, you can look at it with:
+
+    var_dump($sql);
+
+In many cases, it may be too long to be shown in its entirety. You can change the maximum amount of data for xdebug to display in var_dump:
+
+    ini_set('xdebug.var_display_max_data', -1);
+    var_dump($sql);
 
 
 The TestCase class contains several helper methods to make testing your application easier. For instance, set the currently authenticated user using the `be` method  (TestCase::be):

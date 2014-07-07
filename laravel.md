@@ -435,9 +435,31 @@ Our controller can return an error statement, like this:
     return Response::make($view, 404);  // returns a 404 error
 
 
+
+
 Eloquent Models<a name="models">
 -------------------------------------
 
+An Eloquent model is what we use as a data-access layer, to load data from our database. 
+
+    $this->sales = new Sale;    // or pass it in to the constructor
+
+    $sales = $this->sales
+        ->remember(10)          // caches this query for 10 minutes
+        ->withSomething()       // filter it with a scope
+        ->andSomething($foo)    // filter it with another scope (which takes a parameter)
+        ->where('x', $y)        // filter it with a "where" clause
+        ->with('related')       // eager-load a related model
+
+        ->select(DB::raw('field_list, sum(x) as y'))   // select fields, perform operations, etc.
+        ->groupBy('field')      // use a "group by" clause
+        ->having('y','<>',0)    // use a "having" clause
+
+        ->get()                 // run the query; get matching records from database
+        ->lists('field')        // run the query; get an array of 'field'
+        ->lists('field','id')   // run the query; get associative array of 'id'=>'field'
+
+Models should be as 
 By default, the table name will be plural, and the model name will be singular. This can be changed, though…
  
     Table   Model   Controller
@@ -548,7 +570,7 @@ Not exactly what we want. To use a subquery:
 
 This will put parentheses in the correct locations, so we get the right results.
 
-We can also pass parameters to subqueries, like this:
+We can pass parameters to subqueries like this:
 
 ```
     public function scopeForNameLike($query, $first, $last)

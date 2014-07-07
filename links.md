@@ -16,7 +16,7 @@ Helpful links on a variety of topics:
 * [Interesting Apps to Model / Watch / Assist?](#apps)
 * [Interesting Blogs](#blogs)
 * [Forums / Ideas ](#forum)
-
+* [APIs](#api)
 
 
 
@@ -268,7 +268,8 @@ https://github.com/jasonlewis/expressive-date
 Test cases (inherit classes from these):
 https://github.com/Zizaco/laravel4-test-cases
 
-
+Descriptions, ratings, and demos of various software products:
+http://demo.softaculous.com/enduser/index.php?
 
 
 Important Project File Reference <a name="project-files">
@@ -444,6 +445,8 @@ http://coding.smashingmagazine.com/2011/09/14/the-guide-to-css-animation-princip
 Multiselection widget:
 http://www.erichynds.com/blog/jquery-ui-multiselect-widget
 
+Keep static (floating) table headers:
+http://mkoryak.github.io/floatThead
 
 
 Backbone <a name="backbone">
@@ -517,6 +520,9 @@ https://github.com/msurguy/missingpetflyer
 Invoicing System:
 https://github.com/hillelcoren/invoice-ninja
 
+Laravel Tricks Site:
+https://github.com/CodepadME/laravel-tricks
+
 
 Interesting Blogs <a name="blogs">
 ---------------------------------------------
@@ -571,3 +577,11 @@ http://github.com/domnikl/DesignPatternsPHP
 
 Wizard with Bootstrap and AngularJS:
 http://onehungrymind.com/ng-animate-first-look-with-angularjs-wizard/
+
+
+
+
+APIs <a name="api">
+--------------------
+http://help.infusionsoft.com/api-docs
+
