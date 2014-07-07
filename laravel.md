@@ -809,7 +809,7 @@ The resulting array will populate the option value as the “id” field from th
     
     
 
-Forms<a name="forms">
+Forms <a name="forms">
 ------------------------
 
 This is the standard structure to use with forms:
@@ -845,7 +845,7 @@ You can supply additional parameters like so:
 
 
 
-Mail<a name="mail">
+Mail <a name="mail">
 --------------------
 Laravel can send email messages; also through gmail. Configuration for that should be set up as follows:
 
@@ -861,14 +861,14 @@ Queues <a name="queue">
 ------------------------
 Queues can speed up the front-end by doing work on the back-end. 
 
-You can also send a message via a queue:
+You can send a message via a queue:
 
     Mail::queue('emails.view_name', $array_for_view, function($message) {
         $message->to('recipient@address.com')->subject($subject);
     });
 
 
-Logging<a name="logging">
+Logging <a name="logging">
 --------------------------
 Laravel supports logging data to a log file. The logger provides the seven logging levels defined in RFC 5424: 
 
