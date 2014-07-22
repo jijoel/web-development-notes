@@ -141,7 +141,7 @@ also https://github.com/Chumper/Datatable
 I think this lets you interact with Artisan via a web form (useful if no shell access):
 https://github.com/JN-Jones/web-artisan
 
-Laravel IDE Helper - improves auto-completion:
+Laravel IDE Helper - enables auto-completion for Laravel in Sublime/PHPStorm:
 https://github.com/barryvdh/laravel-ide-helper
 "barryvdh/laravel-ide-helper": "v1.5.2"
 
@@ -272,6 +272,7 @@ Descriptions, ratings, and demos of various software products:
 http://demo.softaculous.com/enduser/index.php?
 
 
+
 Important Project File Reference <a name="project-files">
 -------------------------------------------------------------
 
@@ -288,51 +289,35 @@ See a full list of autoloaded classes for the project (refresh via composer dump
 User Interface / Front-End <a name="ui">
 ---------------------------------------------
 
+### Front-End Frameworks
+
+HTML Kickstart (similar to bootstrap)
+http://www.99lime.com/elements/
+
+Semantic web components (similar to bootstrap):
+http://semantic-ui.com/
+
+Template rendering engine:
+http://tempojs.com/
+
+http://foundation.zurb.com/
+
+
+
+### General Layout
+
 Flexbox:
 https://www.adobe.com/devnet/html5/articles/working-with-flexbox-the-new-spec.html
-
-Huge list of frontend resources:
-https://github.com/dypsilon/frontend-dev-bookmarks
 
 "Holy Grail" layout -- 3 equal-length full-height columns with fixed sides and fluid center:
 http://alistapart.com/article/holygrail
 http://philipwalton.github.io/solved-by-flexbox/demos/holy-grail/
 
-Bootstrapper for Laravel:
-http://bootstrapper.aws.af.cm/
+Packery (dynamically rearrange things on pages):
+http://packery.metafizzy.co/faq.html
 
-Bootstrap-themed jQuery UI Widgets
-http://addyosmani.github.io/jquery-ui-bootstrap/
 
-HTML Kickstart (similar to bootstrap)
-http://www.99lime.com/elements/
-
-Type ahead:
-http://twitter.github.io/typeahead.js/
-
-Slideshow:
-http://jquery.malsup.com/cycle2/
-
-Auto-size text fields (autogrow textarea input type):
-http://www.jacklmoore.com/autosize/
-
-Money masks:
-http://plentz.github.io/jquery-maskmoney/
-
-"Are You Sure?" message when leaving a page with changed data:
-https://github.com/codedance/jquery.AreYouSure
-
-JQuery modification highlighter:
-http://dougestep.com/dme/jquery-modification-highlighter-widget
-
-Canvas resize:
-https://gokercebeci.com/dev/canvasresize
-
-"Is Loading" message
-https://github.com/hekigan/is-loading
-
-Canvas functions:
-http://iwhitcomb.github.io/dynamocanvas/
+### Tables
 
 Data tables:
 http://datatables.net/
@@ -350,9 +335,105 @@ http://loicfrering.github.io/backbone.datagrid/
 Another data grid (looks very nice):
 https://github.com/mleibman/SlickGrid/wiki/Examples
 
-CKEditor:
-http://ckeditor.com
-http://docs.ckeditor.com/#!/guide/dev_configuration
+Keep static (floating) table headers:
+http://mkoryak.github.io/floatThead
+
+
+### UI / View Controls
+
+Carousel:
+https://kenwheeler.github.io/slick/
+
+Slideshow:
+http://jquery.malsup.com/cycle2/
+
+Syntax highlighting:
+http://prismjs.com/
+http://highlightjs.org/
+
+Animation:
+https://daneden.me/animate/
+http://coding.smashingmagazine.com/2011/09/14/the-guide-to-css-animation-principles-and-examples/
+
+
+### Canvas
+
+Canvas resize:
+https://gokercebeci.com/dev/canvasresize
+
+Canvas functions:
+http://iwhitcomb.github.io/dynamocanvas/
+
+
+### Validators / Notifiers
+
+Credit card number validator:
+http://paweldecowski.github.io/jQuery-CreditCardValidator/
+
+JQuery modification highlighter:
+http://dougestep.com/dme/jquery-modification-highlighter-widget
+
+Front-end data validation:
+http://reactiveraven.github.io/jqBootstrapValidation/
+
+"Are You Sure?" message when leaving a page with changed data:
+https://github.com/codedance/jquery.AreYouSure
+
+"Is Loading" message
+https://github.com/hekigan/is-loading
+
+"growler" notification boxes:
+https://github.com/ifightcrime/bootstrap-growl
+
+Pop-up dialog boxes:
+http://docs.toddish.co.uk/popup/
+
+Simple modal dialog box:
+http://www.ericmmartin.com/projects/simplemodal/
+
+
+### Forms / Data-Entry Controls
+
+Bootstrap-themed jQuery UI Widgets
+http://addyosmani.github.io/jquery-ui-bootstrap/
+
+Front-end widgets:
+http://alloyui.com/
+
+Bootstrapper for Laravel:
+http://bootstrapper.aws.af.cm/
+(this is an old Laravel bundle)
+
+Additional controls for bootstrap (including a wizard):
+http://exacttarget.github.io/fuelux
+    Checkbox    Combobox    Datagrid    Datepicker    Pillbox    Preloader    Radio
+    Scheduler   Search      Select      Spinner       Tree       Wizard
+
+Plugins for extending bootstrap:
+http://tutorialzine.com/2013/07/50-must-have-plugins-for-extending-twitter-bootstrap/
+
+Twitter Bootstrap Wizard
+http://vadimg.com/twitter-bootstrap-wizard-example/#
+https://github.com/VinceG/twitter-bootstrap-wizard
+
+Money masks:
+http://plentz.github.io/jquery-maskmoney/
+
+Type ahead:
+http://twitter.github.io/typeahead.js/
+
+Tag autocomplete (like twitter hashes, etc.):
+http://sandglaz.github.io/bootstrap-tagautocomplete/
+
+Autocomplete:
+http://hillelcoren.com/flex-autocomplete/
+
+In-place editing for jquery (works with ajax):
+http://www.appelsiini.net/projects/jeditable
+http://vitalets.github.io/x-editable/
+
+
+### Forms / Date/Time 
 
 A nice JQuery UI Date/Time picker:
 https://github.com/trentrichardson/jQuery-Timepicker-Addon
@@ -361,8 +442,55 @@ http://trentrichardson.com/examples/timepicker/
 Bootstrap-compatible date picker:
 http://eternicode.github.io/bootstrap-datepicker/
 
-Autocomplete:
-http://hillelcoren.com/flex-autocomplete/
+Calendar:
+https://github.com/arshaw/fullcalendar
+https://github.com/jarnokurlin/fullcalendar    (includes resource views)
+
+
+### Forms / Select Boxes
+
+Prettier select boxes:
+http://harvesthq.github.io/chosen/
+http://brianreavis.github.io/selectize.js/
+
+Multiselection widget:
+http://www.erichynds.com/blog/jquery-ui-multiselect-widget
+
+
+### Forms / Textbox Editing
+
+Auto-size text fields (autogrow textarea input type):
+http://www.jacklmoore.com/autosize/
+
+Javascript editor -- CKEditor:
+http://ckeditor.com
+http://docs.ckeditor.com/#!/guide/dev_configuration
+
+Another nice Javascript editor -- TinyMCE:
+http://www.tinymce.com/index.php
+
+
+#### File Managers
+
+Editors can upload files with a file manager. Some interesting ones:
+
+http://www.moxiemanager.com/   (paid, but very nice)
+
+https://github.com/barryvdh/laravel-elfinder
+https://github.com/Studio-42/elFinder
+http://elfinder.org/
+
+(I like the interface, but it's slow...):
+https://github.com/simogeo/Filemanager
+
+Interface for File Uploads:
+http://blueimp.github.io/jQuery-File-Upload/index.html
+
+Other jquery-based file managers:
+http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
+
+
+### Graphics/Media
 
 Font Awesome (various icons):
 http://fortawesome.github.io/Font-Awesome/
@@ -373,80 +501,12 @@ http://propublica.github.io/stateface/
 Image cropping with jquery:
 http://deepliquid.com/content/Jcrop.html
 
-Credit card number validator:
-http://paweldecowski.github.io/jQuery-CreditCardValidator/
 
-File Manager:
-https://github.com/Studio-42/elFinder
+### Misc 
 
-Another file manager (I like the interface, but it's slow...):
-https://github.com/simogeo/Filemanager
+Huge list of frontend resources:
+https://github.com/dypsilon/frontend-dev-bookmarks
 
-Interface for File Uploads:
-http://blueimp.github.io/jQuery-File-Upload/index.html
-
-Other jquery-based file managers:
-http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
-
-Prettier select boxes:
-http://harvesthq.github.io/chosen/
-http://brianreavis.github.io/selectize.js/
-
-Pop-up dialog boxes:
-http://docs.toddish.co.uk/popup/
-
-Packery (dynamically rearrange things on pages):
-http://packery.metafizzy.co/faq.html
-
-Template rendering engine:
-http://tempojs.com/
-
-Syntax highlighting:
-http://prismjs.com/
-
-Simple modal dialog box:
-http://www.ericmmartin.com/projects/simplemodal/
-
-Additional controls for bootstrap (including a wizard):
-http://exacttarget.github.io/fuelux
-    Checkbox    Combobox    Datagrid    Datepicker    Pillbox    Preloader    Radio
-    Scheduler   Search      Select      Spinner       Tree       Wizard
-
-Plugins for extending bootstrap:
-http://tutorialzine.com/2013/07/50-must-have-plugins-for-extending-twitter-bootstrap/
-
-AngularJS directives for Bootstrap:
-http://mgcrea.github.io/angular-strap/
-
-Twitter Bootstrap Wizard
-http://vadimg.com/twitter-bootstrap-wizard-example/#
-https://github.com/VinceG/twitter-bootstrap-wizard
-
-Front-end data validation:
-http://reactiveraven.github.io/jqBootstrapValidation/
-
-Tag autocomplete (like twitter hashes, etc.):
-http://sandglaz.github.io/bootstrap-tagautocomplete/
-
-"growler" notification boxes:
-https://github.com/ifightcrime/bootstrap-growl
-
-Semantic web components (similar to bootstrap):
-http://semantic-ui.com/
-
-In-place editing for jquery (works with ajax):
-http://www.appelsiini.net/projects/jeditable
-http://vitalets.github.io/x-editable/
-
-Animation:
-https://daneden.me/animate/
-http://coding.smashingmagazine.com/2011/09/14/the-guide-to-css-animation-principles-and-examples/
-
-Multiselection widget:
-http://www.erichynds.com/blog/jquery-ui-multiselect-widget
-
-Keep static (floating) table headers:
-http://mkoryak.github.io/floatThead
 
 
 Backbone <a name="backbone">
@@ -468,6 +528,10 @@ AngularJS <a name="angularjs">
 Example of using list/detail for an RSS reader:
 http://vojtajina.github.io/WebApp-CodeLab/FinalProject/index.html
 https://github.com/GoogleChrome/wReader-app
+
+AngularJS directives for Bootstrap:
+http://mgcrea.github.io/angular-strap/
+
 
 
 
@@ -511,13 +575,14 @@ http://css.dzone.com/articles/automated-code-reviews-php
 
 Interesting Apps to Model / Watch / Assist? <a name="apps">
 -------------------------------------------------------------------------
-Laravel 4 online reservation system, YARS (Yet Another Reservation System):
+Laravel 4 online reservation system, YARS (Yet Another Reservation System (looks dead...)):
 https://github.com/alariva/yars
 
 Missing pet flyer
 https://github.com/msurguy/missingpetflyer
 
-Invoicing System:
+Awesome Invoicing System:
+https://www.invoiceninja.com/
 https://github.com/hillelcoren/invoice-ninja
 
 Laravel Tricks Site:
@@ -531,7 +596,8 @@ http://culttt.com/
 http://antjanus.com/blog/
 http://fideloper.com/
 http://maxoffsky.com/category/code-blog/
-
+http://keltdockins.com/tags/laravel/
+https://medium.com/laravel-4/
 
 
 Forums / Ideas <a name="forum">
