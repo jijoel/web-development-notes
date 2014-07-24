@@ -896,6 +896,29 @@ This is how to mock a facade:
 
 I think that ...\Config::swap  statement actually swaps out the class the facade is looking for.
 
+We can create mocks, and swap them in when needed:
+
+    private function setupMockDB()
+    {
+        $mock = Mockery::mock('MockDB');
+
+        $mock->shouldReceive('table')->byDefault()->andReturn($mock)
+            ->shouldReceive('join')->byDefault()->andReturn($mock)
+            ->shouldReceive('leftJoin')->byDefault()->andReturn($mock)
+            ->shouldReceive('orderBy')->byDefault()->andReturn($mock)
+            ->shouldReceive('where')->byDefault()->andReturn($mock)
+            ->shouldReceive('whereIn')->byDefault()->andReturn($mock)
+            ->shouldReceive('whereNull')->byDefault()->andReturn($mock)
+            ->shouldReceive('orWhereNull')->byDefault()->andReturn($mock)
+            ->shouldReceive('get')->byDefault()->andReturn(new Collection);
+
+        DB::swap($mock);
+
+        return $mock;
+    }
+
+
+
 
 ### Demeter Chains <a name="demeter">
 
@@ -1331,7 +1354,7 @@ I'll test scopes by seeding a test database. The relevent seeder methods look li
         $this->insertAttributeData($table, $fields, $rows);
     }
 
-    private function createTable($table)
+    public function createTable($table)
     {
         $class = 'Create_' . $table;
         (new $class)->create($this->connection);
@@ -1398,13 +1421,22 @@ We can test for relationships (and related data), by using the seeder (above) to
             'veh_adv_pass_id, veh_adv_res_id',
             array([1,1],[2,1],[3,2])
         );
-        
+
         $this->test->veh_adv_res_id = 1;
 
         $this->assertNotNull($this->test->passengers);
         $this->assertEquals(2, $this->test->passenger_count);
     }
 
+
+#### Troubleshooting by Filtering Result
+
+When troubleshooting an issue with live data, we may see hundreds (or even thousands) of records. To reduce that to something we can manage/deal with, we can do this:
+
+    $results = $results->filter(function($e){
+        if ($e->getRoom() == '111') 
+            return $e;
+    });
 
 
 

@@ -754,6 +754,55 @@ We don't have many of these, but they can be used to do things like letting the 
 ```
 
 
+#### Collections
+
+Eloquent will return a Collection of items.
+
+Filtering a Collection:
+
+```php
+    $results = Model::where(...)->get(); 
+    $filtered = $results->filter(function($e){
+        if ($e->room == '111') 
+            return $e;
+    });
+```
+
+Sorting a collection:
+
+```php
+    $results = Model::where(...)->get();
+    $grouped = $results->sortBy('field');       // simple way...
+
+    $found = $found->sortBy(function($g){
+        return $g->history->creator_name;       // or whatever...
+    });
+```
+
+Grouping a Collection:
+
+Grouping is done exactly the same way as sorting.
+
+```php
+    $results = Model::where(...)->get();
+    $grouped = $results->groupBy('field');       // simple way...
+
+    $found = $found->groupBy(function($g){
+        return $g->history->creator_name;       // or whatever...
+    });
+```
+
+Note: When both sorting and grouping a Collection, always sort first, then group:
+
+```php
+    $found = $found->sortBy(function($r){
+        return $r->history->creator_name;
+    })->groupBy(function($r){
+        return $r->history->creator_name;
+    });
+```
+
+
 
 Views<a name="views">
 ------------------------

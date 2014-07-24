@@ -225,7 +225,16 @@ Master branch is there by default. Work on new, experimental features in new bra
                                 (create the origin repository if it doesn't already exist)
     
 
-git rebase can be a very nice thing when working on feature branches. When working on a feature branch, sometimes things come up that don't belong to that feature. You can switch to dev, make the changes (or create a branch to make the changes); once the changes have been written to dev, swich back to the feature, then `git rebase dev`.
+Sometimes conflicts come up when merging files. Both branches might have merged the file.
+
+    git merge --no-ff branch2           // perform the merge; you will be told if there are conflicts
+
+    git merge --abort                   // aborts the merge
+    git reset --merged                  // older syntax for aborting a merge
+
+    git checkout --ours PATH/FILE       // use the version of the file in our branch
+    git checkout --theirs PATH/FILE     // use the version of the file in the other branch
+
 
 
 
@@ -458,8 +467,4 @@ Hotfix Branch:
     $ git merge --no-ff hotfix-1.2.1
     $ git branch -d hotfix-1.2.1
     $ git push origin --delete hotfix-1.2.1
-
-
-
-
 
