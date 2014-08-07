@@ -126,6 +126,9 @@ Authentication & Authorization:
 https://github.com/cartalyst/sentry
 "cartalyst/sentry": "2.0.*" 
 
+Authentication/ACL admin panel:
+https://github.com/intrip/laravel-authentication-acl
+
 Another auth package:
 https://github.com/Toddish/Verify-L4
 "toddish/verify": "dev-master"

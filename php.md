@@ -176,3 +176,45 @@ FooTest.php:
     }
 ```
 
+
+Closures
+---------
+We can do some really interesting things with PHP, Laravel, and closures. For instance, we can use a closure to select scopes from several classes, and assemble the data.
+
+```php
+    private $sources = [...];       // All of the models that should be used to collect data
+
+    public function getSummary(DateRange $dates)
+    {
+        return $this->loadData(function ($model) use ($dates) {
+            return $model
+                ->inDateRange($dates)
+                ->selectSummaryData();
+        });
+    }
+
+    public function getDetailForCode(DateRange $dates, $accountCode)
+    {
+        return $this->loadData(function($model) use ($dates, $accountCode) {
+            return $model
+                ->inDateRange($dates)               // each of the models must include these scopes
+                ->forAccountCode($accountCode);     // (eg, use an interface)
+        });
+    }
+
+    private function loadData($closure)
+    {
+        $data = new Collection();                   
+        $class = get_class($this);
+        $namespace = substr($class, 0, strrpos($class, '\\')); 
+
+        foreach($this->sources as $source) {            
+            $name = $namespace.'\\'.$source;            // Get the fully namespaced name of the model
+            $model = new $name;                         // Create a model object to search
+            $found = $closure($model)->get();           // find data based on the closure
+            $data = $data->merge($found);               // Merge the found data with the collection
+        }
+
+        return $data;
+    }
+```

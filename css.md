@@ -29,3 +29,22 @@ Although elements like <div>s normally grow to fit their contents, using the flo
         float: left;
     }
 
+
+### Keep a block of text together when printing:
+
+    .class {
+        page-break-inside: avoid;
+    }
+
+
+### Box with rounded corners and a shadow:
+
+    img {
+        margin: auto;               // center in parent div
+        max-width: 100%;            // resize as needed; maintain aspect ratio up to 100% of parent div
+        max-height: 100%;           // resize as needed; maintain aspect ratio up to 100% of parent div
+        border-radius: 5px;         // small rounded corners
+        border: 1px solid black;            // color/style 
+        box-shadow: 5px 5px 10px #999;             // very light gray shadow 
+        -webkit-box-shadow: 5px 5px 10px #999;     // needed for webkit browsers
+    }
