@@ -5,6 +5,7 @@ Here are notes about client-side tools and techniques. Including
 
 * [DataTables](#datatables)
 * [JQuery-UI](#jquery-ui)
+* [Select2](#select2)
 
 
 DataTables <a name="datatables">
@@ -204,3 +205,8 @@ JQuery-UI <a name="jquery-ui">
 JQuery-UI provides user-interface widgets, controls, and interactions for an app. 
 http://jqueryui.com/
 
+
+
+Select2 <a name="select2">
+-----------------------------
+Select2 is a very nice select box.

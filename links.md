@@ -10,8 +10,22 @@ Helpful links on a variety of topics:
 * [Misc](#misc)
 * [Important Project File Reference](#project-files)
 * [User Interface / Front End](#ui)
+    * [Front-End Frameworks](#ui-frontend)
+    * [General Layout](#ui-layout)
+    * [Tables](#ui-tables)
+    * [UI / View Controls](#ui-controls)
+    * [Canvas](#ui-canvas)
+    * [Validators / Notifiers](#ui-validators)
+    * [Forms / Data-Entry Controls](#ui-forms)
+    * [Forms / Date/Time](#ui-datetime)
+    * [Forms / Select Boxes](#ui-select)
+    * [Forms / Textbox Editing](#ui-textbox)
+    * [File Managers](#ui-filemanager)
+    * [Graphics/Media](#ui-graphics)
+    * [Misc](#ui-misc)
 * [Backbone](#backbone)
 * [Component Management](#components)
+* [Web Components](#webcomponents)
 * [Websockets (Persistent Connections / Real-time updates)](#websockets)
 * [Interesting Apps to Model / Watch / Assist?](#apps)
 * [Interesting Blogs](#blogs)
@@ -292,7 +306,25 @@ See a full list of autoloaded classes for the project (refresh via composer dump
 User Interface / Front-End <a name="ui">
 ---------------------------------------------
 
-### Front-End Frameworks
+Lots of stuff on the UI. Here are some things:
+
+* [Front-End Frameworks](#ui-frontend)
+* [General Layout](#ui-layout)
+* [Tables](#ui-tables)
+* [UI / View Controls](#ui-controls)
+* [Canvas](#ui-canvas)
+* [Validators / Notifiers](#ui-validators)
+* [Forms / Data-Entry Controls](#ui-forms)
+* [Forms / Date/Time](#ui-datetime)
+* [Forms / Select Boxes](#ui-select)
+* [Forms / Textbox Editing](#ui-textbox)
+* [File Managers](#ui-filemanager)
+* [Graphics/Media](#ui-graphics)
+* [Misc](#ui-misc)
+
+
+
+### Front-End Frameworks <a name="ui-frontend">
 
 HTML Kickstart (similar to bootstrap)
 http://www.99lime.com/elements/
@@ -307,7 +339,7 @@ http://foundation.zurb.com/
 
 
 
-### General Layout
+### General Layout <a name="ui-layout">
 
 Flexbox:
 https://www.adobe.com/devnet/html5/articles/working-with-flexbox-the-new-spec.html
@@ -320,7 +352,7 @@ Packery (dynamically rearrange things on pages):
 http://packery.metafizzy.co/faq.html
 
 
-### Tables
+### Tables <a name="ui-tables">
 
 Data tables:
 http://datatables.net/
@@ -341,8 +373,12 @@ https://github.com/mleibman/SlickGrid/wiki/Examples
 Keep static (floating) table headers:
 http://mkoryak.github.io/floatThead
 
+Bootstrap Table (fixed headers, show/hide columns, sortable, card view, etc. Awesome!)
+http://wenzhixin.net.cn/p/bootstrap-table/docs/index.html
+https://github.com/wenzhixin/bootstrap-table
 
-### UI / View Controls
+
+### UI / View Controls <a name="ui-controls">
 
 Carousel:
 https://kenwheeler.github.io/slick/
@@ -358,8 +394,14 @@ Animation:
 https://daneden.me/animate/
 http://coding.smashingmagazine.com/2011/09/14/the-guide-to-css-animation-principles-and-examples/
 
+Three-dimensional menu (move mouse to left side to open)
+http://lab.hakim.se/meny/
 
-### Canvas
+Presentations (eg, powerpoint in HTML)
+http://lab.hakim.se/reveal-js
+
+
+### Canvas <a name="ui-canvas">
 
 Canvas resize:
 https://gokercebeci.com/dev/canvasresize
@@ -368,7 +410,7 @@ Canvas functions:
 http://iwhitcomb.github.io/dynamocanvas/
 
 
-### Validators / Notifiers
+### Validators / Notifiers <a name="ui-validators">
 
 Credit card number validator:
 http://paweldecowski.github.io/jQuery-CreditCardValidator/
@@ -395,7 +437,7 @@ Simple modal dialog box:
 http://www.ericmmartin.com/projects/simplemodal/
 
 
-### Forms / Data-Entry Controls
+### Forms / Data-Entry Controls <a name="ui-forms">
 
 Bootstrap-themed jQuery UI Widgets
 http://addyosmani.github.io/jquery-ui-bootstrap/
@@ -419,6 +461,9 @@ Twitter Bootstrap Wizard
 http://vadimg.com/twitter-bootstrap-wizard-example/#
 https://github.com/VinceG/twitter-bootstrap-wizard
 
+Another Bootstrap Wizard
+http://www.panopta.com/2013/02/06/bootstrap-application-wizard-2/
+
 Money masks:
 http://plentz.github.io/jquery-maskmoney/
 
@@ -436,7 +481,7 @@ http://www.appelsiini.net/projects/jeditable
 http://vitalets.github.io/x-editable/
 
 
-### Forms / Date/Time 
+### Forms / Date/Time <a name="ui-datetime">
 
 A nice JQuery UI Date/Time picker:
 https://github.com/trentrichardson/jQuery-Timepicker-Addon
@@ -450,17 +495,42 @@ https://github.com/arshaw/fullcalendar
 https://github.com/jarnokurlin/fullcalendar    (includes resource views)
 
 
-### Forms / Select Boxes
+### Forms / Select Boxes <a name="ui-select">
 
 Prettier select boxes:
 http://harvesthq.github.io/chosen/
 http://brianreavis.github.io/selectize.js/
 
+Pretty select box; searching, remote data sets, infinite scrolling:
+(awesome, but the select box grows as items are added)
+http://ivaynberg.github.io/select2/
+
+Skins for select2 to work with Bootstrap3:
+https://github.com/t0m/select2-bootstrap-css/tree/bootstrap3
+http://fk.github.io/select2-bootstrap-css/
+
+Pretty select box; groupable, stays on one line
+http://wenzhixin.net.cn/p/multiple-select/docs/
+https://github.com/wenzhixin/multiple-select
+
 Multiselection widget:
+(old/abandoned)
 http://www.erichynds.com/blog/jquery-ui-multiselect-widget
 
+Tree-style multiselect:
+http://travistidwell.com/jquery.treeselect.js/
+https://github.com/travist/jquery.treeselect.js
 
-### Forms / Textbox Editing
+Multiselect with Inactive/Active lists (two boxes)
+http://loudev.com/
+https://github.com/lou/multi-select
+
+Type ahead
+http://twitter.github.io/typeahead.js/examples/
+
+
+
+### Forms / Textbox Editing <a name="ui-textbox">
 
 Auto-size text fields (autogrow textarea input type):
 http://www.jacklmoore.com/autosize/
@@ -473,7 +543,7 @@ Another nice Javascript editor -- TinyMCE:
 http://www.tinymce.com/index.php
 
 
-#### File Managers
+#### File Managers <a name="ui-filemanager">
 
 Editors can upload files with a file manager. Some interesting ones:
 
@@ -493,7 +563,7 @@ Other jquery-based file managers:
 http://www.jquery4u.com/plugins/10-jquery-file-manager-plugins/
 
 
-### Graphics/Media
+### Graphics/Media <a name="ui-graphics">
 
 Font Awesome (various icons):
 http://fortawesome.github.io/Font-Awesome/
@@ -504,8 +574,11 @@ http://propublica.github.io/stateface/
 Image cropping with jquery:
 http://deepliquid.com/content/Jcrop.html
 
+Before/After image slider:
+https://github.com/NUKnightLab/juxtapose
 
-### Misc 
+
+### Misc  <a name="ui-misc">
 
 Huge list of frontend resources:
 https://github.com/dypsilon/frontend-dev-bookmarks
@@ -539,7 +612,7 @@ http://mgcrea.github.io/angular-strap/
 
 
 Component Management <a name="components">
---------------------------------------
+--------------------------------------------
 
 Installs packages and dependencies (eg, jquery, etc.)
 https://github.com/bower/bower
@@ -547,6 +620,13 @@ https://github.com/bower/bower
 Another method:
 https://github.com/component/component
 
+
+Web Components <a name="webcomponents">
+
+Introduction to Web Components
+http://slides.com/jasonmayes/introduction-to-web-components
+
+http://webcomponents.org
 
 
 Websockets (Persistent Connections / Real-time updates) <a name="websockets">

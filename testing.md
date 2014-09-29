@@ -714,6 +714,29 @@ We can return the values that we were passed, like so:
         });
 ```
 
+This lets us do nifty things like this:
+
+```php
+    public function testCanReturnDataBasedOnInput()
+    {
+        DateRange::shouldReceive('make')->once()
+            ->with('2014-01-20','2014-01-24')
+            ->andReturn($this->setupMockDateRange());
+        View::shouldReceive('make->with')->once()
+            ->with(Mockery::on(function($args){
+                return array_key_exists('dates', $args)
+                    && array_key_exists('reservations', $args);
+            }))->andReturn(Mockery::mock('MockView'));
+
+        $input = array(
+            'start' => '2014-01-20',
+            'end' => '2014-01-24',
+        );
+
+        $this->call('POST', '/reports/reservation-counts', $input);
+    }
+```
+
 
 ### Using Mocks:
 (instructions from https://tutsplus.com/tutorial/better-testing-in-laravel/)
@@ -1520,6 +1543,10 @@ You can see the sql that would be used to generate a query with:
 instead of 
 
     ->get();
+
+To see the name of the connection you're connected to:
+
+    DB::connection()->getName();
 
 To dump a sql query:
 

@@ -494,6 +494,13 @@ To get additional data from a pivot table (eg, the M2M join table):
     }
 ```
 
+We can search for rows in a table a couple of different ways: 
+
+```php
+    Model::find(1);                    // finds the model with the key of 1; null if not found
+    Model::where('foo','bar')->get();  // finds models, or returns an empty collection
+```
+
 
 
 ### Model Sections <a name="model-sections">

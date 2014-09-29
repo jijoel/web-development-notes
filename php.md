@@ -218,3 +218,32 @@ We can do some really interesting things with PHP, Laravel, and closures. For in
         return $data;
     }
 ```
+
+We can also run something on every field of every table:
+
+```php
+    public function getFieldList()
+    {
+        $result = $this->forAllFieldsInAllTables(function($table, $field){
+            return $table.'.'.$field->getName();
+        });
+
+        return '<p>' . join('</p><p>', $result);
+    }
+
+    private function forAllFieldsInAllTables($callback)
+    {
+        set_time_limit(120);
+        $schemaManager = DB::connection()->getDoctrineSchemaManager();
+        $tables = $schemaManager->listTableNames();
+        $return = [];
+        foreach ($tables as $table) {
+            $fields = $schemaManager->listTableColumns($table);
+            foreach ($fields as $field) {
+                $return[] = $callback($table, $field);
+            }
+        }
+
+        return $return;
+    }
+```
