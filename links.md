@@ -288,6 +288,8 @@ https://github.com/Zizaco/laravel4-test-cases
 Descriptions, ratings, and demos of various software products:
 http://demo.softaculous.com/enduser/index.php?
 
+Themosis Framework for WordPress developers:
+http://framework.themosis.com/
 
 
 Important Project File Reference <a name="project-files">
@@ -733,4 +735,4 @@ http://onehungrymind.com/ng-animate-first-look-with-angularjs-wizard/
 APIs <a name="api">
 --------------------
 http://help.infusionsoft.com/api-docs
-
+http://api.namastelight.com/
