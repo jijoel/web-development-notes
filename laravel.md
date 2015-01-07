@@ -1,5 +1,5 @@
-Laravel 
-=====================
+Laravel <a name="top">
+=======================
 
 * [Setup](#setup)
 * [IOC Binding](#ioc)
@@ -24,8 +24,8 @@ Laravel
 
 
 
-Setup<a name="setup">
-------------------------
+Setup <a name="setup">[^](#top)
+-------------------------------
 
 Install it via the installer:
 
@@ -111,7 +111,7 @@ There are some helper functions that work like globals:
 
 
 
-IoC Binding <a name="ioc">
+IoC Binding <a name="ioc">[^](#top)
 ----------------------------
 
 To use classes that are bound to Laravel's IoC container:
@@ -156,7 +156,7 @@ At this point, we can make the class, using
 
 
     
-Migrations and Seeding<a name="#migrations">
+Migrations and Seeding<a name="#migrations">[^](#top)
 ----------------------------------------------
 Migrations are like version control for your databases.
  
@@ -215,7 +215,7 @@ To run the migration:
 
 
     
-Artisan Class Generator<a name="way-generator">    
+Artisan Class Generator<a name="way-generator">    [^](#top)
 ---------------------------------------------------
 jeffrey way (nettuts) has created an add-in for artisan, which can automatically generate classes (including models, controllers, several views, routing, and error testing) for you.
 
@@ -232,7 +232,7 @@ Even better, we can create resources with a lot of standard boilerplate:
 
 
     
-Routing<a name="routing">
+Routing<a name="routing">[^](#top)
 ----------------------------
 Here are a few different ways to send variables to the default view:
  
@@ -388,7 +388,7 @@ We will end up with these routes:
 
 
 
-Controllers<a name="controllers">
+Controllers<a name="controllers">[^](#top)
 -------------------------------------
 
     php artisan controller:make <Controller name>
@@ -437,7 +437,7 @@ Our controller can return an error statement, like this:
 
 
 
-Eloquent Models<a name="models">
+Eloquent Models<a name="models">[^](#top)
 -------------------------------------
 
 An Eloquent model is what we use as a data-access layer, to load data from our database. 
@@ -503,7 +503,7 @@ We can search for rows in a table a couple of different ways:
 
 
 
-### Model Sections <a name="model-sections">
+### Model Sections <a name="model-sections">[^](#top)
 
 There are several types of methods that we want to include in models. These include:
 
@@ -514,7 +514,7 @@ There are several types of methods that we want to include in models. These incl
 
 
 
-#### Mutators & Accessors <a name="model-mutate">
+#### Mutators & Accessors <a name="model-mutate">[^](#top)
 
 These are used to change data before it is shown to a user, or before it is written to the database. They can be used on existing field names (though it is better to use a Presenter for those), or can define new field names:
 
@@ -538,7 +538,7 @@ We can tell Laravel arrays to include (or hide) given accessors or attributes. T
 
 
 
-#### Scopes <a name="model-scope">
+#### Scopes <a name="model-scope">[^](#top)
 
 These are used to filter data.
 
@@ -607,7 +607,7 @@ in GuestVisit ('guest' return a GuestVisit collection):
 
 
 
-#### Relationships <a name="model-relationship">
+#### Relationships <a name="model-relationship">[^](#top)
 
 These are used to get related records from other models.
 
@@ -743,7 +743,7 @@ In Appointment,
 ```
 
 
-#### Utilities <a name="model-utility">
+#### Utilities <a name="model-utility">[^](#top)
 
 We don't have many of these, but they can be used to do things like letting the model know which Presenter to use to display data:
 
@@ -811,7 +811,7 @@ Note: When both sorting and grouping a Collection, always sort first, then group
 
 
 
-Views<a name="views">
+Views<a name="views">[^](#top)
 ------------------------
 Views can contain multiple sections (a part of a view rendered in each section). It can write data (like a report), or have read/write information (as a form). 
 
@@ -865,7 +865,7 @@ The resulting array will populate the option value as the “id” field from th
     
     
 
-Forms <a name="forms">
+Forms <a name="forms">[^](#top)
 ------------------------
 
 This is the standard structure to use with forms:
@@ -901,7 +901,7 @@ You can supply additional parameters like so:
 
 
 
-Mail <a name="mail">
+Mail <a name="mail">[^](#top)
 --------------------
 Laravel can send email messages; also through gmail. Configuration for that should be set up as follows:
 
@@ -913,7 +913,7 @@ Laravel can send email messages; also through gmail. Configuration for that shou
     'password' => 'your-password',
 
 
-Queues <a name="queue">
+Queues <a name="queue">[^](#top)
 ------------------------
 Queues can speed up the front-end by doing work on the back-end. 
 
@@ -924,7 +924,7 @@ You can send a message via a queue:
     });
 
 
-Logging <a name="logging">
+Logging <a name="logging">[^](#top)
 --------------------------
 Laravel supports logging data to a log file. The logger provides the seven logging levels defined in RFC 5424: 
 
@@ -945,7 +945,7 @@ You can also listen for events, and return the query right away:
     DB::listen(function($sql){ var_dump($sql) })
 
 
-Sessions <a name="sessions">
+Sessions <a name="sessions">[^](#top)
 ------------------------------
 You can use a session to return you to a main page, after making some change in a related (sub) page. Like this:
 
@@ -972,7 +972,7 @@ You can use a session to return you to a main page, after making some change in 
 For this particular function, laravel has a built-in method, `Redirect::intended('default')`
 
 
-Redirections <a name="redirection">
+Redirections <a name="redirection">[^](#top)
 -------------------------------------
 Laravel has several methods for handling redirections. The main facade is Redirect. We can use:
 
@@ -1066,7 +1066,7 @@ We tell Laravel to use it with a RoutingServiceProvider, like so:
 ... and, of course, load the redirection service provider in app.php
 
 
-Events <a name="events">
+Events <a name="events">[^](#top)
 --------------------------
 Events are a very powerful implementation of the Observer pattern. Many of Laravel's objects will send an event as they do work, and you can trap those events, look at them, and pass back a value to let Laravel know if it should cancel the current activity. It generally passes a full object to you, so you can see what is happening. To use events, enter this in a place where it will be executed (eg, start.php, or routes.php, or filters.php, or include a path to something else):
 
