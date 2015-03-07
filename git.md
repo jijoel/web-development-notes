@@ -11,7 +11,7 @@ git
 * [Troubleshooting](#troubleshooting)
 * [Configuration](#config)
 * [Strategy for working with branches](#strategy)
-
+* [Working with Continuous Integration (CI) Tools](#ci-tools)
 
 
 Basic Usage <a name="basic" />
@@ -467,4 +467,9 @@ Hotfix Branch:
     $ git merge --no-ff hotfix-1.2.1
     $ git branch -d hotfix-1.2.1
     $ git push origin --delete hotfix-1.2.1
+
+
+Working with Continuous Integration (CI) tools <a name="ci-tools">
+-------------------------------------------------------------------
+There's a clean way to work with Continuous Integration tools, like [travis](travis-ci.org), [coveralls](coveralls.io), and [scrutinizer](scrutinizer-ci.com). They will scan pull requests, so you can see if everything is working BEFORE merging it with master.
 

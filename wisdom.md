@@ -231,3 +231,67 @@ System design using SOLID principles
   * Actions - single method use-case objects
   * Things / Entities - simple objects, few methods
 
+
+From Build APIs You Won't Hate:
+
+Use UUID/GUID instead of AUTOINCREMENT  (can generate with uniqueid())
+
+{
+  "data": [
+    { 
+      "id": "uuid", 
+      "name": "Object Name", 
+      "links": [
+        { "rel": "link.name", "url": "/path/to/link" }
+      ],
+      ...
+    }
+  ],
+  "pagination": [
+    { "total": total, ... }
+  ],
+  "errors": [
+    {"code": "error_code", "title": "short summary", "detail": "human-readable explanation"}
+  ]
+}
+
+Send good status codes:
+
+  2xx  Success
+  200  Everything is OK
+  201  Object created OK
+  202  Accepted but being processed async
+
+  4xx  Request / client errors (fix and re-send)
+  400  Bad Request / Invalid syntax
+  401  Unauthorized  (no current user)
+  403  Forbidden  (current user can not access requested data)
+  404  Invalid route / not found
+  405  Method not allowed
+  410  Data has been deleted
+
+  5xx  Server errors
+  500  Something has gone wrong on server
+  503  API not available right now
+
+Transform data to good json before returning to the user. See fractal.thephpleague.com.
+
+
+12 Factor App (eg, "best practice" design recommendations):
+http://12factor.net/
+http://slashnode.com/the-12-factor-php-app-part-1/
+
+ 1. Codebase - One codebase tracked in revision control, many deploys (eg, git)
+ 2. Dependencies - Explicitly declare and isolate dependencies (eg, composer)
+ 3. Config - Store config in the environment (.env files)
+ 4. Backing Services - Treat backing services as attached resources
+    (eg, flysystem; connect to local/remote files/databases/etc the same way)
+ 5. Build, release, run - Strictly separate build and run stages  (dev vs prod)
+ 6. Processes - Execute the app as one or more stateless processes
+    (not monolithic; handle requests by different, unrelated, non-communicating processes)
+ 7. Port binding - Export services via port binding  (eg, ReactPhp)
+ 8. Concurrency - Scale out via the process model (web / worker processes)
+ 9. Disposability - Maximize robustness with fast startup and graceful shutdown
+10. Dev/prod parity - Keep development, staging, and production as similar as possible
+11. Logs - Treat logs as event streams
+12. Admin processes - Run admin/management tasks as one-off processes
