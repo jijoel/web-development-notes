@@ -251,6 +251,8 @@ http://payum.forma-dev.com/
 E-Commerce:
 http://sylius.org/
 
+Model workflow (fire events when status changes, etc):
+https://bitbucket.org/smartsoftware/modelworkflow
 
 
 Testing <a name="testing">
@@ -275,9 +277,17 @@ https://github.com/padraic/mockery
 
 Misc <a name="misc">
 --------------------------------------------
+The League of Extraordinary Packages
+https://thephpleague.com/
+
+Skeleton package
+https://github.com/thephpleague/skeleton
 
 Easy fixtures for models
 https://github.com/summerstreet/woodling
+
+I like these, too:
+https://github.com/fzaninotto/Faker
 
 There's an interesting package called Expressive Date, at:
 https://github.com/jasonlewis/expressive-date
@@ -290,6 +300,20 @@ http://demo.softaculous.com/enduser/index.php?
 
 Themosis Framework for WordPress developers:
 http://framework.themosis.com/
+
+Consistent configuration for editors:
+http://editorconfig.org/
+
+Shopping Carts:
+http://www.opencart.com/
+
+Online SVG Editor:
+https://github.com/johan/svg-edit
+http://svg-edit.googlecode.com/svn/branches/stable/editor/svg-editor.html
+
+http://www.prestashop.com/
+http://magento.com/products/overview#community
+
 
 
 Important Project File Reference <a name="project-files">
@@ -673,6 +697,12 @@ https://github.com/hillelcoren/invoice-ninja
 Laravel Tricks Site:
 https://github.com/CodepadME/laravel-tricks
 
+Forum built in PHP / Laravel 4.2:
+https://github.com/summerblue/phphub
+
+Laravel 5 Wiki
+https://github.com/vi-kon/laravel-wiki
+
 
 Interesting Blogs <a name="blogs">
 ---------------------------------------------
@@ -687,6 +717,9 @@ https://medium.com/laravel-4/
 
 Forums / Ideas <a name="forum">
 ---------------------------------------------
+
+Migrate from Laravel 4 to Laravel 5
+http://slashnode.com/definitive-laravel-4-to-laravel-5-migration-guide/
 
 Best practice for responding to AJAX request?
 http://forums.laravel.io/viewtopic.php?id=2508
@@ -729,7 +762,8 @@ http://github.com/domnikl/DesignPatternsPHP
 Wizard with Bootstrap and AngularJS:
 http://onehungrymind.com/ng-animate-first-look-with-angularjs-wizard/
 
-
+Recurring calendar events:
+http://stackoverflow.com/questions/14866343/reoccurring-calendar-events
 
 
 APIs <a name="api">
