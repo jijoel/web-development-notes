@@ -203,6 +203,7 @@ You can squash a commit (turn several commits into a single commit) by moving ba
     git rebase -i master
     (a list comes up; select 'pick' for commits to leave intact; 'squash' for commits to squash into those)
     git push --force  (forces the squashed commits to github)
+    (at this point, you can use git commit --amend to amend the description)
 
 
 Branches <a name="branch" />
@@ -400,6 +401,17 @@ Configuration information is stored in these files:
     ~/.gitconfig          (global for user)
     project/.git/config   (local to project)
 
+You can use ssh keys instead of passwords. There are instructions on generating and setting up ssh keys at https://help.github.com/articles/generating-ssh-keys/
+
+Once the keys are in place, update your remote repository URLs:
+
+    https://help.github.com/articles/changing-a-remote-s-url/
+
+    git remote -v
+    # origin  https://github.com/USERNAME/REPOSITORY.git (fetch)
+    # origin  https://github.com/USERNAME/REPOSITORY.git (push)
+
+    git remote set-url origin git@github.com:USERNAME/OTHERREPOSITORY.git
 
 
 Strategy for working with branches <a name="strategy" />

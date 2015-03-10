@@ -591,20 +591,51 @@ We can pass parameters to subqueries like this:
 
 We can also use related models in a subquery. For instance, in RoomReservation:
 
+```php
     public function scopeWithExperiencePackage($query)
     {
         return $query->whereHas('guest', function($q){
             $q->withExperiencePackage();
         });
     }
+```
 
 in GuestVisit ('guest' return a GuestVisit collection):
 
+```php
     public function scopeWithExperiencePackage($query)
     {
         return $query->where('guest_visit.group_visit_id', self::EXPERIENCE_PACKAGE_CODE);
     }
+```
 
+We can also filter based on the pivot of a relationship:
+
+```php
+    public function departments()
+    {
+        return $this->belongsToMany('Department','staff_assignment',
+            'staff_id','work_assignment')
+            ->withPivot(['start_date','end_date','notes']);
+    }
+
+    public function scopeForDepartment($query, $dept, DateRangeClass $range)
+    {
+        return $query->whereHas('departments', function($q) use ($dept, $range){
+
+            $q->where('start_date', '<=', $range->sqlend)
+                ->where('end_date', '>=', $range->start_sql);
+
+            if ( ! $dept)
+                return $q;  // eg, all departments in this range
+
+            if (is_string($dept))
+                return $q->where('work_assignment', $dept);
+
+            return $q->whereIn('work_assignment', $dept);
+        });
+    }
+```
 
 
 #### Relationships <a name="model-relationship">[^](#top)

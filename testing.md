@@ -968,6 +968,9 @@ In my class, if I have a function `getAlias` that I want to mock, this is how I 
         // getRoot calls getAlias (and takes a parameter)
 ```
 
+This can be handy for mocking data from a relationship.
+
+
 If we need to mock multiple statements, we do it like this:
 
 // TODO: Mock multiple statements
@@ -1571,7 +1574,7 @@ If you prepare a sql statement manually, you can look at it with:
 
     var_dump($sql);
 
-In many cases, it may be too long to be shown in its entirety. You can change the maximum amount of data for xdebug to display in var_dump:
+In many cases, it may be too long to be shown in its entirety. XDebug will limit the output to the first few lines, and tell you the full length. You can change the maximum amount of data for xdebug to display in var_dump:
 
     ini_set('xdebug.var_display_max_data', -1);
     var_dump($sql);
@@ -1601,6 +1604,53 @@ We can also run a query every time the database accessed, to return the SQL code
     Event::listen('illuminate.query', function($sql){
         var_dump($sql);
     });
+
+The nicest workflow that I've found is to tail the Laravel log file, like so:
+
+    tail -f storage/logs/laravel.log
+
+In the code, at the point you want to see the log:
+
+    logQuery();
+
+For this to work, these need to be set up as helper functions:
+
+```php
+    if (! function_exists('logQuery'))
+    {
+        function logQuery()
+        {
+            $items = DB::getQueryLog();
+            $output = [];
+            foreach($items as $item) {
+                $output[] = interpolateQuery($item['query'],$item['bindings']);
+            }
+            Log::debug($output);
+        }
+    }
+    if (! function_exists('interpolateQuery'))
+    {
+        function interpolateQuery($query, $params) {
+            $keys = array();
+
+            # build a regular expression for each parameter
+            foreach ($params as $key => $value) {
+                if (is_string($key)) {
+                    $keys[] = '/:'.$key.'/';
+                } else {
+                    $keys[] = '/[?]/';
+                }
+            }
+
+            $query = preg_replace($keys, $params, $query, 1, $count);
+
+            #trigger_error('replaced '.$count.' keys');
+
+            return $query;
+        }
+    }
+```
+
 
 
 Selenium <a name="selenium">
