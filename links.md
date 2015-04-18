@@ -314,6 +314,8 @@ http://svg-edit.googlecode.com/svn/branches/stable/editor/svg-editor.html
 http://www.prestashop.com/
 http://magento.com/products/overview#community
 
+PHP micro-framework for simple single-file apps:
+http://silex.sensiolabs.org
 
 
 Important Project File Reference <a name="project-files">
@@ -713,6 +715,7 @@ http://fideloper.com/
 http://maxoffsky.com/category/code-blog/
 http://keltdockins.com/tags/laravel/
 https://medium.com/laravel-4/
+http://www.mdswanson.com/
 
 
 Forums / Ideas <a name="forum">

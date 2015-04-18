@@ -295,3 +295,158 @@ http://slashnode.com/the-12-factor-php-app-part-1/
 10. Dev/prod parity - Keep development, staging, and production as similar as possible
 11. Logs - Treat logs as event streams
 12. Admin processes - Run admin/management tasks as one-off processes
+
+
+The Pragmatic Programmer Checklist
+----------------------------------
+Architectural Questions
+
+  * Are responsibilities well defined?
+  * Are the collaborations well defined?
+  * Is coupling minimized?
+  * Can you identify potential duplication?
+  * Are interface definitions and constraints acceptable?
+  * Can modules access needed data—when needed?
+
+The debugging checklists
+ 
+  * Is the problem being reported a direct result of the underlying bug, or merely a symptom?
+  * Is the bug really in the compiler? Is it in the OS? Or is it in your code?
+  * If you explained this problem in detail to a coworker, what would you say?
+  * If the suspect code passes its unit tests, are the tests complete enough? What happens if you run the unit test with this data?
+  * Do the conditions that caused this bug exist anywhere else in the system?
+
+How to Program Deliberately
+
+  * Stay aware of what you're doing.
+  * Don't code blindfolded.
+  * Proceed from a plan.
+  * Rely only on reliable things.
+  * Document your assumptions.
+  * Test assumptions as well as code.
+  * Prioritize your effort.
+  * Don't be a slave to history.
+
+Cutting the Gordian Knot
+When solving impossible problems, ask yourself:
+
+  * Is there an easier way?
+  * Am I solving the right problem?
+  * Why is this a problem?
+  * What makes it hard?
+  * Do I have to do it this way?
+  * Does it have to be done at all?
+
+Law of Demeter for Functions
+
+  * An object's method should call only methods belonging to: Itself
+  * Any parameters passed in
+  * Objects it creates
+  * Component objects
+
+How to maintain orthogonality
+
+  * Design independent, well defined components
+  * Keep your code decoupled
+  * Avoid global data
+  * Refactor similar functions
+
+Things to prototype
+
+  * Architecture
+  * New functionality in an existing system
+  * Structure or contents of external data
+  * Third-party tools or components
+  * Performance issues
+  * User interface design
+
+Aspects of Testing
+
+  * Unit testing
+  * Integration testing
+  * Validation and verification
+  * Resource exhaustion, errors, and recovery
+  * Performance testing
+  * Usability testing
+  * Testing the tests themselves
+
+When to Refactor ?
+
+  * You discover a violation of the DRY principle.
+  * You find things that could be more orthogonal.
+  * Your knowledge improves.
+  * The requirements evolve.
+  * You need to improve performance.
+
+The Wisdom Acrostic ( Customer specific)
+
+  * Why do you want to learn them?
+  * What is their interest in what you have got to say?
+  * How sophisticated are they?
+  * How much details do they want?
+  * Whom do you want to own the information?
+  * How can you motivate them to listen to you?
+
+
+
+Get Better
+------------
+http://www.mdswanson.com/blog/2011/10/24/get-better.html
+
+> ... the sooner you care, the better you'll make. The better you'll do. And the better you'll live.
+> Merlin Mann
+
+Take 5 minutes to:
+
+  * Read the most interesting blog post in your RSS reader
+  * Look through the code you wrote today and find a place to improve
+  * Write down any problems you encountered today
+  * Learn a new keyboard shortcut for your IDE, source control tool, or shell
+  * Ask a co-worker if they've read anything interesting lately
+
+Take 15 minutes to:
+
+  * Refactor a piece of code you wrote this week
+  * Find code that's missing tests and add one
+  * Update your team/company wiki
+  * Read a few of the top stories on news.yc or /r/programming
+  * Read a chapter in a technical book
+  * Write a thoughtful comment on a blog post
+
+Take 30 minutes to:
+
+  * Watch a talk from a conference that interests you
+  * Write a blog post about a bug you encountered and how you fixed it
+  * Write a blog post about something you've been working on or learning about
+  * Listen to a podcast - here are some I like: Podcast Roundup
+  * Do a kata or a problem on Project Euler
+  * Attend a brownbag or lunch-and-learn
+
+Take an hour a week to:
+
+  * Help an open source library that you use - patchs, documentation, bugs
+  * Work on a side-project on your own
+  * Watch a screencast about something new
+  * Try to answer some questions on StackOverflow
+  * Do prep work to host a brownbag or meetup talk
+  * Take an online class: Stanford courses on iPhone, Machine Learning, AI
+
+Take 2 hours a month to:
+
+  * Go to a local dev meetup
+  * Take someone you look up to out to lunch and pick their brain
+  * Do self reflection and update your position on The Long Road
+  * Plan out how to Get Better over the next month;
+
+Take a weekend a year to:
+
+  * Go to a conference
+  * Attend a Startup Weekend or Hackathon
+  * Use your craft to help others
+  
+Take one minute a day - just 60 seconds - to stop and ask yourself this question:
+
+Did I Get Better today?
+
+If you aren't happy with your answer, do something about it.
+
