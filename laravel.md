@@ -840,6 +840,20 @@ Note: When both sorting and grouping a Collection, always sort first, then group
     });
 ```
 
+We can also sum items in a collection:
+
+    $amount = 0;
+    foreach($person->tab as $item)
+        $amount += $item->total;
+
+... is the equivalent of:
+
+    $person->tab->sum('total');
+
+... which can be done separately in Eloquent (before the collection is returned):
+
+    return Tab::where('person_id', $this->id)->sum('total');
+
 
 
 Views<a name="views">[^](#top)
