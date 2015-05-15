@@ -773,6 +773,18 @@ In Appointment,
     }
 ```
 
+We can also do a pass-through relationship, like so:
+
+    public function connection()
+    {
+        if (! $this->customer) 
+            return $this->customer();
+
+        return $this->customer->hasOne('Connection', 'connection_table_id');
+    }
+
+If the customer (above) returns null, we can't use it; instead, just return it.
+
 
 #### Utilities <a name="model-utility">[^](#top)
 
