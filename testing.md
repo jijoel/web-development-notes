@@ -300,6 +300,12 @@ These are functionally similar (though the first looks for the $title anywhere o
     $crawler = $this->client->request('GET', $route);
     $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     $this->assertCount(1, $crawler->filter("#content h1:contains({$title})"));
+
+    // for Laravel 5:
+    $result = $this->call('get', $route);
+    $this->assertEquals(200, $result->getStatusCode());
+    $crawler = new Crawler($result->getContent());
+    $this->assertCount(1, $crawler->filter("#content h1:contains({$title})"));
 ```
 
 The response class has several useful functions, including:
@@ -342,6 +348,11 @@ The view class that is returned also has valuable information:
 
 Web Crawler <a name="laravel-web-crawler">
 ---------------------------------------------
+NOTE: Laravel 5 does not include the 'client' property in the test object. To use a crawler:
+
+    $crawler = new Crawler($this->call('GET','/')->getContent());
+    var_dump($crawler->filter('#main-menu')->html());
+
 The Symphony web crawler component will go through the DOM of the page to handle very specific test cases. It can be used during integration tests to simulate a browser (much faster than Selenium).
 
 We can see if there is a div with id 'item' like this:
