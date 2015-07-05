@@ -479,6 +479,9 @@ http://docs.toddish.co.uk/popup/
 Simple modal dialog box:
 http://www.ericmmartin.com/projects/simplemodal/
 
+Nifty Bootstrap 3 Dialog boxes:
+http://nakupanda.github.io/bootstrap3-dialog/
+
 
 ### Forms / Data-Entry Controls <a name="ui-forms">
 

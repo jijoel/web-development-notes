@@ -1590,6 +1590,16 @@ In many cases, it may be too long to be shown in its entirety. XDebug will limit
     ini_set('xdebug.var_display_max_data', -1);
     var_dump($sql);
 
+You might also want to look at JUST the log items for a single connection:
+
+    ini_set('xdebug.var_display_max_data', -1);
+    $this->test->getConnection()->enableQueryLog();
+
+    $test = $this->test->find('re_1');
+    $this->assertNotNull($test->transfers);
+
+    $log = $this->test->getConnection()->getQueryLog();
+    var_dump($log);
 
 The TestCase class contains several helper methods to make testing your application easier. For instance, set the currently authenticated user using the `be` method  (TestCase::be):
 
