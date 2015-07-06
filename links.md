@@ -58,6 +58,12 @@ http://php.net/manual/en/timezones.php
 GPG Cheatsheet:
 http://irtfweb.ifa.hawaii.edu/~lockhart/gpg/
 
+PHP Package Checklist:
+http://phppackagechecklist.com/#1,2,3,4,5,6,7,8,9,10,11,12,13,14
+
+Easy way to learn web frameworks:
+https://github.com/komarserjio/notejam
+
 
 Laravel 4 <a name="laravel">
 -------------------------------------
@@ -253,6 +259,15 @@ http://sylius.org/
 
 Model workflow (fire events when status changes, etc):
 https://bitbucket.org/smartsoftware/modelworkflow
+
+Gulp workflow for maintainable email templates:
+https://github.com/koomai/bulletproof-email
+
+Roles and Permissions for Laravel 5
+https://github.com/romanbican/roles
+
+Laravel tables (reports?)
+https://github.com/msieprawski/resource-table
 
 
 Testing <a name="testing">
@@ -707,6 +722,10 @@ https://github.com/summerblue/phphub
 
 Laravel 5 Wiki
 https://github.com/vi-kon/laravel-wiki
+
+Top Cute Animals:
+http://topcuteanimals.com/
+https://github.com/ukjadoon/topcuteanimals
 
 
 Interesting Blogs <a name="blogs">
